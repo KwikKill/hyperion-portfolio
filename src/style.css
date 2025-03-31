@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+  .form-btn {
+    @apply rounded bg-blue-800 text-white mt-3 mx-auto p-3 hover:ring hover:ring-pink-500
+  }
+
+  .error {
+    @apply border-red-500
+  }
+
+  .success {
+    @apply bg-green-400 ring-green-900
+  }
+}
+
+@layer base {
+  :root {
+    --color-primary: 56 189 248;
+    --color-secondary: 251 113 133;
+    --color-accent: 139 92 246;
+    --color-background: 255 255 255;
+    --color-text: 15 23 42;
+  }
+
+  .dark {
+    --color-primary: 14 165 233;
+    --color-secondary: 244 63 94;
+    --color-accent: 124 58 237;
+    --color-background: 15 23 42;
+    --color-text: 241 245 249;
+  }
+
+  .cyberpunk {
+    --color-primary: 254 238 59;
+    --color-secondary: 0 255 255;
+    --color-accent: 255 0 128;
+    --color-background: 10 10 40;
+    --color-text: 255 255 255;
+  }
+}
+
+.cyberpunk-text-glow {
+  text-shadow: 0 0 5px rgb(var(--color-primary) / 0.5), 0 0 10px rgb(var(--color-primary) / 0.3);
+}
+
+.cyberpunk-folder {
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid rgb(var(--color-primary));
+  box-shadow: 0 0 15px rgb(var(--color-primary) / 0.5);
+  transition: all 0.3s ease;
+}
+
+.cyberpunk-folder:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgb(var(--color-primary) / 0.8);
+}
+
+.cyberpunk-desktop-icon {
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.cyberpunk-desktop-icon:hover {
+  transform: scale(1.1);
+}
+
+.cyberpunk-desktop-icon::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+  border-radius: 3px;
+}
+
+.cyberpunk-terminal {
+  position: relative;
+  box-shadow: 0 0 15px rgba(255, 213, 0, 0.5);
+}
+
+.cyberpunk-terminal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+}
+
+/* Blinking cursor animation */
+.blink-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+.star-badge-modal {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  background-color: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 4px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+html {
+  /* font-family: "SD Dystopian"; */
+  color: #feee3b;
+  background-color: #1a1a1a;
+}
+
+.text-shadow {
+  text-shadow: black 0 0 5px;
+}
+
+@font-face {
+  font-family: "SD Glitch Robot";
+  src: url(./assets/fonts/Sdglitchrobotdemo-GOPdO.ttf);
+}
+
+@font-face {
+  font-family: "SD Dystopian";
+  src: url(./assets/fonts/Sddystopiandemo-GO7xa.otf);
+}
+
+@font-face {
+  font-family: "Cyberway Riders";
+  src: url(./assets/fonts/CyberwayRiders-lg97d.ttf);
+}
+
+@font-face {
+  font-family: "Cybergame Regular";
+  src: url(./assets/fonts/Cybergame-Regular-Italic.ttf);
+}
+
+@font-face {
+  font-family: "Cyberpunk";
+  src: url(./assets/fonts/Cyberpunks.otf);
+}
+
+@font-face {
+  font-family: "Cyberpunk Italic";
+  src: url(./assets/fonts/Cyberpunks\ Italic.otf);
+}
+
+@font-face {
+  font-family: "Valorax";
+  src: url(./assets/fonts/Valorax-lg25V.otf);
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
