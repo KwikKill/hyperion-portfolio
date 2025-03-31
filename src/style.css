@@ -124,6 +124,7 @@ html {
   /* font-family: "SD Dystopian"; */
   color: #feee3b;
   background-color: #1a1a1a;
+  scroll-behavior: smooth;
 }
 
 .text-shadow {

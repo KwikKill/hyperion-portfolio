@@ -179,7 +179,11 @@
                 <line x1="3" y1="9" x2="21" y2="9"></line>
                 <line x1="9" y1="21" x2="9" y2="9"></line>
               </svg>
-              {{ isEnglish ? 'Choose Experience' : 'Choisir l\'Expérience' }}
+              {{
+                isEnglish
+                ? 'Select Version'
+                : 'Sélectionner la version'
+              }}
             </h3>
 
             <div class="space-y-4 mx-6">
@@ -228,7 +232,11 @@
                     <div class="text-lg font-medium text-white flex items-center">
                       Cyberpunk
                       <span class="text-yellow-400 font-bold text-sm ml-2 star-badge-modal">
-                        Recommended
+                        {{
+                          isEnglish
+                          ? 'Recommended'
+                          : 'Récommandé'
+                        }}
                       </span>
                     </div>
                     <div class="text-sm text-gray-300">
