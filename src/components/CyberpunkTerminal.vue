@@ -1,6 +1,6 @@
 <template>
   <div
-    class="cyberpunk-terminal bg-black/90 border-2 border-theme-foreground/70 rounded-md p-4 text-green-400 font-mono text-sm overflow-hidden"
+    class="cyberpunk-terminal bg-black/90 border-2 border-theme-foreground/70 rounded-md p-4 text-green-400 font-mono text-sm overflow-hidden h-full"
   >
     <div class="terminal-header flex justify-between items-center mb-2 pb-2 border-b border-theme-foreground/30">
       <div class="text-theme-foreground">kwikkill@hyperion:~</div>
@@ -12,7 +12,7 @@
     </div>
 
     <div
-      class="terminal-content overflow-y-auto max-h-[240px] scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-gray-800"
+      class="terminal-content overflow-y-auto max-h-[360px] scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-gray-800"
     >
       <div v-for="(line, index) in terminalLines" :key="index" class="mb-1">
         <template v-if="line.type === 'command'">
@@ -103,8 +103,8 @@ onMounted(() => {
     lines = [
       { type: 'command', text: 'whoami' },
       { type: 'response', text: 'Gabriel Blaisot (kwikkill) - Computer Science Student' },
-      { type: 'response', text: 'Passionate about web development, software engineering, and creating innovative solutions.', inline: true },
-      { type: 'response', text: 'Interested in AI, Machine Learning, and Cybersecurity.', inline: true },
+      { type: 'response', text: 'Passionate about web development and software engineering.', inline: true },
+      { type: 'response', text: 'Interested in AI and Machine Learning.', inline: true },
       { type: 'response', text: 'Always eager to learn new technologies and improve my skills.', inline: true },
       { type: 'command', text: 'cat skills.txt' },
     ]
@@ -132,8 +132,8 @@ onMounted(() => {
     lines = [
       { type: 'command', text: 'whoami' },
       { type: 'response', text: 'Gabriel Blaisot (kwikkill) - Étudiant en Informatique' },
-      { type: 'response', text: 'Passionné par le développement web, l\'ingénierie logicielle et la création de solutions innovantes.', inline: true },
-      { type: 'response', text: 'Intéressé par l\'IA, le Machine Learning et la Cybersécurité.', inline: true },
+      { type: 'response', text: 'Passionné par le développement web et l\'ingénierie logicielle.', inline: true },
+      { type: 'response', text: 'Intéressé par l\'IA et le Machine Learning.', inline: true },
       { type: 'response', text: 'Toujours désireux d\'apprendre de nouvelles technologies et d\'améliorer mes compétences.', inline: true },
       { type: 'command', text: 'cat competences.txt' }
     ]

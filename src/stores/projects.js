@@ -29,7 +29,7 @@ export const useProjectsStore = defineStore("projects", {
         id: 2,
         name: {
           en: "Insalan.fr Website",
-          fr: "Site Insalan",
+          fr: "Site Insalan.fr",
         },
         description: {
           en: "Improvement of the Insalan association's website as development manager. Under my leadership, the association's website was rewritten in Django and DjangoREST for the backend, and Vue.js and tailwind for the frontend. The site is hosted on a VPS at INSA Rennes and uses Nginx as a reverse proxy.",

@@ -136,7 +136,7 @@
           </div>
 
           <div class="md:w-1/2">
-            <div class="text-gray-300 mb-4 font-mono">
+            <div class="text-gray-300 mb-4 font-mono text-justify">
               {{ selectedProject.localizedDescription }}
             </div>
 

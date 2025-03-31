@@ -49,7 +49,7 @@
           </div>
         </div>
 
-        <div>
+        <div class="h-full">
           <CyberpunkTerminal />
         </div>
       </div>

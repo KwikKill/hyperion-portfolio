@@ -123,11 +123,19 @@
               <div class="flex items-center">
                 <span class="text-cyan-400 mr-2">kwikkill@system:~$</span>
                 <span class="text-theme-foreground">
-                  {{ isEnglish ? 'echo "Always learning new technologies"' : 'echo "Toujours en train d\'apprendre de nouvelles technologies"' }}
+                  {{
+                    isEnglish
+                    ? 'echo "Always learning new technologies"'
+                    : 'echo "Toujours en train d\'apprendre de nouvelles technologies"'
+                  }}
                 </span>
               </div>
               <div class="mt-1">
-                {{ isEnglish ? 'Always learning new technologies' : 'Toujours en train d\'apprendre de nouvelles technologies' }}
+                {{
+                  isEnglish
+                  ? 'Always learning new technologies'
+                  : 'Toujours en train d\'apprendre de nouvelles technologies'
+                }}
               </div>
             </div>
           </div>

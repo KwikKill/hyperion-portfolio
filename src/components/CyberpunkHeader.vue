@@ -37,6 +37,7 @@ const navItems = computed(() => {
     { id: 'home', href: '#home', label: isEnglish ? 'Home' : 'Accueil' },
     { id: 'about', href: '#about', label: isEnglish ? 'About' : 'À propos' },
     { id: 'projects', href: '#projects', label: isEnglish ? 'Projects' : 'Projets' },
+    { id: 'interests', href: '#interests', label: isEnglish ? 'Interests' : 'Intérêts' },
   ]
 })
 </script>
