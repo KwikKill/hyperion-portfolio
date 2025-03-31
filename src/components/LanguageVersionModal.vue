@@ -4,7 +4,7 @@
     <div
       class="fixed inset-0 bg-gradient-to-br overflow-hidden"
       :class="{
-        'from-indigo-900 via-gray-900 to-black': version === 'classic',
+        'from-indigo-900 via-gray-900 to-black': version !== 'cyberpunk',
         'from-yellow-900 via-gray-800 to-black': version === 'cyberpunk',
       }"
     >
@@ -58,7 +58,7 @@
               alt="Logo"
               class="w-24 h-24 mx-auto rounded-full border-4 shadow-lg"
               :class="{
-                'border-white/20': version === 'classic',
+                'border-white/20': version !== 'cyberpunk',
                 'border-theme-foreground/30 animate-pulse': version === 'cyberpunk',
               }"
             />

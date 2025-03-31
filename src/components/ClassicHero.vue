@@ -8,6 +8,8 @@
           </h1>
           <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-blue-600 dark:text-blue-400">
             {{ isEnglish ? 'Computer Science Student' : 'Étudiant en Informatique' }}
+            <br />
+            INSA Rennes
           </h2>
           <p class="text-lg text-gray-700 dark:text-gray-300 mb-8">
             {{ isEnglish
@@ -26,7 +28,7 @@
         </div>
         <div class="md:w-1/2">
           <img
-            src="@/assets/placeholder400x400.svg"
+            src="@/assets/logo.png"
             alt="Profile"
             class="rounded-full w-64 h-64 mx-auto object-cover shadow-lg"
           />
