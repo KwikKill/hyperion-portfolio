@@ -28,7 +28,7 @@
           <input
             type="text"
             v-model="searchQuery"
-            :placeholder="isEnglish ? 'SEARCH PROJECTS...' : 'RECHERCHER DES PROJETS...'"
+            :placeholder="isEnglish ? 'SEARCH PROJECTS, TECHNO,...' : 'RECHERCHER DES PROJETS, TECHNO,...'"
             class="w-full bg-transparent border-none outline-none text-theme-foreground font-mono uppercase placeholder-gray-500 focus:ring-0"
             @focus="isSearchFocused = true"
             @blur="isSearchFocused = false"
@@ -168,7 +168,7 @@
                 v-if="selectedProject.github"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="px-4 py-2 border border-theme-foreground text-theme-foreground hover:bg-theme-foreground/10 font-mono uppercase text-sm"
+                class="px-4 py-2 bg-theme-foreground hover:bg-yellow-400 text-black font-mono uppercase text-sm"
               >
                 GitHub
               </a>

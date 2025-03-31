@@ -62,7 +62,13 @@
 
           <!-- Movies content -->
           <div v-if="activeCategory === 'movies'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div v-for="(movie, index) in movies" :key="index" class="media-card group">
+            <div
+              v-for="(movie, index) in movies"
+              :key="index"
+              class="media-card group"
+                @click="activeCard = activeCard === index ? null : index"
+              :class="activeCard === index ? 'active' : ''"
+            >
               <div class="media-card-inner">
                 <div class="media-card-front">
                   <img :src="movie.image" :alt="movie.title" class="w-full h-48 object-cover rounded-t-md" />
@@ -127,6 +133,8 @@ const preferencesStore = usePreferencesStore()
 const isEnglish = computed(() => preferencesStore.isEnglish)
 
 const activeCategory = ref('movies')
+
+const activeCard = ref(null)
 
 const movies = computed(() => {
   if (isEnglish.value) {
@@ -372,6 +380,10 @@ const games = computed(() => {
   height: 100%;
   transition: transform 0.8s;
   transform-style: preserve-3d;
+}
+
+.media-card.active .media-card-inner {
+  transform: rotateY(180deg);
 }
 
 .media-card:hover .media-card-inner {

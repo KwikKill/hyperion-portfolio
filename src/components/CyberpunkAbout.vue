@@ -42,7 +42,7 @@
 
           <div class="terminal-content font-mono">
             <div class="mb-4">
-              <span class="text-cyan-400">kwikkill@system:~$</span>
+              <span class="text-cyan-400">kwikkill@hyperion:~$</span>
               <span class="text-theme-foreground ml-2">{{ isEnglish ? 'cat profile.txt' : 'cat profil.txt' }}</span>
             </div>
 
