@@ -14,7 +14,7 @@
       <!-- Terminal header -->
       <div class="cyberpunk-terminal border-2 border-theme-foreground/70 rounded-md bg-black/80 p-2 mb-8 flex justify-between items-center">
         <div class="text-theme-foreground font-mono uppercase tracking-wider">
-          {{ isEnglish ? 'HYPERION OS v1.0 - USER PROFILE' : 'HYPERION OS v1.0 - PROFIL UTILISATEUR' }}
+          {{ isEnglish ? 'HYPERION v1.0 - USER PROFILE' : 'HYPERION v1.0 - PROFIL UTILISATEUR' }}
         </div>
         <div class="flex space-x-2">
           <div class="w-3 h-3 rounded-full bg-green-500"></div>

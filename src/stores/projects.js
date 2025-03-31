@@ -18,16 +18,54 @@ export const useProjectsStore = defineStore("projects", {
           en: "portfolio.vue",
           fr: "portfolio.vue",
         },
-        date: {
-          en: "Mar 30 2025",
-          fr: "30 Mar 2025",
-        },
+        date: "2025",
         starred: true,
-        technologies: ["Vue.js", "Tailwind CSS", "Pinia"],
+        technologies: ["Vue.js", "Tailwind CSS", "Pinia", "docker"],
         image: "/src/assets/projects/portfolio.webp",
         link: "#",
-        github: "https://github.com/kwikkill/portfolio",
+        github: "https://github.com/KwikKill/hyperion-portfolio",
       },
+      {
+        id: 2,
+        name: {
+          en: "Insalan.fr Website",
+          fr: "Site Insalan",
+        },
+        description: {
+          en: "Improvement of the Insalan association's website as development manager. Under my leadership, the association's website was rewritten in Django and DjangoREST for the backend, and Vue.js and tailwind for the frontend. The site is hosted on a VPS at INSA Rennes and uses Nginx as a reverse proxy.",
+          fr: "Amélioration du site de l'association Insalan en tant que responsable développement. Sous mon mandat de responsable, le site de l'association a été réécrit en Django et DjangoREST pour le backend, et Vue.js et tailwind pour le frontend. Le site est hébergé sur un VPS de l'INSA Rennes et utilise Nginx comme reverse proxy.",
+        },
+        file: {
+          en: "insalan.html",
+          fr: "insalan.html",
+        },
+        date: "2023-2025",
+        starred: true,
+        technologies: ["Vue.js", "Tailwind CSS", "Pinia", "Django", "DjangoREST", "Docker", "Nginx"],
+        image: "/src/assets/projects/insalan.webp",
+        link: "https://insalan.fr",
+        github: "https://github.com/InsaLan/infra-insalan.fr",
+      },
+      {
+        id: 3,
+        name: {
+          en: "Insalan.fr Monitoring",
+          fr: "Surveillance Insalan.fr",
+        },
+        description: {
+          en: "Setting up a metrology ecosystem for the insalan.fr site. The system is based on Telegraf, InfluxDB, and Grafana and allows monitoring of site traffic, response times, and other metrics from NGINX logs.",
+          fr: "Mise en place d'un écosystème de métrologie pour le site insalan.fr. Le système est basé sur Telegraf, InfluxDB et Grafana et permet de surveiller le trafic du site, les temps de réponse et d'autres métriques à partir des logs NGINX",
+        },
+        file: {
+          en: "insalan-monitoring.html",
+          fr: "insalan-monitoring.html",
+        },
+        date: "2025",
+        starred: false,
+        technologies: ["Grafana", "Telegraf", "InfluxDB", "Nginx", "Docker"],
+        image: "/src/assets/projects/monit.webp",
+        github: "https://github.com/InsaLan/infra-insalan.fr/blob/main/docker-compose-analytics.yml",
+      }
     ],
     skills: {
       en: [

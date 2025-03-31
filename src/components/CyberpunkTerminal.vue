@@ -116,10 +116,12 @@ onMounted(() => {
       })
     })
     lines.push({ type: 'command', text: 'ls -la projects/' })
+    // format the date string to be the same length
     projects.value.forEach(project => {
       lines.push({
         type: 'response',
-        text: 'drwxr-xr-x 23 root root   4096 ' + project.date['en'] + ' ' + project.file['en']
+        text: 'drwxr-xr-x 23 root root   4096 '
+        + project.file['en']
       })
     })
     lines.push(
@@ -138,7 +140,9 @@ onMounted(() => {
     skills.value.forEach(skill => {
       lines.push({
         type: 'response',
-        text: skill['name'] + ' : ' + skill['skills'].join(', '),
+        text: skill['name']
+        + ' : '
+        + skill['skills'].join(', '),
         inline: true
       })
     })
@@ -146,7 +150,8 @@ onMounted(() => {
     projects.value.forEach(project => {
       lines.push({
         type: 'response',
-        text: 'drwxr-xr-x 23 root root   4096 ' + project.date['fr'] + ' ' + project.file['fr']
+        text: 'drwxr-xr-x 23 root root   4096 '
+        + project.file['fr']
       })
     })
     lines.push(

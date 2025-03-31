@@ -16,8 +16,8 @@
         <div class="text-theme-foreground font-mono uppercase tracking-wider">
           {{
             isEnglish
-            ? 'HYPERION OS v1.0 - USER INTERESTS'
-            : 'HYPERION OS v1.0 - INTÉRÊTS UTILISATEUR'
+            ? 'HYPERION v1.0 - USER INTERESTS'
+            : 'HYPERION v1.0 - INTÉRÊTS UTILISATEUR'
           }}
         </div>
         <div class="flex space-x-2">

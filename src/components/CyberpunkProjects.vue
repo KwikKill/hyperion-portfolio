@@ -10,7 +10,7 @@
       <!-- Desktop header bar -->
       <div class="cyberpunk-terminal border-2 border-theme-foreground/70 rounded-md bg-black/80 p-2 mb-4 flex justify-between items-center rounded-md">
         <div class="text-theme-foreground font-mono uppercase tracking-wider">
-          {{ isEnglish ? 'HYPERION OS v1.0 - PROJECTS DIRECTORY' : 'HYPERION OS v1.0 - RÉPERTOIRE DES PROJETS' }}
+          {{ isEnglish ? 'HYPERION v1.0 - PROJECTS DIRECTORY' : 'HYPERION v1.0 - RÉPERTOIRE DES PROJETS' }}
         </div>
         <div class="flex space-x-2">
           <div class="w-3 h-3 rounded-full bg-green-500"></div>
@@ -91,7 +91,7 @@
               {{ project.localizedName }}
             </div>
             <div class="text-xs text-cyan-400 mt-1 font-mono">
-              {{ project.date[getLanguage] }}
+              {{ project.date }}
             </div>
           </div>
         </div>
@@ -189,7 +189,6 @@ const preferencesStore = usePreferencesStore()
 const projectsStore = useProjectsStore()
 
 const isEnglish = computed(() => preferencesStore.isEnglish)
-const getLanguage = computed(() => preferencesStore.getLanguage)
 const projects = computed(() => projectsStore.getLocalizedProjects)
 
 const selectedProject = ref(null)

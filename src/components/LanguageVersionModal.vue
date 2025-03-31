@@ -1,7 +1,13 @@
 <template>
   <div v-if="preferencesStore.showModal" class="inset-0 flex items-center justify-center z-50">
     <!-- Animated background with gradient overlay -->
-    <div class="fixed inset-0 bg-gradient-to-br from-indigo-900 via-gray-900 to-black overflow-hidden">
+    <div
+      class="fixed inset-0 bg-gradient-to-br overflow-hidden"
+      :class="{
+        'from-indigo-900 via-gray-900 to-black': version === 'classic',
+        'from-yellow-900 via-gray-800 to-black': version === 'cyberpunk',
+      }"
+    >
       <div class="absolute inset-0 opacity-20">
         <div class="absolute top-0 left-0 w-full h-full grid bggrid grid-cols-12 grid-rows-12 gap-4">
           <div v-for="i in 144" :key="i" class="bg-white rounded-md"></div>
@@ -34,7 +40,7 @@
         </div>
       </div>
 
-      <div class="p-8">
+      <div class="px-8 pb-8 bt-2">
         <!-- Header -->
         <div class="text-center mb-8">
           <h2 class="text-3xl font-bold text-white mb-3">
@@ -57,6 +63,12 @@
               }"
             />
           </div>
+          <p class="text-gray-300 mt-2">
+            {{ isEnglish
+              ? 'This portfolio is still under construction, but you can already see my projects and skills.'
+              : 'Ce portfolio est encore en construction, mais vous pouvez déjà voir mes projets et compétences.'
+            }}
+          </p>
         </div>
 
         <!-- Selection Sections -->
@@ -240,7 +252,7 @@
             class="confirm-btn relative overflow-hidden group w-full"
             :disabled="!language || !version"
           >
-            <div class="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+            <div class="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-gray-800 opacity-90 group-hover:opacity-100 transition-opacity duration-300"
               :class="{'opacity-50': !language || !version}"></div>
             <div class="relative z-10 py-4 px-8 text-white font-medium text-lg flex items-center justify-center">
               {{
