@@ -47,10 +47,16 @@
             </div>
 
             <div class="text-green-400 mb-4 leading-relaxed">
-              {{ isEnglish
-                ? 'I\'m a computer science student from France, passionate about web development and software engineering. I love creating innovative solutions to complex problems and continuously learning new technologies.'
-                : 'Je suis un étudiant en informatique français, passionné par le développement web et l\'ingénierie logicielle. J\'aime créer des solutions innovantes à des problèmes complexes et apprendre continuellement de nouvelles technologies.'
-              }}
+              <template
+                v-if="isEnglish"
+              >
+                I'm a computer science student from France, passionate about web development and software engineering. I love creating innovative solutions to complex problems and continuously learning new technologies.
+              </template>
+              <template
+                v-else
+              >
+                Etudiant en Informatique à l'INSA de Rennes passionné par le développement web et l'ingénierie logicielle. J'apprécie la technologie et apprendre de nouvelles choses.
+              </template>
             </div>
 
             <div class="mb-4">
@@ -59,11 +65,98 @@
             </div>
 
             <div class="text-green-400 leading-relaxed">
-              {{ isEnglish
-                ? 'When I\'m not coding, you can find me exploring new technologies, contributing to open-source projects, or expanding my knowledge in various computer science domains.'
-                : 'Quand je ne code pas, vous pouvez me trouver en train d\'explorer de nouvelles technologies, de contribuer à des projets open-source, ou d\'élargir mes connaissances dans divers domaines de l\'informatique.'
-              }}
+              <template
+                v-if="isEnglish"
+              >
+                When I\'m not coding, you can find me exploring new technologies,  or expanding my knowledge in various computer science domains.
+                <br/>
+                Apart from these subjects, I enjoy video games, films and books (mainly science fiction), board games, role-playing games and Greek mythology.
+                <br/>
+                I also played table tennis in a club for 5 years.
+              </template>
+              <template
+                v-else
+              >
+                Quand je ne code pas, vous pouvez me trouver en train d'explorer de nouvelles technologies, ou d'élargir mes connaissances dans divers domaines de l'informatique.
+                <br/>
+                En dehors de ces sujets, j'apprécie les jeux vidéos, les films et les livres (principalement la science fiction), les jeux de société, les jeux de rôles et la mythologie Grecque.
+                <br/>
+                J'ai également fait 5 ans de tennis de table en club.
+              </template>
             </div>
+
+            <div class="mb-4">
+              <span class="text-cyan-400">kwikkill@system:~$</span>
+              <span class="text-theme-foreground ml-2">
+                {{
+                  isEnglish
+                  ? 'cat associations.txt'
+                  : 'cat associations.txt'
+                }}
+              </span>
+            </div>
+
+            <div
+              class="text-green-400 leading-relaxed"
+            >
+              <div
+                v-if="isEnglish"
+              >
+                <p>
+                  Being actively involved in associations has been a significant part of my life. I have been an active member of several student and technology-focused organizations. These experiences have allowed me to develop skills in project management, teamwork, and event organization.
+                </p>
+                <ul class="list-disc list-inside ml-4 mt-4">
+                  <li>
+                    Development Manager INSALAN (2023-2025)
+                  </li>
+                  <li>
+                    Volunteer Secur'INSA (2023-2024)
+                  </li>
+                  <li>
+                    Treasurer Night Fury (2023-2024)
+                  </li>
+                  <li>
+                    Development Manager Night Fury (2022-2023)
+                  </li>
+                  <li>
+                    E-sport LoL Manager Night Fury (2021-2022)
+                  </li>
+                  <li>
+                    Volunteer FOG (2021)
+                  </li>
+                </ul>
+              </div>
+              <div
+                v-else
+              >
+                <p>
+                  L'associatif étant une part importante de ma vie, j'ai été membre actif de plusieurs associations étudiantes et technologiques. Ces expériences m'ont permis de développer des compétences en gestion de projet, en travail d'équipe et en organisation d'événements.
+                </p>
+                <ul
+                  class="list-disc list-inside ml-4 mt-4"
+                >
+                  <li>
+                    Responsable Développement INSALAN (2023-2025)
+                  </li>
+                  <li>
+                    Bénévole Secur'INSA (2023-2024)
+                  </li>
+                  <li>
+                    Trésorier Night Fury (2023-2024)
+                  </li>
+                  <li>
+                    Responsable Développement Night Fury (2022-2023)
+                  </li>
+                  <li>
+                    Responsable E-sport LoL Night Fury (2021-2022)
+                  </li>
+                  <li>
+                    Bénévole FOG (2021)
+                  </li>
+                </ul>
+              </div>
+            </div>
+
           </div>
         </div>
 
