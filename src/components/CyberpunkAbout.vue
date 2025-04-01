@@ -60,7 +60,7 @@
             </div>
 
             <div class="mb-4">
-              <span class="text-cyan-400">kwikkill@system:~$</span>
+              <span class="text-cyan-400">kwikkill@hyperion:~$</span>
               <span class="text-theme-foreground ml-2">{{ isEnglish ? 'cat interests.txt' : 'cat interets.txt' }}</span>
             </div>
 
@@ -86,7 +86,7 @@
             </div>
 
             <div class="mb-4">
-              <span class="text-cyan-400">kwikkill@system:~$</span>
+              <span class="text-cyan-400">kwikkill@hyperion:~$</span>
               <span class="text-theme-foreground ml-2">
                 {{
                   isEnglish
@@ -178,7 +178,7 @@
 
           <div class="terminal-content font-mono">
             <div class="mb-4">
-              <span class="text-cyan-400">kwikkill@system:~$</span>
+              <span class="text-cyan-400">kwikkill@hyperion:~$</span>
               <span class="text-theme-foreground ml-2">{{ isEnglish ? './list_skills.sh' : './lister_competences.sh' }}</span>
             </div>
 
@@ -214,7 +214,7 @@
 
             <div class="mt-4 text-green-400 pt-4 border-t border-theme-foreground/30">
               <div class="flex items-center">
-                <span class="text-cyan-400 mr-2">kwikkill@system:~$</span>
+                <span class="text-cyan-400 mr-2">kwikkill@hyperion:~$</span>
                 <span class="text-theme-foreground">
                   {{
                     isEnglish
