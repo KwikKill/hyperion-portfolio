@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 import { defineStore } from "pinia"
 import { usePreferencesStore } from "./preferences"
 
@@ -415,7 +416,8 @@ export const useProjectsStore = defineStore("projects", {
           skills: ['Markdown', 'LaTeX']
         }
       ]
-    }
+    },
+    selectedProject: ref(null),
   }),
 
   getters: {

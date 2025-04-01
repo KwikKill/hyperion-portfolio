@@ -66,6 +66,7 @@
           class="flex flex-col items-center cursor-pointer group"
           @click="openProject(project)"
           :class="{'search-match': isSearchMatch(project)}"
+          :id="'project-' + project.file[language]"
         >
           <div class="desktop-folder mb-2 transition-transform group-hover:scale-110 relative">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -182,6 +183,7 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { storeToRefs } from 'pinia';
 import { usePreferencesStore } from '../stores/preferences'
 import { useProjectsStore } from '../stores/projects'
 
@@ -189,9 +191,11 @@ const preferencesStore = usePreferencesStore()
 const projectsStore = useProjectsStore()
 
 const isEnglish = computed(() => preferencesStore.isEnglish)
+const language = computed(() => preferencesStore.language)
 const projects = computed(() => projectsStore.getLocalizedProjects)
 
-const selectedProject = ref(null)
+const { selectedProject } = storeToRefs(projectsStore)
+
 const searchQuery = ref('')
 const isSearchFocused = ref(false)
 const lastSearchTime = ref(Date.now())
