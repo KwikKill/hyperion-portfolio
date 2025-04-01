@@ -18,11 +18,12 @@
 
     <!-- Modal content with glass effect -->
     <div
-      class="relative max-w-4xl w-full mx-4 my-8 rounded-xl overflow-hidden backdrop-blur-md bg-gray-900/95 border border-white/20 shadow-2xl transition-all duration-500 transform"
+      class="relative max-w-4xl w-full mx-4 my-8 rounded-xl overflow-hidden backdrop-blur-md bg-gray-900/95 border  shadow-2xl transition-all duration-500 transform"
       :class="{
         'scale-95 opacity-0': !isModalReady,
         'scale-100 opacity-100': isModalReady,
-        'cyberpunk-terminal': version === 'cyberpunk',
+        'cyberpunk-terminal border-theme-foreground/70': version === 'cyberpunk',
+        'border-white/20': version !== 'cyberpunk'
       }"
     >
       <!-- Cyberpunk terminal header -->
@@ -77,9 +78,10 @@
         >
           <!-- Language Selection -->
           <div
-            class="bg-black rounded-xl pb-6 border border-white/50 transition-all duration-500"
+            class="bg-black rounded-xl pb-6 border transition-all duration-500"
             :class="{
-              'cyberpunk-terminal': version === 'cyberpunk',
+              'cyberpunk-terminal border-theme-foreground/70': version === 'cyberpunk',
+              'border-white/50': version !== 'cyberpunk'
             }"
           >
             <!-- Cyberpunk terminal header -->
@@ -153,9 +155,10 @@
 
           <!-- Version Selection -->
           <div
-            class="bg-black rounded-xl pb-6 border border-white/50 transition-all duration-500"
+            class="bg-black rounded-xl pb-6 border transition-all duration-500"
             :class="{
-              'cyberpunk-terminal': version === 'cyberpunk',
+              'cyberpunk-terminal border-theme-foreground/70': version === 'cyberpunk',
+              'border-white/50': version !== 'cyberpunk'
             }"
           >
             <!-- Cyberpunk terminal header -->
