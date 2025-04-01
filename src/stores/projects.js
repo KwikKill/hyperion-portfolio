@@ -5,7 +5,6 @@ export const useProjectsStore = defineStore("projects", {
   state: () => ({
     projects: [
       {
-        id: 1,
         name: {
           en: "Portfolio Website",
           fr: "Site Portfolio",
@@ -26,7 +25,6 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/KwikKill/hyperion-portfolio",
       },
       {
-        id: 2,
         name: {
           en: "Insalan.fr Website",
           fr: "Site Insalan.fr",
@@ -47,7 +45,6 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/InsaLan/infra-insalan.fr",
       },
       {
-        id: 3,
         name: {
           en: "Insalan.fr Monitoring",
           fr: "Métrologie Insalan.fr",
@@ -67,14 +64,13 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/InsaLan/infra-insalan.fr/blob/main/docker-compose-analytics.yml",
       },
       {
-        id:4,
         name: {
           en: "Break the code",
           fr: "Break the code"
         },
         description: {
           en: "Participation in the \"Break the code\" algorithmic competition organized by Sopra Steria. By improving each year, my teammates and I managed to reach the top 6 in the second year and the top 4 in the third and fourth years out of more than 40 teams. The competition is open to all students from computer science schools in Rennes.",
-          fr: "Participation au concours d'algorythmie \"Break the eode\" organisée par Sopra Steria. En m'améliorant chaque année, nous avons réussi avec mes coéquipiés à nous hisser au top 6 dès la deuxième année et au top 4 la troisième et quatrième année sur plus de 40 équipes. Le concours est ouvert à tous les étudiants des écoles d'informatique de Rennes.",
+          fr: "Participation au concours d'algorythmie \"Break the code\" organisée par Sopra Steria. En m'améliorant chaque année, nous avons réussi avec mes coéquipiés à nous hisser au top 6 dès la deuxième année et au top 4 la troisième et quatrième année sur plus de 40 équipes. Le concours est ouvert à tous les étudiants des écoles d'informatique de Rennes.",
         },
         file: {
           en: "breakthecode.html",
@@ -87,7 +83,6 @@ export const useProjectsStore = defineStore("projects", {
         link: "https://www.linkedin.com/posts/m-paris_breakthecode-challenge-codage-activity-7272240941552340992-maS5"
       },
       {
-        id: 5,
         name: {
           en: "Infographique",
           fr: "Infographique",
@@ -108,7 +103,6 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/KwikKill/infographique"
       },
       {
-        id: 6,
         name: {
           en: "Bomberman AI",
           fr: "IA Bomberman",
@@ -128,7 +122,6 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/KwikKill/Bomberman",
       },
       {
-        id: 7,
         name: {
           en: "Advent of Codpilote",
           fr: "Advent of Codpilote",
@@ -148,7 +141,6 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/KwikKill/advent-of-codpilote"
       },
       {
-        id: 8,
         name: {
           en: "Lightshield improvement",
           fr: "Amélioration de Lightshield",
@@ -168,7 +160,6 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/KwikKill/Lightshield",
       },
       {
-        id: 9,
         name: {
           en: "document indexer",
           fr: "indexeur de documents"
@@ -188,7 +179,6 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/KwikKill/TALEO",
       },
       {
-        id: 10,
         name: {
           en: "journals generation",
           fr: "Génération de revues"
@@ -208,7 +198,62 @@ export const useProjectsStore = defineStore("projects", {
         link: "https://www.irisa.fr/article/2023-09/la-creation-de-revues-numeriques-des-registres-des-soldats-de-lancien-regime-un",
       },
       {
-        id: 11,
+        name: {
+          en: "PSH website",
+          fr: "Site PSH"
+        },
+        description: {
+          en: "Creation of a website for a humanities project related to INSA Rennes. This static site was created to illustrate our topic \"What is the impact of digital technology on access to culture?\" The support was between a website and a PDF document, the choice was quickly made.",
+          fr: "Création d'un site internet pour un projet de science humaines lié à l'INSA Rennes. Ce site statique a été créé pour illuster notre sujet \" Quel est l'impact du numérique sur l'accès à la culture ? \". Le support était entre un site internet et un document PDF, le choix a été vite fait.",
+        },
+        file: {
+          en: "psh.html",
+          fr: "psh.html",
+        },
+        date: "2023",
+        starred: false,
+        technologies: ["Vue.js", "Tailwind CSS", "Docker"],
+        image: "/src/assets/projects/psh.webp",
+        link: "https://psh.blaisot.org/"
+      },
+      {
+        name: {
+          en: "RankUp website",
+          fr: "Site RankUp"
+        },
+        description: {
+          en: "Creation of a website for my discord bot RankUp. This showcase site allows to present the bot and give information about its use. (Anecdote: the site was entirely made in 3h)",
+          fr: "Création d'un site internet pour mon bot discord RankUp. Ce site vitrine permet de présenter le bot et de donner des informations sur son utilisation. (Annecdote: le site a entierement été fait en 3h)",
+        },
+        file: {
+          en: "rankup-website.html",
+          fr: "rankup-website.html",
+        },
+        date: "2023",
+        starred: false,
+        technologies: ["Vue.js", "Tailwind CSS", "Docker"],
+        image: "/src/assets/projects/rankup-website.webp",
+        link: "https://rankup.somi.blaisot.org/"
+      },
+      {
+        name: {
+          en: "Stack Web",
+          fr: "Stack Web",
+        },
+        description: {
+          en: "Setting up a deployment stack for dockerized sites. This environment contains a nginx server, docker containers and their associated configurations, enabling me to easily host my sites (like this one).",
+          fr: "Mise en place d'une stack de déploiement pour sites dockerisés. Cet environnement contient un serveur nginx, des containers dockers et leurs configurations associées et me permet de facilement héberger mes sites (comme celui là)."
+        },
+        file: {
+          en: "stack.html",
+          fr: "stack.html",
+        },
+        date: "2023",
+        starred: false,
+        technologies: ["Docker", "Nginx", "Shell"],
+        image: "/src/assets/projects/stack.webp",
+      },
+      {
         name: {
           en: "RankUp LoL Discord Bot",
           fr: "Bot Discord RankUp LoL",
@@ -229,7 +274,6 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/KwikKill/Kwik_bot",
       },
       {
-        id: 12,
         name: {
           en: "Virtual file system",
           fr: "Système de fichiers virtuel",
@@ -249,7 +293,6 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/KwikKill/Virtual-File-System"
       },
       {
-        id: 13,
         name: {
           en: "Minecraft server management",
           fr: "Gestion d'un serveur Minecraft",
@@ -268,7 +311,6 @@ export const useProjectsStore = defineStore("projects", {
         image: "/src/assets/projects/minecraft.webp",
       },
       {
-        id: 14,
         name: {
           en: "Mindustry modding",
           fr: "Modding Mindustry",

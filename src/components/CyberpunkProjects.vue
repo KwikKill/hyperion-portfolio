@@ -62,7 +62,7 @@
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-10">
         <div
           v-for="project in filteredProjects"
-          :key="project.id"
+          :key="project"
           class="flex flex-col items-center cursor-pointer group"
           @click="openProject(project)"
           :class="{'search-match': isSearchMatch(project)}"
