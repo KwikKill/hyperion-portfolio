@@ -67,7 +67,7 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/InsaLan/infra-insalan.fr/blob/main/docker-compose-analytics.yml",
       },
       {
-        id:4,
+        id: 4,
         name: {
           en: "Infographique",
           fr: "Infographique",
@@ -88,7 +88,7 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/KwikKill/infographique"
       },
       {
-        id:5,
+        id: 5,
         name: {
           en: "Bomberman AI",
           fr: "IA Bomberman",
@@ -108,7 +108,7 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/KwikKill/Bomberman",
       },
       {
-        id:6,
+        id: 6,
         name: {
           en: "Lightshield improvement",
           fr: "Amélioration de Lightshield",
@@ -128,7 +128,47 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/KwikKill/Lightshield",
       },
       {
-        id:7,
+        id: 7,
+        name: {
+          en: "document indexer",
+          fr: "indexeur de documents"
+        },
+        description: {
+          en: "This project was carried out as part of the TALEO (automatic processing of written and oral language) module of my studies at INSA Rennes. The objective was to create a document indexer in Python and a documents search tool. The indexer creates an inverted index from a set of documents. It is then possible to search for words in the documents and display the results as a list. Several algorithms have been implemented (tf.id, bm25, dirichlet,...).",
+          fr: "Ce projet a été réalisé dans le cadre du module TALEO (traitement automatique du langage écrit et oral) de mon cursus à l'INSA Rennes. L'objectif était de créer un indexeur de documents en python ainsi qu'un outil de recherche de documents. L'indexeur permet de créer un index inversé à partir d'un ensemble de documents. Il est ensuite possible de rechercher des mots dans les documents et d'afficher les résultats sous forme de liste. Plusieurs algorythmes ont été implémentés (tf.id, bm25, dirichlet,...)."
+        },
+        file: {
+          en: "indexer.py",
+          fr: "indexer.py",
+        },
+        date: "2024",
+        starred: false,
+        technologies: ["python"],
+        image: "/src/assets/projects/indexer.webp",
+        github: "https://github.com/KwikKill/TALEO",
+      },
+      {
+        id: 8,
+        name: {
+          en: "journals generation",
+          fr: "Génération de revues"
+        },
+        description: {
+          en: "This research project was carried out as part of my studies at INSA Rennes. The objective was to improve a python pipeline for generating historical reviews on soldiers from the old regime.",
+          fr: "Ce projet inscrit dans la recherche a été réalisé dans le cadre de mon cursus à l'INSA Rennes. L'objectif était l'amélioration d'un pipeline python de génération de revues historique sur les soldats de l'ancien régime."
+        },
+        file: {
+          en: "journals.py",
+          fr: "revues.py",
+        },
+        date: "2023-2024",
+        starred: false,
+        technologies: ["Python", "LaTeX"],
+        image: "/src/assets/projects/revues.webp",
+        link: "https://www.irisa.fr/article/2023-09/la-creation-de-revues-numeriques-des-registres-des-soldats-de-lancien-regime-un",
+      },
+      {
+        id: 9,
         name: {
           en: "RankUp LoL Discord Bot",
           fr: "Bot Discord RankUp LoL",
@@ -149,7 +189,7 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/KwikKill/Kwik_bot",
       },
       {
-        id: 8,
+        id: 10,
         name: {
           en: "Virtual file system",
           fr: "Système de fichiers virtuel",
@@ -169,7 +209,7 @@ export const useProjectsStore = defineStore("projects", {
         github: "https://github.com/KwikKill/Virtual-File-System"
       },
       {
-        id: 9,
+        id: 11,
         name: {
           en: "Mindustry modding",
           fr: "Modding Mindustry",
