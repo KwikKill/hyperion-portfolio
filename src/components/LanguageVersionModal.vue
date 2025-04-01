@@ -73,7 +73,7 @@
 
         <!-- Selection Sections -->
         <div
-          class="grid md:grid-cols-2 gap-6 mb-8"
+          class="grid md:grid-cols-2 gap-6 mb-8 overflow-x-auto"
         >
           <!-- Language Selection -->
           <div
@@ -228,10 +228,10 @@
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   </div>
-                  <div class="text-left">
-                    <div class="text-lg font-medium text-white flex items-center">
+                  <div class="text-left flex flex-col">
+                    <div class="text-lg font-medium text-white flex min-[450px]:items-center min-[450px]:flex-row flex-col min-[450px]:gap-2">
                       Cyberpunk
-                      <span class="text-yellow-400 font-bold text-sm ml-2 star-badge-modal">
+                      <span class="text-yellow-400 font-bold text-sm star-badge-modal max-[370px]:hidden max-w-min">
                         {{
                           isEnglish
                           ? 'Recommended'
