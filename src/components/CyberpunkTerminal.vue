@@ -83,6 +83,12 @@ const currentTypingLine = ref(null)
 const isTyping = ref(false)
 // Track the current character index for typing animation
 const currentCharIndex = ref(0)
+// Track the current character's randomization state
+const charRandomizationCount = ref(0)
+// Maximum number of randomizations per character
+const MAX_RANDOMIZATIONS = 2
+// Characters to use for randomization
+const RANDOM_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/'
 
 // Function to handle project link clicks
 function handleProjectClick(link, event) {
@@ -116,31 +122,64 @@ function scrollToBottom() {
   })
 }
 
-// Function to type the next character
+// Function to get a random character
+function getRandomChar() {
+  return RANDOM_CHARS.charAt(Math.floor(Math.random() * RANDOM_CHARS.length))
+}
+
+// Function to type the next character with randomization effect
 function typeNextChar() {
-  if (!currentTypingLine.value || currentCharIndex.value >= currentTypingLine.value.text.length) {
-    // Finished typing the current line
+  if (!currentTypingLine.value) return
+
+  const targetText = currentTypingLine.value.text
+  const lineIndex = displayedLines.value.length - 1
+
+  // If we've finished typing all characters
+  if (currentCharIndex.value >= targetText.length) {
     isTyping.value = false
     return
   }
 
-  // Increment the character index
-  currentCharIndex.value++
+  // If we're still randomizing the current character
+  if (charRandomizationCount.value < MAX_RANDOMIZATIONS) {
+    // Increment randomization count
+    charRandomizationCount.value++
 
-  // Update the displayed text
-  const lineIndex = displayedLines.value.length - 1
-  if (lineIndex >= 0) {
-    displayedLines.value[lineIndex] = {
-      ...displayedLines.value[lineIndex],
-      text: currentTypingLine.value.text.substring(0, currentCharIndex.value)
+    // Create a partially randomized string
+    let displayText = targetText.substring(0, currentCharIndex.value)
+
+    // Add the current character as a random character
+    displayText += getRandomChar()
+
+    // Update the displayed text
+    if (lineIndex >= 0) {
+      displayedLines.value[lineIndex] = {
+        ...displayedLines.value[lineIndex],
+        text: displayText
+      }
     }
+
+    // Schedule the next randomization
+    setTimeout(typeNextChar, 1)
+  } else {
+    // We've finished randomizing, set the correct character
+    charRandomizationCount.value = 0
+    currentCharIndex.value++
+
+    // Update the displayed text with the correct characters so far
+    if (lineIndex >= 0) {
+      displayedLines.value[lineIndex] = {
+        ...displayedLines.value[lineIndex],
+        text: targetText.substring(0, currentCharIndex.value)
+      }
+    }
+
+    // Schedule the next character
+    setTimeout(typeNextChar,1)
   }
 
-  // Scroll to bottom with each character
+  // Scroll to bottom with each update
   scrollToBottom()
-
-  // Schedule the next character
-  setTimeout(typeNextChar, 10)
 }
 
 // Function to add a new line with typing animation
@@ -154,6 +193,7 @@ function addLineWithTyping(line) {
   // Set up for typing animation
   currentTypingLine.value = line
   currentCharIndex.value = 0
+  charRandomizationCount.value = 0
   isTyping.value = true
 
   // Add the line to displayed lines with empty text initially

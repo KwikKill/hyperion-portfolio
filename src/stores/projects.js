@@ -371,7 +371,7 @@ export const useProjectsStore = defineStore("projects", {
         },
         {
           name: 'Other',
-          skills: ['Markdown', 'LaTeX']
+          skills: ['Markdown', 'LaTeX', 'Typst']
         }
       ],
       fr: [
@@ -413,7 +413,7 @@ export const useProjectsStore = defineStore("projects", {
         },
         {
           name: 'Autres',
-          skills: ['Markdown', 'LaTeX']
+          skills: ['Markdown', 'LaTeX', 'Typst']
         }
       ]
     },
