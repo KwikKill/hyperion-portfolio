@@ -77,7 +77,7 @@
       </slot>
     </div>
     <div
-      class="font-mono p-2 transition-all duration-300 overflow-hidden"
+      class="font-mono p-2 transition-all duration-300 overflow-hidden text-theme-foreground/50"
       v-if="isMinimized"
     >
       {{ isEnglish
