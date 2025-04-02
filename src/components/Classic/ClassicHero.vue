@@ -14,7 +14,7 @@
           <p class="text-lg text-gray-700 dark:text-gray-300 mb-8">
             {{ isEnglish
                 ? 'Passionate about web development and software engineering. I love video games, technology, and learning new things. Also passionate about Greek mythology.'
-                : 'Etudiant en Informatique passionné par le développement web et l\'ingénierie logicielle. J\'adore les jeux vidéo, la technologie et apprendre de nouvelles choses. Passionné aussi par la mythologie grecque.'
+                : 'Etudiant en Informatique passionné par le développement web et l\'ingénierie logicielle. J\'adore les jeux vidéo, la technologie et apprendre de nouvelles choses. Passionné également par la mythologie grecque.'
               }}
           </p>
           <div class="flex space-x-4">
