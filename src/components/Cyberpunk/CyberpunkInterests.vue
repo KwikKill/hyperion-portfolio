@@ -10,7 +10,7 @@
       <div class="absolute inset-0 scanlines opacity-20"></div>
     </div>
 
-    <div class="container mx-auto px-4 flex flex-col gap-4">
+    <div class="container mx-auto flex flex-col gap-4">
       <!-- Section header -->
       <CyberpunkTerminalWindow noBody :showIcon="false">
         <template #title>

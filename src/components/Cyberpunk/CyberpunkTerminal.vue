@@ -87,7 +87,7 @@ const currentCharIndex = ref(0)
 // Track the current character's randomization state
 const charRandomizationCount = ref(0)
 // Maximum number of randomizations per character
-const MAX_RANDOMIZATIONS = 2
+const MAX_RANDOMIZATIONS = 0
 // Characters to use for randomization and glitching
 const RANDOM_CHARS = '0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/'
 
@@ -256,7 +256,7 @@ function typeNextChar() {
     }
 
     // Schedule the next randomization
-    setTimeout(typeNextChar, 1)
+    setTimeout(typeNextChar, 0)
   } else {
     // We've finished randomizing, set the correct character
     charRandomizationCount.value = 0
@@ -272,7 +272,7 @@ function typeNextChar() {
     }
 
     // Schedule the next character
-    setTimeout(typeNextChar, 1)
+    setTimeout(typeNextChar, 0)
   }
 
   // Scroll to bottom with each update

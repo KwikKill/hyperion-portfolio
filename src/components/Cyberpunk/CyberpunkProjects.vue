@@ -116,6 +116,20 @@
             <span class="text-xs ml-1">{{ isEnglish ? 'FEATURED PROJECT' : 'PROJET MIS EN AVANT' }}</span>
           </span>
         </template>
+
+        <template #buttons>
+          <div class="flex justify-end">
+            <button
+              @click="closeProject"
+              class="text-theme-foreground hover:text-yellow-300"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </template>
+
         <template #body>
           <div class="flex flex-col md:flex-row gap-6">
             <div class="md:w-1/2">
@@ -165,17 +179,6 @@
                 </a>
               </div>
             </div>
-          </div>
-
-          <div class="flex justify-end mt-4">
-            <button
-              @click="closeProject"
-              class="text-theme-foreground hover:text-yellow-300"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
           </div>
         </template>
       </CyberpunkTerminalWindow>

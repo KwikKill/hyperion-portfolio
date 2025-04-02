@@ -30,7 +30,7 @@
             INSA Rennes
           </h2>
 
-          <CyberpunkTerminalWindow class="mb-8 space-y-2 md:max-w-lg">
+          <CyberpunkTerminalWindow class="md:max-w-lg">
             <template #title>
               {{ isEnglish ? 'welcome to my portfolio' : 'bienvenue sur mon portfolio' }}
             </template>
@@ -122,7 +122,7 @@
             </template>
           </CyberpunkTerminalWindow>
 
-          <div class="flex space-x-4">
+          <div class="flex space-x-4 mt-8">
             <a
               href="#projects"
               class="px-6 py-3 bg-theme-foreground hover:bg-yellow-600 text-black font-medium rounded-none transition-colors uppercase tracking-wider cyberpunk-button"
