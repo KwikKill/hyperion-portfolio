@@ -1,7 +1,11 @@
 <template>
   <header class="bg-white dark:bg-gray-800 shadow-md py-4">
     <div class="container mx-auto px-4 flex justify-between items-center">
-      <div class="text-2xl font-bold text-gray-900 dark:text-white">
+      <div
+        class="text-2xl font-bold text-gray-900 dark:text-white cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        @click="preferencesStore.resetPreferences"
+        @keydown.enter="preferencesStore.resetPreferences"
+      >
         KwikKill - Portfolio
       </div>
 

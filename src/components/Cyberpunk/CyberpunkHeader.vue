@@ -1,9 +1,13 @@
 <template>
   <header class="bg-black/80 border-b border-theme-foreground/50 py-4 backdrop-blur-sm">
     <div class="container mx-auto px-4 flex justify-between items-center">
-      <div class="text-2xl font-bold text-theme-foreground cyberpunk-text-glow">
+      <div
+        class="text-2xl font-bold text-theme-foreground cyberpunk-text-glow cursor-pointer hover:text-yellow-400 transition-colors"
+        @click="preferencesStore.resetPreferences"
+        @keydown.enter="preferencesStore.resetPreferences"
+      >
         <span class="text-gray-500">&lt;</span>
-        <img src="../assets/logo.png" alt="Logo" class="inline-block w-8 h-8" />
+        <img src="/src/assets/logo.png" alt="Logo" class="inline-block w-8 h-8" />
         KwikKill
         <span class="text-gray-500">/&gt;</span>
       </div>

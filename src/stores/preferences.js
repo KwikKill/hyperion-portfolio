@@ -19,9 +19,16 @@ export const usePreferencesStore = defineStore("preferences", {
         document.documentElement.classList.remove("dark")
       } else if (version === "classic") {
         document.documentElement.classList.remove("cyberpunk")
-        // You could add dark mode toggle in the classic version
+        document.documentElement.classList.add("dark")
       }
     },
+    resetPreferences() {
+      this.language = null
+      this.version = null
+      this.showModal = true
+      document.documentElement.classList.remove("cyberpunk")
+      document.documentElement.classList.remove("dark")
+    }
   },
 
   getters: {
