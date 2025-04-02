@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-900 text-green-400 font-mono text-sm rounded-lg shadow-lg overflow-hidden border border-gray-700">
+  <div class="bg-gray-900 text-green-400 font-mono text-sm rounded-lg shadow-lg overflow-hidden border border-gray-700 h-full">
     <div class="bg-gray-800 px-4 py-2 flex justify-between items-center">
       <div class="text-white">terminal@portfolio:~</div>
       <div class="flex space-x-2">
@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div ref="terminalContentRef" class="p-4 h-64 overflow-y-auto">
+    <div ref="terminalContentRef" class="p-4 h-64 overflow-y-auto h-[600px] lg:h-[500px] xl:h-[410px]">
       <div v-for="(line, index) in terminalLines" :key="index" class="mb-1">
         <template v-if="line.type === 'command'">
           <span class="text-blue-400">terminal@portfolio:~$</span>

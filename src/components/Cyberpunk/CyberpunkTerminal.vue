@@ -11,7 +11,7 @@
     </div>
 
     <div ref="terminalContentRef"
-      class="terminal-content overflow-y-auto max-h-[360px] scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-gray-800">
+      class="terminal-content overflow-y-auto max-h-[520px] scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-gray-800">
       <div v-for="(line, index) in displayedLines" :key="index" class="mb-1">
         <template v-if="line.type === 'command'">
           <span class="text-cyan-400">kwikkill@hyperion:~$</span>
@@ -210,12 +210,14 @@ function scheduleNextGlitch() {
     applyGlitch(randomLine.index)
   }
 
-  // Schedule the next glitch
-  const nextGlitchTime = getRandomNumber(GLITCH_INTERVAL_MIN, GLITCH_INTERVAL_MAX)
-  const timeoutId = setTimeout(scheduleNextGlitch, nextGlitchTime)
+  if (activeGlitchTimeouts.value.length < 10000) {
+    // Schedule the next glitch
+    const nextGlitchTime = getRandomNumber(GLITCH_INTERVAL_MIN, GLITCH_INTERVAL_MAX)
+    const timeoutId = setTimeout(scheduleNextGlitch, nextGlitchTime)
 
-  // Store the timeout ID
-  activeGlitchTimeouts.value.push(timeoutId)
+    // Store the timeout ID
+    activeGlitchTimeouts.value.push(timeoutId)
+  }
 }
 
 // Function to type the next character with randomization effect

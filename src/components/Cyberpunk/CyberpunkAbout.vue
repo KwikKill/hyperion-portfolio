@@ -64,7 +64,7 @@
               <span class="text-theme-foreground ml-2">{{ isEnglish ? 'cat interests.txt' : 'cat interets.txt' }}</span>
             </div>
 
-            <div class="text-green-400 leading-relaxed">
+            <div class="text-green-400 mb-4 leading-relaxed">
               <template
                 v-if="isEnglish"
               >
