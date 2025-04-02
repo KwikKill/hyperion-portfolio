@@ -1,61 +1,63 @@
 <template>
-  <div
-    class="cyberpunk-terminal bg-black/90 border-2 border-theme-foreground/70 rounded-md p-4 text-green-400 font-mono text-sm overflow-hidden h-full">
-    <div class="terminal-header flex justify-between items-center mb-2 pb-2 border-b border-theme-foreground/30">
-      <div class="text-theme-foreground">kwikkill@hyperion:~</div>
-      <div class="flex items-center space-x-2">
-        <div class="w-3 h-3 rounded-full bg-green-500"></div>
-        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-        <div class="w-3 h-3 rounded-full bg-red-500"></div>
-      </div>
-    </div>
+  <CyberpunkTerminalWindow
+    class="cyberpunk-terminal bg-black/90 border-2 border-theme-foreground/70 rounded-md text-green-400 font-mono text-sm overflow-hidden h-full"
+    :showIcon="false"
+  >
+    <template #title>
+      kwikkill@hyperion:~
+    </template>
 
-    <div ref="terminalContentRef"
-      class="terminal-content overflow-y-auto xl:max-h-[520px] lg:max-h-[610px] md:max-h-[700px] max-h-[520px] scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-gray-800">
-      <div v-for="(line, index) in displayedLines" :key="index" class="mb-1">
-        <template v-if="line.type === 'command'">
+    <template #body>
+      <div
+        ref="terminalContentRef"
+        class="terminal-content overflow-y-auto xl:max-h-[520px] lg:max-h-[610px] md:max-h-[700px] max-h-[520px] scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-gray-800"
+      >
+        <div v-for="(line, index) in displayedLines" :key="index" class="mb-1">
+          <template v-if="line.type === 'command'">
+            <span class="text-cyan-400">kwikkill@hyperion:~$</span>
+            <span class="text-theme-foreground ml-2">
+              {{ line.text }}
+            </span>
+          </template>
+          <template v-else-if="line.type === 'response'">
+            <span v-if="line.inline" class="text-red-500 mr-2">
+              >>
+            </span>
+            <span class="text-green-400 cursor-pointer hover:text-green-600 transition-colors" v-if="line.link"
+              @click.prevent="handleProjectClick(line.link, $event)">
+              {{ line.displayText || line.text }}
+            </span>
+            <span class="text-green-400" v-else>
+              {{ line.displayText || line.text }}
+            </span>
+          </template>
+          <template v-else-if="line.type === 'error'">
+            <span v-if="line.inline" class="text-red-500 mr-2">
+              >>
+            </span>
+            <a :href="line.link" class="text-red-400 hover:text-red-600 transition-colors" target="_blank"
+              rel="noopener noreferrer" v-if="line.link">
+              {{ line.displayText || line.text }}
+            </a>
+            <span class="text-red-400" v-else>
+              {{ line.displayText || line.text }}
+            </span>
+          </template>
+        </div>
+
+        <div class="flex items-center mt-2 animate-pulse">
           <span class="text-cyan-400">kwikkill@hyperion:~$</span>
-          <span class="text-theme-foreground ml-2">
-            {{ line.text }}
-          </span>
-        </template>
-        <template v-else-if="line.type === 'response'">
-          <span v-if="line.inline" class="text-red-500 mr-2">
-            >>
-          </span>
-          <span class="text-green-400 cursor-pointer hover:text-green-600 transition-colors" v-if="line.link"
-            @click.prevent="handleProjectClick(line.link, $event)">
-            {{ line.displayText || line.text }}
-          </span>
-          <span class="text-green-400" v-else>
-            {{ line.displayText || line.text }}
-          </span>
-        </template>
-        <template v-else-if="line.type === 'error'">
-          <span v-if="line.inline" class="text-red-500 mr-2">
-            >>
-          </span>
-          <a :href="line.link" class="text-red-400 hover:text-red-600 transition-colors" target="_blank"
-            rel="noopener noreferrer" v-if="line.link">
-            {{ line.displayText || line.text }}
-          </a>
-          <span class="text-red-400" v-else>
-            {{ line.displayText || line.text }}
-          </span>
-        </template>
+          <span class="ml-2 w-2 h-4 bg-theme-foreground blink-cursor" />
+        </div>
       </div>
-
-      <div class="flex items-center mt-2 animate-pulse">
-        <span class="text-cyan-400">kwikkill@hyperion:~$</span>
-        <span class="ml-2 w-2 h-4 bg-theme-foreground blink-cursor" />
-      </div>
-    </div>
-  </div>
+    </template>
+  </CyberpunkTerminalWindow>
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch, nextTick, onBeforeUnmount } from 'vue'
+import { ref, onMounted, computed, nextTick, onBeforeUnmount } from 'vue'
 import { storeToRefs } from 'pinia';
+import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue'
 
 import { usePreferencesStore } from '../../stores/preferences'
 import { useProjectsStore } from '../../stores/projects'

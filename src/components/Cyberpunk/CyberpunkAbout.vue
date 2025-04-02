@@ -12,35 +12,20 @@
 
     <div class="container mx-auto px-4 relative z-10">
       <!-- Terminal header -->
-      <div class="cyberpunk-terminal border-2 border-theme-foreground/70 rounded-md bg-black/80 p-2 mb-8 flex justify-between items-center">
-        <div class="text-theme-foreground font-mono uppercase tracking-wider">
+      <CyberpunkTerminalWindow class="mb-8" :showIcon="false" :noBody="true">
+        <template #title>
           {{ isEnglish ? 'HYPERION v1.0 - USER PROFILE' : 'HYPERION v1.0 - PROFIL UTILISATEUR' }}
-        </div>
-        <div class="flex space-x-2">
-          <div class="w-3 h-3 rounded-full bg-green-500"></div>
-          <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-          <div class="w-3 h-3 rounded-full bg-red-500"></div>
-        </div>
-      </div>
+        </template>
+      </CyberpunkTerminalWindow>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- About Me Terminal -->
-        <div class="cyberpunk-terminal border-2 border-theme-foreground/70 rounded-md bg-black/80 p-2">
-          <div class="terminal-header mb-4 pb-2 border-b border-theme-foreground/30 flex justify-between items-center">
-            <div class="flex items-center">
-              <div class="w-4 h-4 bg-theme-foreground mr-2"></div>
-              <div class="text-theme-foreground font-mono uppercase">
-                {{ isEnglish ? 'ABOUT_ME.EXE' : 'A_PROPOS_DE_MOI.EXE' }}
-              </div>
-            </div>
-            <div class="flex space-x-2">
-              <div class="w-3 h-3 rounded-full bg-green-500"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div class="w-3 h-3 rounded-full bg-red-500"></div>
-            </div>
-          </div>
+        <CyberpunkTerminalWindow>
+          <template #title>
+            {{ isEnglish ? 'ABOUT_ME.EXE' : 'A_PROPOS_DE_MOI.EXE' }}
+          </template>
 
-          <div class="terminal-content font-mono">
+          <template #body>
             <div class="mb-4">
               <span class="text-cyan-400">kwikkill@hyperion:~$</span>
               <span class="text-theme-foreground ml-2">{{ isEnglish ? 'cat profile.txt' : 'cat profil.txt' }}</span>
@@ -64,7 +49,7 @@
               <span class="text-theme-foreground ml-2">{{ isEnglish ? 'cat interests.txt' : 'cat interets.txt' }}</span>
             </div>
 
-            <div class="text-green-400 mb-4 leading-relaxed">
+            <div class="text-green-400 leading-relaxed">
               <template
                 v-if="isEnglish"
               >
@@ -156,27 +141,16 @@
                 </ul>
               </div>
             </div>
+          </template>
+        </CyberpunkTerminalWindow>
 
-          </div>
-        </div>
+        <!-- Skills Terminal - Keeping the original structure for this one as an example -->
+        <CyberpunkTerminalWindow>
+          <template #title>
+            {{ isEnglish ? 'SKILLS.EXE' : 'COMPETENCES.EXE' }}
+          </template>
 
-        <!-- Skills Terminal -->
-        <div class="cyberpunk-terminal border-2 border-theme-foreground/70 rounded-md bg-black/80 p-2">
-          <div class="terminal-header mb-4 pb-2 border-b border-theme-foreground/30 flex justify-between items-center">
-            <div class="flex items-center">
-              <div class="w-4 h-4 bg-theme-foreground mr-2"></div>
-              <div class="text-theme-foreground font-mono uppercase">
-                {{ isEnglish ? 'SKILLS.EXE' : 'COMPETENCES.EXE' }}
-              </div>
-            </div>
-            <div class="flex space-x-2">
-              <div class="w-3 h-3 rounded-full bg-green-500"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div class="w-3 h-3 rounded-full bg-red-500"></div>
-            </div>
-          </div>
-
-          <div class="terminal-content font-mono">
+          <template #body>
             <div class="mb-4">
               <span class="text-cyan-400">kwikkill@hyperion:~$</span>
               <span class="text-theme-foreground ml-2">{{ isEnglish ? './list_skills.sh' : './lister_competences.sh' }}</span>
@@ -231,8 +205,8 @@
                 }}
               </div>
             </div>
-          </div>
-        </div>
+          </template>
+        </CyberpunkTerminalWindow>
       </div>
     </div>
   </section>
@@ -242,6 +216,7 @@
 import { computed, ref, onMounted } from 'vue'
 import { usePreferencesStore } from '../../stores/preferences'
 import { useProjectsStore } from '../../stores/projects'
+import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue'
 
 const projectsStore = useProjectsStore()
 
@@ -318,7 +293,5 @@ onMounted(() => {
 .skill-item {
   position: relative;
 }
-
-/* Remove the ::before pseudo-element since we're using > character directly in the template */
 </style>
 
