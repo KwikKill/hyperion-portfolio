@@ -1,5 +1,5 @@
 <template>
-  <section id="interests" class="py-20 bg-white dark:bg-gray-800">
+  <section id="interests" class="pb-20 pt-10 bg-white dark:bg-gray-800">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">
         {{ isEnglish ? 'My Interests' : 'Mes Intérêts' }}
@@ -41,7 +41,7 @@
         <div
           v-for="(movie, index) in movies"
           :key="index"
-          class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+          class="bg-gray-50 dark:bg-gray-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
         >
           <img
             :src="movie.image"
@@ -52,7 +52,9 @@
             <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">{{ movie.title }}</h3>
             <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">{{ movie.year }} • {{ movie.genre }}</p>
             <p class="text-gray-700 dark:text-gray-300 mb-4">{{ movie.description }}</p>
-            <div class="text-sm text-blue-600 dark:text-blue-400 font-medium">
+            <div
+              class="text-sm font-medium text-blue-600 dark:text-blue-400"
+            >
               {{ isEnglish ? 'Why I love it:' : 'Pourquoi je l\'aime:' }} {{ movie.whyILoveIt }}
             </div>
           </div>
@@ -64,7 +66,7 @@
         <div
           v-for="(game, index) in games"
           :key="index"
-          class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
+          class="bg-gray-50 dark:bg-gray-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
         >
           <img
             :src="game.image"
@@ -75,7 +77,9 @@
             <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">{{ game.title }}</h3>
             <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">{{ game.year }}</p>
             <p class="text-gray-700 dark:text-gray-300 mb-4">{{ game.description }}</p>
-            <div class="text-sm text-blue-600 dark:text-blue-400 font-medium">
+            <div
+              class="text-sm text-blue-600 dark:text-blue-400 font-medium"
+            >
               {{ isEnglish ? 'Why I love it:' : 'Pourquoi je l\'aime:' }} {{ game.whyILoveIt }}
             </div>
           </div>

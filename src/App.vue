@@ -18,6 +18,13 @@ import LanguageVersionModal from '@/components/LanguageVersionModal.vue'
 import ClassicPortfolio from '@/components/Classic/ClassicPortfolio.vue'
 import CyberpunkPortfolio from '@/components/Cyberpunk/CyberpunkPortfolio.vue'
 
+import { onMounted } from 'vue'
+
 const preferencesStore = usePreferencesStore()
+
+onMounted(() => {
+  // Check for URL parameters on mount
+  preferencesStore.checkUrlParameters()
+})
 </script>
 

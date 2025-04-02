@@ -238,14 +238,14 @@
                         {{
                           isEnglish
                           ? 'Recommended'
-                          : 'Récommandé'
+                          : 'Recommandé'
                         }}
                       </span>
                     </div>
                     <div class="text-sm text-gray-300">
                       {{
                         isEnglish
-                        ? 'Interface fantasy and futuristic'
+                        ? 'fantasy and futuristic Interface'
                         : 'Interface fantaisie et futuriste'
                       }}
                     </div>
@@ -286,6 +286,12 @@
 import { ref, computed, onMounted } from 'vue'
 import { usePreferencesStore } from '../stores/preferences'
 
+// Update the setPreferences method to also update URL parameters
+const handleSetPreferences = (lang, version) => {
+  preferencesStore.setPreferences(lang, version)
+  preferencesStore.updateUrlParameters()
+}
+
 const preferencesStore = usePreferencesStore()
 const language = ref(null)
 const version = ref(null)
@@ -303,7 +309,7 @@ function setVersion(ver) {
 
 function confirmSelection() {
   if (language.value && version.value) {
-    preferencesStore.setPreferences(language.value, version.value)
+    handleSetPreferences(language.value, version.value)
   }
 }
 

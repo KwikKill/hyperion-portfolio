@@ -28,7 +28,34 @@ export const usePreferencesStore = defineStore("preferences", {
       this.showModal = true
       document.documentElement.classList.remove("cyberpunk")
       document.documentElement.classList.remove("dark")
-    }
+    },
+    checkUrlParameters() {
+      // Get URL parameters
+      const urlParams = new URLSearchParams(window.location.search)
+      const langParam = urlParams.get("lang")
+      const versionParam = urlParams.get("version")
+
+      // Check if both parameters are valid
+      const validLang = ["en", "fr"].includes(langParam)
+      const validVersion = ["classic", "cyberpunk"].includes(versionParam)
+
+      // If both parameters are valid, set preferences
+      if (validLang && validVersion) {
+        this.setPreferences(langParam, versionParam)
+        return true
+      }
+
+      return false
+    },
+    updateUrlParameters() {
+      // Only update URL if preferences are set
+      if (this.language && this.version) {
+        const url = new URL(window.location.href)
+        url.searchParams.set("lang", this.language)
+        url.searchParams.set("version", this.version)
+        window.history.replaceState({}, "", url)
+      }
+    },
   },
 
   getters: {
