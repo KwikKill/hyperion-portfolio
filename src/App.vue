@@ -15,8 +15,8 @@
 <script setup>
 import { usePreferencesStore } from '@/stores/preferences'
 import LanguageVersionModal from '@/components/LanguageVersionModal.vue'
-import ClassicPortfolio from '@/components/ClassicPortfolio.vue'
-import CyberpunkPortfolio from '@/components/CyberpunkPortfolio.vue'
+import ClassicPortfolio from '@/components/Classic/ClassicPortfolio.vue'
+import CyberpunkPortfolio from '@/components/Cyberpunk/CyberpunkPortfolio.vue'
 
 const preferencesStore = usePreferencesStore()
 </script>

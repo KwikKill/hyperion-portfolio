@@ -240,8 +240,8 @@
 
 <script setup>
 import { computed, ref, onMounted } from 'vue'
-import { usePreferencesStore } from '../stores/preferences'
-import { useProjectsStore } from '../stores/projects'
+import { usePreferencesStore } from '../../stores/preferences'
+import { useProjectsStore } from '../../stores/projects'
 
 const projectsStore = useProjectsStore()
 

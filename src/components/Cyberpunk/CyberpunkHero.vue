@@ -59,7 +59,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { usePreferencesStore } from '../stores/preferences'
+import { usePreferencesStore } from '../../stores/preferences'
 import CyberpunkTerminal from './CyberpunkTerminal.vue'
 
 const preferencesStore = usePreferencesStore()

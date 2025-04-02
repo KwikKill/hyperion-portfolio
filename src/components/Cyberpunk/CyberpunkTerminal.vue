@@ -57,8 +57,8 @@
 import { ref, onMounted, computed, watch, nextTick, onBeforeUnmount } from 'vue'
 import { storeToRefs } from 'pinia';
 
-import { usePreferencesStore } from '../stores/preferences'
-import { useProjectsStore } from '../stores/projects'
+import { usePreferencesStore } from '../../stores/preferences'
+import { useProjectsStore } from '../../stores/projects'
 
 const preferencesStore = usePreferencesStore()
 const isEnglish = computed(() => preferencesStore.isEnglish)

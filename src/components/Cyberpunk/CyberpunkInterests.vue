@@ -127,8 +127,8 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { usePreferencesStore } from '../stores/preferences'
-import { useProjectsStore } from '../stores/projects'
+import { usePreferencesStore } from '../../stores/preferences'
+import { useProjectsStore } from '../../stores/projects'
 
 const preferencesStore = usePreferencesStore()
 const isEnglish = computed(() => preferencesStore.isEnglish)

@@ -184,8 +184,8 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { storeToRefs } from 'pinia';
-import { usePreferencesStore } from '../stores/preferences'
-import { useProjectsStore } from '../stores/projects'
+import { usePreferencesStore } from '../../stores/preferences'
+import { useProjectsStore } from '../../stores/projects'
 
 const preferencesStore = usePreferencesStore()
 const projectsStore = useProjectsStore()

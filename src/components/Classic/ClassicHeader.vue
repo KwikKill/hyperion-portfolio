@@ -23,7 +23,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { usePreferencesStore } from '../stores/preferences'
+import { usePreferencesStore } from '../../stores/preferences'
 
 const preferencesStore = usePreferencesStore()
 

@@ -46,7 +46,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { usePreferencesStore } from '../stores/preferences'
+import { usePreferencesStore } from '../../stores/preferences'
 import ClassicTerminal from './ClassicTerminal.vue'
 
 const preferencesStore = usePreferencesStore()

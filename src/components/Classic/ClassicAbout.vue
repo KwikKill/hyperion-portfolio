@@ -94,8 +94,8 @@
 
 <script setup>
 import { computed } from 'vue'
-import { usePreferencesStore } from '../stores/preferences'
-import { useProjectsStore } from '../stores/projects'
+import { usePreferencesStore } from '../../stores/preferences'
+import { useProjectsStore } from '../../stores/projects'
 
 const preferencesStore = usePreferencesStore()
 const projectsStore = useProjectsStore()
