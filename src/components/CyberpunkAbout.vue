@@ -68,7 +68,7 @@
               <template
                 v-if="isEnglish"
               >
-                When I\'m not coding, you can find me exploring new technologies,  or expanding my knowledge in various computer science domains.
+                When I'm not coding, you can find me exploring new technologies,  or expanding my knowledge in various computer science domains.
                 <br/>
                 Apart from these subjects, I enjoy video games, films and books (mainly science fiction), board games, role-playing games and Greek mythology.
                 <br/>

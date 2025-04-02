@@ -13,9 +13,9 @@
           </h2>
           <p class="text-lg text-gray-700 dark:text-gray-300 mb-8">
             {{ isEnglish
-              ? 'Passionate about web development, software engineering, and creating innovative solutions.'
-              : 'Passionné par le développement web, l\'ingénierie logicielle et la création de solutions innovantes.'
-            }}
+                ? 'Passionate about web development and software engineering. I love video games, technology, and learning new things. Also passionate about Greek mythology.'
+                : 'Etudiant en Informatique passionné par le développement web et l\'ingénierie logicielle. J\'adore les jeux vidéo, la technologie et apprendre de nouvelles choses. Passionné aussi par la mythologie grecque.'
+              }}
           </p>
           <div class="flex space-x-4">
             <a
@@ -24,14 +24,20 @@
             >
               {{ isEnglish ? 'View Projects' : 'Voir les Projets' }}
             </a>
+            <a
+              href="#interests"
+              class="px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-md transition-colors"
+            >
+              {{ isEnglish ? 'My Interests' : 'Mes Intérêts' }}
+            </a>
           </div>
         </div>
         <div class="md:w-1/2">
-          <img
-            src="@/assets/logo.png"
-            alt="Profile"
-            class="rounded-full w-64 h-64 mx-auto object-cover shadow-lg"
-          />
+          <div class="flex flex-col items-center">
+            <div class="w-full max-w-md">
+              <ClassicTerminal />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -41,6 +47,7 @@
 <script setup>
 import { computed } from 'vue'
 import { usePreferencesStore } from '../stores/preferences'
+import ClassicTerminal from './ClassicTerminal.vue'
 
 const preferencesStore = usePreferencesStore()
 const isEnglish = computed(() => preferencesStore.isEnglish)

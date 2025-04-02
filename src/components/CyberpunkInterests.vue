@@ -114,8 +114,8 @@
           <div class="mt-8 pt-4 border-t border-yellow-500/30 text-center">
             <p class="text-yellow-400 font-mono text-sm">
               {{ isEnglish
-                ? 'These works are part of my inspirations and passions. They reflect my love for science fiction, art, and immersive storytelling.'
-                : 'Ces oeuvres font partie de mes inspirations et de mes passions. Elles reflètent mon amour pour la science-fiction, l\'art et la narration immersive.'
+                ? 'Beyond coding, I have a variety of interests that inspire my creativity and approach to problem-solving. Here are some of my favorite movies and games.'
+                : 'Au-delà du code, j\'ai une variété d\'intérêts qui inspirent ma créativité et mon approche de la résolution de problèmes. Voici quelques-uns de mes films et jeux préférés.'
               }}
             </p>
           </div>
@@ -128,213 +128,18 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { usePreferencesStore } from '../stores/preferences'
+import { useProjectsStore } from '../stores/projects'
 
 const preferencesStore = usePreferencesStore()
 const isEnglish = computed(() => preferencesStore.isEnglish)
+const projectsStore = useProjectsStore()
+const movies = computed(() => projectsStore.getLocalizedMovies)
+const games = computed(() => projectsStore.getLocalizedGames)
 
 const activeCategory = ref('movies')
 
 const activeCard = ref(null)
 
-const movies = computed(() => {
-  if (isEnglish.value) {
-    return [
-    {
-        title: "Matrix",
-        year: "1999",
-        genre: "Science-Fiction/Action",
-        image: "/src/assets/movies/matrix.webp",
-        description: "A hacker learns about the true nature of his reality and his role in the war against its controllers.",
-        whyILoveIt: "Revolutionary visual effects and a mind-bending story."
-      },
-      {
-        title: "Ghost in the Shell",
-        year: "1995",
-        genre: "Anime/Science-Fiction",
-        image: "/src/assets/movies/ghost_in_the_shell.webp",
-        description: "A cyborg policewoman and her partner hunt a mysterious hacker called the Puppet Master.",
-        whyILoveIt: "Pioneering cyberpunk animation with deep philosophical questions."
-      },
-      {
-        title: "Inception",
-        year: "2010",
-        genre: "Science-Fiction/Action",
-        image: "/src/assets/movies/inception.webp",
-        description: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
-        whyILoveIt: "Complex narrative layers and mind-bending concepts."
-      },
-      {
-        title: "Ex Machina",
-        year: "2014",
-        genre: "Science-Fiction/Drama",
-        image: "/src/assets/movies/ex_machina.webp",
-        description: "A programmer is selected to participate in a groundbreaking experiment in synthetic intelligence by evaluating the human qualities of a highly advanced humanoid A.I.",
-        whyILoveIt: "Exploring the limits of AI and human emotions."
-      },
-      {
-        title: "Tenet",
-        year: "2020",
-        genre: "Science-Fiction/Action",
-        image: "/src/assets/movies/tenet.webp",
-        description: "Armed with only one word, \"Tenet,\" and fighting for the survival of the world, a protagonist journeys through the twilight world of international espionage on a mission that will unfold in something beyond real time.",
-        whyILoveIt: "A complex narrative about time and perception."
-      },
-      {
-        title: "La cité de la peur",
-        year: "1994",
-        genre: "Comedy",
-        image: "/src/assets/movies/la_cité_de_la_peur.webp",
-        description: "A French comedy film that parodies horror and suspense films.",
-        whyILoveIt: "A classic of French humor with references to pop culture."
-      }
-    ]
-  } else {
-    return [
-      {
-        title: "Matrix",
-        year: "1999",
-        genre: "Science-Fiction/Action",
-        image: "/src/assets/movies/matrix.webp",
-        description: "Un pirate informatique découvre, par l'intermédiaire de mystérieux rebelles, la véritable nature de sa réalité et son rôle dans la guerre contre ses contrôleurs.",
-        whyILoveIt: "Effets visuels révolutionnaires et une histoire qui défie l'esprit."
-      },
-      {
-        title: "Ghost in the Shell",
-        year: "1995",
-        genre: "Anime/Science-Fiction",
-        image: "/src/assets/movies/ghost_in_the_shell.webp",
-        description: "Une policière cyborg et son partenaire traquent un mystérieux hacker appelé le Puppet Master.",
-        whyILoveIt: "Animation cyberpunk pionnière avec des questions philosophiques profondes."
-      },
-      {
-        title: "Inception",
-        year: "2010",
-        genre: "Science-Fiction/Action",
-        image: "/src/assets/movies/inception.webp",
-        description: "Un voleur qui dérobe des secrets d'entreprises grâce à une technologie de partage de rêves se voit confier la tâche inverse : implanter une idée dans l'esprit d'un P.D.G.",
-        whyILoveIt: "Couches narratives complexes et concepts qui défient l'esprit."
-      },
-      {
-        title: "Ex Machina",
-        year: "2014",
-        genre: "Science-Fiction/Drama",
-        image: "/src/assets/movies/ex_machina.webp",
-        description: "Un programmeur est sélectionné pour participer à une expérience révolutionnaire dans le domaine de l'intelligence artificielle en évaluant les capacités et la conscience d'un robot humanoïde.",
-        whyILoveIt: "Explorer les limites de l'IA et des émotions humaines."
-      },
-      {
-        title: "Tenet",
-        year: "2020",
-        genre: "Science-Fiction/Action",
-        image: "/src/assets/movies/tenet.webp",
-        description: "Muni d'un seul mot, \"Tenet,\" et décidé à se battre pour sauver le monde, un homme sillonne l'univers crépusculaire de l'espionnage international.",
-        whyILoveIt: "Un récit complexe sur le temps et la perception."
-      },
-      {
-        title: "La cité de la peur",
-        year: "1994",
-        genre: "Comédie",
-        image: "/src/assets/movies/la_cité_de_la_peur.webp",
-        description: "Un film comique français qui parodie les films d'horreur et de suspense.",
-        whyILoveIt: "Un classique de l'humour français avec des références à la culture pop."
-      }
-    ]
-  }
-})
-
-const games = computed(() => {
-  if (isEnglish.value) {
-    return [
-    {
-        title: "Cyberpunk 2077",
-        year: "2020",
-        image: "/src/assets/games/cyberpunk_2077.webp",
-        description: "An open-world action-adventure game set in Night City, a metropolis obsessed with power, glamour, and body modification.",
-        whyILoveIt: "Immersive cyberpunk world with incredible attention to detail."
-      },
-      {
-        title: "The Witcher 3: Wild Hunt",
-        year: "2015",
-        image: "/src/assets/games/the_witcher_3.webp",
-        description: "An open-world RPG focused on storytelling, set in a visually stunning fantasy universe filled with meaningful choices and impactful consequences.",
-        whyILoveIt: "Rich storytelling and beautifully designed world."
-      },
-      {
-        title: "A plague tale: Innocence/Requiem",
-        year: "2019/2022",
-        image: "/src/assets/games/a_plague_tale.webp",
-        description: "An action-adventure narrative game following two children in a plague-ridden medieval France.",
-        whyILoveIt: "Emotive story and immersive atmosphere."
-      },
-      {
-        title: "Baldur's Gate 3",
-        year: "2023",
-        image: "/src/assets/games/baldurs_gate_3.webp",
-        description: "A turn-based RPG based on the Dungeons & Dragons universe, offering freedom of exploration and choice.",
-        whyILoveIt: "Extremely immersive with meaningful choices and a rich world."
-      },
-      {
-        title: "Little Miss Fortune",
-        year: "2019",
-        image: "/src/assets/games/little_miss_fortune.webp",
-        description: "A narrative adventure game where you follow a little girl as she tries to find a treasure.",
-        whyILoveIt: "Disturbing story and unique aesthetic."
-      },
-      {
-        title: "Hollow Knight",
-        year: "2017",
-        image: "/src/assets/games/hollow_knight.webp",
-        description: "A challenging 2D action-adventure game set in a vast interconnected world.",
-        whyILoveIt: "Atmospheric world-building and precise, responsive controls."
-      }
-    ]
-  } else {
-    return [
-      {
-        title: "Cyberpunk 2077",
-        year: "2020",
-        image: "/src/assets/games/cyberpunk_2077.webp",
-        description: "Un jeu d'action-aventure en monde ouvert situé à Night City, une mégalopole obsédée par le pouvoir, le glamour et la modification corporelle.",
-        whyILoveIt: "Monde cyberpunk immersif avec une attention incroyable aux détails."
-      },
-      {
-        title: "The Witcher 3: Wild Hunt",
-        year: "2015",
-        image: "/src/assets/games/the_witcher_3.webp",
-        description: "Un RPG en monde ouvert axé sur l'histoire, situé dans un univers fantastique visuellement époustouflant, rempli de choix significatifs et de conséquences impactantes.",
-        whyILoveIt: "Narration riche et monde magnifiquement conçu."
-      },
-      {
-        title: "A plague tale: Innocence/Requiem",
-        year: "2019/2022",
-        image: "/src/assets/games/a_plague_tale.webp",
-        description: "Un jeu d'action-aventure narratif qui suit deux enfants dans une France médiévale ravagée par la peste.",
-        whyILoveIt: "L'histoire émotive et l'atmosphère immersive."
-      },
-      {
-        title: "Baldur's Gate 3",
-        year: "2023",
-        image: "/src/assets/games/baldurs_gate_3.webp",
-        description: "Un RPG au tour par tour basé sur l'univers de Donjons et Dragons, offrant une liberté d'exploration et de choix.",
-        whyILoveIt: "Extrêmement immersif avec des choix significatifs et un monde riche."
-      },
-      {
-        title: "Little Miss Fortune",
-        year: "2019",
-        image: "/src/assets/games/little_miss_fortune.webp",
-        description: "Un jeu d'aventure narratif où vous suivez une petite fille qui cherche à trouver un trésor.",
-        whyILoveIt: "L'histoire dérangeante et l'esthétique unique."
-      },
-      {
-        title: "Hollow Knight",
-        year: "2017",
-        image: "/src/assets/games/hollow_knight.webp",
-        description: "Un jeu d'action-aventure 2D exigeant situé dans un monde vaste et interconnecté.",
-        whyILoveIt: "Construction atmosphérique du monde et contrôles précis et réactifs."
-      }
-    ]
-  }
-})
 </script>
 
 <style scoped>
