@@ -10,8 +10,7 @@
       </div>
     </div>
 
-    <div
-      ref="terminalContentRef"
+    <div ref="terminalContentRef"
       class="terminal-content overflow-y-auto max-h-[360px] scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-gray-800">
       <div v-for="(line, index) in displayedLines" :key="index" class="mb-1">
         <template v-if="line.type === 'command'">
@@ -24,12 +23,12 @@
           <span v-if="line.inline" class="text-red-500 mr-2">
             >>
           </span>
-          <span class="text-green-400 cursor-pointer hover:text-green-600 transition-colors"
-            v-if="line.link" @click.prevent="handleProjectClick(line.link, $event)">
-            {{ line.text }}
+          <span class="text-green-400 cursor-pointer hover:text-green-600 transition-colors" v-if="line.link"
+            @click.prevent="handleProjectClick(line.link, $event)">
+            {{ line.displayText || line.text }}
           </span>
           <span class="text-green-400" v-else>
-            {{ line.text }}
+            {{ line.displayText || line.text }}
           </span>
         </template>
         <template v-else-if="line.type === 'error'">
@@ -38,10 +37,10 @@
           </span>
           <a :href="line.link" class="text-red-400 hover:text-red-600 transition-colors" target="_blank"
             rel="noopener noreferrer" v-if="line.link">
-            {{ line.text }}
+            {{ line.displayText || line.text }}
           </a>
           <span class="text-red-400" v-else>
-            {{ line.text }}
+            {{ line.displayText || line.text }}
           </span>
         </template>
       </div>
@@ -55,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch, nextTick } from 'vue'
+import { ref, onMounted, computed, watch, nextTick, onBeforeUnmount } from 'vue'
 import { storeToRefs } from 'pinia';
 
 import { usePreferencesStore } from '../stores/preferences'
@@ -87,8 +86,18 @@ const currentCharIndex = ref(0)
 const charRandomizationCount = ref(0)
 // Maximum number of randomizations per character
 const MAX_RANDOMIZATIONS = 2
-// Characters to use for randomization
-const RANDOM_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/'
+// Characters to use for randomization and glitching
+const RANDOM_CHARS = '0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/'
+
+// Glitch effect configuration
+const GLITCH_INTERVAL_MIN = 300  // Minimum time between glitches (ms)
+const GLITCH_INTERVAL_MAX = 1000  // Maximum time between glitches (ms)
+const GLITCH_DURATION_MIN = 100   // Minimum duration of a glitch (ms)
+const GLITCH_DURATION_MAX = 300   // Maximum duration of a glitch (ms)
+const GLITCH_PROBABILITY = 0.7    // Probability of a line being eligible for glitches (0-1)
+
+// Store active glitch timeouts to clear them when component is unmounted
+const activeGlitchTimeouts = ref([])
 
 // Function to handle project link clicks
 function handleProjectClick(link, event) {
@@ -127,6 +136,88 @@ function getRandomChar() {
   return RANDOM_CHARS.charAt(Math.floor(Math.random() * RANDOM_CHARS.length))
 }
 
+// Function to get a random number between min and max
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+// Function to apply a glitch to a random character in a line
+function applyGlitch(lineIndex) {
+  if (lineIndex >= displayedLines.value.length) return
+
+  const line = displayedLines.value[lineIndex]
+
+  // Skip command lines and empty lines
+  if (line.type === 'command' || !line.text || line.text.length === 0) return
+
+  // Make sure the line has a displayText property (copy from text if not)
+  if (!line.displayText) {
+    line.displayText = line.text
+  }
+
+  // Select a random character position
+  const charIndex = Math.floor(Math.random() * line.text.length)
+
+  // Skip spaces and special characters
+  if (line.text[charIndex] === ' ' || line.text[charIndex] === '\n') {
+    // Try again with a different line
+    applyGlitch(lineIndex)
+    return
+  }
+
+  // Create a new string with the glitched character
+  const glitchedText =
+    line.displayText.substring(0, charIndex) +
+    getRandomChar() +
+    line.displayText.substring(charIndex + 1)
+
+  // Update the displayed text
+  displayedLines.value[lineIndex] = {
+    ...line,
+    displayText: glitchedText
+  }
+
+  // Schedule the glitch to be reverted
+  const glitchDuration = getRandomNumber(GLITCH_DURATION_MIN, GLITCH_DURATION_MAX)
+  const timeoutId = setTimeout(() => {
+    // Revert the glitch
+    if (lineIndex < displayedLines.value.length) {
+      displayedLines.value[lineIndex] = {
+        ...displayedLines.value[lineIndex],
+        displayText: line.text
+      }
+    }
+  }, glitchDuration)
+
+  // Store the timeout ID
+  activeGlitchTimeouts.value.push(timeoutId)
+}
+
+// Function to schedule the next glitch
+function scheduleNextGlitch() {
+  // Randomly select a line to glitch
+  const eligibleLines = displayedLines.value
+    .map((line, index) => ({ line, index }))
+    .filter(item =>
+      item.line.type !== 'command' &&
+      item.line.text &&
+      item.line.text.length > 0 &&
+      Math.random() < GLITCH_PROBABILITY
+    )
+
+  if (eligibleLines.length > 0) {
+    const randomLine = eligibleLines[Math.floor(Math.random() * eligibleLines.length)]
+    applyGlitch(randomLine.index)
+  }
+
+  // Schedule the next glitch
+  const nextGlitchTime = getRandomNumber(GLITCH_INTERVAL_MIN, GLITCH_INTERVAL_MAX)
+  const timeoutId = setTimeout(scheduleNextGlitch, nextGlitchTime)
+
+  // Store the timeout ID
+  activeGlitchTimeouts.value.push(timeoutId)
+}
+
 // Function to type the next character with randomization effect
 function typeNextChar() {
   if (!currentTypingLine.value) return
@@ -155,7 +246,8 @@ function typeNextChar() {
     if (lineIndex >= 0) {
       displayedLines.value[lineIndex] = {
         ...displayedLines.value[lineIndex],
-        text: displayText
+        text: targetText, // Store the original text
+        displayText: displayText // Display the randomized text
       }
     }
 
@@ -170,12 +262,13 @@ function typeNextChar() {
     if (lineIndex >= 0) {
       displayedLines.value[lineIndex] = {
         ...displayedLines.value[lineIndex],
-        text: targetText.substring(0, currentCharIndex.value)
+        text: targetText, // Store the original text
+        displayText: targetText.substring(0, currentCharIndex.value) // Display the correct text so far
       }
     }
 
     // Schedule the next character
-    setTimeout(typeNextChar,1)
+    setTimeout(typeNextChar, 1)
   }
 
   // Scroll to bottom with each update
@@ -197,7 +290,7 @@ function addLineWithTyping(line) {
   isTyping.value = true
 
   // Add the line to displayed lines with empty text initially
-  const initialLine = { ...line, text: '' }
+  const initialLine = { ...line, text: line.text, displayText: '' }
   displayedLines.value.push(initialLine)
 
   // Start typing animation
@@ -206,7 +299,11 @@ function addLineWithTyping(line) {
 
 // Function to process the next line from the queue
 function processNextLine() {
-  if (terminalLines.value.length === 0) return
+  if (terminalLines.value.length === 0) {
+    // All lines have been processed, start the glitch effect
+    scheduleNextGlitch()
+    return
+  }
 
   const line = terminalLines.value.shift()
 
@@ -302,8 +399,15 @@ onMounted(() => {
   processNextLine()
 })
 
+// Clean up all timeouts when component is unmounted
+onBeforeUnmount(() => {
+  activeGlitchTimeouts.value.forEach(timeoutId => {
+    clearTimeout(timeoutId)
+  })
+})
+
 // Watch for changes in displayed lines to scroll to bottom
-watch(displayedLines, () => {
+/*watch(displayedLines, () => {
   scrollToBottom()
-}, { deep: true })
+}, { deep: true })*/
 </script>
