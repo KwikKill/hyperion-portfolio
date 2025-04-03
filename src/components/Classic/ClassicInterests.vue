@@ -1,18 +1,16 @@
 <template>
   <section id="interests" class="pb-20 pt-10 bg-white dark:bg-gray-800">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">
+      <h2 class="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
         {{ isEnglish ? 'My Interests' : 'Mes Intérêts' }}
       </h2>
 
-      <div class="mb-8">
-        <p class="text-gray-700 dark:text-gray-300 text-center max-w-3xl mx-auto mb-10">
-          {{ isEnglish
-            ? 'Beyond coding, I have a variety of interests that inspire my creativity and approach to problem-solving. Here are some of my favorite movies and games.'
-            : 'Au-delà du code, j\'ai une variété d\'intérêts qui inspirent ma créativité et mon approche de la résolution de problèmes. Voici quelques-uns de mes films et jeux préférés.'
-          }}
-        </p>
-      </div>
+      <p class="text-gray-700 dark:text-gray-300 text-center max-w-3xl mx-auto">
+        {{ isEnglish
+          ? 'Beyond coding, I have a variety of interests that inspire my creativity and approach to problem-solving. Here are some of my favorite movies and games.'
+          : 'Au-delà du code, j\'ai une variété d\'intérêts qui inspirent ma créativité et mon approche de la résolution de problèmes. Voici quelques-uns de mes films et jeux préférés.'
+        }}
+      </p>
 
       <!-- Categories tabs -->
       <div class="flex justify-center mb-8 border-b border-gray-200 dark:border-gray-700">
