@@ -1,7 +1,8 @@
 <template>
   <CyberpunkTerminalWindow
-    class="cyberpunk-terminal bg-black/90 border-2 border-theme-foreground/70 rounded-md text-green-400 font-mono text-sm overflow-hidden h-full"
+    class="cyberpunk-terminal border-2 border-theme-foreground/70 rounded-md text-green-400 font-mono text-sm overflow-hidden h-full"
     :showIcon="false"
+    body_class="overflow-y-auto xl:max-h-[520px] lg:max-h-[610px] md:max-h-[700px] max-h-[520px]"
   >
     <template #title>
       kwikkill@hyperion:~
@@ -10,7 +11,6 @@
     <template #body>
       <div
         ref="terminalContentRef"
-        class="terminal-content overflow-y-auto xl:max-h-[520px] lg:max-h-[610px] md:max-h-[700px] max-h-[520px] scrollbar-thin scrollbar-thumb-cyan-500 scrollbar-track-gray-800"
       >
         <div v-for="(line, index) in displayedLines" :key="index" class="mb-1">
           <template v-if="line.type === 'command'">
@@ -87,7 +87,7 @@ const currentCharIndex = ref(0)
 // Track the current character's randomization state
 const charRandomizationCount = ref(0)
 // Maximum number of randomizations per character
-const MAX_RANDOMIZATIONS = 0
+const MAX_RANDOMIZATIONS = 1
 // Characters to use for randomization and glitching
 const RANDOM_CHARS = '0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/'
 
@@ -128,7 +128,7 @@ function handleProjectClick(link, event) {
 function scrollToBottom() {
   nextTick(() => {
     if (terminalContentRef.value) {
-      terminalContentRef.value.scrollTop = terminalContentRef.value.scrollHeight
+      terminalContentRef.value.parentElement.scrollTop = terminalContentRef.value.parentElement.scrollHeight
     }
   })
 }
@@ -256,7 +256,7 @@ function typeNextChar() {
     }
 
     // Schedule the next randomization
-    setTimeout(typeNextChar, 0)
+    setTimeout(typeNextChar, 1)
   } else {
     // We've finished randomizing, set the correct character
     charRandomizationCount.value = 0
@@ -272,7 +272,7 @@ function typeNextChar() {
     }
 
     // Schedule the next character
-    setTimeout(typeNextChar, 0)
+    setTimeout(typeNextChar, 1)
   }
 
   // Scroll to bottom with each update
