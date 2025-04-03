@@ -10,7 +10,7 @@
       <div class="absolute inset-0 scanlines opacity-20"></div>
     </div>
 
-    <div class="container mx-auto px-4 z-10 relative">
+    <div class="container mx-auto px-4 relative">
       <!-- Terminal header -->
       <CyberpunkTerminalWindow class="mb-8" :showIcon="false" :noBody="true">
         <template #title>
