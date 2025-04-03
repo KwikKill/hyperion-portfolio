@@ -104,6 +104,9 @@ const activeGlitchTimeouts = ref([])
 // Function to handle project link clicks
 function handleProjectClick(link, event) {
   if (link && link.startsWith('#project-')) {
+    if (preferencesStore.isAnyFullScreen) {
+      return;
+    }
     // Extract the project file name from the link
     const projectFile = link.replace('#project-', '')
 

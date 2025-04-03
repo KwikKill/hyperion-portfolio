@@ -5,6 +5,7 @@ export const usePreferencesStore = defineStore("preferences", {
     language: null, // 'en' or 'fr'
     version: null, // 'classic' or 'cyberpunk'
     showModal: true,
+    isAnyFullScreen: false,
   }),
 
   actions: {

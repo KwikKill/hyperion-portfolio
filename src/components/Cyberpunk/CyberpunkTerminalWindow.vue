@@ -160,6 +160,7 @@ const toggleMinimize = () => {
   isMinimized.value = !isMinimized.value;
   if (isMinimized.value) {
     isFullscreen.value = false;
+    preferencesStore.isAnyFullScreen = false;
     document.body.style.overflow = '';
   }
 };
@@ -168,9 +169,11 @@ const toggleMinimize = () => {
 const toggleFullscreen = () => {
   isFullscreen.value = !isFullscreen.value;
   if (isFullscreen.value) {
+    preferencesStore.isAnyFullScreen = true;
     isMinimized.value = false;
     document.body.style.overflow = 'hidden';
   } else {
+    preferencesStore.isAnyFullScreen = false;
     document.body.style.overflow = '';
   }
 };
@@ -178,6 +181,9 @@ const toggleFullscreen = () => {
 // Close terminal
 const closeTerminal = () => {
   isClosed.value = true;
+  isMinimized.value = false;
+  isFullscreen.value = false;
+  preferencesStore.isAnyFullScreen = false;
   document.body.style.overflow = '';
 };
 
@@ -186,6 +192,7 @@ const reopenTerminal = () => {
   isClosed.value = false;
   isMinimized.value = false;
   isFullscreen.value = false;
+  preferencesStore.isAnyFullScreen = false;
 };
 
 // Computed styles

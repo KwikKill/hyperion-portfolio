@@ -122,8 +122,14 @@
 html {
   /* font-family: "SD Dystopian"; */
   color: #feee3b;
-  background-color: #1a1a1a;
+  background-color: rgb(31 41 55);
   scroll-behavior: smooth;
+}
+
+.cyberpunk {
+  scrollbar-color: #feee3b #000000;
+  scrollbar-width: thin;
+  background-color: #000000;
 }
 
 .text-shadow {
