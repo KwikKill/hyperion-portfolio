@@ -2,7 +2,7 @@
   <section id="interests" class="pb-20 pt-10 bg-white dark:bg-gray-800">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold mb-4 text-center text-gray-900 dark:text-white">
-        {{ isEnglish ? 'My Interests' : 'Mes Intérêts' }}
+        {{ isEnglish ? 'My Interests' : 'Mes centres d\'intérêts' }}
       </h2>
 
       <p class="text-gray-700 dark:text-gray-300 text-center max-w-3xl mx-auto">

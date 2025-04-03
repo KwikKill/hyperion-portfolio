@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref } from "vue"
 import { defineStore } from "pinia"
 import { usePreferencesStore } from "./preferences"
 
@@ -67,10 +67,10 @@ export const useProjectsStore = defineStore("projects", {
       {
         name: {
           en: "Break the code",
-          fr: "Break the code"
+          fr: "Break the code",
         },
         description: {
-          en: "Participation in the \"Break the code\" algorithmic competition organized by Sopra Steria. By improving each year, my teammates and I managed to reach the top 6 in the second year and the top 4 in the third and fourth years out of more than 40 teams. The competition is open to all students from computer science schools in Rennes.",
+          en: 'Participation in the "Break the code" algorithmic competition organized by Sopra Steria. By improving each year, my teammates and I managed to reach the top 6 in the second year and the top 4 in the third and fourth years out of more than 40 teams. The competition is open to all students from computer science schools in Rennes.',
           fr: "Participation au concours d'algorythmie \"Break the code\" organisée par Sopra Steria. En m'améliorant chaque année, nous avons réussi avec mes coéquipiés à nous hisser au top 6 dès la deuxième année et au top 4 la troisième et quatrième année sur plus de 40 équipes. Le concours est ouvert à tous les étudiants des écoles d'informatique de Rennes.",
         },
         file: {
@@ -81,7 +81,7 @@ export const useProjectsStore = defineStore("projects", {
         starred: true,
         technologies: ["Python", "JavaScript"],
         image: "/src/assets/projects/btc.webp",
-        link: "https://www.linkedin.com/posts/m-paris_breakthecode-challenge-codage-activity-7272240941552340992-maS5"
+        link: "https://www.linkedin.com/posts/m-paris_breakthecode-challenge-codage-activity-7272240941552340992-maS5",
       },
       {
         name: {
@@ -101,7 +101,7 @@ export const useProjectsStore = defineStore("projects", {
         technologies: ["C++", "SFML", "Blender"],
         image: "/src/assets/projects/infographique.webp",
         link: "https://youtu.be/HfP1gKB0Cpg",
-        github: "https://github.com/KwikKill/infographique"
+        github: "https://github.com/KwikKill/infographique",
       },
       {
         name: {
@@ -109,7 +109,7 @@ export const useProjectsStore = defineStore("projects", {
           fr: "IA Bomberman",
         },
         description: {
-          en: "Replication of a Bomberman game in C++ using SFML and creation of an AI to play the game. This project is part of the \"AI for games\" module at INSA Rennes. The AI is based on the MCTS (Monte Carlo Tree Search) algorithm and uses UCB1 pruning to choose the best move at each turn.",
+          en: 'Replication of a Bomberman game in C++ using SFML and creation of an AI to play the game. This project is part of the "AI for games" module at INSA Rennes. The AI is based on the MCTS (Monte Carlo Tree Search) algorithm and uses UCB1 pruning to choose the best move at each turn.',
           fr: "Réplication d'un jeu de bomberman en C++ avec SFML et création d'une IA pour jouer au jeu. Ce projet s'inscrit dans le cadre du module \"IA pour les jeux\" de l'INSA Rennes. L'IA est basée sur l'algorithme de MCTS (Monte Carlo Tree Search) et utilise l'élagage UCB1 pour choisir le meilleur coup à chaque tour.",
         },
         file: {
@@ -129,7 +129,7 @@ export const useProjectsStore = defineStore("projects", {
         },
         description: {
           en: "This project is not finished. The aim was to solve the algorythmic problems of the advent of code only with Github copilot. The main rule was: no code writen by yourself.",
-          fr: "Ce projet n'est pas finis. L'objectif était de résoudre les problème d'algorythmie de l'advent of code uniquement avec Github copilot. Pour cela, la règle principale était la suivante : interdiction d'écrire du code soit même."
+          fr: "Ce projet n'est pas finis. L'objectif était de résoudre les problème d'algorythmie de l'advent of code uniquement avec Github copilot. Pour cela, la règle principale était la suivante : interdiction d'écrire du code soit même.",
         },
         file: {
           en: "adventofcode.html",
@@ -139,7 +139,7 @@ export const useProjectsStore = defineStore("projects", {
         starred: false,
         technologies: ["Python", "JavaScript", "TypeScript"],
         image: "/src/assets/projects/advent.webp",
-        github: "https://github.com/KwikKill/advent-of-codpilote"
+        github: "https://github.com/KwikKill/advent-of-codpilote",
       },
       {
         name: {
@@ -148,7 +148,7 @@ export const useProjectsStore = defineStore("projects", {
         },
         description: {
           en: "Lightshield is a Self-Contained Pipeline to keep a local mirror of the RiotGames API. I've cloned the project, fixed some bugs, and improved it.",
-          fr: "Lightshield est un pipeline autonome pour garder un miroir local de l'API RiotGames. J'ai cloné le projet, résolu quelques bugs et l'ai amélioré."
+          fr: "Lightshield est un pipeline autonome pour garder un miroir local de l'API RiotGames. J'ai cloné le projet, résolu quelques bugs et l'ai amélioré.",
         },
         file: {
           en: "lightshield.py",
@@ -163,11 +163,11 @@ export const useProjectsStore = defineStore("projects", {
       {
         name: {
           en: "document indexer",
-          fr: "indexeur de documents"
+          fr: "indexeur de documents",
         },
         description: {
           en: "This project was carried out as part of the TALEO (automatic processing of written and oral language) module of my studies at INSA Rennes. The objective was to create a document indexer in Python and a documents search tool. The indexer creates an inverted index from a set of documents. It is then possible to search for words in the documents and display the results as a list. Several algorithms have been implemented (tf.id, bm25, dirichlet,...).",
-          fr: "Ce projet a été réalisé dans le cadre du module TALEO (traitement automatique du langage écrit et oral) de mon cursus à l'INSA Rennes. L'objectif était de créer un indexeur de documents en python ainsi qu'un outil de recherche de documents. L'indexeur permet de créer un index inversé à partir d'un ensemble de documents. Il est ensuite possible de rechercher des mots dans les documents et d'afficher les résultats sous forme de liste. Plusieurs algorythmes ont été implémentés (tf.id, bm25, dirichlet,...)."
+          fr: "Ce projet a été réalisé dans le cadre du module TALEO (traitement automatique du langage écrit et oral) de mon cursus à l'INSA Rennes. L'objectif était de créer un indexeur de documents en python ainsi qu'un outil de recherche de documents. L'indexeur permet de créer un index inversé à partir d'un ensemble de documents. Il est ensuite possible de rechercher des mots dans les documents et d'afficher les rsultats sous forme de liste. Plusieurs algorythmes ont été implémentés (tf.id, bm25, dirichlet,...).",
         },
         file: {
           en: "indexer.py",
@@ -182,11 +182,11 @@ export const useProjectsStore = defineStore("projects", {
       {
         name: {
           en: "journals generation",
-          fr: "Génération de revues"
+          fr: "Génération de revues",
         },
         description: {
           en: "This research project was carried out as part of my studies at INSA Rennes. The objective was to improve a python pipeline for generating historical reviews on soldiers from the old regime.",
-          fr: "Ce projet inscrit dans la recherche a été réalisé dans le cadre de mon cursus à l'INSA Rennes. L'objectif était l'amélioration d'un pipeline python de génération de revues historique sur les soldats de l'ancien régime."
+          fr: "Ce projet inscrit dans la recherche a été réalisé dans le cadre de mon cursus à l'INSA Rennes. L'objectif était l'amélioration d'un pipeline python de génération de revues historique sur les soldats de l'ancien régime.",
         },
         file: {
           en: "journals.py",
@@ -201,10 +201,10 @@ export const useProjectsStore = defineStore("projects", {
       {
         name: {
           en: "PSH website",
-          fr: "Site PSH"
+          fr: "Site PSH",
         },
         description: {
-          en: "Creation of a website for a humanities project related to INSA Rennes. This static site was created to illustrate our topic \"What is the impact of digital technology on access to culture?\" The support was between a website and a PDF document, the choice was quickly made.",
+          en: 'Creation of a website for a humanities project related to INSA Rennes. This static site was created to illustrate our topic "What is the impact of digital technology on access to culture?" The support was between a website and a PDF document, the choice was quickly made.',
           fr: "Création d'un site internet pour un projet de science humaines lié à l'INSA Rennes. Ce site statique a été créé pour illuster notre sujet \" Quel est l'impact du numérique sur l'accès à la culture ? \". Le support était entre un site internet et un document PDF, le choix a été vite fait.",
         },
         file: {
@@ -215,12 +215,12 @@ export const useProjectsStore = defineStore("projects", {
         starred: false,
         technologies: ["Vue.js", "Tailwind CSS", "Docker"],
         image: "/src/assets/projects/psh.webp",
-        link: "https://psh.blaisot.org/"
+        link: "https://psh.blaisot.org/",
       },
       {
         name: {
           en: "RankUp website",
-          fr: "Site RankUp"
+          fr: "Site RankUp",
         },
         description: {
           en: "Creation of a website for my discord bot RankUp. This showcase site allows to present the bot and give information about its use. (Anecdote: the site was entirely made in 3h)",
@@ -234,7 +234,7 @@ export const useProjectsStore = defineStore("projects", {
         starred: false,
         technologies: ["Vue.js", "Tailwind CSS", "Docker"],
         image: "/src/assets/projects/rankup-website.webp",
-        link: "https://rankup.somi.blaisot.org/"
+        link: "https://rankup.somi.blaisot.org/",
       },
       {
         name: {
@@ -243,7 +243,7 @@ export const useProjectsStore = defineStore("projects", {
         },
         description: {
           en: "Setting up a deployment stack for dockerized sites. This environment contains a nginx server, docker containers and their associated configurations, enabling me to easily host my sites (like this one).",
-          fr: "Mise en place d'une stack de déploiement pour sites dockerisés. Cet environnement contient un serveur nginx, des containers dockers et leurs configurations associées et me permet de facilement héberger mes sites (comme celui là)."
+          fr: "Mise en place d'une stack de déploiement pour sites dockerisés. Cet environnement contient un serveur nginx, des containers dockers et leurs configurations associées et me permet de facilement héberger mes sites (comme celui là).",
         },
         file: {
           en: "stack.html",
@@ -281,7 +281,7 @@ export const useProjectsStore = defineStore("projects", {
         },
         description: {
           en: "A virtual file system that allows creating, deleting, and moving virtual files and directories. It is implemented in Python and uses a file as disk to store data. The file system includes a partition table, and it is possible to choose the type of RAID to use.",
-          fr: "Un système de fichiers virtuel qui permet de créer, supprimer et déplacer des fichiers et des répertoires virtuels. Il est implémenté en Python et utilise un fichier comme disque pour stocker les données. Le système de fichiers inclut une table de partitionnement et il est possible de choisir le type de RAID à utiliser."
+          fr: "Un système de fichiers virtuel qui permet de créer, supprimer et déplacer des fichiers et des répertoires virtuels. Il est implémenté en Python et utilise un fichier comme disque pour stocker les données. Le système de fichiers inclut une table de partitionnement et il est possible de choisir le type de RAID à utiliser.",
         },
         file: {
           en: "virtualfs.py",
@@ -291,7 +291,7 @@ export const useProjectsStore = defineStore("projects", {
         starred: false,
         technologies: ["Python"],
         image: "/src/assets/projects/vfs.webp",
-        github: "https://github.com/KwikKill/Virtual-File-System"
+        github: "https://github.com/KwikKill/Virtual-File-System",
       },
       {
         name: {
@@ -300,7 +300,7 @@ export const useProjectsStore = defineStore("projects", {
         },
         description: {
           en: "Development of a Minecraft plugin and a website for a Minecraft server. The plugin allows generating random buildings in the server world and interacting with several APIs. The website was a static showcase site.",
-          fr: "Développement d'un plugin minecraft ainsi qu'un site internet pour un serveur Minecraft. Le plugin permet de générer des batiments aléatoires dans le monde du serveur ainsi qu'interragir avec plusieurs API. Le site internet était un site statique vitrine."
+          fr: "Développement d'un plugin minecraft ainsi qu'un site internet pour un serveur Minecraft. Le plugin permet de générer des batiments aléatoires dans le monde du serveur ainsi qu'interragir avec plusieurs API. Le site internet était un site statique vitrine.",
         },
         file: {
           en: "minecraft-plugin.java",
@@ -329,103 +329,304 @@ export const useProjectsStore = defineStore("projects", {
         technologies: ["Java"],
         image: "/src/assets/projects/mindustry.webp",
         github: "https://github.com/KwikKill/Anuken-Mindustry",
-      }
+      },
+    ],
+    experiences: [
+      {
+        title: {
+          en: "Development Intern (12 weeks)",
+          fr: "Stage de développement (12 semaines)",
+        },
+        company: "Broadpeak",
+        location: {
+          en: "Rennes, France",
+          fr: "Rennes, France",
+        },
+        period: {
+          en: "June 2024 - August 2024",
+          fr: "Juin 2024 - Août 2024",
+        },
+        description: {
+          en: "Integration of an auto benchmark step using a company tool in a Jenkins pipeline and development of a plugin to allow visualization and interpretation of results.",
+          fr: "Intégration d’une étape de benchmark auto en utilisant un outil de l'entreprise dans un pipeline Jenkins et développement d’un plugin pour permettre la visualisation et d’interprétation des résultats.",
+        },
+        technologies: ["Jenkins", "Java", "Groovy", "HTML", "CSS", "Javascript", "Chart.js", "Ansible", "ESXI", "Git"],
+        achievements: {
+          en: [
+            "Add performance criteria for tests",
+            "Quantification of regressions on new versions",
+          ],
+          fr: [
+            "Ajout de critères de performance pour les tests",
+            "Quantification des régressions lors de nouvelles versions",
+          ],
+        },
+      },
+      {
+        title: {
+          en: "Development Intern (4 weeks)",
+          fr: "Stage de développement (4 semaines)",
+        },
+        company: "CozyCloud",
+        location: {
+          en: "Rennes, France",
+          fr: "Rennes, France",
+        },
+        period: {
+          en: "June 2023 - July 2023",
+          fr: "Juin 2023 - Juillet 2023",
+        },
+        description: {
+          en: "Maintaining and improving a web application (Flask) for park management for support teams.",
+          fr: "Maintient et Amélioration d’une application web (Flask) de gestion de parc à destination des équipes supports."
+        },
+        technologies: ["Python", "Flask", "HTML", "CSS", "JavaScript", "Git"],
+        achievements: {
+          en: [
+          ],
+          fr: [
+          ],
+        },
+      },
+      {
+        title: {
+          en: "Development Intern (6 weeks)",
+          fr: "Stage de dévelopement (6 semaines)"
+        },
+        company: "Blacknut",
+        location: {
+          en: "Rennes, France",
+          fr: "Rennes, France",
+        },
+        period: {
+          en: "June 2022 - July 2022",
+          fr: "Juin 2022 - Juillet 2022",
+        },
+        description: {
+          en: "Hardware updates and encryption of company computers, optimization of the backup process by integrating the company's API to only back up new data, and technology updates in the back-office team of a cloud gaming startup.",
+          fr: "Mises à jour hardware et chiffrement des ordinateurs de l'entreprise, optimisation du processus de backup en intégrant l'api de l'entreprise pour ne sauvegarder que les nouveautées et mise à jour de technologie dans l'équipe back-office d'une startup de cloud gaming.",
+        },
+        technologies: ["Python", "Jenkins", "Golang", "AWS S3", "Git"],
+        achievements: {
+          en: [
+            "Disk encryption for data security",
+            "Integration of company API for backup optimization",
+            "Translation of Jenkins jobs into JenkinsFiles",
+          ],
+          fr: [
+            "Chiffrement de disques pour la sécurité des données",
+            "Intégration de l'API de l'entreprise pour l'optimisation des sauvegardes",
+            "Traduction de job Jenkins en JenkinsFiles"
+          ],
+        },
+      },
     ],
     skills: {
       en: [
         {
-          name: 'Languages',
-          skills: ['Shell Script', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'Python', 'Java', 'C', 'C++', 'Go', 'R', 'OCaml']
+          name: "Languages",
+          skills: [
+            "Shell Script",
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "TypeScript",
+            "Python",
+            "Java",
+            "C",
+            "C++",
+            "Go",
+            "R",
+            "OCaml",
+          ],
         },
         {
-          name: 'Web Development',
-          skills: ['Angular', 'Django', 'DjangoREST', 'Vue.js', 'Express.js', 'FastAPI', 'Vite', 'TailwindCSS', 'jQuery', 'Bootstrap', 'Swagger', 'Nginx']
+          name: "Web Development",
+          skills: [
+            "Angular",
+            "Django",
+            "DjangoREST",
+            "Vue.js",
+            "Express.js",
+            "FastAPI",
+            "Vite",
+            "TailwindCSS",
+            "jQuery",
+            "Bootstrap",
+            "Swagger",
+            "Nginx",
+          ],
         },
         {
-          name: 'Databases',
-          skills: ['Postgres', 'MongoDB', 'MySQL', 'Redis', 'SQLite', 'MariaDB', 'ApacheCassandra', 'InfluxDB', 'YAML', 'JSON', 'XML']
+          name: "Databases",
+          skills: [
+            "Postgres",
+            "MongoDB",
+            "MySQL",
+            "Redis",
+            "SQLite",
+            "MariaDB",
+            "ApacheCassandra",
+            "InfluxDB",
+            "YAML",
+            "JSON",
+            "XML",
+          ],
         },
         {
-          name: 'CI/CD',
-          skills: ['Jenkins', 'Apache Groovy', 'TravisCI', 'GitLab CI', 'GitHub Actions']
+          name: "CI/CD",
+          skills: ["Jenkins", "Apache Groovy", "TravisCI", "GitLab CI", "GitHub Actions"],
         },
         {
-          name: 'Tools',
-          skills: ['GithubPages', 'Makefile', 'CMake', 'NPM', 'Poetry', 'Apache Maven', 'Wireguard', 'Postman', 'Ansible', 'Prometheus', 'Telegraf', 'Grafana', 'Docker', 'ESLint', 'Prettier', 'Pylint']
+          name: "Tools",
+          skills: [
+            "GithubPages",
+            "Makefile",
+            "CMake",
+            "NPM",
+            "Poetry",
+            "Apache Maven",
+            "Wireguard",
+            "Postman",
+            "Ansible",
+            "Prometheus",
+            "Telegraf",
+            "Grafana",
+            "Docker",
+            "ESLint",
+            "Prettier",
+            "Pylint",
+          ],
         },
         {
-          name: 'Design',
-          skills: ['Gimp', 'Figma']
+          name: "Design",
+          skills: ["Gimp", "Figma"],
         },
         {
-          name: 'Data Science and Data Visualization',
-          skills: ['Scipy', 'TensorFlow', 'PyTorch', 'Chart.js']
+          name: "Data Science and Data Visualization",
+          skills: ["Scipy", "TensorFlow", "PyTorch", "Chart.js"],
         },
         {
-          name: 'Version Control',
-          skills: ['Git', 'Gitea', 'Bitbucket', 'GitHub', 'GitLab']
+          name: "Version Control",
+          skills: ["Git", "Gitea", "Bitbucket", "GitHub", "GitLab"],
         },
         {
-          name: 'Cloud providers',
-          skills: ['Scaleway', 'OVH', 'Hetzner']
+          name: "Cloud providers",
+          skills: ["Scaleway", "OVH", "Hetzner"],
         },
         {
-          name: 'Other',
-          skills: ['Markdown', 'LaTeX', 'Typst']
-        }
+          name: "Other",
+          skills: ["Markdown", "LaTeX", "Typst"],
+        },
       ],
       fr: [
         {
-          name: 'Langages',
-          skills: ['Shell Script', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'Python', 'Java', 'C', 'C++', 'Go', 'R', 'OCaml']
+          name: "Langages",
+          skills: [
+            "Shell Script",
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "TypeScript",
+            "Python",
+            "Java",
+            "C",
+            "C++",
+            "Go",
+            "R",
+            "OCaml",
+          ],
         },
         {
-          name: 'Développement Web',
-          skills: ['Angular', 'Django', 'DjangoREST', 'Vue.js', 'Express.js', 'FastAPI', 'Vite', 'TailwindCSS', 'jQuery', 'Bootstrap', 'Swagger', 'Nginx']
+          name: "Développement Web",
+          skills: [
+            "Angular",
+            "Django",
+            "DjangoREST",
+            "Vue.js",
+            "Express.js",
+            "FastAPI",
+            "Vite",
+            "TailwindCSS",
+            "jQuery",
+            "Bootstrap",
+            "Swagger",
+            "Nginx",
+          ],
         },
         {
-          name: 'Bases de Données',
-          skills: ['Postgres', 'MongoDB', 'MySQL', 'Redis', 'SQLite', 'MariaDB', 'ApacheCassandra', 'InfluxDB', 'YAML', 'JSON', 'XML']
+          name: "Bases de Données",
+          skills: [
+            "Postgres",
+            "MongoDB",
+            "MySQL",
+            "Redis",
+            "SQLite",
+            "MariaDB",
+            "ApacheCassandra",
+            "InfluxDB",
+            "YAML",
+            "JSON",
+            "XML",
+          ],
         },
         {
-          name: 'CI/CD',
-          skills: ['Jenkins', 'Apache Groovy', 'TravisCI', 'GitLab CI', 'GitHub Actions']
+          name: "CI/CD",
+          skills: ["Jenkins", "Apache Groovy", "TravisCI", "GitLab CI", "GitHub Actions"],
         },
         {
-          name: 'Outils',
-          skills: ['GithubPages', 'Makefile', 'CMake', 'NPM', 'Poetry', 'Apache Maven', 'Wireguard', 'Postman', 'Ansible', 'Prometheus', 'Telegraf', 'Grafana', 'Docker', 'ESLint', 'Prettier', 'Pylint']
+          name: "Outils",
+          skills: [
+            "GithubPages",
+            "Makefile",
+            "CMake",
+            "NPM",
+            "Poetry",
+            "Apache Maven",
+            "Wireguard",
+            "Postman",
+            "Ansible",
+            "Prometheus",
+            "Telegraf",
+            "Grafana",
+            "Docker",
+            "ESLint",
+            "Prettier",
+            "Pylint",
+          ],
         },
         {
-          name: 'Design',
-          skills: ['Gimp', 'Figma']
+          name: "Design",
+          skills: ["Gimp", "Figma"],
         },
         {
-          name: 'Science des Données et Visualisation',
-          skills: ['Scipy', 'TensorFlow', 'PyTorch', 'Chart.js']
+          name: "Science des Données et Visualisation",
+          skills: ["Scipy", "TensorFlow", "PyTorch", "Chart.js"],
         },
         {
-          name: 'Contrôle de Version',
-          skills: ['Git', 'Gitea', 'Bitbucket', 'GitHub', 'GitLab']
+          name: "Contrôle de Version",
+          skills: ["Git", "Gitea", "Bitbucket", "GitHub", "GitLab"],
         },
         {
-          name: 'Fournisseurs Cloud',
-          skills: ['Scaleway', 'OVH', 'Hetzner']
+          name: "Fournisseurs Cloud",
+          skills: ["Scaleway", "OVH", "Hetzner"],
         },
         {
-          name: 'Autres',
-          skills: ['Markdown', 'LaTeX', 'Typst']
-        }
-      ]
+          name: "Autres",
+          skills: ["Markdown", "LaTeX", "Typst"],
+        },
+      ],
     },
     movies: {
-      "en": [
+      en: [
         {
           title: "Matrix",
           year: "1999",
           genre: "Science-Fiction/Action",
           image: "/src/assets/movies/matrix.webp",
-          description: "A hacker learns about the true nature of his reality and his role in the war against its controllers.",
-          whyILoveIt: "Revolutionary visual effects and a mind-bending story."
+          description:
+            "A hacker learns about the true nature of his reality and his role in the war against its controllers.",
+          whyILoveIt: "Revolutionary visual effects and a mind-bending story.",
         },
         {
           title: "Ghost in the Shell",
@@ -433,31 +634,34 @@ export const useProjectsStore = defineStore("projects", {
           genre: "Anime/Science-Fiction",
           image: "/src/assets/movies/ghost_in_the_shell.webp",
           description: "A cyborg policewoman and her partner hunt a mysterious hacker called the Puppet Master.",
-          whyILoveIt: "Pioneering cyberpunk animation with deep philosophical questions."
+          whyILoveIt: "Pioneering cyberpunk animation with deep philosophical questions.",
         },
         {
           title: "Inception",
           year: "2010",
           genre: "Science-Fiction/Action",
           image: "/src/assets/movies/inception.webp",
-          description: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
-          whyILoveIt: "Complex narrative layers and mind-bending concepts."
+          description:
+            "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
+          whyILoveIt: "Complex narrative layers and mind-bending concepts.",
         },
         {
           title: "Ex Machina",
           year: "2014",
           genre: "Science-Fiction/Drama",
           image: "/src/assets/movies/ex_machina.webp",
-          description: "A programmer is selected to participate in a groundbreaking experiment in synthetic intelligence by evaluating the human qualities of a highly advanced humanoid A.I.",
-          whyILoveIt: "Exploring the limits of AI and human emotions."
+          description:
+            "A programmer is selected to participate in a groundbreaking experiment in synthetic intelligence by evaluating the human qualities of a highly advanced humanoid A.I.",
+          whyILoveIt: "Exploring the limits of AI and human emotions.",
         },
         {
           title: "Tenet",
           year: "2020",
           genre: "Science-Fiction/Action",
           image: "/src/assets/movies/tenet.webp",
-          description: "Armed with only one word, \"Tenet,\" and fighting for the survival of the world, a protagonist journeys through the twilight world of international espionage on a mission that will unfold in something beyond real time.",
-          whyILoveIt: "A complex narrative about time and perception."
+          description:
+            'Armed with only one word, "Tenet," and fighting for the survival of the world, a protagonist journeys through the twilight world of international espionage on a mission that will unfold in something beyond real time.',
+          whyILoveIt: "A complex narrative about time and perception.",
         },
         {
           title: "La cité de la peur",
@@ -465,8 +669,8 @@ export const useProjectsStore = defineStore("projects", {
           genre: "Comedy",
           image: "/src/assets/movies/la_cité_de_la_peur.webp",
           description: "A French comedy film that parodies horror and suspense films.",
-          whyILoveIt: "A classic of French humor with references to pop culture."
-        }
+          whyILoveIt: "A classic of French humor with references to pop culture.",
+        },
       ],
       fr: [
         {
@@ -474,8 +678,9 @@ export const useProjectsStore = defineStore("projects", {
           year: "1999",
           genre: "Science-Fiction/Action",
           image: "/src/assets/movies/matrix.webp",
-          description: "Un pirate informatique découvre, par l'intermédiaire de mystérieux rebelles, la véritable nature de sa réalité et son rôle dans la guerre contre ses contrôleurs.",
-          whyILoveIt: "Effets visuels révolutionnaires et une histoire qui défie l'esprit."
+          description:
+            "Un pirate informatique découvre, par l'intermédiaire de mystérieux rebelles, la véritable nature de sa réalité et son rôle dans la guerre contre ses contrôleurs.",
+          whyILoveIt: "Effets visuels révolutionnaires et une histoire qui défie l'esprit.",
         },
         {
           title: "Ghost in the Shell",
@@ -483,31 +688,34 @@ export const useProjectsStore = defineStore("projects", {
           genre: "Anime/Science-Fiction",
           image: "/src/assets/movies/ghost_in_the_shell.webp",
           description: "Une policière cyborg et son partenaire traquent un mystérieux hacker appelé le Puppet Master.",
-          whyILoveIt: "Animation cyberpunk pionnière avec des questions philosophiques profondes."
+          whyILoveIt: "Animation cyberpunk pionnière avec des questions philosophiques profondes.",
         },
         {
           title: "Inception",
           year: "2010",
           genre: "Science-Fiction/Action",
           image: "/src/assets/movies/inception.webp",
-          description: "Un voleur qui dérobe des secrets d'entreprises grâce à une technologie de partage de rêves se voit confier la tâche inverse : implanter une idée dans l'esprit d'un P.D.G.",
-          whyILoveIt: "Couches narratives complexes et concepts qui défient l'esprit."
+          description:
+            "Un voleur qui dérobe des secrets d'entreprises grâce à une technologie de partage de rêves se voit confier la tâche inverse : implanter une idée dans l'esprit d'un P.D.G.",
+          whyILoveIt: "Couches narratives complexes et concepts qui défient l'esprit.",
         },
         {
           title: "Ex Machina",
           year: "2014",
           genre: "Science-Fiction/Drama",
           image: "/src/assets/movies/ex_machina.webp",
-          description: "Un programmeur est sélectionné pour participer à une expérience révolutionnaire dans le domaine de l'intelligence artificielle en évaluant les capacités et la conscience d'un robot humanoïde.",
-          whyILoveIt: "Explorer les limites de l'IA et des émotions humaines."
+          description:
+            "Un programmeur est sélectionné pour participer à une expérience révolutionnaire dans le domaine de l'intelligence artificielle en évaluant les capacités et la conscience d'un robot humanoïde.",
+          whyILoveIt: "Explorer les limites de l'IA et des émotions humaines.",
         },
         {
           title: "Tenet",
           year: "2020",
           genre: "Science-Fiction/Action",
           image: "/src/assets/movies/tenet.webp",
-          description: "Muni d'un seul mot, \"Tenet,\" et décidé à se battre pour sauver le monde, un homme sillonne l'univers crépusculaire de l'espionnage international.",
-          whyILoveIt: "Un récit complexe sur le temps et la perception."
+          description:
+            "Muni d'un seul mot, \"Tenet,\" et décidé à se battre pour sauver le monde, un homme sillonne l'univers crépusculaire de l'espionnage international.",
+          whyILoveIt: "Un récit complexe sur le temps et la perception.",
         },
         {
           title: "La cité de la peur",
@@ -515,9 +723,9 @@ export const useProjectsStore = defineStore("projects", {
           genre: "Comédie",
           image: "/src/assets/movies/la_cité_de_la_peur.webp",
           description: "Un film comique français qui parodie les films d'horreur et de suspense.",
-          whyILoveIt: "Un classique de l'humour français avec des références à la culture pop."
-        }
-      ]
+          whyILoveIt: "Un classique de l'humour français avec des références à la culture pop.",
+        },
+      ],
     },
     games: {
       en: [
@@ -525,89 +733,96 @@ export const useProjectsStore = defineStore("projects", {
           title: "Cyberpunk 2077",
           year: "2020",
           image: "/src/assets/games/cyberpunk_2077.webp",
-          description: "An open-world action-adventure game set in Night City, a metropolis obsessed with power, glamour, and body modification.",
-          whyILoveIt: "Immersive cyberpunk world with incredible attention to detail."
+          description:
+            "An open-world action-adventure game set in Night City, a metropolis obsessed with power, glamour, and body modification.",
+          whyILoveIt: "Immersive cyberpunk world with incredible attention to detail.",
         },
         {
           title: "The Witcher 3: Wild Hunt",
           year: "2015",
           image: "/src/assets/games/the_witcher_3.webp",
-          description: "An open-world RPG focused on storytelling, set in a visually stunning fantasy universe filled with meaningful choices and impactful consequences.",
-          whyILoveIt: "Rich storytelling and beautifully designed world."
+          description:
+            "An open-world RPG focused on storytelling, set in a visually stunning fantasy universe filled with meaningful choices and impactful consequences.",
+          whyILoveIt: "Rich storytelling and beautifully designed world.",
         },
         {
           title: "A plague tale: Innocence/Requiem",
           year: "2019/2022",
           image: "/src/assets/games/a_plague_tale.webp",
           description: "An action-adventure narrative game following two children in a plague-ridden medieval France.",
-          whyILoveIt: "Emotive story and immersive atmosphere."
+          whyILoveIt: "Emotive story and immersive atmosphere.",
         },
         {
           title: "Baldur's Gate 3",
           year: "2023",
           image: "/src/assets/games/baldurs_gate_3.webp",
-          description: "A turn-based RPG based on the Dungeons & Dragons universe, offering freedom of exploration and choice.",
-          whyILoveIt: "Extremely immersive with meaningful choices and a rich world."
+          description:
+            "A turn-based RPG based on the Dungeons & Dragons universe, offering freedom of exploration and choice.",
+          whyILoveIt: "Extremely immersive with meaningful choices and a rich world.",
         },
         {
           title: "Little Miss Fortune",
           year: "2019",
           image: "/src/assets/games/little_miss_fortune.webp",
           description: "A narrative adventure game where you follow a little girl as she tries to find a treasure.",
-          whyILoveIt: "Disturbing story and unique aesthetic."
+          whyILoveIt: "Disturbing story and unique aesthetic.",
         },
         {
           title: "Hollow Knight",
           year: "2017",
           image: "/src/assets/games/hollow_knight.webp",
           description: "A challenging 2D action-adventure game set in a vast interconnected world.",
-          whyILoveIt: "Atmospheric world-building and precise, responsive controls."
-        }
+          whyILoveIt: "Atmospheric world-building and precise, responsive controls.",
+        },
       ],
       fr: [
         {
           title: "Cyberpunk 2077",
           year: "2020",
           image: "/src/assets/games/cyberpunk_2077.webp",
-          description: "Un jeu d'action-aventure en monde ouvert situé à Night City, une mégalopole obsédée par le pouvoir, le glamour et la modification corporelle.",
-          whyILoveIt: "Monde cyberpunk immersif avec une attention incroyable aux détails."
+          description:
+            "Un jeu d'action-aventure en monde ouvert situé à Night City, une mégalopole obsédée par le pouvoir, le glamour et la modification corporelle.",
+          whyILoveIt: "Monde cyberpunk immersif avec une attention incroyable aux détails.",
         },
         {
           title: "The Witcher 3: Wild Hunt",
           year: "2015",
           image: "/src/assets/games/the_witcher_3.webp",
-          description: "Un RPG en monde ouvert axé sur l'histoire, situé dans un univers fantastique visuellement époustouflant, rempli de choix significatifs et de conséquences impactantes.",
-          whyILoveIt: "Narration riche et monde magnifiquement conçu."
+          description:
+            "Un RPG en monde ouvert axé sur l'histoire, situé dans un univers fantastique visuellement époustouflant, rempli de choix significatifs et de conséquences impactantes.",
+          whyILoveIt: "Narration riche et monde magnifiquement conçu.",
         },
         {
           title: "A plague tale: Innocence/Requiem",
           year: "2019/2022",
           image: "/src/assets/games/a_plague_tale.webp",
-          description: "Un jeu d'action-aventure narratif qui suit deux enfants dans une France médiévale ravagée par la peste.",
-          whyILoveIt: "L'histoire émotive et l'atmosphère immersive."
+          description:
+            "Un jeu d'action-aventure narratif qui suit deux enfants dans une France médiévale ravagée par la peste.",
+          whyILoveIt: "L'histoire émotive et l'atmosphère immersive.",
         },
         {
           title: "Baldur's Gate 3",
           year: "2023",
           image: "/src/assets/games/baldurs_gate_3.webp",
-          description: "Un RPG au tour par tour basé sur l'univers de Donjons et Dragons, offrant une liberté d'exploration et de choix.",
-          whyILoveIt: "Extrêmement immersif avec des choix significatifs et un monde riche."
+          description:
+            "Un RPG au tour par tour basé sur l'univers de Donjons et Dragons, offrant une liberté d'exploration et de choix.",
+          whyILoveIt: "Extrêmement immersif avec des choix significatifs et un monde riche.",
         },
         {
           title: "Little Miss Fortune",
           year: "2019",
           image: "/src/assets/games/little_miss_fortune.webp",
           description: "Un jeu d'aventure narratif où vous suivez une petite fille qui cherche à trouver un trésor.",
-          whyILoveIt: "L'histoire dérangeante et l'esthétique unique."
+          whyILoveIt: "L'histoire dérangeante et l'esthétique unique.",
         },
         {
           title: "Hollow Knight",
           year: "2017",
           image: "/src/assets/games/hollow_knight.webp",
           description: "Un jeu d'action-aventure 2D exigeant situé dans un monde vaste et interconnecté.",
-          whyILoveIt: "Construction atmosphérique du monde et contrôles précis et réactifs."
-        }
-      ]
+          whyILoveIt: "Construction atmosphérique du monde et contrôles précis et réactifs.",
+        },
+      ],
     },
     selectedProject: ref(null),
   }),
@@ -621,6 +836,19 @@ export const useProjectsStore = defineStore("projects", {
         ...project,
         localizedName: project.name[lang],
         localizedDescription: project.description[lang],
+      }))
+    },
+    getLocalizedExperiences: (state) => {
+      const preferencesStore = usePreferencesStore()
+      const lang = preferencesStore.language
+
+      return state.experiences.map((experience) => ({
+        ...experience,
+        localizedTitle: experience.title[lang],
+        localizedLocation: experience.location[lang],
+        localizedPeriod: experience.period[lang],
+        localizedDescription: experience.description[lang],
+        localizedAchievements: experience.achievements[lang],
       }))
     },
     getLocalizedSkills: (state) => {

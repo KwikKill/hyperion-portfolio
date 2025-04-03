@@ -1,11 +1,11 @@
 <template>
-  <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-900">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">
+  <section id="projects" class="pb-20 bg-gray-50 dark:bg-gray-900">
+    <div class="">
+      <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-800 p-4 mb-8">
         {{ isEnglish ? 'My Projects' : 'Mes Projets' }}
       </h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto px-4">
         <div
           v-for="project in projects"
           :key="project.id"

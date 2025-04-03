@@ -14,12 +14,12 @@
 
       <nav>
         <ul class="md:flex space-x-6 hidden">
-          <li v-for="item in navItems" :key="item.id">
+          <li v-for="item in navLinks" :key="item.href">
             <a
               :href="item.href"
               class="text-gray-300 hover:text-yellow-400 transition-colors uppercase tracking-wider text-sm font-medium"
             >
-              {{ item.label }}
+              {{ item.name }}
             </a>
           </li>
         </ul>
@@ -34,15 +34,16 @@ import { usePreferencesStore } from '../../stores/preferences'
 
 const preferencesStore = usePreferencesStore()
 
-const navItems = computed(() => {
-  const isEnglish = preferencesStore.isEnglish
+const isEnglish = computed(() => preferencesStore.isEnglish)
 
-  return [
-    { id: 'home', href: '#home', label: isEnglish ? 'Home' : 'Accueil' },
-    { id: 'about', href: '#about', label: isEnglish ? 'About' : 'À propos' },
-    { id: 'projects', href: '#projects', label: isEnglish ? 'Projects' : 'Projets' },
-    { id: 'interests', href: '#interests', label: isEnglish ? 'Interests' : 'Intérêts' },
-  ]
-})
+// Find the navigation links array and add the Experience link
+
+const navLinks = computed(() => [
+  { name: isEnglish.value ? 'Home' : 'Accueil', href: '#home' },
+  { name: isEnglish.value ? 'About' : 'À Propos', href: '#about' },
+  { name: isEnglish.value ? 'Experience' : 'Expérience', href: '#experience' },
+  { name: isEnglish.value ? 'Projects' : 'Projets', href: '#projects' },
+  { name: isEnglish.value ? 'Interests' : 'Intérêts', href: '#interests' },
+])
 </script>
 

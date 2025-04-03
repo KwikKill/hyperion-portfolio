@@ -1,12 +1,11 @@
 <template>
-  <div class="min-h-screen flex flex-col">
+  <div>
     <ClassicHeader />
-    <main>
-      <ClassicHero />
-      <ClassicAbout />
-      <ClassicProjects />
-      <ClassicInterests />
-    </main>
+    <ClassicHero />
+    <ClassicAbout />
+    <ClassicExperience />
+    <ClassicProjects />
+    <ClassicInterests />
     <ClassicFooter />
   </div>
 </template>
@@ -15,6 +14,7 @@
 import ClassicHeader from './ClassicHeader.vue'
 import ClassicHero from './ClassicHero.vue'
 import ClassicAbout from './ClassicAbout.vue'
+import ClassicExperience from './ClassicExperience.vue'
 import ClassicProjects from './ClassicProjects.vue'
 import ClassicInterests from './ClassicInterests.vue'
 import ClassicFooter from './ClassicFooter.vue'

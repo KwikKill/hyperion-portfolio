@@ -16,10 +16,12 @@
     >
       <!-- Terminal header -->
       <div
-        class="terminal-header flex justify-between items-center"
+        class="terminal-header flex items-center"
         :class="{
           'border-b border-theme-foreground/30 pb-2': !noBody,
           'mb-0': isMinimized,
+          'justify-center text-center': noButtons,
+          'justify-between': !noButtons
         }"
         v-if="!noTitle"
       >
@@ -29,7 +31,10 @@
             <slot name="title">Terminal Window</slot>
           </div>
         </div>
-        <slot name="buttons">
+        <slot
+          name="buttons"
+          v-if="!noButtons"
+        >
           <div class="flex space-x-2">
             <!-- Minimize button -->
             <div
@@ -141,6 +146,10 @@ const props = defineProps({
     default: false
   },
   noTitle: {
+    type: Boolean,
+    default: false
+  },
+  noButtons: {
     type: Boolean,
     default: false
   },
