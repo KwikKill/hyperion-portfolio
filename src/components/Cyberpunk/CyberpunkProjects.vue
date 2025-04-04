@@ -61,7 +61,7 @@
               {{ isEnglish ? 'TRY ANOTHER SEARCH TERM' : 'ESSAYEZ UN AUTRE TERME DE RECHERCHE' }}
             </div>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-10">
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-5">
             <!-- Project items remain the same -->
             <div v-for="project in filteredProjects" :key="project"
               class="flex flex-col items-center cursor-pointer group" @click="openProject(project)"
@@ -104,14 +104,17 @@
       @click.self="closeProject">
       <CyberpunkTerminalWindow body_class="max-w-3xl w-full max-h-[80vh] overflow-y-auto p-4">
         <template #title>
-          {{ selectedProject.localizedName }}
-          <span v-if="selectedProject.starred" class="ml-2 text-theme-foreground star-badge-modal">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <span class="text-xs ml-1">{{ isEnglish ? 'FEATURED PROJECT' : 'PROJET MIS EN AVANT' }}</span>
-          </span>
+          <div
+            class="flex justify-center items-start md:items-center text-theme-foreground font-mono text-lg cyberpunk-text-glow md:flex-row flex-col">
+            {{ selectedProject.localizedName }}
+            <span v-if="selectedProject.starred" class="md:ml-2 text-theme-foreground star-badge-modal">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+              <span class="text-xs ml-1">{{ isEnglish ? 'FEATURED PROJECT' : 'PROJET MIS EN AVANT' }}</span>
+            </span>
+          </div>
         </template>
 
         <template #buttons>
