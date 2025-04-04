@@ -11,29 +11,25 @@
             <br />
             INSA Rennes
           </h2>
-          <div
-            class="flex flex-col gap-4"
-          >
+          <div class="flex flex-col gap-4">
             <p class="text-lg text-gray-700 dark:text-gray-300">
-              {{ isEnglish
-                  ? 'Passionate about web development and software engineering. I love video games, technology, and learning new things. Also passionate about Greek mythology.'
-                  : 'Etudiant en Informatique passionné par le développement web et l\'ingénierie logicielle. J\'adore les jeux vidéo, la technologie et apprendre de nouvelles choses. Également passionné par la mythologie grecque.'
-                }}
+              <template v-if="isEnglish">
+                Passionate about web development and software engineering. I love video games, technology, and learning
+                new things. Also passionate about Greek mythology.
+              </template>
+              <template v-else>
+                Etudiant en Informatique passionné par le développement web et l'ingénierie logicielle. J'adore les jeux
+                vidéo, la technologie et apprendre de nouvelles choses. Également passionné par la mythologie grecque.
+              </template>
             </p>
-            <ClassicContact
-              class="shadow-lg rounded-lg"
-            />
+            <ClassicContact class="shadow-lg rounded-lg" />
             <div class="flex gap-4 items-center justify-center md:justify-start">
-              <a
-                href="#projects"
-                class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
-              >
+              <a href="#projects"
+                class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors">
                 {{ isEnglish ? 'View Projects' : 'Voir les Projets' }}
               </a>
-              <a
-                href="#interests"
-                class="px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-md transition-colors"
-              >
+              <a href="#interests"
+                class="px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-md transition-colors">
                 {{ isEnglish ? 'My Interests' : 'Mes Intérêts' }}
               </a>
             </div>
@@ -60,4 +56,3 @@ import ClassicContact from './ClassicContact.vue'
 const preferencesStore = usePreferencesStore()
 const isEnglish = computed(() => preferencesStore.isEnglish)
 </script>
-

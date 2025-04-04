@@ -3,19 +3,15 @@
     <div class="container mx-auto px-4 flex justify-between items-center">
       <div
         class="text-2xl font-bold text-gray-900 dark:text-white cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-        @click="preferencesStore.resetPreferences"
-        @keydown.enter="preferencesStore.resetPreferences"
-      >
+        @click="preferencesStore.resetPreferences" @keydown.enter="preferencesStore.resetPreferences">
         KwikKill - Portfolio
       </div>
 
       <nav>
         <ul class="flex space-x-6">
           <li v-for="item in navLinks" :key="item.href">
-            <a
-              :href="item.href"
-              class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
+            <a :href="item.href"
+              class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
               {{ item.name }}
             </a>
           </li>
@@ -43,4 +39,3 @@ const navLinks = computed(() => [
   { name: isEnglish.value ? 'Interests' : 'Intérêts', href: '#interests' },
 ])
 </script>
-

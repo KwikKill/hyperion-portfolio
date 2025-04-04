@@ -3,9 +3,7 @@
     <div class="container mx-auto px-4 flex justify-between items-center">
       <div
         class="text-2xl font-bold text-theme-foreground cyberpunk-text-glow cursor-pointer hover:text-yellow-400 transition-colors"
-        @click="preferencesStore.resetPreferences"
-        @keydown.enter="preferencesStore.resetPreferences"
-      >
+        @click="preferencesStore.resetPreferences" @keydown.enter="preferencesStore.resetPreferences">
         <span class="text-gray-500">&lt;</span>
         <img src="/src/assets/logo.png" alt="Logo" class="inline-block w-8 h-8" />
         KwikKill
@@ -15,10 +13,8 @@
       <nav>
         <ul class="md:flex space-x-6 hidden">
           <li v-for="item in navLinks" :key="item.href">
-            <a
-              :href="item.href"
-              class="text-gray-300 hover:text-yellow-400 transition-colors uppercase tracking-wider text-sm font-medium"
-            >
+            <a :href="item.href"
+              class="text-gray-300 hover:text-yellow-400 transition-colors uppercase tracking-wider text-sm font-medium">
               {{ item.name }}
             </a>
           </li>
@@ -46,4 +42,3 @@ const navLinks = computed(() => [
   { name: isEnglish.value ? 'Interests' : 'Intérêts', href: '#interests' },
 ])
 </script>
-

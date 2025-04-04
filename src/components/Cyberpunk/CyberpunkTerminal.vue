@@ -1,17 +1,13 @@
 <template>
   <CyberpunkTerminalWindow
     class="cyberpunk-terminal border-2 border-theme-foreground/70 rounded-md text-green-400 font-mono text-sm overflow-hidden h-full"
-    :showIcon="false"
-    body_class="overflow-y-auto xl:max-h-[520px] lg:max-h-[610px] md:max-h-[700px] max-h-[520px]"
-  >
+    :showIcon="false" body_class="overflow-y-auto xl:max-h-[520px] lg:max-h-[610px] md:max-h-[700px] max-h-[520px]">
     <template #title>
       kwikkill@hyperion:~
     </template>
 
     <template #body>
-      <div
-        ref="terminalContentRef"
-      >
+      <div ref="terminalContentRef">
         <div v-for="(line, index) in displayedLines" :key="index" class="mb-1">
           <template v-if="line.type === 'command'">
             <span class="text-cyan-400">kwikkill@hyperion:~$</span>

@@ -32,15 +32,13 @@
             </div>
 
             <div class="text-green-400 mb-4 leading-relaxed">
-              <template
-                v-if="isEnglish"
-              >
-                I'm a computer science student from France, passionate about web development and software engineering. I love creating innovative solutions to complex problems and continuously learning new technologies.
+              <template v-if="isEnglish">
+                I'm a computer science student from France, passionate about web development and software engineering. I
+                love creating innovative solutions to complex problems and continuously learning new technologies.
               </template>
-              <template
-                v-else
-              >
-                Etudiant en Informatique à l'INSA de Rennes passionné par le développement web et l'ingénierie logicielle. J'apprécie la technologie et apprendre de nouvelles choses.
+              <template v-else>
+                Etudiant en Informatique à l'INSA de Rennes passionné par le développement web et l'ingénierie
+                logicielle. J'apprécie la technologie et apprendre de nouvelles choses.
               </template>
             </div>
 
@@ -49,23 +47,23 @@
               <span class="text-theme-foreground ml-2">{{ isEnglish ? 'cat interests.txt' : 'cat interets.txt' }}</span>
             </div>
 
-            <div class="text-green-400 leading-relaxed">
-              <template
-                v-if="isEnglish"
-              >
-                When I'm not coding, you can find me exploring new technologies,  or expanding my knowledge in various computer science domains.
-                <br/>
-                Apart from these subjects, I enjoy video games, films and books (mainly science fiction), board games, role-playing games and Greek mythology.
-                <br/>
+            <div class="text-green-400 leading-relaxed mb-4 ">
+              <template v-if="isEnglish">
+                When I'm not coding, you can find me exploring new technologies, or expanding my knowledge in various
+                computer science domains.
+                <br />
+                Apart from these subjects, I enjoy video games, films and books (mainly science fiction), board games,
+                role-playing games and Greek mythology.
+                <br />
                 I also played table tennis in a club for 5 years.
               </template>
-              <template
-                v-else
-              >
-                Quand je ne code pas, vous pouvez me trouver en train d'explorer de nouvelles technologies, ou d'élargir mes connaissances dans divers domaines de l'informatique.
-                <br/>
-                En dehors de ces sujets, j'apprécie les jeux vidéos, les films et les livres (principalement la science fiction), les jeux de société, les jeux de rôles et la mythologie Grecque.
-                <br/>
+              <template v-else>
+                Quand je ne code pas, vous pouvez me trouver en train d'explorer de nouvelles technologies, ou d'élargir
+                mes connaissances dans divers domaines de l'informatique.
+                <br />
+                En dehors de ces sujets, j'apprécie les jeux vidéos, les films et les livres (principalement la science
+                fiction), les jeux de société, les jeux de rôles et la mythologie Grecque.
+                <br />
                 J'ai également fait 5 ans de tennis de table en club.
               </template>
             </div>
@@ -75,20 +73,20 @@
               <span class="text-theme-foreground ml-2">
                 {{
                   isEnglish
-                  ? 'cat associations.txt'
-                  : 'cat associations.txt'
+                    ? 'cat associations.txt'
+                    : 'cat associations.txt'
                 }}
               </span>
             </div>
 
-            <div
-              class="text-green-400 leading-relaxed"
-            >
-              <div
-                v-if="isEnglish"
-              >
+            <div class="text-green-400 leading-relaxed mb-4">
+              <div v-if="isEnglish">
                 <p>
-                  Being actively involved in associations has been a significant part of my life. I have been an active member of several student and technology-focused organizations. These experiences have allowed me to develop skills in project management, teamwork, and event organization.
+                  Being actively involved in associations has been a significant part of my life. I have been an active
+                  member of
+                  several student and technology-focused organizations. These experiences have allowed me to develop
+                  skills in
+                  project management, teamwork, and event organization.
                 </p>
                 <ul class="list-disc list-inside ml-4 mt-4">
                   <li>
@@ -111,15 +109,15 @@
                   </li>
                 </ul>
               </div>
-              <div
-                v-else
-              >
+              <div v-else>
                 <p>
-                  L'associatif étant une part importante de ma vie, j'ai été membre actif de plusieurs associations étudiantes et technologiques. Ces expériences m'ont permis de développer des compétences en gestion de projet, en travail d'équipe et en organisation d'événements.
+                  L'associatif étant une part importante de ma vie, j'ai été membre actif de plusieurs associations
+                  étudiantes et
+                  technologiques. Ces expériences m'ont permis de développer des compétences en gestion de projet, en
+                  travail
+                  d'équipe et en organisation d'événements.
                 </p>
-                <ul
-                  class="list-disc list-inside ml-4 mt-4"
-                >
+                <ul class="list-disc list-inside ml-4 mt-4">
                   <li>
                     Responsable Développement INSALAN (2023-2025)
                   </li>
@@ -153,7 +151,8 @@
           <template #body>
             <div class="mb-4">
               <span class="text-cyan-400">kwikkill@hyperion:~$</span>
-              <span class="text-theme-foreground ml-2">{{ isEnglish ? './list_skills.sh' : './lister_competences.sh' }}</span>
+              <span class="text-theme-foreground ml-2">{{ isEnglish ? './list_skills.sh' : './lister_competences.sh'
+                }}</span>
             </div>
 
             <div class="space-y-4">
@@ -161,24 +160,19 @@
                 <!-- Foldable category header -->
                 <div
                   class="text-theme-foreground uppercase mb-2 flex items-center cursor-pointer hover:bg-gray-900/30 p-1"
-                  @click="toggleCategory(index)"
-                >
-                  <span class="text-cyan-400 mr-2 transition-transform duration-200" :class="{'rotate-90': expandedCategories[index]}">
+                  @click="toggleCategory(index)">
+                  <span class="text-cyan-400 mr-2 transition-transform duration-200"
+                    :class="{ 'rotate-90': expandedCategories[index] }">
                     ▶
                   </span>
                   {{ category.name }}
                 </div>
 
                 <!-- Skills list (collapsible) -->
-                <div
-                  v-if="expandedCategories[index]"
-                  class="ml-6 space-y-1 transition-all duration-300 overflow-hidden"
-                >
-                  <div
-                    v-for="(skill, skillIndex) in category.skills"
-                    :key="skillIndex"
-                    class="skill-item flex items-center"
-                  >
+                <div v-if="expandedCategories[index]"
+                  class="ml-6 space-y-1 transition-all duration-300 overflow-hidden">
+                  <div v-for="(skill, skillIndex) in category.skills" :key="skillIndex"
+                    class="skill-item flex items-center">
                     <span class="text-cyan-400 mr-2">></span>
                     <span class="text-green-400">{{ skill }}</span>
                   </div>
@@ -192,16 +186,16 @@
                 <span class="text-theme-foreground">
                   {{
                     isEnglish
-                    ? 'echo "Always learning new technologies"'
-                    : 'echo "Toujours en train d\'apprendre de nouvelles technologies"'
+                      ? 'echo "Always learning new technologies"'
+                      : 'echo "Toujours en train d\'apprendre de nouvelles technologies"'
                   }}
                 </span>
               </div>
               <div class="mt-1">
                 {{
                   isEnglish
-                  ? 'Always learning new technologies'
-                  : 'Toujours en train d\'apprendre de nouvelles technologies'
+                    ? 'Always learning new technologies'
+                    : 'Toujours en train d\'apprendre de nouvelles technologies'
                 }}
               </div>
             </div>
@@ -281,11 +275,9 @@ onMounted(() => {
 }
 
 .scanlines {
-  background: linear-gradient(
-    to bottom,
-    transparent 50%,
-    rgba(0, 0, 0, 0.5) 50%
-  );
+  background: linear-gradient(to bottom,
+      transparent 50%,
+      rgba(0, 0, 0, 0.5) 50%);
   background-size: 100% 4px;
   pointer-events: none;
 }
@@ -294,4 +286,3 @@ onMounted(() => {
   position: relative;
 }
 </style>
-

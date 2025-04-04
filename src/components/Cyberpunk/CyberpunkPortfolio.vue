@@ -19,4 +19,3 @@ import CyberpunkProjects from './CyberpunkProjects.vue'
 import CyberpunkInterests from './CyberpunkInterests.vue'
 import CyberpunkFooter from './CyberpunkFooter.vue'
 </script>
-

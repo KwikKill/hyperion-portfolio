@@ -1,5 +1,6 @@
 <template>
-  <div class="bg-gray-900 text-green-400 font-mono text-sm rounded-lg shadow-lg overflow-hidden border border-gray-700 h-full">
+  <div
+    class="bg-gray-900 text-green-400 font-mono text-sm rounded-lg shadow-lg overflow-hidden border border-gray-700 h-full">
     <div class="bg-gray-800 px-4 py-2 flex justify-between items-center">
       <div class="text-white">terminal@portfolio:~</div>
       <div class="flex space-x-2">
@@ -16,23 +17,12 @@
           <span class="text-white ml-2">{{ line.text }}</span>
         </template>
         <template v-else>
-          <span
-            class="text-blue-400"
-            v-if="line.inline"
-          >>> </span>
-          <a
-            v-if="line.link"
-            :href="line.link"
-            class="text-green-400 hover:underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <span class="text-blue-400" v-if="line.inline">>> </span>
+          <a v-if="line.link" :href="line.link" class="text-green-400 hover:underline" target="_blank"
+            rel="noopener noreferrer">
             {{ line.text }}
           </a>
-          <span
-            class="text-green-400"
-            v-else
-          >
+          <span class="text-green-400" v-else>
             {{ line.text }}
           </span>
         </template>
@@ -144,4 +134,3 @@ onMounted(() => {
   scrollToBottom()
 })
 </script>
-

@@ -16,8 +16,8 @@
         <template #title>
           {{
             isEnglish
-            ? 'HYPERION v1.0 - USER INTERESTS'
-            : 'HYPERION v1.0 - INTÉRÊTS UTILISATEUR'
+              ? 'HYPERION v1.0 - USER INTERESTS'
+              : 'HYPERION v1.0 - INTÉRÊTS UTILISATEUR'
           }}
         </template>
       </CyberpunkTerminalWindow>
@@ -37,25 +37,22 @@
                 class="px-4 py-2 font-mono text-sm uppercase transition-colors duration-200 relative"
                 :class="activeCategory === 'movies' ? 'text-yellow-300' : 'text-gray-500 hover:text-yellow-400'">
                 <span>{{ isEnglish ? 'Movies' : 'Films' }}</span>
-                <span v-if="activeCategory === 'movies'" class="absolute bottom-0 left-0 w-full h-0.5 bg-yellow-500"></span>
+                <span v-if="activeCategory === 'movies'"
+                  class="absolute bottom-0 left-0 w-full h-0.5 bg-yellow-500"></span>
               </button>
               <button @click="activeCategory = 'games'"
                 class="px-4 py-2 font-mono text-sm uppercase transition-colors duration-200 relative"
                 :class="activeCategory === 'games' ? 'text-yellow-300' : 'text-gray-500 hover:text-yellow-400'">
                 <span>{{ isEnglish ? 'Video Games' : 'Jeux Vidéo' }}</span>
-                <span v-if="activeCategory === 'games'" class="absolute bottom-0 left-0 w-full h-0.5 bg-yellow-500"></span>
+                <span v-if="activeCategory === 'games'"
+                  class="absolute bottom-0 left-0 w-full h-0.5 bg-yellow-500"></span>
               </button>
             </div>
 
             <!-- Movies content -->
             <div v-if="activeCategory === 'movies'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div
-                v-for="(movie, index) in movies"
-                :key="index"
-                class="media-card group"
-                  @click="activeCard = activeCard === index ? null : index"
-                :class="activeCard === index ? 'active' : ''"
-              >
+              <div v-for="(movie, index) in movies" :key="index" class="media-card group"
+                @click="activeCard = activeCard === index ? null : index" :class="activeCard === index ? 'active' : ''">
                 <div class="media-card-inner">
                   <div class="media-card-front">
                     <img :src="movie.image" :alt="movie.title" class="w-full h-48 object-cover rounded-t-md" />
@@ -100,10 +97,16 @@
             <!-- Terminal footer -->
             <div class="mt-8 pt-4 border-t border-yellow-500/30 text-center">
               <p class="text-yellow-400 font-mono text-sm">
-                {{ isEnglish
-                  ? 'Beyond coding, I have a variety of interests that inspire my creativity and approach to problem-solving. Here are some of my favorite movies and games.'
-                  : 'Au-delà du code, j\'ai une variété d\'intérêts qui inspirent ma créativité et mon approche de la résolution de problèmes. Voici quelques-uns de mes films et jeux préférés.'
-                }}
+                <template
+                  v-if="isEnglish"
+                >
+                  Beyond coding, I have a variety of interests that inspire my creativity and approach to problem - solving.Here are some of my favorite movies and games.
+                </template>
+                <template
+                  v-else
+                >
+                  Au-delà du code, j'ai une variété d'intérêts qui inspirent ma créativité et mon approche de la résolution de problèmes. Voici quelques - uns de mes films et jeux préférés.
+               </template>
               </p>
             </div>
           </div>

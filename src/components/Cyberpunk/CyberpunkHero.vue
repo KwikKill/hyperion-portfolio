@@ -23,8 +23,8 @@
           <h2 class="text-2xl md:text-3xl font-semibold mb-6 ">
             {{
               isEnglish
-              ? 'Computer Science Student'
-              : 'Étudiant en Informatique'
+                ? 'Computer Science Student'
+                : 'Étudiant en Informatique'
             }}
             <br />
             INSA Rennes
@@ -39,10 +39,16 @@
               <!-- Description section -->
               <div class="text-justify mb-4">
                 <p class="text-gray-300">
-                  {{ isEnglish
-                    ? 'Passionate about web development and software engineering. I love video games, technology, and learning new things. Also passionate about Greek mythology.'
-                    : 'Etudiant en Informatique passionné par le développement web et l\'ingénierie logicielle. J\'adore les jeux vidéo, la technologie et apprendre de nouvelles choses. Également passionné par la mythologie grecque.'
-                  }}
+                  <template
+                    v-if="isEnglish"
+                  >
+                    Passionate about web development and software engineering. I love video games, technology, and learning new things. Also passionate about Greek mythology.
+                  </template>
+                  <template
+                    v-else
+                  >
+                    Etudiant en Informatique passionné par le développement web et l'ingénierie logicielle. J'adore les jeux vidéo, la technologie et apprendre de nouvelles choses. Également passionné par la mythologie grecque.
+                  </template>
                 </p>
               </div>
 
@@ -52,64 +58,58 @@
                   <span class="text-theme-foreground font-mono uppercase text-sm">
                     {{
                       isEnglish
-                      ? 'CONTACT INFORMATION'
-                      : 'INFORMATIONS DE CONTACT'
+                        ? 'CONTACT INFORMATION'
+                        : 'INFORMATIONS DE CONTACT'
                     }}
                   </span>
                 </div>
 
-                <div
-                  v-if="contact_reveal"
-                  class="space-y-2 font-mono pl-4 border-l border-cyan-800"
-                >
+                <div v-if="contact_reveal" class="space-y-2 font-mono pl-4 border-l border-cyan-800">
                   <div class="flex items-center">
                     <span class="text-cyan-400 mr-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
                     </span>
-                    <a
-                      href="tel:+33652411416"
-                      class="text-theme-foreground hover:text-yellow-400 transition-colors"
-                    >
+                    <a href="tel:+33652411416" class="text-theme-foreground hover:text-yellow-400 transition-colors">
                       +33 6 52 41 14 16
                     </a>
                   </div>
 
                   <div class="flex items-center">
                     <span class="text-cyan-400 mr-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
                     </span>
-                    <a
-                      href="mailto:gabriel@blaisot.org"
-                      class="text-theme-foreground hover:text-yellow-400 transition-colors"
-                    >
+                    <a href="mailto:gabriel@blaisot.org"
+                      class="text-theme-foreground hover:text-yellow-400 transition-colors">
                       gabriel@blaisot.org
                     </a>
                   </div>
 
                   <div class="flex items-center">
                     <span class="text-cyan-400 mr-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                          d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                       </svg>
                     </span>
-                    <a href="https://www.linkedin.com/in/gabriel-blaisot-a89480233/" target="_blank" rel="noopener noreferrer" class="text-theme-foreground hover:text-yellow-400 transition-colors">
+                    <a href="https://www.linkedin.com/in/gabriel-blaisot-a89480233/" target="_blank"
+                      rel="noopener noreferrer" class="text-theme-foreground hover:text-yellow-400 transition-colors">
                       gabriel-blaisot
                     </a>
                   </div>
                 </div>
-                <div
-                  v-else
+                <div v-else
                   class="glitch-container pl-4 border-l border-cyan-800 py-3 cursor-pointer flex items-center justify-center"
-                  @click="contact_reveal = true"
-                >
-                  <div
-                    class="glitch-text"
-                    :data-text="isEnglish ? 'CLICK TO REVEAL' : 'CLIQUER POUR RÉVÉLER'"
-                  >
+                  @click="contact_reveal = true">
+                  <div class="glitch-text" :data-text="isEnglish ? 'CLICK TO REVEAL' : 'CLIQUER POUR RÉVÉLER'">
                     {{ isEnglish ? 'CLICK TO REVEAL' : 'CLIQUER POUR RÉVÉLER' }}
                   </div>
                   <div class="glitch-blocks">
@@ -123,10 +123,8 @@
           </CyberpunkTerminalWindow>
 
           <div class="flex space-x-4 mt-8">
-            <a
-              href="#projects"
-              class="px-6 py-3 bg-theme-foreground hover:bg-yellow-600 text-black font-medium rounded-none transition-colors uppercase tracking-wider cyberpunk-button"
-            >
+            <a href="#projects"
+              class="px-6 py-3 bg-theme-foreground hover:bg-yellow-600 text-black font-medium rounded-none transition-colors uppercase tracking-wider cyberpunk-button">
               {{ isEnglish ? 'View Projects' : 'Voir les Projets' }}
             </a>
           </div>
@@ -174,10 +172,12 @@ const contact_reveal = ref(false)
     background-size: 40px 40px;
     transform: perspective(500px) rotateX(60deg) translateZ(0);
   }
+
   50% {
     background-size: 40px 40px;
     transform: perspective(500px) rotateX(60deg) translateZ(5px);
   }
+
   100% {
     background-size: 40px 40px;
     transform: perspective(500px) rotateX(60deg) translateZ(0);
@@ -196,12 +196,10 @@ const contact_reveal = ref(false)
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
   transition: 0.5s;
 }
 
@@ -290,63 +288,211 @@ const contact_reveal = ref(false)
 }
 
 @keyframes glitch-text {
-  0%, 100% { opacity: 1; }
-  72.5%, 75% { opacity: 0.7; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  72.5%,
+  75% {
+    opacity: 0.7;
+  }
 }
 
 @keyframes glitch-text-before {
-  0% { clip: rect(44px, 450px, 56px, 0); }
-  5% { clip: rect(17px, 450px, 94px, 0); }
-  10% { clip: rect(12px, 450px, 18px, 0); }
-  15% { clip: rect(89px, 450px, 100px, 0); }
-  20% { clip: rect(30px, 450px, 65px, 0); }
-  25% { clip: rect(20px, 450px, 40px, 0); }
-  30% { clip: rect(54px, 450px, 73px, 0); }
-  35% { clip: rect(10px, 450px, 25px, 0); }
-  40% { clip: rect(38px, 450px, 50px, 0); }
-  45% { clip: rect(75px, 450px, 85px, 0); }
-  50% { clip: rect(5px, 450px, 15px, 0); }
-  55% { clip: rect(82px, 450px, 90px, 0); }
-  60% { clip: rect(28px, 450px, 39px, 0); }
-  65% { clip: rect(60px, 450px, 72px, 0); }
-  70% { clip: rect(15px, 450px, 30px, 0); }
-  75% { clip: rect(45px, 450px, 55px, 0); }
-  80% { clip: rect(70px, 450px, 80px, 0); }
-  85% { clip: rect(8px, 450px, 20px, 0); }
-  90% { clip: rect(50px, 450px, 62px, 0); }
-  95% { clip: rect(78px, 450px, 87px, 0); }
-  100% { clip: rect(32px, 450px, 47px, 0); }
+  0% {
+    clip: rect(44px, 450px, 56px, 0);
+  }
+
+  5% {
+    clip: rect(17px, 450px, 94px, 0);
+  }
+
+  10% {
+    clip: rect(12px, 450px, 18px, 0);
+  }
+
+  15% {
+    clip: rect(89px, 450px, 100px, 0);
+  }
+
+  20% {
+    clip: rect(30px, 450px, 65px, 0);
+  }
+
+  25% {
+    clip: rect(20px, 450px, 40px, 0);
+  }
+
+  30% {
+    clip: rect(54px, 450px, 73px, 0);
+  }
+
+  35% {
+    clip: rect(10px, 450px, 25px, 0);
+  }
+
+  40% {
+    clip: rect(38px, 450px, 50px, 0);
+  }
+
+  45% {
+    clip: rect(75px, 450px, 85px, 0);
+  }
+
+  50% {
+    clip: rect(5px, 450px, 15px, 0);
+  }
+
+  55% {
+    clip: rect(82px, 450px, 90px, 0);
+  }
+
+  60% {
+    clip: rect(28px, 450px, 39px, 0);
+  }
+
+  65% {
+    clip: rect(60px, 450px, 72px, 0);
+  }
+
+  70% {
+    clip: rect(15px, 450px, 30px, 0);
+  }
+
+  75% {
+    clip: rect(45px, 450px, 55px, 0);
+  }
+
+  80% {
+    clip: rect(70px, 450px, 80px, 0);
+  }
+
+  85% {
+    clip: rect(8px, 450px, 20px, 0);
+  }
+
+  90% {
+    clip: rect(50px, 450px, 62px, 0);
+  }
+
+  95% {
+    clip: rect(78px, 450px, 87px, 0);
+  }
+
+  100% {
+    clip: rect(32px, 450px, 47px, 0);
+  }
 }
 
 @keyframes glitch-text-after {
-  0% { clip: rect(32px, 450px, 47px, 0); }
-  5% { clip: rect(78px, 450px, 87px, 0); }
-  10% { clip: rect(50px, 450px, 62px, 0); }
-  15% { clip: rect(8px, 450px, 20px, 0); }
-  20% { clip: rect(70px, 450px, 80px, 0); }
-  25% { clip: rect(45px, 450px, 55px, 0); }
-  30% { clip: rect(15px, 450px, 30px, 0); }
-  35% { clip: rect(60px, 450px, 72px, 0); }
-  40% { clip: rect(28px, 450px, 39px, 0); }
-  45% { clip: rect(82px, 450px, 90px, 0); }
-  50% { clip: rect(5px, 450px, 15px, 0); }
-  55% { clip: rect(75px, 450px, 85px, 0); }
-  60% { clip: rect(38px, 450px, 50px, 0); }
-  65% { clip: rect(10px, 450px, 25px, 0); }
-  70% { clip: rect(54px, 450px, 73px, 0); }
-  75% { clip: rect(20px, 450px, 40px, 0); }
-  80% { clip: rect(30px, 450px, 65px, 0); }
-  85% { clip: rect(89px, 450px, 100px, 0); }
-  90% { clip: rect(12px, 450px, 18px, 0); }
-  95% { clip: rect(17px, 450px, 94px, 0); }
-  100% { clip: rect(44px, 450px, 56px, 0); }
+  0% {
+    clip: rect(32px, 450px, 47px, 0);
+  }
+
+  5% {
+    clip: rect(78px, 450px, 87px, 0);
+  }
+
+  10% {
+    clip: rect(50px, 450px, 62px, 0);
+  }
+
+  15% {
+    clip: rect(8px, 450px, 20px, 0);
+  }
+
+  20% {
+    clip: rect(70px, 450px, 80px, 0);
+  }
+
+  25% {
+    clip: rect(45px, 450px, 55px, 0);
+  }
+
+  30% {
+    clip: rect(15px, 450px, 30px, 0);
+  }
+
+  35% {
+    clip: rect(60px, 450px, 72px, 0);
+  }
+
+  40% {
+    clip: rect(28px, 450px, 39px, 0);
+  }
+
+  45% {
+    clip: rect(82px, 450px, 90px, 0);
+  }
+
+  50% {
+    clip: rect(5px, 450px, 15px, 0);
+  }
+
+  55% {
+    clip: rect(75px, 450px, 85px, 0);
+  }
+
+  60% {
+    clip: rect(38px, 450px, 50px, 0);
+  }
+
+  65% {
+    clip: rect(10px, 450px, 25px, 0);
+  }
+
+  70% {
+    clip: rect(54px, 450px, 73px, 0);
+  }
+
+  75% {
+    clip: rect(20px, 450px, 40px, 0);
+  }
+
+  80% {
+    clip: rect(30px, 450px, 65px, 0);
+  }
+
+  85% {
+    clip: rect(89px, 450px, 100px, 0);
+  }
+
+  90% {
+    clip: rect(12px, 450px, 18px, 0);
+  }
+
+  95% {
+    clip: rect(17px, 450px, 94px, 0);
+  }
+
+  100% {
+    clip: rect(44px, 450px, 56px, 0);
+  }
 }
 
 @keyframes glitch-block {
-  0%, 100% { transform: translate(0); opacity: 0.3; }
-  25% { transform: translate(-10px, 2px); opacity: 0.5; }
-  50% { transform: translate(8px, -5px); opacity: 0.1; }
-  75% { transform: translate(-5px, 3px); opacity: 0.4; }
+
+  0%,
+  100% {
+    transform: translate(0);
+    opacity: 0.3;
+  }
+
+  25% {
+    transform: translate(-10px, 2px);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: translate(8px, -5px);
+    opacity: 0.1;
+  }
+
+  75% {
+    transform: translate(-5px, 3px);
+    opacity: 0.4;
+  }
 }
 </style>
-

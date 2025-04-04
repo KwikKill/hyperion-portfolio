@@ -19,4 +19,3 @@ import ClassicProjects from './ClassicProjects.vue'
 import ClassicInterests from './ClassicInterests.vue'
 import ClassicFooter from './ClassicFooter.vue'
 </script>
-
