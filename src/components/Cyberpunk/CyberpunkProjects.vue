@@ -1,9 +1,15 @@
 <template>
   <section id="projects" class="cyberpunk-terminal py-20 bg-black relative min-h-screen rounded-md">
-    <!-- Cyberpunk desktop background with grid -->
-    <div class="absolute inset-0 z-0">
-      <div class="cyberpunk-grid-bg h-full"></div>
-      <div class="absolute inset-0 bg-black/30"></div>
+    <!-- Enhanced cyberpunk background with depth -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+      <!-- Improved grid background with perspective -->
+      <div class="cyber-grid-bg"></div>
+      <!-- Digital circuit lines -->
+      <div class="circuit-lines"></div>
+      <!-- Scan lines effect -->
+      <div class="scan-lines"></div>
+      <!-- Radial glow overlay -->
+      <div class="radial-overlay"></div>
     </div>
 
     <div class="container mx-auto px-4 relative z-10">
@@ -14,20 +20,57 @@
         </template>
       </CyberpunkTerminalWindow>
 
-      <!-- Search bar -->
+      <!-- Search and filter bar -->
       <CyberpunkTerminalWindow class="mb-2" :noTitle="true">
         <template #body>
-          <div class="flex items-center">
-            <div class="text-cyan-400 mr-2 font-mono">
-              <span class="blink-cursor">></span>
+          <div class="flex flex-col md:flex-row gap-4">
+            <!-- Search input -->
+            <div class="flex items-center flex-1 border border-theme-foreground/30 rounded px-3 py-1 md:border-0">
+              <div class="text-cyan-400 mr-2 font-mono">
+                <div class="text-cyan-400 mr-2 font-mono">
+                  <span class="blink-cursor">></span>
+                </div>
+              </div>
+              <div class="relative flex-1">
+                <input type="text" v-model="searchQuery"
+                  :placeholder="isEnglish ? 'SEARCH PROJECTS...' : 'RECHERCHER DES PROJETS...'"
+                  class="w-full bg-transparent border-none outline-none text-theme-foreground font-mono uppercase placeholder-gray-500 focus:ring-0"
+                  @focus="isSearchFocused = true" @blur="isSearchFocused = false" />
+                <div v-if="searchQuery" @click="clearSearch"
+                  class="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 hover:text-theme-foreground">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </div>
             </div>
-            <div class="relative flex-1">
-              <input type="text" v-model="searchQuery"
-                :placeholder="isEnglish ? 'SEARCH PROJECTS, TECHNO,...' : 'RECHERCHER DES PROJETS, TECHNO,...'"
-                class="w-full bg-transparent border-none outline-none text-theme-foreground font-mono uppercase placeholder-gray-500 focus:ring-0"
-                @focus="isSearchFocused = true" @blur="isSearchFocused = false" />
-              <div v-if="searchQuery" @click="clearSearch"
-                class="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500 hover:text-theme-foreground">
+
+            <!-- Technology filter dropdown -->
+            <div class="flex items-center">
+              <div class="text-cyan-400 mr-2 font-mono">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+              </div>
+              <div class="relative">
+                <select v-model="selectedTechnology"
+                  class="appearance-none bg-transparent border border-theme-foreground/30 rounded px-3 py-1 text-theme-foreground font-mono uppercase focus:outline-none focus:ring-1 focus:ring-theme-foreground w-[180px]">
+                  <option value="">{{ isEnglish ? 'NO FILTER' : 'PAS DE FILTRE' }}</option>
+                  <option v-for="tech in availableTechnologies" :key="tech" :value="tech">{{ tech }}</option>
+                </select>
+                <div
+                  class="pointer-events-none absolute inset-y-0 right-1 flex items-center px-2 text-theme-foreground">
+                  <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </div>
+              </div>
+              <div v-if="selectedTechnology" @click="clearTechnologyFilter"
+                class="ml-2 cursor-pointer text-gray-500 hover:text-theme-foreground">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
@@ -35,8 +78,12 @@
                 </svg>
               </div>
             </div>
-            <div class="text-gray-500 ml-2 font-mono text-sm">
-              {{ filteredProjects.length }} {{ isEnglish ? 'RESULTS' : 'RÉSULTATS' }}
+
+            <!-- Results counter -->
+            <div class="text-cyan-400 font-mono text-sm items-center md:flex hidden">
+              <span class="bg-black/50 px-2 py-1 rounded border border-theme-foreground/30">
+                {{ filteredProjects.length }} {{ isEnglish ? 'FILES' : 'FICHIERS' }}
+              </span>
             </div>
           </div>
         </template>
@@ -45,23 +92,36 @@
       <!-- Desktop icons grid -->
       <CyberpunkTerminalWindow>
         <template #title>
-          {{
-            isEnglish
-              ? 'PROJECTS EXPLORER'
-              : 'EXPLORATEUR DE PROJETS'
-          }}
+          <div class="flex items-center justify-between w-full gap-2">
+            <div>
+              {{ isEnglish ? 'PROJECTS EXPLORER' : 'EXPLORATEUR DE PROJETS' }}
+            </div>
+            <div v-if="selectedTechnology" class="text-sm flex items-center">
+              <span class="px-2 py-0.5 bg-theme-foreground/20 border border-theme-foreground/30 rounded text-xs">
+                {{ selectedTechnology }}
+              </span>
+            </div>
+          </div>
         </template>
         <template #body>
           <!-- Search status message -->
-          <div v-if="searchQuery && filteredProjects.length === 0" class="text-center mb-6">
-            <div class="text-theme-foreground font-mono uppercase cyberpunk-text-glow">
-              {{ isEnglish ? 'NO PROJECTS FOUND' : 'AUCUN PROJET TROUVÉ' }}
+          <div v-if="(searchQuery || selectedTechnology) && filteredProjects.length === 0"
+            class="text-center p-4 border border-red-500/50 bg-black/50 rounded">
+            <div class="text-red-400 font-mono uppercase cyberpunk-text-glow flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              {{ isEnglish ? 'NO FILES FOUND' : 'AUCUN FICHIER TROUVÉ' }}
             </div>
             <div class="text-cyan-400 text-sm font-mono mt-2">
-              {{ isEnglish ? 'TRY ANOTHER SEARCH TERM' : 'ESSAYEZ UN AUTRE TERME DE RECHERCHE' }}
+              {{ isEnglish ? 'TRY ANOTHER SEARCH TERM OR FILTER' : 'ESSAYEZ UN AUTRE TERME DE RECHERCHE OU FILTRE' }}
             </div>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-5">
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6" :class="{
+            'mt-5': !((searchQuery || selectedTechnology) && filteredProjects.length === 0)
+          }">
             <!-- Project items remain the same -->
             <div v-for="project in filteredProjects" :key="project"
               class="flex flex-col items-center cursor-pointer group" @click="openProject(project)"
@@ -100,7 +160,8 @@
     </div>
 
     <!-- Project Modal -->
-    <div v-if="selectedProject" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+    <div v-if="selectedProject"
+      class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 backdrop-blur-sm"
       @click.self="closeProject">
       <CyberpunkTerminalWindow body_class="max-w-3xl w-full max-h-[80vh] overflow-y-auto p-4">
         <template #title>
@@ -163,7 +224,8 @@
                 </h4>
                 <div class="flex flex-wrap gap-2">
                   <span v-for="(tech, index) in selectedProject.technologies" :key="index"
-                    class="px-2 py-1 bg-black text-theme-foreground text-xs font-mono uppercase border border-theme-foreground">
+                    class="px-2 py-1 bg-black text-theme-foreground text-xs font-mono uppercase border border-theme-foreground cursor-pointer hover:bg-theme-foreground/10"
+                    @click.stop="filterByTechFromModal(tech)">
                     {{ tech }}
                   </span>
                 </div>
@@ -198,7 +260,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { storeToRefs } from 'pinia';
 import { usePreferencesStore } from '../../stores/preferences'
 import { useProjectsStore } from '../../stores/projects'
@@ -216,32 +278,77 @@ const { selectedProject } = storeToRefs(projectsStore)
 const searchQuery = ref('')
 const isSearchFocused = ref(false)
 const lastSearchTime = ref(Date.now())
+const selectedTechnology = ref('')
 
-// Filter projects based on search query
-const filteredProjects = computed(() => {
-  if (!searchQuery.value) return projects.value
-
-  const query = searchQuery.value.toLowerCase()
-  return projects.value.filter(project => {
-    return project.localizedName.toLowerCase().includes(query) ||
-      project.localizedDescription.toLowerCase().includes(query) ||
-      project.technologies.some(tech => tech.toLowerCase().includes(query))
+// Get all unique technologies from all projects
+const availableTechnologies = computed(() => {
+  const techSet = new Set()
+  projects.value.forEach(project => {
+    project.technologies.forEach(tech => {
+      techSet.add(tech)
+    })
   })
+  return Array.from(techSet).sort()
+})
+
+// Filter projects based on search query and selected technology
+const filteredProjects = computed(() => {
+  let result = projects.value
+
+  // Apply technology filter if selected
+  if (selectedTechnology.value) {
+    result = result.filter(project =>
+      project.technologies.includes(selectedTechnology.value)
+    )
+  }
+
+  // Apply search query filter if present
+  if (searchQuery.value) {
+    const query = searchQuery.value.toLowerCase()
+    result = result.filter(project => {
+      return project.localizedName.toLowerCase().includes(query) ||
+        project.localizedDescription.toLowerCase().includes(query) ||
+        project.technologies.some(tech => tech.toLowerCase().includes(query))
+    })
+  }
+
+  return result
 })
 
 // Check if a project is a new match for animation purposes
 function isSearchMatch(project) {
-  if (!searchQuery.value) return false
+  if (!searchQuery.value && !selectedTechnology.value) return false
 
-  const query = searchQuery.value.toLowerCase()
-  return project.localizedName.toLowerCase().includes(query) ||
-    project.localizedDescription.toLowerCase().includes(query) ||
-    project.technologies.some(tech => tech.toLowerCase().includes(query))
+  let isMatch = true
+
+  if (searchQuery.value) {
+    const query = searchQuery.value.toLowerCase()
+    isMatch = project.localizedName.toLowerCase().includes(query) ||
+      project.localizedDescription.toLowerCase().includes(query) ||
+      project.technologies.some(tech => tech.toLowerCase().includes(query))
+  }
+
+  if (selectedTechnology.value && isMatch) {
+    isMatch = project.technologies.includes(selectedTechnology.value)
+  }
+
+  return isMatch
 }
 
 // Clear search
 function clearSearch() {
   searchQuery.value = ''
+}
+
+// Clear technology filter
+function clearTechnologyFilter() {
+  selectedTechnology.value = ''
+}
+
+// Filter by technology from modal
+function filterByTechFromModal(tech) {
+  selectedTechnology.value = tech
+  closeProject()
 }
 
 // Update last search time when query changes (for animation timing)
@@ -259,17 +366,66 @@ function closeProject() {
 </script>
 
 <style scoped>
-/* Styles remain the same */
-.cyberpunk-grid-bg {
-  background-color: #1a1a1a;
+/* Enhanced cyberpunk grid background */
+.cyber-grid-bg {
+  background-color: #000;
   background-image:
-    linear-gradient(rgba(255, 215, 0, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 215, 0, 0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
+    linear-gradient(to right, rgba(254, 238, 59, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(254, 238, 59, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+  width: 100%;
+  height: 100%;
+  transform: perspective(500px) rotateX(60deg);
+  transform-origin: center top;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -50%;
+  animation: grid-pulse 15s infinite linear;
 }
 
-.desktop-folder {
-  position: relative;
+/* Digital circuit lines */
+.circuit-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 30% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 10%),
+    radial-gradient(circle at 70% 60%, rgba(254, 238, 59, 0.1) 0%, transparent 15%),
+    radial-gradient(circle at 40% 80%, rgba(255, 0, 128, 0.1) 0%, transparent 12%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Scan lines effect */
+.scan-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom,
+      transparent 50%,
+      rgba(0, 0, 0, 0.1) 50%);
+  background-size: 100% 4px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Radial overlay */
+.radial-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center,
+      transparent 0%,
+      rgba(0, 0, 0, 0.7) 100%);
+  pointer-events: none;
 }
 
 .desktop-folder::after {
@@ -283,11 +439,6 @@ function closeProject() {
   background-color: rgba(255, 215, 0, 0.5);
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
   border-radius: 3px;
-}
-
-/* Search animations */
-.search-match {
-  animation: pulse-glow 1.5s ease-in-out;
 }
 
 /* Star badge styling */
@@ -344,6 +495,24 @@ function closeProject() {
   100% {
     transform: scale(1);
     filter: brightness(1);
+  }
+}
+
+/* Grid animation */
+@keyframes grid-pulse {
+  0% {
+    background-size: 30px 30px;
+    opacity: 0.8;
+  }
+
+  50% {
+    background-size: 32px 32px;
+    opacity: 1;
+  }
+
+  100% {
+    background-size: 30px 30px;
+    opacity: 0.8;
   }
 }
 </style>
