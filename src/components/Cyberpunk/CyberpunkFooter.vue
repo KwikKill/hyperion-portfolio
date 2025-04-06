@@ -5,7 +5,7 @@
         <div class="mb-4 text-center md:mb-0 md:text-left">
           <div class="cyberpunk-text-glow text-2xl font-bold text-theme-foreground">
             <span class="text-gray-500">&lt;</span>
-            <img src="/src/assets/logo.png" alt="Logo" class="inline-block size-8"/>
+            <img src="@/assets/logo.png" alt="Logo" class="inline-block size-8"/>
             KwikKill
             <span class="text-gray-500">/&gt;</span>
           </div>

@@ -7,7 +7,7 @@
         @keydown.enter="preferencesStore.resetPreferences"
       >
         <span class="text-gray-500">&lt;</span>
-        <img src="/src/assets/logo.png" alt="Logo" class="inline-block size-8"/>
+        <img src="@/assets/logo.png" alt="Logo" class="inline-block size-8"/>
         KwikKill
         <span class="text-gray-500">/&gt;</span>
       </div>

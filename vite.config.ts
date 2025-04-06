@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vite';
 
 const websocket_url = process.env.VITE_WEBSITE_HOST;
-console.log('websocket_url', websocket_url);
 
 // https://vitejs.dev/config/
 export default defineConfig({

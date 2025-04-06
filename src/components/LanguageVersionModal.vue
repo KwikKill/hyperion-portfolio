@@ -55,7 +55,7 @@
           </p>
           <div class="mt-4">
             <img
-              src="../assets/logo.png"
+              src="@/assets/logo.png"
               alt="Logo"
               class="mx-auto size-24 rounded-full border-4 shadow-lg"
               :class="{
@@ -130,7 +130,7 @@
                   <div
                     class="mr-4 flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-blue-600/20"
                   >
-                    <img src="../assets/Flag_UK.svg" alt="English" class="size-full object-cover"/>
+                    <img src="@/assets/Flag_UK.svg" alt="English" class="size-full object-cover"/>
                   </div>
                   <div class="text-left">
                     <div class="text-lg font-medium text-white">
@@ -154,7 +154,7 @@
                   <div
                     class="mr-4 flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-blue-600/20"
                   >
-                    <img src="../assets/Flag_FR.svg" alt="Français" class="size-full object-cover"/>
+                    <img src="@/assets/Flag_FR.svg" alt="Français" class="size-full object-cover"/>
                   </div>
                   <div class="text-left">
                     <div class="text-lg font-medium text-white">

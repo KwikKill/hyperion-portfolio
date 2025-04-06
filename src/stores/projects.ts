@@ -1,5 +1,34 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import aptImage from '@/assets/games/a_plague_tale.webp';
+import baldurImage from '@/assets/games/baldurs_gate_3.webp';
+import cp2077Image from '@/assets/games/cyberpunk_2077.webp';
+import hollowknightImage from '@/assets/games/hollow_knight.webp';
+import lmfImage from '@/assets/games/little_miss_fortune.webp';
+import thewitcherImage from '@/assets/games/the_witcher_3.webp';
+import exMachinaImage from '@/assets/movies/ex_machina.webp';
+import gitsImage from '@/assets/movies/ghost_in_the_shell.webp';
+import inceptionImage from '@/assets/movies/inception.webp';
+import lcdlpImage from '@/assets/movies/la_cité_de_la_peur.webp';
+import matrixImage from '@/assets/movies/matrix.webp';
+import tenetImage from '@/assets/movies/tenet.webp';
+import codepilotImage from '@/assets/projects/advent.webp';
+import bombermanImage from '@/assets/projects/bomberman.webp';
+import btcImage from '@/assets/projects/btc.webp';
+import indexerImage from '@/assets/projects/indexer.webp';
+import infographiqueImage from '@/assets/projects/infographique.webp';
+import insalanImage from '@/assets/projects/insalan.webp';
+import lightshieldImage from '@/assets/projects/lightshield.webp';
+import mindustryImage from '@/assets/projects/mindustry.webp';
+import minecraftImage from '@/assets/projects/minecraft.webp';
+import monitImage from '@/assets/projects/monit.webp';
+import portfolioImage from '@/assets/projects/portfolio.webp';
+import pshImage from '@/assets/projects/psh.webp';
+import rankupImage from '@/assets/projects/rankup.webp';
+import rankupwebImage from '@/assets/projects/rankup-website.webp';
+import revuesImage from '@/assets/projects/revues.webp';
+import stackImage from '@/assets/projects/stack.webp';
+import vfsImage from '@/assets/projects/vfs.webp';
 import type { Experience } from '@/models/experience';
 import type { Games } from '@/models/game';
 import type { Movies } from '@/models/movie';
@@ -27,7 +56,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2025',
         starred: true,
         technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Pinia', 'Docker', 'PostgreSQL'],
-        image: '/src/assets/projects/portfolio.webp',
+        image: portfolioImage,
         link: '#',
         github: 'https://github.com/KwikKill/hyperion-portfolio',
       },
@@ -47,7 +76,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2023-2025',
         starred: true,
         technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Pinia', 'JavaScript', 'TypeScript', 'Django', 'DjangoREST', 'Docker', 'Nginx', 'Postgres'],
-        image: '/src/assets/projects/insalan.webp',
+        image: insalanImage,
         link: 'https://insalan.fr',
         github: 'https://github.com/InsaLan/infra-insalan.fr',
       },
@@ -67,7 +96,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2025',
         starred: false,
         technologies: ['Grafana', 'Telegraf', 'InfluxDB', 'Nginx', 'Docker'],
-        image: '/src/assets/projects/monit.webp',
+        image: monitImage,
         github: 'https://github.com/InsaLan/infra-insalan.fr/blob/main/docker-compose-analytics.yml',
       },
       {
@@ -86,7 +115,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2021-2024',
         starred: true,
         technologies: ['Python', 'JavaScript'],
-        image: '/src/assets/projects/btc.webp',
+        image: btcImage,
         link: 'https://www.linkedin.com/posts/m-paris_breakthecode-challenge-codage-activity-7272240941552340992-maS5',
       },
       {
@@ -105,7 +134,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2024',
         starred: false,
         technologies: ['C++', 'SFML', 'Blender'],
-        image: '/src/assets/projects/infographique.webp',
+        image: infographiqueImage,
         link: 'https://youtu.be/HfP1gKB0Cpg',
         github: 'https://github.com/KwikKill/infographique',
       },
@@ -125,7 +154,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2024',
         starred: false,
         technologies: ['C++', 'SFML'],
-        image: '/src/assets/projects/bomberman.webp',
+        image: bombermanImage,
         github: 'https://github.com/KwikKill/Bomberman',
       },
       {
@@ -144,7 +173,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2023-2024',
         starred: false,
         technologies: ['Python', 'JavaScript', 'TypeScript'],
-        image: '/src/assets/projects/advent.webp',
+        image: codepilotImage,
         github: 'https://github.com/KwikKill/advent-of-codpilote',
       },
       {
@@ -163,7 +192,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2024',
         starred: false,
         technologies: ['Python', 'JavaScript', 'Docker', 'Redis', 'Postgres'],
-        image: '/src/assets/projects/lightshield.webp',
+        image: lightshieldImage,
         github: 'https://github.com/KwikKill/Lightshield',
       },
       {
@@ -182,7 +211,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2024',
         starred: false,
         technologies: ['Python'],
-        image: '/src/assets/projects/indexer.webp',
+        image: indexerImage,
         github: 'https://github.com/KwikKill/TALEO',
       },
       {
@@ -201,7 +230,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2023-2024',
         starred: false,
         technologies: ['Python', 'LaTeX'],
-        image: '/src/assets/projects/revues.webp',
+        image: revuesImage,
         link: 'https://www.irisa.fr/article/2023-09/la-creation-de-revues-numeriques-des-registres-des-soldats-de-lancien-regime-un',
       },
       {
@@ -220,7 +249,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2023',
         starred: false,
         technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker'],
-        image: '/src/assets/projects/psh.webp',
+        image: pshImage,
         link: 'https://psh.blaisot.org/',
       },
       {
@@ -239,7 +268,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2023',
         starred: false,
         technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker'],
-        image: '/src/assets/projects/rankup-website.webp',
+        image: rankupwebImage,
         link: 'https://rankup.somi.blaisot.org/',
       },
       {
@@ -258,7 +287,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2023',
         starred: false,
         technologies: ['Docker', 'Nginx', 'Shell'],
-        image: '/src/assets/projects/stack.webp',
+        image: stackImage,
       },
       {
         name: {
@@ -276,7 +305,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2019-2025',
         starred: true,
         technologies: ['JavaScript', 'Discord.js', 'Docker', 'Postgres'],
-        image: '/src/assets/projects/rankup.webp',
+        image: rankupImage,
         link: 'https://rankup.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/Kwik_bot',
       },
@@ -296,7 +325,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2020',
         starred: false,
         technologies: ['Python'],
-        image: '/src/assets/projects/vfs.webp',
+        image: vfsImage,
         github: 'https://github.com/KwikKill/Virtual-File-System',
       },
       {
@@ -315,7 +344,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2018-2020',
         starred: false,
         technologies: ['Java', 'HTML', 'CSS'],
-        image: '/src/assets/projects/minecraft.webp',
+        image: minecraftImage,
       },
       {
         name: {
@@ -333,7 +362,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2018',
         starred: false,
         technologies: ['Java'],
-        image: '/src/assets/projects/mindustry.webp',
+        image: mindustryImage,
         github: 'https://github.com/KwikKill/Anuken-Mindustry',
       },
     ] as Project[],
@@ -629,7 +658,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'Matrix',
           year: '1999',
           genre: 'Science-Fiction/Action',
-          image: '/src/assets/movies/matrix.webp',
+          image: matrixImage,
           description:
             'A hacker learns about the true nature of his reality and his role in the war against its controllers.',
           whyILoveIt: 'Revolutionary visual effects and a mind-bending story.',
@@ -638,7 +667,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'Ghost in the Shell',
           year: '1995',
           genre: 'Anime/Science-Fiction',
-          image: '/src/assets/movies/ghost_in_the_shell.webp',
+          image: gitsImage,
           description: 'A cyborg policewoman and her partner hunt a mysterious hacker called the Puppet Master.',
           whyILoveIt: 'Pioneering cyberpunk animation with deep philosophical questions.',
         },
@@ -646,7 +675,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'Inception',
           year: '2010',
           genre: 'Science-Fiction/Action',
-          image: '/src/assets/movies/inception.webp',
+          image: inceptionImage,
           description:
             'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.',
           whyILoveIt: 'Complex narrative layers and mind-bending concepts.',
@@ -655,7 +684,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'Ex Machina',
           year: '2014',
           genre: 'Science-Fiction/Drama',
-          image: '/src/assets/movies/ex_machina.webp',
+          image: exMachinaImage,
           description:
             'A programmer is selected to participate in a groundbreaking experiment in synthetic intelligence by evaluating the human qualities of a highly advanced humanoid A.I.',
           whyILoveIt: 'Exploring the limits of AI and human emotions.',
@@ -664,7 +693,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'Tenet',
           year: '2020',
           genre: 'Science-Fiction/Action',
-          image: '/src/assets/movies/tenet.webp',
+          image: tenetImage,
           description:
             'Armed with only one word, "Tenet," and fighting for the survival of the world, a protagonist journeys through the twilight world of international espionage on a mission that will unfold in something beyond real time.',
           whyILoveIt: 'A complex narrative about time and perception.',
@@ -673,7 +702,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'La cité de la peur',
           year: '1994',
           genre: 'Comedy',
-          image: '/src/assets/movies/la_cité_de_la_peur.webp',
+          image: lcdlpImage,
           description: 'A French comedy film that parodies horror and suspense films.',
           whyILoveIt: 'A classic of French humor with references to pop culture.',
         },
@@ -683,7 +712,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'Matrix',
           year: '1999',
           genre: 'Science-Fiction/Action',
-          image: '/src/assets/movies/matrix.webp',
+          image: matrixImage,
           description:
             "Un pirate informatique découvre, par l'intermédiaire de mystérieux rebelles, la véritable nature de sa réalité et son rôle dans la guerre contre ses contrôleurs.",
           whyILoveIt: "Effets visuels révolutionnaires et une histoire qui défie l'esprit.",
@@ -692,7 +721,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'Ghost in the Shell',
           year: '1995',
           genre: 'Anime/Science-Fiction',
-          image: '/src/assets/movies/ghost_in_the_shell.webp',
+          image: gitsImage,
           description: 'Une policière cyborg et son partenaire traquent un mystérieux hacker appelé le Puppet Master.',
           whyILoveIt: 'Animation cyberpunk pionnière avec des questions philosophiques profondes.',
         },
@@ -700,7 +729,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'Inception',
           year: '2010',
           genre: 'Science-Fiction/Action',
-          image: '/src/assets/movies/inception.webp',
+          image: inceptionImage,
           description:
             "Un voleur qui dérobe des secrets d'entreprises grâce à une technologie de partage de rêves se voit confier la tâche inverse : implanter une idée dans l'esprit d'un P.D.G.",
           whyILoveIt: "Couches narratives complexes et concepts qui défient l'esprit.",
@@ -709,7 +738,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'Ex Machina',
           year: '2014',
           genre: 'Science-Fiction/Drama',
-          image: '/src/assets/movies/ex_machina.webp',
+          image: exMachinaImage,
           description:
             "Un programmeur est sélectionné pour participer à une expérience révolutionnaire dans le domaine de l'intelligence artificielle en évaluant les capacités et la conscience d'un robot humanoïde.",
           whyILoveIt: "Explorer les limites de l'IA et des émotions humaines.",
@@ -718,7 +747,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'Tenet',
           year: '2020',
           genre: 'Science-Fiction/Action',
-          image: '/src/assets/movies/tenet.webp',
+          image: tenetImage,
           description:
             "Muni d'un seul mot, \"Tenet,\" et décidé à se battre pour sauver le monde, un homme sillonne l'univers crépusculaire de l'espionnage international.",
           whyILoveIt: 'Un récit complexe sur le temps et la perception.',
@@ -727,7 +756,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'La cité de la peur',
           year: '1994',
           genre: 'Comédie',
-          image: '/src/assets/movies/la_cité_de_la_peur.webp',
+          image: lcdlpImage,
           description: "Un film comique français qui parodie les films d'horreur et de suspense.",
           whyILoveIt: "Un classique de l'humour français avec des références à la culture pop.",
         },
@@ -738,7 +767,7 @@ export const useProjectsStore = defineStore('projects', {
         {
           title: 'Cyberpunk 2077',
           year: '2020',
-          image: '/src/assets/games/cyberpunk_2077.webp',
+          image: cp2077Image,
           description:
             'An open-world action-adventure game set in Night City, a metropolis obsessed with power, glamour, and body modification.',
           whyILoveIt: 'Immersive cyberpunk world with incredible attention to detail.',
@@ -746,7 +775,7 @@ export const useProjectsStore = defineStore('projects', {
         {
           title: 'The Witcher 3: Wild Hunt',
           year: '2015',
-          image: '/src/assets/games/the_witcher_3.webp',
+          image: thewitcherImage,
           description:
             'An open-world RPG focused on storytelling, set in a visually stunning fantasy universe filled with meaningful choices and impactful consequences.',
           whyILoveIt: 'Rich storytelling and beautifully designed world.',
@@ -754,14 +783,14 @@ export const useProjectsStore = defineStore('projects', {
         {
           title: 'A plague tale: Innocence/Requiem',
           year: '2019/2022',
-          image: '/src/assets/games/a_plague_tale.webp',
+          image: aptImage,
           description: 'An action-adventure narrative game following two children in a plague-ridden medieval France.',
           whyILoveIt: 'Emotive story and immersive atmosphere.',
         },
         {
           title: "Baldur's Gate 3",
           year: '2023',
-          image: '/src/assets/games/baldurs_gate_3.webp',
+          image: baldurImage,
           description:
             'A turn-based RPG based on the Dungeons & Dragons universe, offering freedom of exploration and choice.',
           whyILoveIt: 'Extremely immersive with meaningful choices and a rich world.',
@@ -769,14 +798,14 @@ export const useProjectsStore = defineStore('projects', {
         {
           title: 'Little Miss Fortune',
           year: '2019',
-          image: '/src/assets/games/little_miss_fortune.webp',
+          image: lmfImage,
           description: 'A narrative adventure game where you follow a little girl as she tries to find a treasure.',
           whyILoveIt: 'Disturbing story and unique aesthetic.',
         },
         {
           title: 'Hollow Knight',
           year: '2017',
-          image: '/src/assets/games/hollow_knight.webp',
+          image: hollowknightImage,
           description: 'A challenging 2D action-adventure game set in a vast interconnected world.',
           whyILoveIt: 'Atmospheric world-building and precise, responsive controls.',
         },
@@ -785,7 +814,7 @@ export const useProjectsStore = defineStore('projects', {
         {
           title: 'Cyberpunk 2077',
           year: '2020',
-          image: '/src/assets/games/cyberpunk_2077.webp',
+          image: cp2077Image,
           description:
             "Un jeu d'action-aventure en monde ouvert situé à Night City, une mégalopole obsédée par le pouvoir, le glamour et la modification corporelle.",
           whyILoveIt: 'Monde cyberpunk immersif avec une attention incroyable aux détails.',
@@ -793,7 +822,7 @@ export const useProjectsStore = defineStore('projects', {
         {
           title: 'The Witcher 3: Wild Hunt',
           year: '2015',
-          image: '/src/assets/games/the_witcher_3.webp',
+          image: thewitcherImage,
           description:
             "Un RPG en monde ouvert axé sur l'histoire, situé dans un univers fantastique visuellement époustouflant, rempli de choix significatifs et de conséquences impactantes.",
           whyILoveIt: 'Narration riche et monde magnifiquement conçu.',
@@ -801,7 +830,7 @@ export const useProjectsStore = defineStore('projects', {
         {
           title: 'A plague tale: Innocence/Requiem',
           year: '2019/2022',
-          image: '/src/assets/games/a_plague_tale.webp',
+          image: aptImage,
           description:
             "Un jeu d'action-aventure narratif qui suit deux enfants dans une France médiévale ravagée par la peste.",
           whyILoveIt: "L'histoire émotive et l'atmosphère immersive.",
@@ -809,7 +838,7 @@ export const useProjectsStore = defineStore('projects', {
         {
           title: "Baldur's Gate 3",
           year: '2023',
-          image: '/src/assets/games/baldurs_gate_3.webp',
+          image: baldurImage,
           description:
             "Un RPG au tour par tour basé sur l'univers de Donjons et Dragons, offrant une liberté d'exploration et de choix.",
           whyILoveIt: 'Extrêmement immersif avec des choix significatifs et un monde riche.',
@@ -817,14 +846,14 @@ export const useProjectsStore = defineStore('projects', {
         {
           title: 'Little Miss Fortune',
           year: '2019',
-          image: '/src/assets/games/little_miss_fortune.webp',
+          image: lmfImage,
           description: "Un jeu d'aventure narratif où vous suivez une petite fille qui cherche à trouver un trésor.",
           whyILoveIt: "L'histoire dérangeante et l'esthétique unique.",
         },
         {
           title: 'Hollow Knight',
           year: '2017',
-          image: '/src/assets/games/hollow_knight.webp',
+          image: hollowknightImage,
           description: "Un jeu d'action-aventure 2D exigeant situé dans un monde vaste et interconnecté.",
           whyILoveIt: 'Construction atmosphérique du monde et contrôles précis et réactifs.',
         },
