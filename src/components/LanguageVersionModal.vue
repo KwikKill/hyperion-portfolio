@@ -5,7 +5,7 @@
       class="fixed inset-0 overflow-hidden bg-gradient-to-br"
       :class="{
         'from-indigo-900 via-gray-900 to-black': version !== 'cyberpunk',
-        'from-yellow-900 via-gray-800 to-black': version === 'cyberpunk',
+        'from-theme-foreground via-yellow-900 to-black': version === 'cyberpunk',
       }"
     >
       <div class="absolute inset-0 opacity-20">
