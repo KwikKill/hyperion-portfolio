@@ -11,7 +11,7 @@
           :key="project.name[language ?? 'en']"
           class="relative flex flex-col overflow-hidden rounded-lg bg-white shadow-lg transition-transform hover:scale-105 dark:bg-gray-800"
         >
-          <img :src="project.image" :alt="project.localizedName" class="h-48 w-full object-cover"/>
+          <img :src="project.images[0]" :alt="project.localizedName" class="h-48 w-full object-cover"/>
           <div
             v-if="project.starred"
             class="absolute left-0 top-0 rounded-br-lg bg-yellow-500 px-2 py-1 text-sm font-bold text-white"

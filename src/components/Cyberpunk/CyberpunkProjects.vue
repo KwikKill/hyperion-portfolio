@@ -270,12 +270,79 @@
 
         <template #body>
           <div class="flex flex-col gap-6 md:flex-col">
-            <div class="">
-              <img
-                :src="selectedProject.image"
-                :alt="selectedProject.localizedName"
-                class="h-auto w-full rounded-md border-2 border-theme-foreground/70 object-cover"
-              />
+            <!-- Image Gallery -->
+            <div class="relative">
+              <!-- Main Image with transition -->
+              <div class="relative overflow-hidden rounded-md border-2 border-theme-foreground/70">
+                <transition name="fade" mode="out-in">
+                  <img
+                    :key="currentImageIndex"
+                    :src="selectedProject.images[currentImageIndex]"
+                    :alt="`${selectedProject.localizedName} - Image ${currentImageIndex + 1}`"
+                    class="h-auto w-full object-cover"
+                  />
+                </transition>
+
+                <!-- Navigation Arrows -->
+                <div class="absolute inset-0 flex items-center justify-between px-2">
+                  <!-- Previous Button -->
+                  <button
+                    v-if="selectedProject.images.length > 1"
+                    type="button"
+                    class="flex size-10 items-center justify-center rounded-full bg-black/50 text-theme-foreground transition-colors hover:bg-theme-foreground/20"
+                    aria-label="Previous image"
+                    @click.stop="prevImage"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                  </button>
+
+                  <!-- Spacer for single image -->
+                  <div v-else class="w-10"/>
+
+                  <!-- Next Button -->
+                  <button
+                    v-if="selectedProject.images.length > 1"
+                    type="button"
+                    class="flex size-10 items-center justify-center rounded-full bg-black/50 text-theme-foreground transition-colors hover:bg-theme-foreground/20"
+                    aria-label="Next image"
+                    @click.stop="nextImage"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </button>
+
+                  <!-- Spacer for single image -->
+                  <div v-else class="w-10"/>
+                </div>
+              </div>
+
+              <!-- Image Indicators -->
+              <div
+                v-if="selectedProject.images.length > 1"
+                class="mt-2 flex justify-center gap-2"
+              >
+                <button
+                  v-for="(_, index) in selectedProject.images"
+                  :key="index"
+                  type="button"
+                  class="h-2 w-8 rounded-full transition-colors"
+                  :class="index === currentImageIndex ? 'bg-theme-foreground' : 'bg-gray-600 hover:bg-gray-500'"
+                  :aria-label="`Go to image ${index + 1}`"
+                  :aria-current="index === currentImageIndex ? 'true' : 'false'"
+                  @click.stop="setCurrentImage(index)"
+                />
+              </div>
+
+              <!-- Image Counter -->
+              <div
+                v-if="selectedProject.images.length > 1"
+                class="absolute bottom-7 right-3 rounded bg-black/70 px-2 py-1 text-xs text-theme-foreground"
+              >
+                {{ currentImageIndex + 1 }} / {{ selectedProject.images.length }}
+              </div>
             </div>
 
             <div class="">
@@ -408,6 +475,7 @@ const searchQuery = ref('');
 const isSearchFocused = ref(false);
 const lastSearchTime = ref(Date.now());
 const selectedTechnology = ref('');
+const currentImageIndex = ref(0);
 
 // Get all unique technologies from all projects
 const availableTechnologies = computed(() => {
@@ -460,6 +528,22 @@ function isSearchMatch(project: localizedProject) {
   return isMatch;
 }
 
+// Image navigation functions
+function nextImage() {
+  if (!selectedProject.value) return;
+  currentImageIndex.value = (currentImageIndex.value + 1) % selectedProject.value.images.length;
+}
+
+function prevImage() {
+  if (!selectedProject.value) return;
+  currentImageIndex.value = (currentImageIndex.value - 1 + selectedProject.value.images.length)
+  % selectedProject.value.images.length;
+}
+
+function setCurrentImage(index: number) {
+  currentImageIndex.value = index;
+}
+
 // Clear search
 function clearSearch() {
   searchQuery.value = '';
@@ -472,6 +556,8 @@ function clearTechnologyFilter() {
 
 function closeProject() {
   selectedProject.value = null;
+  // Reset image index when closing the modal
+  currentImageIndex.value = 0;
 }
 
 // Filter by technology from modal
@@ -487,7 +573,14 @@ watch(searchQuery, () => {
 
 function openProject(project: localizedProject) {
   selectedProject.value = project;
+  // Reset image index when opening a new project
+  currentImageIndex.value = 0;
 }
+
+// Reset current image index when selected project changes
+watch(selectedProject, () => {
+  currentImageIndex.value = 0;
+});
 </script>
 
 <style scoped>
@@ -577,8 +670,18 @@ function openProject(project: localizedProject) {
   filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.5));
 }
 
-@keyframes star-pulse {
+/* Image transition effects */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
 
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@keyframes star-pulse {
   0%,
   100% {
     transform: scale(1);

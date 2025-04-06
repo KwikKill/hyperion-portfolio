@@ -56,7 +56,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2025',
         starred: true,
         technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Pinia', 'Docker', 'PostgreSQL'],
-        image: portfolioImage,
+        images: [portfolioImage],
         link: '#',
         github: 'https://github.com/KwikKill/hyperion-portfolio',
       },
@@ -76,7 +76,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2023-2025',
         starred: true,
         technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Pinia', 'JavaScript', 'TypeScript', 'Django', 'DjangoREST', 'Docker', 'Nginx', 'Postgres'],
-        image: insalanImage,
+        images: [insalanImage],
         link: 'https://insalan.fr',
         github: 'https://github.com/InsaLan/infra-insalan.fr',
       },
@@ -96,7 +96,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2025',
         starred: false,
         technologies: ['Grafana', 'Telegraf', 'InfluxDB', 'Nginx', 'Docker'],
-        image: monitImage,
+        images: [monitImage],
         github: 'https://github.com/InsaLan/infra-insalan.fr/blob/main/docker-compose-analytics.yml',
       },
       {
@@ -115,7 +115,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2021-2024',
         starred: true,
         technologies: ['Python', 'JavaScript'],
-        image: btcImage,
+        images: [btcImage],
         link: 'https://www.linkedin.com/posts/m-paris_breakthecode-challenge-codage-activity-7272240941552340992-maS5',
       },
       {
@@ -134,7 +134,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2024',
         starred: false,
         technologies: ['C++', 'SFML', 'Blender'],
-        image: infographiqueImage,
+        images: [infographiqueImage],
         link: 'https://youtu.be/HfP1gKB0Cpg',
         github: 'https://github.com/KwikKill/infographique',
       },
@@ -154,7 +154,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2024',
         starred: false,
         technologies: ['C++', 'SFML'],
-        image: bombermanImage,
+        images: [bombermanImage],
         github: 'https://github.com/KwikKill/Bomberman',
       },
       {
@@ -173,7 +173,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2023-2024',
         starred: false,
         technologies: ['Python', 'JavaScript', 'TypeScript'],
-        image: codepilotImage,
+        images: [codepilotImage],
         github: 'https://github.com/KwikKill/advent-of-codpilote',
       },
       {
@@ -192,7 +192,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2024',
         starred: false,
         technologies: ['Python', 'JavaScript', 'Docker', 'Redis', 'Postgres'],
-        image: lightshieldImage,
+        images: [lightshieldImage],
         github: 'https://github.com/KwikKill/Lightshield',
       },
       {
@@ -211,7 +211,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2024',
         starred: false,
         technologies: ['Python'],
-        image: indexerImage,
+        images: [indexerImage],
         github: 'https://github.com/KwikKill/TALEO',
       },
       {
@@ -230,7 +230,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2023-2024',
         starred: false,
         technologies: ['Python', 'LaTeX'],
-        image: revuesImage,
+        images: [revuesImage],
         link: 'https://www.irisa.fr/article/2023-09/la-creation-de-revues-numeriques-des-registres-des-soldats-de-lancien-regime-un',
       },
       {
@@ -249,7 +249,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2023',
         starred: false,
         technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker'],
-        image: pshImage,
+        images: [pshImage],
         link: 'https://psh.blaisot.org/',
       },
       {
@@ -268,7 +268,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2023',
         starred: false,
         technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker'],
-        image: rankupwebImage,
+        images: [rankupwebImage],
         link: 'https://rankup.somi.blaisot.org/',
       },
       {
@@ -287,7 +287,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2023',
         starred: false,
         technologies: ['Docker', 'Nginx', 'Shell'],
-        image: stackImage,
+        images: [stackImage],
       },
       {
         name: {
@@ -305,7 +305,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2019-2025',
         starred: true,
         technologies: ['JavaScript', 'Discord.js', 'Docker', 'Postgres'],
-        image: rankupImage,
+        images: [rankupImage],
         link: 'https://rankup.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/Kwik_bot',
       },
@@ -325,7 +325,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2020',
         starred: false,
         technologies: ['Python'],
-        image: vfsImage,
+        images: [vfsImage],
         github: 'https://github.com/KwikKill/Virtual-File-System',
       },
       {
@@ -344,7 +344,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2018-2020',
         starred: false,
         technologies: ['Java', 'HTML', 'CSS'],
-        image: minecraftImage,
+        images: [minecraftImage],
       },
       {
         name: {
@@ -362,7 +362,7 @@ export const useProjectsStore = defineStore('projects', {
         date: '2018',
         starred: false,
         technologies: ['Java'],
-        image: mindustryImage,
+        images: [mindustryImage],
         github: 'https://github.com/KwikKill/Anuken-Mindustry',
       },
     ] as Project[],

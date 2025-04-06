@@ -14,7 +14,7 @@ export interface Project {
   date: string;
   starred: boolean;
   technologies: string[];
-  image: string;
+  images: string[];
   link?: string;
   github?: string;
 }
@@ -29,7 +29,7 @@ export interface localizedProject {
   date: string;
   starred: boolean;
   technologies: string[];
-  image: string;
+  images: string[];
   link?: string;
   github?: string;
 }
