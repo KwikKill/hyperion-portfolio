@@ -138,9 +138,11 @@
                     </a>
                   </div>
                 </div>
-                <div
+                <button
                   v-else
-                  class="glitch-container flex cursor-pointer items-center justify-center border-l border-cyan-800 py-3 pl-4"
+                  class="glitch-container flex w-full cursor-pointer items-center justify-center border-l border-cyan-800 py-3 pl-4"
+                  type="button"
+                  data-umami-event="contact clicked"
                   @click="contact_reveal = true"
                   @keydown.enter="contact_reveal = true"
                 >
@@ -152,18 +154,28 @@
                     <div class="glitch-block"/>
                     <div class="glitch-block"/>
                   </div>
-                </div>
+                </button>
               </div>
             </template>
           </CyberpunkTerminalWindow>
 
-          <div class="mt-8 flex space-x-4">
-            <a
-              href="#projects"
-              class="cyberpunk-button rounded-none bg-theme-foreground px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-yellow-600"
-            >
-              {{ isEnglish ? 'View Projects' : 'Voir les Projets' }}
-            </a>
+          <div class="flex flex-row gap-4">
+            <div class="mt-8 flex space-x-4">
+              <a
+                href="#projects"
+                class="cyberpunk-button rounded-none bg-theme-foreground px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-yellow-600"
+              >
+                {{ isEnglish ? 'View Projects' : 'Voir les Projets' }}
+              </a>
+            </div>
+            <div class="mt-8 flex space-x-4">
+              <a
+                href="#experience"
+                class="cyberpunk-button rounded-none bg-theme-foreground px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-yellow-600"
+              >
+                {{ isEnglish ? 'View past experiences' : 'Voir les expériences passées' }}
+              </a>
+            </div>
           </div>
         </div>
 

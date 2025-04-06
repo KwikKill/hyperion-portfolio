@@ -173,12 +173,14 @@
             }"
           >
             <!-- Project items remain the same -->
-            <div
+            <button
               v-for="project in filteredProjects"
               :id="'project-' + project.file[language ?? 'en']"
               :key="project.localizedName"
+              type="button"
               class="group flex cursor-pointer flex-col items-center"
               :class="{ 'search-match': isSearchMatch(project) }"
+              :data-umami-event="project.localizedName"
               @click="openProject(project)"
               @keydown.enter="openProject(project)"
             >
@@ -216,7 +218,7 @@
                   {{ project.date }}
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         </template>
       </CyberpunkTerminalWindow>

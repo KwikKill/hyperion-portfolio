@@ -67,6 +67,7 @@
         <button
           class="rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
           type="button"
+          data-umami-event="contact clicked"
           @click="contact_revealed = true"
         >
           {{ isEnglish ? 'Reveal Contact' : 'Révéler mon contact' }}
