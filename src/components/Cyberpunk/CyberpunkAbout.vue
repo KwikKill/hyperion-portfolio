@@ -1,24 +1,24 @@
 <template>
-  <section id="about" class="cyberpunk-terminal py-20 bg-black relative min-h-screen">
+  <section id="about" class="cyberpunk-terminal relative min-h-screen bg-black py-20">
     <!-- Cyberpunk background with grid -->
     <div class="absolute inset-0 z-0">
       <!-- Circuit board pattern background -->
-      <div class="circuit-board-bg h-full"></div>
+      <div class="circuit-board-bg h-full"/>
       <!-- Overlay with radial gradient -->
-      <div class="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/90"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/90"/>
       <!-- Animated scan lines -->
-      <div class="absolute inset-0 scanlines opacity-20"></div>
+      <div class="scanlines absolute inset-0 opacity-20"/>
     </div>
 
-    <div class="container mx-auto px-4 relative">
+    <div class="container relative mx-auto px-4">
       <!-- Terminal header -->
-      <CyberpunkTerminalWindow class="mb-8" :showIcon="false" :noBody="true">
+      <CyberpunkTerminalWindow class="mb-8" :show-icon="false" :no-body="true">
         <template #title>
           {{ isEnglish ? 'HYPERION v1.0 - USER PROFILE' : 'HYPERION v1.0 - PROFIL UTILISATEUR' }}
         </template>
       </CyberpunkTerminalWindow>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
         <!-- About Me Terminal -->
         <CyberpunkTerminalWindow>
           <template #title>
@@ -28,10 +28,10 @@
           <template #body>
             <div class="mb-4">
               <span class="text-cyan-400">kwikkill@hyperion:~$</span>
-              <span class="text-theme-foreground ml-2">{{ isEnglish ? 'cat profile.txt' : 'cat profil.txt' }}</span>
+              <span class="ml-2 text-theme-foreground">{{ isEnglish ? 'cat profile.txt' : 'cat profil.txt' }}</span>
             </div>
 
-            <div class="text-green-400 mb-4 leading-relaxed">
+            <div class="mb-4 leading-relaxed text-green-400">
               <template v-if="isEnglish">
                 I'm a computer science student from France, passionate about web development and software engineering. I
                 love creating innovative solutions to complex problems and continuously learning new technologies.
@@ -44,33 +44,33 @@
 
             <div class="mb-4">
               <span class="text-cyan-400">kwikkill@hyperion:~$</span>
-              <span class="text-theme-foreground ml-2">{{ isEnglish ? 'cat interests.txt' : 'cat interets.txt' }}</span>
+              <span class="ml-2 text-theme-foreground">{{ isEnglish ? 'cat interests.txt' : 'cat interets.txt' }}</span>
             </div>
 
-            <div class="text-green-400 leading-relaxed mb-4 ">
+            <div class="mb-4 leading-relaxed text-green-400 ">
               <template v-if="isEnglish">
                 When I'm not coding, you can find me exploring new technologies, or expanding my knowledge in various
                 computer science domains.
-                <br />
+                <br/>
                 Apart from these subjects, I enjoy video games, films and books (mainly science fiction), board games,
                 role-playing games and Greek mythology.
-                <br />
+                <br/>
                 I also played table tennis in a club for 5 years.
               </template>
               <template v-else>
                 Quand je ne code pas, vous pouvez me trouver en train d'explorer de nouvelles technologies, ou d'élargir
                 mes connaissances dans divers domaines de l'informatique.
-                <br />
+                <br/>
                 En dehors de ces sujets, j'apprécie les jeux vidéos, les films et les livres (principalement la science
                 fiction), les jeux de société, les jeux de rôles et la mythologie Grecque.
-                <br />
+                <br/>
                 J'ai également fait 5 ans de tennis de table en club.
               </template>
             </div>
 
             <div class="mb-4">
               <span class="text-cyan-400">kwikkill@hyperion:~$</span>
-              <span class="text-theme-foreground ml-2">
+              <span class="ml-2 text-theme-foreground">
                 {{
                   isEnglish
                     ? 'cat associations.txt'
@@ -79,7 +79,7 @@
               </span>
             </div>
 
-            <div class="text-green-400 leading-relaxed mb-4">
+            <div class="mb-4 leading-relaxed text-green-400">
               <div v-if="isEnglish">
                 <p>
                   Being actively involved in associations has been a significant part of my life. I have been an active
@@ -88,7 +88,7 @@
                   skills in
                   project management, teamwork, and event organization.
                 </p>
-                <ul class="list-disc list-inside ml-4 mt-4">
+                <ul class="ml-4 mt-4 list-inside list-disc">
                   <li>
                     Development Manager INSALAN (2023-2025)
                   </li>
@@ -117,7 +117,7 @@
                   travail
                   d'équipe et en organisation d'événements.
                 </p>
-                <ul class="list-disc list-inside ml-4 mt-4">
+                <ul class="ml-4 mt-4 list-inside list-disc">
                   <li>
                     Responsable Développement INSALAN (2023-2025)
                   </li>
@@ -151,38 +151,47 @@
           <template #body>
             <div class="mb-4">
               <span class="text-cyan-400">kwikkill@hyperion:~$</span>
-              <span class="text-theme-foreground ml-2">{{ isEnglish ? './list_skills.sh' : './lister_competences.sh'
-                }}</span>
+              <span class="ml-2 text-theme-foreground">{{ isEnglish ? './list_skills.sh' : './lister_competences.sh'
+              }}</span>
             </div>
 
             <div class="space-y-4">
               <div v-for="(category, index) in skills" :key="index">
                 <!-- Foldable category header -->
                 <div
-                  class="text-theme-foreground uppercase mb-2 flex items-center cursor-pointer hover:bg-gray-900/30 p-1"
-                  @click="toggleCategory(index)">
-                  <span class="text-cyan-400 mr-2 transition-transform duration-200"
-                    :class="{ 'rotate-90': expandedCategories[index] }">
+                  class="mb-2 flex cursor-pointer items-center p-1 uppercase text-theme-foreground hover:bg-gray-900/30"
+                  @click="toggleCategory(index)"
+                  @keydown.enter="toggleCategory(index)"
+                >
+                  <span
+                    class="mr-2 text-cyan-400 transition-transform duration-200"
+                    :class="{ 'rotate-90': expandedCategories[index] }"
+                  >
                     ▶
                   </span>
                   {{ category.name }}
                 </div>
 
                 <!-- Skills list (collapsible) -->
-                <div v-if="expandedCategories[index]"
-                  class="ml-6 space-y-1 transition-all duration-300 overflow-hidden">
-                  <div v-for="(skill, skillIndex) in category.skills" :key="skillIndex"
-                    class="skill-item flex items-center">
-                    <span class="text-cyan-400 mr-2">></span>
+                <div
+                  v-if="expandedCategories[index]"
+                  class="ml-6 space-y-1 overflow-hidden transition-all duration-300"
+                >
+                  <div
+                    v-for="(skill, skillIndex) in category.skills"
+                    :key="skillIndex"
+                    class="skill-item flex items-center"
+                  >
+                    <span class="mr-2 text-cyan-400">></span>
                     <span class="text-green-400">{{ skill }}</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="mt-4 text-green-400 pt-4 border-t border-theme-foreground/30">
+            <div class="mt-4 border-t border-theme-foreground/30 pt-4 text-green-400">
               <div class="flex items-center">
-                <span class="text-cyan-400 mr-2">kwikkill@hyperion:~$</span>
+                <span class="mr-2 text-cyan-400">kwikkill@hyperion:~$</span>
                 <span class="text-theme-foreground">
                   {{
                     isEnglish
@@ -206,30 +215,31 @@
   </section>
 </template>
 
-<script setup>
-import { computed, ref, onMounted } from 'vue'
-import { usePreferencesStore } from '../../stores/preferences'
-import { useProjectsStore } from '../../stores/projects'
-import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue'
+<script setup lang="ts">
+import { computed, onMounted, ref } from 'vue';
 
-const projectsStore = useProjectsStore()
+import { usePreferencesStore } from '../../stores/preferences';
+import { useProjectsStore } from '../../stores/projects';
+import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
-const skills = computed(() => projectsStore.getLocalizedSkills)
-const preferencesStore = usePreferencesStore()
-const isEnglish = computed(() => preferencesStore.isEnglish)
+const projectsStore = useProjectsStore();
+
+const skills = computed(() => projectsStore.getLocalizedSkills);
+const preferencesStore = usePreferencesStore();
+const isEnglish = computed(() => preferencesStore.isEnglish);
 
 // Track which categories are expanded
-const expandedCategories = ref({})
+const expandedCategories = ref<Record<string | number, boolean>>({});
 
 // Toggle category expansion
-function toggleCategory(index) {
-  expandedCategories.value[index] = !expandedCategories.value[index]
+function toggleCategory(index: string | number) {
+  expandedCategories.value[index] = !expandedCategories.value[index];
 }
 
 // Initialize with first category expanded
 onMounted(() => {
-  expandedCategories.value[0] = true
-})
+  expandedCategories.value[0] = true;
+});
 </script>
 
 <style scoped>

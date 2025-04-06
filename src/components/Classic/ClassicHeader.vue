@@ -1,17 +1,21 @@
 <template>
-  <header class="bg-white dark:bg-gray-800 shadow-md py-4">
-    <div class="container mx-auto px-4 flex justify-between items-center">
+  <header class="bg-white py-4 shadow-md dark:bg-gray-800">
+    <div class="container mx-auto flex items-center justify-between px-4">
       <div
-        class="text-2xl font-bold text-gray-900 dark:text-white cursor-pointer hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-        @click="preferencesStore.resetPreferences" @keydown.enter="preferencesStore.resetPreferences">
+        class="cursor-pointer text-2xl font-bold text-gray-900 transition-colors hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
+        @click="preferencesStore.resetPreferences"
+        @keydown.enter="preferencesStore.resetPreferences"
+      >
         KwikKill - Portfolio
       </div>
 
       <nav>
-        <ul class="flex space-x-6">
+        <ul class="hidden space-x-6 md:flex">
           <li v-for="item in navLinks" :key="item.href">
-            <a :href="item.href"
-              class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            <a
+              :href="item.href"
+              class="text-gray-700 transition-colors hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+            >
               {{ item.name }}
             </a>
           </li>
@@ -21,13 +25,14 @@
   </header>
 </template>
 
-<script setup>
-import { computed } from 'vue'
-import { usePreferencesStore } from '../../stores/preferences'
+<script setup lang="ts">
+import { computed } from 'vue';
 
-const preferencesStore = usePreferencesStore()
+import { usePreferencesStore } from '../../stores/preferences';
 
-const isEnglish = computed(() => preferencesStore.isEnglish)
+const preferencesStore = usePreferencesStore();
+
+const isEnglish = computed(() => preferencesStore.isEnglish);
 
 // Find the navigation links array and add the Experience link
 
@@ -37,5 +42,5 @@ const navLinks = computed(() => [
   { name: isEnglish.value ? 'Experience' : 'Expérience', href: '#experience' },
   { name: isEnglish.value ? 'Projects' : 'Projets', href: '#projects' },
   { name: isEnglish.value ? 'Interests' : 'Intérêts', href: '#interests' },
-])
+]);
 </script>

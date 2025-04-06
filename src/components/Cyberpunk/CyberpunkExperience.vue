@@ -1,22 +1,21 @@
 <template>
-  <section id="experience" class="cyberpunk-terminal py-20 relative min-h-screen">
+  <section id="experience" class="cyberpunk-terminal relative min-h-screen py-20">
     <!-- Unique cyberpunk background - digital city skyline with data streams -->
     <div class="absolute inset-0 z-0 overflow-hidden">
-
-      <div class="digital-city h-1/2 bg-bottom top-0 rotate-180" />
-      <div class="digital-city h-1/2 bg-top bottom-0" />
+      <div class="digital-city top-0 h-1/2 rotate-180 bg-bottom"/>
+      <div class="digital-city bottom-0 h-1/2 bg-top"/>
 
       <!--div class="bg-black/30 w-full h-full absolute bottom-0 left-0 right-0 z-10"/-->
 
       <!-- Data stream overlay -->
-      <div class="data-streams"></div>
+      <div class="data-streams"/>
       <!-- Dark gradient overlay for readability -->
       <!--div class="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-black/90"></div-->
     </div>
 
-    <div class="container mx-auto px-4 z-10 relative flex flex-col gap-8">
+    <div class="container relative z-10 mx-auto flex flex-col gap-8 px-4">
       <!-- Section header -->
-      <CyberpunkTerminalWindow :noBody="true" :showIcon="false">
+      <CyberpunkTerminalWindow :no-body="true" :show-icon="false">
         <template #title>
           {{ isEnglish ? 'HYPERION v1.0 - CAREER PATH' : 'HYPERION v1.0 - PARCOURS PROFESSIONNEL' }}
         </template>
@@ -26,23 +25,26 @@
       <div class="relative">
         <!-- Vertical timeline line -->
         <div
-          class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-cyan-400 via-theme-foreground to-theme-foreground">
-        </div>
+          class="absolute left-1/2 h-full w-1 -translate-x-1/2 bg-gradient-to-b from-cyan-400 via-theme-foreground to-theme-foreground"
+        />
 
         <div class="space-y-24">
           <div v-for="(experience, index) in experiences" :key="index" class="relative">
             <!-- Timeline node -->
             <div
-              class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-black border-2 border-cyan-400 z-20"
-              style="top: -12px;">
-              <div class="absolute inset-1 rounded-full bg-cyan-400 animate-pulse"></div>
+              class="absolute left-1/2 z-20 size-6 -translate-x-1/2 rounded-full border-2 border-cyan-400 bg-black"
+              style="top: -12px;"
+            >
+              <div class="absolute inset-1 animate-pulse rounded-full bg-cyan-400"/>
             </div>
 
             <!-- Experience card -->
-            <div class="relative z-10 flex flex-col md:flex-row items-center pt-6"
-              :class="index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'">
+            <div
+              class="relative z-10 flex flex-col items-center pt-6 md:flex-row"
+              :class="index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'"
+            >
               <!-- Date badge -->
-              <CyberpunkTerminalWindow :noBody="true" :noButtons="true" :showIcon="false" class="md:w-2/6 2xl:w-1/4">
+              <CyberpunkTerminalWindow :no-body="true" :no-buttons="true" :show-icon="false" class="md:w-2/6 2xl:w-1/4">
                 <template #title>
                   {{ experience.localizedPeriod }}
                 </template>
@@ -50,28 +52,44 @@
 
               <!-- Content card -->
               <div
-                class="cyberpunk-terminal w-full md:mt-0 mt-4 md:w-full bg-black/95 border-2 border-theme-foreground rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:border-cyan-400 hover:bg-black"
-                :class="index % 2 === 0 ? 'md:ml-8' : 'md:mr-8'">
+                class="cyberpunk-terminal mt-4 w-full overflow-hidden rounded-lg border-2 border-theme-foreground bg-black/95 transition-all duration-300 hover:scale-[1.02] hover:border-cyan-400 hover:bg-black md:mt-0 md:w-full"
+                :class="index % 2 === 0 ? 'md:ml-8' : 'md:mr-8'"
+              >
                 <!-- Header -->
-                <div class="bg-gradient-to-r from-black to-gray-900 p-4 border-b border-theme-foreground/30">
+                <div class="border-b border-theme-foreground/30 bg-gradient-to-r from-black to-gray-900 p-4">
                   <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                    <h3 class="text-xl font-bold text-theme-foreground cyberpunk-text-glow">
+                    <h3 class="cyberpunk-text-glow text-xl font-bold text-theme-foreground">
                       {{ experience.localizedTitle }}
                     </h3>
-                    <div class="text-cyan-400 font-mono mt-2 md:mt-0">{{ experience.company }}</div>
+                    <div class="font-mono mt-2 text-cyan-400 md:mt-0">
+                      {{ experience.company }}
+                    </div>
                   </div>
                   <div class="mt-2 text-theme-foreground/70">
                     <span class="inline-flex items-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-cyan-400" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="mr-1 size-4 text-cyan-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        />
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
                       </svg>
-                      <span class="text-cyan-400 mr-2">[</span>
+                      <span class="mr-2 text-cyan-400">[</span>
                       {{ experience.localizedLocation }}
-                      <span class="text-cyan-400 ml-2">]</span>
+                      <span class="ml-2 text-cyan-400">]</span>
                     </span>
                   </div>
                 </div>
@@ -80,22 +98,25 @@
                 <div class="p-6">
                   <!-- Description -->
                   <div class="mb-6">
-                    <h4 class="text-cyan-400 mb-2 font-mono text-sm uppercase tracking-wider">
+                    <h4 class="font-mono mb-2 text-sm uppercase tracking-wider text-cyan-400">
                       {{ isEnglish ? 'Mission' : 'Mission' }}
                     </h4>
-                    <p class="text-theme-foreground leading-relaxed">
+                    <p class="leading-relaxed text-theme-foreground">
                       {{ experience.localizedDescription }}
                     </p>
                   </div>
 
                   <!-- Technologies -->
                   <div class="mb-6">
-                    <h4 class="text-cyan-400 mb-2 font-mono text-sm uppercase tracking-wider">
+                    <h4 class="font-mono mb-2 text-sm uppercase tracking-wider text-cyan-400">
                       {{ isEnglish ? 'Technologies' : 'Technologies' }}
                     </h4>
                     <div class="flex flex-wrap gap-2">
-                      <span v-for="(tech, techIndex) in experience.technologies" :key="techIndex"
-                        class="px-3 py-1 border border-theme-foreground/50 bg-black/30 text-theme-foreground text-sm rounded-sm hover:bg-cyan-400/10 transition-colors">
+                      <span
+                        v-for="(tech, techIndex) in experience.technologies"
+                        :key="techIndex"
+                        class="rounded-sm border border-theme-foreground/50 bg-black/30 px-3 py-1 text-sm text-theme-foreground transition-colors hover:bg-cyan-400/10"
+                      >
                         {{ tech }}
                       </span>
                     </div>
@@ -103,13 +124,16 @@
 
                   <!-- Achievements -->
                   <div v-if="experience.localizedAchievements.length">
-                    <h4 class="text-cyan-400 mb-2 font-mono text-sm uppercase tracking-wider">
+                    <h4 class="font-mono mb-2 text-sm uppercase tracking-wider text-cyan-400">
                       {{ isEnglish ? 'Key Achievements' : 'Réalisations Clés' }}
                     </h4>
                     <ul class="space-y-2 text-theme-foreground">
-                      <li v-for="(achievement, achievementIndex) in experience.localizedAchievements"
-                        :key="achievementIndex" class="flex items-start">
-                        <span class="text-green-400 mr-2">></span>
+                      <li
+                        v-for="(achievement, achievementIndex) in experience.localizedAchievements"
+                        :key="achievementIndex"
+                        class="flex items-start"
+                      >
+                        <span class="mr-2 text-green-400">></span>
                         <span>{{ achievement }}</span>
                       </li>
                     </ul>
@@ -124,17 +148,18 @@
   </section>
 </template>
 
-<script setup>
-import { computed } from 'vue'
-import { usePreferencesStore } from '../../stores/preferences'
-import { useProjectsStore } from '../../stores/projects'
-import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue'
+<script setup lang="ts">
+import { computed } from 'vue';
 
-const preferencesStore = usePreferencesStore()
-const projectsStore = useProjectsStore()
+import { usePreferencesStore } from '../../stores/preferences';
+import { useProjectsStore } from '../../stores/projects';
+import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
-const isEnglish = computed(() => preferencesStore.isEnglish)
-const experiences = computed(() => projectsStore.getLocalizedExperiences)
+const preferencesStore = usePreferencesStore();
+const projectsStore = useProjectsStore();
+
+const isEnglish = computed(() => preferencesStore.isEnglish);
+const experiences = computed(() => projectsStore.getLocalizedExperiences);
 </script>
 
 <style scoped>

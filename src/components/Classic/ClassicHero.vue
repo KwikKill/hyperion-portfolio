@@ -1,14 +1,14 @@
 <template>
-  <section id="home" class="py-20 bg-gray-50 dark:bg-gray-900">
+  <section id="home" class="bg-gray-50 py-20 dark:bg-gray-900">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div class="mb-10 md:mb-0">
-          <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+          <h1 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl dark:text-white">
             {{ isEnglish ? 'Hi, I\'m Gabriel Blaisot' : 'Bonjour, je suis Gabriel Blaisot' }}
           </h1>
-          <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-blue-600 dark:text-blue-400">
+          <h2 class="mb-6 text-2xl font-semibold text-blue-600 md:text-3xl dark:text-blue-400">
             {{ isEnglish ? 'Computer Science Student' : 'Étudiant en Informatique' }}
-            <br />
+            <br/>
             INSA Rennes
           </h2>
           <div class="flex flex-col gap-4">
@@ -22,23 +22,27 @@
                 vidéo, la technologie et apprendre de nouvelles choses. Également passionné par la mythologie grecque.
               </template>
             </p>
-            <ClassicContact class="shadow-lg rounded-lg" />
-            <div class="flex gap-4 items-center justify-center md:justify-start">
-              <a href="#projects"
-                class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors">
+            <ClassicContact class="rounded-lg shadow-lg"/>
+            <div class="flex items-center justify-center gap-4 md:justify-start">
+              <a
+                href="#projects"
+                class="rounded-md bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
+              >
                 {{ isEnglish ? 'View Projects' : 'Voir les Projets' }}
               </a>
-              <a href="#interests"
-                class="px-6 py-3 border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-md transition-colors">
+              <a
+                href="#interests"
+                class="rounded-md border border-blue-600 px-6 py-3 text-blue-600 transition-colors hover:bg-blue-50 dark:hover:bg-blue-900/30"
+              >
                 {{ isEnglish ? 'My Interests' : 'Mes Intérêts' }}
               </a>
             </div>
           </div>
         </div>
         <div class="h-full">
-          <div class="flex flex-col items-center h-full">
-            <div class="md:w-3/4 w-full h-full">
-              <ClassicTerminal />
+          <div class="flex h-full flex-col items-center">
+            <div class="size-full md:w-3/4">
+              <ClassicTerminal/>
             </div>
           </div>
         </div>
@@ -47,12 +51,13 @@
   </section>
 </template>
 
-<script setup>
-import { computed } from 'vue'
-import { usePreferencesStore } from '../../stores/preferences'
-import ClassicTerminal from './ClassicTerminal.vue'
-import ClassicContact from './ClassicContact.vue'
+<script setup lang="ts">
+import { computed } from 'vue';
 
-const preferencesStore = usePreferencesStore()
-const isEnglish = computed(() => preferencesStore.isEnglish)
+import { usePreferencesStore } from '../../stores/preferences';
+import ClassicContact from './ClassicContact.vue';
+import ClassicTerminal from './ClassicTerminal.vue';
+
+const preferencesStore = usePreferencesStore();
+const isEnglish = computed(() => preferencesStore.isEnglish);
 </script>

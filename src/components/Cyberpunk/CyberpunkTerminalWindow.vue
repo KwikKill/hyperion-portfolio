@@ -1,57 +1,91 @@
 <template>
-  <div class="cyberpunk-terminal border-2 border-theme-foreground/70 rounded-md bg-black/95 transition-all duration-300"
+  <div
+    class="cyberpunk-terminal rounded-md border-2 border-theme-foreground/70 bg-black/95 transition-all duration-300"
     :class="{
       'p-2': !noTitle,
-      'fixed inset-0 z-50 terminal-fullscreen': isFullscreen,
-      'relative': !isFullscreen,
-      'border-2 border-dashed border-theme-foreground/50 rounded-md cursor-pointer bg-black/0 transition-all': isClosed
-    }" :style="terminalStyle">
-    <div :class="{
-      invisible: isClosed,
-    }">
+      'terminal-fullscreen fixed inset-0 z-50': isFullscreen,
+      relative: !isFullscreen,
+      'cursor-pointer rounded-md border-2 border-dashed border-theme-foreground/50 bg-black/0 transition-all': isClosed,
+    }"
+    :style="terminalStyle"
+  >
+    <div
+      :class="{
+        invisible: isClosed,
+      }"
+    >
       <!-- Terminal header -->
-      <div class="terminal-header flex items-center" :class="{
-        'border-b border-theme-foreground/30 pb-2': !noBody,
-        'mb-0': isMinimized,
-        'justify-center text-center': noButtons,
-        'justify-between': !noButtons
-      }" v-if="!noTitle">
+      <div
+        v-if="!noTitle"
+        class="terminal-header flex items-center"
+        :class="{
+          'border-b border-theme-foreground/30 pb-2': !noBody,
+          'mb-0': isMinimized,
+          'justify-center text-center': noButtons,
+          'justify-between': !noButtons,
+        }"
+      >
         <div class="flex items-center">
-          <div v-if="showIcon" class="w-4 h-4 bg-theme-foreground mr-2"></div>
-          <div class="text-theme-foreground font-mono uppercase tracking-wider">
-            <slot name="title">Terminal Window</slot>
+          <div v-if="showIcon" class="mr-2 size-4 bg-theme-foreground"/>
+          <div class="font-mono uppercase tracking-wider text-theme-foreground">
+            <slot name="title">
+              Terminal Window
+            </slot>
           </div>
         </div>
-        <slot name="buttons" v-if="!noButtons">
+        <slot v-if="!noButtons" name="buttons">
           <div class="flex space-x-2">
             <!-- Minimize button -->
-            <div class="w-3 h-3 rounded-full cursor-pointer transition-all bg-gray-500 cursor-not-allowed" v-if="noBody"
-              title="Disabled" />
             <div
-              class="w-3 h-3 rounded-full cursor-pointer transition-all bg-green-500 hover:ring-1 hover:ring-white/50"
-              v-else @click.prevent="toggleMinimize" title="Minimize" />
+              v-if="noBody"
+              class="size-3 cursor-not-allowed rounded-full bg-gray-500 transition-all"
+              title="Disabled"
+            />
+            <div
+              v-else
+              class="size-3 cursor-pointer rounded-full bg-green-500 transition-all hover:ring-1 hover:ring-white/50"
+              title="Minimize"
+              @click.prevent="toggleMinimize"
+              @keydown.enter.prevent="toggleMinimize"
+            />
 
             <!-- Fullscreen button -->
-            <div class="w-3 h-3 rounded-full cursor-pointer transition-all bg-gray-500 cursor-not-allowed" v-if="noBody"
-              title="Disabled" />
             <div
-              class="w-3 h-3 rounded-full cursor-pointer transition-all bg-yellow-500 hover:ring-1 hover:ring-white/50"
-              v-else @click.prevent="toggleFullscreen" title="Fullscreen" />
+              v-if="noBody"
+              class="size-3 cursor-not-allowed rounded-full bg-gray-500 transition-all"
+              title="Disabled"
+            />
+            <div
+              v-else
+              class="size-3 cursor-pointer rounded-full bg-yellow-500 transition-all hover:ring-1 hover:ring-white/50"
+              title="Fullscreen"
+              @click.prevent="toggleFullscreen"
+              @keydown.enter.prevent="toggleFullscreen"
+            />
 
             <!-- Close button -->
-            <div class="w-3 h-3 rounded-full bg-red-500 cursor-pointer hover:ring-1 hover:ring-white/50 transition-all"
-              @click.prevent="closeTerminal" title="Close" />
+            <div
+              class="size-3 cursor-pointer rounded-full bg-red-500 transition-all hover:ring-1 hover:ring-white/50"
+              title="Close"
+              @click.prevent="closeTerminal"
+              @keydown.enter.prevent="closeTerminal"
+            />
           </div>
         </slot>
       </div>
 
       <!-- Terminal content -->
-      <div class="font-mono p-2 transition-all duration-300" :class="{
-        [body_class]: !isFullscreen,
-        'max-h-0 overflow-hidden': isMinimized,
-        'max-h-screen overflow-auto': isFullscreen,
-        'overflow-hidden': !isFullscreen && !isMinimized,
-      }" v-if="!noBody && !isMinimized" :style="bodyStyle">
+      <div
+        v-if="!noBody && !isMinimized"
+        class="font-mono p-2 transition-all duration-300"
+        :class="{
+          [bodyClass]: !isFullscreen,
+          'max-h-0 overflow-hidden': isMinimized,
+          'max-h-screen overflow-auto': isFullscreen,
+          'overflow-hidden': !isFullscreen && !isMinimized,
+        }"
+        :style="bodyStyle"
+      >
         <slot name="body">
           <!-- Default content if no body is provided -->
           <div class="text-cyan-400">
@@ -60,19 +94,25 @@
         </slot>
       </div>
     </div>
-    <div class="font-mono p-2 transition-all duration-300 overflow-hidden text-theme-foreground/50" v-if="isMinimized">
+    <div v-if="isMinimized" class="font-mono overflow-hidden p-2 text-theme-foreground/50 transition-all duration-300">
       {{ isEnglish
         ? 'Terminal is minimized. Click the button to restore.'
         : 'Le terminal est minimisé. Cliquez sur le bouton pour le restaurer.'
       }}
     </div>
 
-    <div v-if="isClosed"
-      class="absolute w-full h-full top-0 left-0 flex items-center justify-center rounded-md bg-black z-5"
-      @click="reopenTerminal">
-      <span class="text-theme-foreground font-mono glitch-text" :data-text="isEnglish
-        ? '[ CLICK TO RESTORE TERMINAL ]'
-        : '[ CLIQUEZ POUR RESTAURER LE TERMINAL ]'">
+    <div
+      v-if="isClosed"
+      class="z-5 absolute left-0 top-0 flex size-full items-center justify-center rounded-md bg-black"
+      @click="reopenTerminal"
+      @keydown.enter="reopenTerminal"
+    >
+      <span
+        class="font-mono glitch-text text-theme-foreground"
+        :data-text="isEnglish
+          ? '[ CLICK TO RESTORE TERMINAL ]'
+          : '[ CLIQUEZ POUR RESTAURER LE TERMINAL ]'"
+      >
         {{
           isEnglish
             ? '[ CLICK TO RESTORE TERMINAL ]'
@@ -83,38 +123,39 @@
   </div>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue';
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+
 import { usePreferencesStore } from '../../stores/preferences';
 
 const preferencesStore = usePreferencesStore();
 const isEnglish = computed(() => preferencesStore.isEnglish);
 
-const props = defineProps({
+defineProps({
   showIcon: {
     type: Boolean,
-    default: true
+    default: true,
   },
   borderColor: {
     type: String,
-    default: 'theme-foreground/70'
+    default: 'theme-foreground/70',
   },
   noBody: {
     type: Boolean,
-    default: false
+    default: false,
   },
   noTitle: {
     type: Boolean,
-    default: false
+    default: false,
   },
   noButtons: {
     type: Boolean,
-    default: false
+    default: false,
   },
-  body_class: {
+  bodyClass: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 });
 
 // Terminal state
@@ -170,7 +211,7 @@ const terminalStyle = computed(() => {
       maxWidth: '100%',
       maxHeight: '100%',
       overflow: 'auto',
-      zIndex: 1000
+      zIndex: 1000,
     };
   }
   return {};
@@ -180,12 +221,12 @@ const bodyStyle = computed(() => {
   if (isMinimized.value) {
     return {
       maxHeight: '0px',
-      padding: '0px'
+      padding: '0px',
     };
   }
   if (isFullscreen.value) {
     return {
-      maxHeight: '100%'
+      maxHeight: '100%',
     };
   }
   return {};
