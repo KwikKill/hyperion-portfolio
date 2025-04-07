@@ -1,5 +1,5 @@
 <template>
-  <div class="cyberpunk">
+  <div>
     <CyberpunkHeader/>
     <CyberpunkHero/>
     <CyberpunkAbout/>

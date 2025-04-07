@@ -5,7 +5,7 @@
       class="fixed inset-0 overflow-hidden bg-gradient-to-br"
       :class="{
         'from-indigo-900 via-gray-900 to-black': version !== 'cyberpunk',
-        'from-theme-foreground via-yellow-900 to-black': version === 'cyberpunk',
+        'from-primary via-yellow-900 to-black': version === 'cyberpunk',
       }"
     >
       <div class="absolute inset-0 opacity-20">
@@ -22,18 +22,18 @@
       :class="{
         'scale-95 opacity-0': !isModalReady,
         'scale-100 opacity-100': isModalReady,
-        'cyberpunk-terminal border-theme-foreground/70': version === 'cyberpunk',
+        'cyberpunk-terminal border-primary/70': version === 'cyberpunk',
         'border-white/20': version !== 'cyberpunk',
       }"
     >
       <!-- Cyberpunk terminal header -->
       <div
-        class="terminal-header mb-2 flex items-center justify-between border-b border-theme-foreground/30 p-2"
+        class="terminal-header mb-2 flex items-center justify-between border-b border-primary/30 p-2"
         :class="{
           invisible: version !== 'cyberpunk',
         }"
       >
-        <div class="text-theme-foreground"/>
+        <div class="text-primary"/>
         <div class="flex items-center space-x-2">
           <div class="size-3 rounded-full bg-green-500"/>
           <div class="size-3 rounded-full bg-yellow-500"/>
@@ -60,7 +60,7 @@
               class="mx-auto size-24 rounded-full border-4 shadow-lg"
               :class="{
                 'border-white/20': version !== 'cyberpunk',
-                'animate-pulse border-theme-foreground/30': version === 'cyberpunk',
+                'animate-pulse border-primary/30': version === 'cyberpunk',
               }"
             />
           </div>
@@ -78,18 +78,18 @@
           <div
             class="rounded-xl border bg-black pb-6 transition-all duration-500"
             :class="{
-              'cyberpunk-terminal border-theme-foreground/70': version === 'cyberpunk',
+              'cyberpunk-terminal border-primary/70': version === 'cyberpunk',
               'border-white/50': version !== 'cyberpunk',
             }"
           >
             <!-- Cyberpunk terminal header -->
             <div
-              class="terminal-header mb-2 flex items-center justify-between border-b border-theme-foreground/30 p-2"
+              class="terminal-header mb-2 flex items-center justify-between border-b border-primary/30 p-2"
               :class="{
                 invisible: version !== 'cyberpunk',
               }"
             >
-              <div class="text-theme-foreground"/>
+              <div class="text-primary"/>
               <div class="flex items-center space-x-2">
                 <div class="size-3 rounded-full bg-green-500"/>
                 <div class="size-3 rounded-full bg-yellow-500"/>
@@ -170,18 +170,18 @@
           <div
             class="rounded-xl border bg-black pb-6 transition-all duration-500"
             :class="{
-              'cyberpunk-terminal border-theme-foreground/70': version === 'cyberpunk',
+              'cyberpunk-terminal border-primary/70': version === 'cyberpunk',
               'border-white/50': version !== 'cyberpunk',
             }"
           >
             <!-- Cyberpunk terminal header -->
             <div
-              class="terminal-header mb-2 flex items-center justify-between border-b border-theme-foreground/30 p-2"
+              class="terminal-header mb-2 flex items-center justify-between border-b border-primary/30 p-2"
               :class="{
                 invisible: version !== 'cyberpunk',
               }"
             >
-              <div class="text-theme-foreground"/>
+              <div class="text-primary"/>
               <div class="flex items-center space-x-2">
                 <div class="size-3 rounded-full bg-green-500"/>
                 <div class="size-3 rounded-full bg-yellow-500"/>

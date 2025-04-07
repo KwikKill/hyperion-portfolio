@@ -1,9 +1,9 @@
 <template>
-  <footer class="border-t border-theme-foreground/30 bg-black py-3">
+  <footer class="border-t border-primary/30 bg-bg py-3">
     <div class="container mx-auto px-4">
       <div class="flex flex-col items-center justify-between md:flex-row">
         <div class="mb-4 text-center md:mb-0 md:text-left">
-          <div class="cyberpunk-text-glow text-2xl font-bold text-theme-foreground">
+          <div class="cyberpunk-text-glow text-2xl font-bold text-primary">
             <span class="text-gray-500">&lt;</span>
             <img src="@/assets/logo.png" alt="Logo" class="inline-block size-8"/>
             KwikKill
@@ -20,7 +20,7 @@
               href="https://github.com/kwikkill"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-gray-500 transition-colors hover:text-theme-foreground"
+              class="text-gray-500 transition-colors hover:text-primary"
             >
               <span class="sr-only">GitHub</span>
               <svg class="size-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -35,7 +35,7 @@
               href="https://www.linkedin.com/in/gabriel-blaisot-a89480233/"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-gray-500 transition-colors hover:text-theme-foreground"
+              class="text-gray-500 transition-colors hover:text-primary"
             >
               <span class="sr-only">LinkedIn</span>
               <svg class="size-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

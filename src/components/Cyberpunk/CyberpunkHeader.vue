@@ -1,13 +1,13 @@
 <template>
   <header
-    class="border-b border-theme-foreground/50 bg-black/80 py-4 backdrop-blur-sm"
+    class="border-b border-primary/50 bg-bg/80 py-4 backdrop-blur-sm"
     :class="{
       'top-0 z-50 w-full md:fixed': !isAnyFullScreen,
     }"
   >
     <div class="container mx-auto flex items-center justify-between px-4">
       <div
-        class="cyberpunk-text-glow cursor-pointer text-4xl font-bold text-theme-foreground transition-colors hover:text-yellow-400"
+        class="cyberpunk-text-glow cursor-pointer text-4xl font-bold text-primary transition-colors hover:text-hover"
         @click="preferencesStore.resetPreferences"
         @keydown.enter="preferencesStore.resetPreferences"
       >
@@ -17,23 +17,28 @@
         <span class="text-gray-500">/&gt;</span>
       </div>
 
-      <nav>
-        <ul class="hidden space-x-6 md:flex">
-          <li v-for="item in navLinks" :key="item.href">
-            <a
-              :href="item.href"
-              :class="[
-                'text-md relative font-medium uppercase tracking-wider transition-colors hover:text-yellow-400',
-                activeSection === item.href.substring(1)
-                  ? 'active-nav-link text-yellow-400'
-                  : 'text-gray-300',
-              ]"
-            >
-              {{ item.name }}
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <div class="flex items-center space-x-4">
+        <!-- Theme Selector -->
+        <CyberpunkThemeSelector/>
+
+        <nav>
+          <ul class="hidden space-x-6 md:flex">
+            <li v-for="item in navLinks" :key="item.href">
+              <a
+                :href="item.href"
+                :class="[
+                  'text-md relative font-medium uppercase tracking-wider transition-colors hover:text-hover',
+                  activeSection === item.href.substring(1)
+                    ? 'active-nav-link text-primary'
+                    : '',
+                ]"
+              >
+                {{ item.name }}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </header>
 </template>
@@ -44,6 +49,7 @@ import {
 } from 'vue';
 
 import { usePreferencesStore } from '../../stores/preferences';
+import CyberpunkThemeSelector from './CyberpunkThemeSelector.vue';
 
 const preferencesStore = usePreferencesStore();
 

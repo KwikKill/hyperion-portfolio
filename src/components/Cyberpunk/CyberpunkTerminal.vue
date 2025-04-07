@@ -1,8 +1,8 @@
 <template>
   <CyberpunkTerminalWindow
-    class="cyberpunk-terminal font-mono h-full overflow-hidden rounded-md border-2 border-theme-foreground/70 text-sm text-green-400"
+    class="cyberpunk-terminal font-mono h-full overflow-hidden rounded-md border-2 border-primary/70 text-sm"
     :show-icon="false"
-    body-class="overflow-y-auto xl:max-h-[520px] lg:max-h-[610px] md:max-h-[700px] max-h-[520px]"
+    body-class="overflow-y-auto xl:max-h-[530px] lg:max-h-[610px] md:max-h-[700px] max-h-[520px]"
   >
     <template #title>
       kwikkill@hyperion:~
@@ -12,8 +12,8 @@
       <div ref="terminalContentRef">
         <div v-for="(line, index) in displayedLines" :key="index" class="mb-1">
           <template v-if="line.type === 'command'">
-            <span class="text-cyan-400">kwikkill@hyperion:~$</span>
-            <span class="ml-2 text-theme-foreground">
+            <span class="text-secondary">kwikkill@hyperion:~$</span>
+            <span class="ml-2 text-primary">
               {{ line.text }}
             </span>
           </template>
@@ -23,13 +23,13 @@
             </span>
             <span
               v-if="line.link"
-              class="cursor-pointer text-green-400 transition-colors hover:text-green-600"
+              class="cursor-pointer text-terminal transition-colors hover:text-terminal-hover"
               @click.prevent="handleProjectClick(line.link)"
               @keydown.enter.prevent="handleProjectClick(line.link)"
             >
               {{ line.displayText || line.text }}
             </span>
-            <span v-else class="text-green-400">
+            <span v-else class="text-terminal">
               {{ line.displayText || line.text }}
             </span>
           </template>
@@ -53,8 +53,8 @@
         </div>
 
         <div class="mt-2 flex animate-pulse items-center">
-          <span class="text-cyan-400">kwikkill@hyperion:~$</span>
-          <span class="blink-cursor ml-2 h-4 w-2 bg-theme-foreground"/>
+          <span class="text-secondary">kwikkill@hyperion:~$</span>
+          <span class="blink-cursor ml-2 h-4 w-2 bg-primary"/>
         </div>
       </div>
     </template>
@@ -131,7 +131,7 @@ function handleProjectClick(link: string | URL | undefined) {
     }
 
     // Set the selected project in the store
-    const selectedProj = projects.value.find((project) => project.file[isEnglish.value ? 'en' : 'fr'] === projectFile);
+    const selectedProj = projects.value.find((project) => project.localizedFile === projectFile);
     if (selectedProj) {
       selectedProject.value = selectedProj;
     }
@@ -380,8 +380,8 @@ onMounted(() => {
       lines.push({
         type: 'response',
         text: `drwxr-xr-x 23 root root   4096 ${
-          project.file.en}`,
-        link: `#project-${project.file.en}`,
+          project.localizedFile}`,
+        link: `#project-${project.localizedFile}`,
       });
     });
     lines.push(
@@ -411,8 +411,8 @@ onMounted(() => {
       lines.push({
         type: 'response',
         text: `drwxr-xr-x 23 root root   4096 ${
-          project.file.fr}`,
-        link: `#project-${project.file.fr}`,
+          project.localizedFile}`,
+        link: `#project-${project.localizedFile}`,
       });
     });
     lines.push(

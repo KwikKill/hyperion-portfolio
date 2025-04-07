@@ -1,22 +1,22 @@
 <template>
-  <section id="home" class="cyberpunk-terminal relative flex min-h-screen items-center overflow-hidden py-20">
+  <section id="home" class="relative flex min-h-screen items-center overflow-hidden py-20">
     <!-- Cyberpunk background with grid and glow effects -->
-    <div class="absolute inset-0 z-0 bg-black">
+    <div class="absolute inset-0 z-0 bg-bg">
       <div class="cyberpunk-grid"/>
-      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black"/>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-bg/50 to-bg"/>
     </div>
 
     <div class="container relative z-10 mx-auto px-4">
       <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
         <div>
-          <div class="mb-4 inline-block rounded-md border-2 border-theme-foreground/70 bg-black/70 px-3 py-1">
-            <span class="text-sm font-medium uppercase tracking-widest text-theme-foreground">
+          <div class="mb-4 inline-block rounded-md border-2 border-primary/70 bg-black/70 px-3 py-1">
+            <span class="text-sm font-medium uppercase tracking-widest text-primary">
               hyperion: {{ isEnglish ? 'System Online' : 'Système en Ligne' }}
             </span>
           </div>
 
-          <h1 class="mb-4 text-5xl font-bold text-white md:text-6xl">
-            <span class="cyberpunk-text-glow text-theme-foreground">Gabriel </span>
+          <h1 class="mb-4 text-5xl font-bold md:text-6xl">
+            <span class="cyberpunk-text-glow text-primary">Gabriel </span>
             <span class="text-gray-500">Blaisot</span>
           </h1>
 
@@ -38,7 +38,7 @@
             <template #body>
               <!-- Description section -->
               <div class="mb-4 text-justify">
-                <p class="text-gray-300">
+                <p class="">
                   <template
                     v-if="isEnglish"
                   >
@@ -57,8 +57,8 @@
 
               <!-- Contact section -->
               <div>
-                <div class="mb-2 flex items-center border-b border-theme-foreground/30">
-                  <span class="font-mono text-sm uppercase text-theme-foreground">
+                <div class="mb-2 flex items-center border-b border-primary/30">
+                  <span class="font-mono text-sm uppercase text-primary">
                     {{
                       isEnglish
                         ? 'CONTACT INFORMATION'
@@ -69,7 +69,7 @@
 
                 <div v-if="contact_reveal" class="font-mono space-y-2 border-l border-cyan-800 pl-4">
                   <div class="flex items-center">
-                    <span class="mr-2 text-cyan-400">
+                    <span class="mr-2 text-secondary">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         class="mr-2 size-5"
@@ -85,13 +85,13 @@
                         />
                       </svg>
                     </span>
-                    <a href="tel:+33652411416" class="text-theme-foreground transition-colors hover:text-yellow-400">
+                    <a href="tel:+33652411416" class="text-primary transition-colors hover:text-hover">
                       +33 6 52 41 14 16
                     </a>
                   </div>
 
                   <div class="flex items-center">
-                    <span class="mr-2 text-cyan-400">
+                    <span class="mr-2 text-secondary">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         class="mr-2 size-5"
@@ -109,14 +109,14 @@
                     </span>
                     <a
                       href="mailto:gabriel@blaisot.org"
-                      class="text-theme-foreground transition-colors hover:text-yellow-400"
+                      class="text-primary transition-colors hover:text-hover"
                     >
                       gabriel@blaisot.org
                     </a>
                   </div>
 
                   <div class="flex items-center">
-                    <span class="mr-2 text-cyan-400">
+                    <span class="mr-2 text-secondary">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         class="mr-2 size-5"
@@ -132,7 +132,7 @@
                       href="https://www.linkedin.com/in/gabriel-blaisot-a89480233/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="text-theme-foreground transition-colors hover:text-yellow-400"
+                      class="text-primary transition-colors hover:text-hover"
                     >
                       gabriel-blaisot
                     </a>
@@ -163,7 +163,7 @@
             <div class="mt-8 flex space-x-4">
               <a
                 href="#projects"
-                class="cyberpunk-button rounded-none bg-theme-foreground px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-yellow-600"
+                class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-hover"
               >
                 {{ isEnglish ? 'View Projects' : 'Voir les Projets' }}
               </a>
@@ -171,7 +171,7 @@
             <div class="mt-8 flex space-x-4">
               <a
                 href="#experience"
-                class="cyberpunk-button rounded-none bg-theme-foreground px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-yellow-600"
+                class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-hover"
               >
                 {{ isEnglish ? 'View past experiences' : 'Voir les expériences passées' }}
               </a>
@@ -203,8 +203,8 @@ const contact_reveal = ref(false);
 .cyberpunk-grid {
   background-size: 40px 40px;
   background-image:
-    linear-gradient(to right, rgba(255, 213, 0, 0.1) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 213, 0, 0.1) 1px, transparent 1px);
+    linear-gradient(to right, rgb(var(--color-primary) / 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--color-primary) / 0.1) 1px, transparent 1px);
   width: 100%;
   height: 100%;
   transform: perspective(500px) rotateX(60deg);
@@ -264,7 +264,7 @@ const contact_reveal = ref(false);
 }
 
 .glitch-text {
-  color: var(--theme-foreground, #feee3b);
+  color: rgb(var(--color-primary));
   font-family: monospace;
   font-size: 1rem;
   font-weight: bold;
@@ -309,7 +309,7 @@ const contact_reveal = ref(false);
 
 .glitch-block {
   position: absolute;
-  background: var(--theme-foreground, #feee3b);
+  background: rgb(var(--color-primary));
   animation: glitch-block 1.5s infinite;
 }
 

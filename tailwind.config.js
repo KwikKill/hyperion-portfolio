@@ -12,42 +12,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        'theme-bg': '#1a1a1a',
-        'theme-foreground': '#feee3b',
-        'theme-border': '#393838',
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
+        primary: 'rgb(var(--color-primary))',
+        secondary: 'rgb(var(--color-secondary))',
+        bg: 'rgb(var(--color-background))',
+        accent: 'rgb(var(--color-accent))',
+        text: 'rgb(var(--color-text))',
+        hover: 'rgb(var(--color-hover))',
+        terminal: 'rgb(var(--color-terminal))',
+        'terminal-hover': 'rgb(var(--color-terminal-hover))',
       },
       screens: {
         custom1: '1900px',

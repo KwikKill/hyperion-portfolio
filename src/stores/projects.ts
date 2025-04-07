@@ -77,6 +77,10 @@ export const useProjectsStore = defineStore('projects', {
         starred: true,
         technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Pinia', 'JavaScript', 'TypeScript', 'Django', 'DjangoREST', 'Docker', 'Nginx', 'Postgres'],
         images: [insalanImage],
+        note: {
+          en: 'Team Management',
+          fr: 'Gestion d\'équipe',
+        },
         link: 'https://insalan.fr',
         github: 'https://github.com/InsaLan/infra-insalan.fr',
       },
@@ -116,6 +120,10 @@ export const useProjectsStore = defineStore('projects', {
         starred: true,
         technologies: ['Python', 'JavaScript'],
         images: [btcImage],
+        note: {
+          en: 'Competition',
+          fr: 'Compétition',
+        },
         link: 'https://www.linkedin.com/posts/m-paris_breakthecode-challenge-codage-activity-7272240941552340992-maS5',
       },
       {
@@ -135,6 +143,10 @@ export const useProjectsStore = defineStore('projects', {
         starred: false,
         technologies: ['C++', 'SFML', 'Blender'],
         images: [infographiqueImage],
+        note: {
+          en: 'School Assignment',
+          fr: 'Projet Scolaire',
+        },
         link: 'https://youtu.be/HfP1gKB0Cpg',
         github: 'https://github.com/KwikKill/infographique',
       },
@@ -155,6 +167,10 @@ export const useProjectsStore = defineStore('projects', {
         starred: false,
         technologies: ['C++', 'SFML'],
         images: [bombermanImage],
+        note: {
+          en: 'School Assignment',
+          fr: 'Projet Scolaire',
+        },
         github: 'https://github.com/KwikKill/Bomberman',
       },
       {
@@ -193,6 +209,10 @@ export const useProjectsStore = defineStore('projects', {
         starred: false,
         technologies: ['Python', 'JavaScript', 'Docker', 'Redis', 'Postgres'],
         images: [lightshieldImage],
+        note: {
+          en: 'Open Source Contribution',
+          fr: 'Contribution Open Source',
+        },
         github: 'https://github.com/KwikKill/Lightshield',
       },
       {
@@ -212,6 +232,10 @@ export const useProjectsStore = defineStore('projects', {
         starred: false,
         technologies: ['Python'],
         images: [indexerImage],
+        note: {
+          en: 'School Assignment',
+          fr: 'Projet Scolaire',
+        },
         github: 'https://github.com/KwikKill/TALEO',
       },
       {
@@ -231,6 +255,10 @@ export const useProjectsStore = defineStore('projects', {
         starred: false,
         technologies: ['Python', 'LaTeX'],
         images: [revuesImage],
+        note: {
+          en: 'Research Project',
+          fr: 'Projet de Recherche',
+        },
         link: 'https://www.irisa.fr/article/2023-09/la-creation-de-revues-numeriques-des-registres-des-soldats-de-lancien-regime-un',
       },
       {
@@ -250,6 +278,10 @@ export const useProjectsStore = defineStore('projects', {
         starred: false,
         technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker'],
         images: [pshImage],
+        note: {
+          en: 'School Assignment',
+          fr: 'Projet Scolaire',
+        },
         link: 'https://psh.blaisot.org/',
       },
       {
@@ -269,6 +301,10 @@ export const useProjectsStore = defineStore('projects', {
         starred: false,
         technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker'],
         images: [rankupwebImage],
+        note: {
+          en: 'Personal Project',
+          fr: 'Projet Personnel',
+        },
         link: 'https://rankup.somi.blaisot.org/',
       },
       {
@@ -288,6 +324,10 @@ export const useProjectsStore = defineStore('projects', {
         starred: false,
         technologies: ['Docker', 'Nginx', 'Shell'],
         images: [stackImage],
+        note: {
+          en: 'Used in Production',
+          fr: 'Utilisé en Production',
+        },
       },
       {
         name: {
@@ -306,6 +346,10 @@ export const useProjectsStore = defineStore('projects', {
         starred: true,
         technologies: ['JavaScript', 'Discord.js', 'Docker', 'Postgres'],
         images: [rankupImage],
+        note: {
+          en: '150+ Users',
+          fr: '150+ Utilisateurs',
+        },
         link: 'https://rankup.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/Kwik_bot',
       },
@@ -326,6 +370,10 @@ export const useProjectsStore = defineStore('projects', {
         starred: false,
         technologies: ['Python'],
         images: [vfsImage],
+        note: {
+          en: 'School Assignment',
+          fr: 'Projet Scolaire',
+        },
         github: 'https://github.com/KwikKill/Virtual-File-System',
       },
       {
@@ -363,6 +411,10 @@ export const useProjectsStore = defineStore('projects', {
         starred: false,
         technologies: ['Java'],
         images: [mindustryImage],
+        note: {
+          en: 'Open Source Contribution',
+          fr: 'Contribution Open Source',
+        },
         github: 'https://github.com/KwikKill/Anuken-Mindustry',
       },
     ] as Project[],
@@ -383,7 +435,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'Integration of an auto benchmark step using a company tool in a Jenkins pipeline and development of a plugin to allow visualization and interpretation of results.',
-          fr: "Intégration d’une étape de benchmark auto en utilisant un outil de l'entreprise dans un pipeline Jenkins et développement d’un plugin pour permettre la visualisation et d’interprétation des résultats.",
+          fr: "Intégration d'une étape de benchmark auto en utilisant un outil de l'entreprise dans un pipeline Jenkins et développement d'un plugin pour permettre la visualisation et d'interprétation des résultats.",
         },
         technologies: ['Jenkins', 'Java', 'Groovy', 'HTML', 'CSS', 'Javascript', 'Chart.js', 'Ansible', 'ESXI', 'Git'],
         achievements: {
@@ -413,7 +465,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'Maintaining and improving a web application (Flask) for park management for support teams.',
-          fr: 'Maintient et Amélioration d’une application web (Flask) de gestion de parc à destination des équipes supports.',
+          fr: 'Maintient et Amélioration d\'une application web (Flask) de gestion de parc à destination des équipes supports.',
         },
         technologies: ['Python', 'Flask', 'HTML', 'CSS', 'JavaScript', 'Git'],
         achievements: {
@@ -871,6 +923,8 @@ export const useProjectsStore = defineStore('projects', {
         ...project,
         localizedName: project.name[lang ?? 'en'],
         localizedDescription: project.description[lang ?? 'en'],
+        localizedNote: project.note ? project.note[lang ?? 'en'] : undefined,
+        localizedFile: project.file[lang ?? 'en'],
       }));
     },
     getLocalizedExperiences: (state) => {

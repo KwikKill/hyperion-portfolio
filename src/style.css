@@ -11,7 +11,7 @@
   }
 
   .success {
-    @apply bg-green-400 ring-green-900
+    @apply bg-terminal ring-green-900
   }
 }
 
@@ -33,12 +33,61 @@
   }
 
   .cyberpunk {
-    --color-primary: 254 238 59;
-    --color-secondary: 0 255 255;
-    --color-accent: 255 0 128;
-    --color-background: 10 10 40;
-    --color-text: 255 255 255;
+    --color-primary: 254 238 59; /* Yellow */
+    --color-secondary: 0 255 255; /* Cyan */
+    --color-accent: 255 0 128; /* Pink */
+    --color-background: 0 0 0; /* Black */
+    --color-text: 255 255 255; /* White */
+    --color-hover: 204 204 0; /* Dark Yellow */
+    --color-terminal: 74, 222, 128; /* Green */
+    --color-terminal-hover: 22 163 74; /* Dark Green */
   }
+
+  /* Ghost in the Shell theme - neon pink and violet */
+  .theme-ghost {
+    --color-primary: 255 0 255; /* Magenta */
+    --color-secondary: 138 43 226; /* Violet */
+    --color-accent: 255 105 180; /* Hot pink */
+    --color-background: 25 25 35; /* Dark purple-ish */
+    --color-text: 255 255 255; /* White */
+    --color-hover: 138 43 226; /* Deep pink */
+    --color-terminal: 255, 20, 147; /* Deep pink */
+    --color-terminal-hover: 255 105 180; /* Hot pink */
+  }
+
+  /* Matrix theme - green and black */
+  .theme-matrix {
+    --color-primary: 0 255 0; /* Bright green */
+    --color-secondary: 144 238 144; /* Light green */
+    --color-accent: 50 205 50; /* Lime green */
+    --color-background: 0 10 0; /* Near black */
+    --color-text: 0 255 0; /* Bright green */
+    --color-hover: 0 128 0; /* Dark green */
+    --color-terminal: 0, 255, 0; /* Bright green */
+    --color-terminal-hover: 0 128 0; /* Dark green */
+  }
+
+  .theme-solarpunk {
+    --color-primary: 112 191 100;     /* Leaf Green */
+    --color-secondary: 255 204 92;    /* Sunflower Yellow */
+    --color-accent: 255 127 80;       /* Coral Orange */
+    --color-background: 240 255 244;  /* Soft Mint (eco-paper vibe) */
+    --color-text: 34 45 34;           /* Forest Green (for contrast) */
+    --color-hover: 72 160 120;        /* Emerald Green */
+    --color-terminal: 85, 170, 85;    /* Bright Green Terminal */
+    --color-terminal-hover: 255 204 92; /* Sunflower Yellow */
+  }
+}
+
+/* Add theme-specific pulse animations for the active nav link */
+.theme-ghost .active-nav-link::after {
+  background-color: rgb(var(--color-primary));
+  box-shadow: 0 0 8px 1px rgb(var(--color-primary) / 0.8);
+}
+
+.theme-matrix .active-nav-link::after {
+  background-color: rgb(var(--color-primary));
+  box-shadow: 0 0 8px 1px rgb(var(--color-primary) / 0.8);
 }
 
 .cyberpunk-text-glow {
@@ -46,7 +95,7 @@
 }
 
 .cyberpunk-folder {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgb(var(--color-background) / 0.7);
   border: 2px solid rgb(var(--color-primary));
   box-shadow: 0 0 15px rgb(var(--color-primary) / 0.5);
   transition: all 0.3s ease;
@@ -74,13 +123,17 @@
   transform: translateX(-50%);
   width: 20px;
   height: 3px;
-  background-color: rgba(255, 215, 0, 0.5);
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+  background-color: rgb(var(--color-primary) / 0.5);
+  box-shadow: 0 0 10px rgb(var(--color-primary) / 0.7);
   border-radius: 3px;
 }
 
 .cyberpunk-terminal {
-  box-shadow: 0 0 15px rgba(255, 213, 0, 0.5);
+  box-shadow: 0 0 15px rgb(var(--color-primary) / 0.5);
+}
+
+section {
+  box-shadow: 0 0 15px rgb(var(--color-primary) / 0.5);
 }
 
 .cyberpunk-terminal::before {
@@ -92,8 +145,8 @@
   bottom: 0;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.15),
-    rgba(0, 0, 0, 0.15) 1px,
+    rgb(var(--color-background)/ 0.15),
+    rgb(var(--color-background)/ 0.15) 1px,
     transparent 1px,
     transparent 2px
   );
@@ -109,8 +162,8 @@
   display: inline-flex;
   align-items: center;
   padding: 2px 6px;
-  background-color: rgba(255, 215, 0, 0.1);
-  border: 1px solid rgba(255, 215, 0, 0.3);
+  background-color: rgb(var(--color-primary) / 0.1);
+  border: 1px solid rgb(var(--color-primary) / 0.3);
   border-radius: 4px;
 }
 
@@ -121,15 +174,15 @@
 
 html {
   /* font-family: "SD Dystopian"; */
-  color: #feee3b;
-  background-color: rgb(31 41 55);
+  color: rgb(var(--color-text));
+  background-color: rgb(var(--color-background));
   scroll-behavior: smooth;
 }
 
 .cyberpunk {
-  scrollbar-color: #feee3b #000000;
+  scrollbar-color: rgb(var(--color-primary)) rgb(var(--color-background));
   scrollbar-width: thin;
-  background-color: #000000;
+  background-color: rgb(var(--color-background));
 }
 
 .text-shadow {

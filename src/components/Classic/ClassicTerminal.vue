@@ -1,6 +1,6 @@
 <template>
   <div
-    class="font-mono h-full overflow-hidden rounded-lg border border-gray-700 bg-gray-900 text-sm text-green-400 shadow-lg"
+    class="font-mono h-full overflow-hidden rounded-lg border border-gray-700 bg-gray-900 text-sm text-terminal shadow-lg"
   >
     <div class="flex items-center justify-between bg-gray-800 px-4 py-2">
       <div class="text-white">
@@ -24,13 +24,13 @@
           <a
             v-if="line.link"
             :href="line.link"
-            class="text-green-400 hover:underline"
+            class="text-terminal hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >
             {{ line.text }}
           </a>
-          <span v-else class="text-green-400">
+          <span v-else class="text-terminal">
             {{ line.text }}
           </span>
         </template>
@@ -104,7 +104,7 @@ onMounted(() => {
       lines.push({
         type: 'response',
         text: `drwxr-xr-x 23 root root   4096 ${
-          project.file.en}`,
+          project.localizedFile}`,
       });
     });
     lines.push(
@@ -134,7 +134,7 @@ onMounted(() => {
       lines.push({
         type: 'response',
         text: `drwxr-xr-x 23 root root   4096 ${
-          project.file.fr}`,
+          project.localizedFile}`,
       });
     });
     lines.push(

@@ -1,11 +1,11 @@
 <template>
   <div
-    class="cyberpunk-terminal rounded-md border-2 border-theme-foreground/70 bg-black/95 transition-all duration-300"
+    class="cyberpunk-terminal rounded-md border-2 border-primary/70 bg-bg/95 transition-all duration-300"
     :class="{
       'p-2': !noTitle,
       'terminal-fullscreen fixed inset-0 z-50': isFullscreen,
       relative: !isFullscreen,
-      'cursor-pointer rounded-md border-2 border-dashed border-theme-foreground/50 bg-black/0 transition-all': isClosed,
+      'cursor-pointer rounded-md border-2 border-dashed border-primary/50 bg-black/0 transition-all': isClosed,
     }"
     :style="terminalStyle"
   >
@@ -19,15 +19,15 @@
         v-if="!noTitle"
         class="terminal-header flex items-center"
         :class="{
-          'border-b border-theme-foreground/30 pb-2': !noBody,
+          'border-b border-primary/30 pb-2': !noBody,
           'mb-0': isMinimized,
           'justify-center text-center': noButtons,
           'justify-between': !noButtons,
         }"
       >
         <div class="flex items-center">
-          <div v-if="showIcon" class="mr-2 size-4 bg-theme-foreground"/>
-          <div class="font-mono uppercase tracking-wider text-theme-foreground">
+          <div v-if="showIcon" class="mr-2 size-4 bg-primary"/>
+          <div class="font-mono uppercase tracking-wider text-primary">
             <slot name="title">
               Terminal Window
             </slot>
@@ -88,13 +88,13 @@
       >
         <slot name="body">
           <!-- Default content if no body is provided -->
-          <div class="text-cyan-400">
+          <div class="text-secondary">
             kwikkill@hyperion:~$ echo "Terminal content goes here"
           </div>
         </slot>
       </div>
     </div>
-    <div v-if="isMinimized" class="font-mono overflow-hidden p-2 text-theme-foreground/50 transition-all duration-300">
+    <div v-if="isMinimized" class="font-mono overflow-hidden p-2 text-primary/50 transition-all duration-300">
       {{ isEnglish
         ? 'Terminal is minimized. Click the button to restore.'
         : 'Le terminal est minimisé. Cliquez sur le bouton pour le restaurer.'
@@ -108,7 +108,7 @@
       @keydown.enter="reopenTerminal"
     >
       <span
-        class="font-mono glitch-text text-theme-foreground"
+        class="font-mono glitch-text text-primary"
         :data-text="isEnglish
           ? '[ CLICK TO RESTORE TERMINAL ]'
           : '[ CLIQUEZ POUR RESTAURER LE TERMINAL ]'"
@@ -138,7 +138,7 @@ defineProps({
   },
   borderColor: {
     type: String,
-    default: 'theme-foreground/70',
+    default: 'primary/70',
   },
   noBody: {
     type: Boolean,
@@ -270,14 +270,14 @@ const bodyStyle = computed(() => {
 }
 
 .glitch-text::before {
-  color: #0ff;
+  color: rgb(var(--color-secondary));
   z-index: -1;
   animation: glitch 1s cubic-bezier(0.5, 0, 0.5, 1) both infinite;
   animation-delay: 0.1s;
 }
 
 .glitch-text::after {
-  color: #f0f;
+  color: rgb(var(--color-accent));
   z-index: -1;
   animation: glitch 1s cubic-bezier(0.5, 0, 0.5, 1) reverse both infinite;
   animation-delay: 0.2s;

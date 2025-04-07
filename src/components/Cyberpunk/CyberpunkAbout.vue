@@ -1,11 +1,11 @@
 <template>
-  <section id="about" class="cyberpunk-terminal relative min-h-screen bg-black py-20">
+  <section id="about" class="relative min-h-screen bg-bg py-20">
     <!-- Cyberpunk background with grid -->
     <div class="absolute inset-0 z-0">
       <!-- Circuit board pattern background -->
       <div class="circuit-board-bg h-full"/>
       <!-- Overlay with radial gradient -->
-      <div class="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/90"/>
+      <div class="absolute inset-0 bg-gradient-to-br from-bg/80 via-bg/60 to-bg/90"/>
       <!-- Animated scan lines -->
       <div class="scanlines absolute inset-0 opacity-20"/>
     </div>
@@ -27,11 +27,11 @@
 
           <template #body>
             <div class="mb-4">
-              <span class="text-cyan-400">kwikkill@hyperion:~$</span>
-              <span class="ml-2 text-theme-foreground">{{ isEnglish ? 'cat profile.txt' : 'cat profil.txt' }}</span>
+              <span class="text-secondary">kwikkill@hyperion:~$</span>
+              <span class="ml-2 text-primary">{{ isEnglish ? 'cat profile.txt' : 'cat profil.txt' }}</span>
             </div>
 
-            <div class="mb-4 leading-relaxed text-green-400">
+            <div class="mb-4 leading-relaxed text-terminal">
               <template v-if="isEnglish">
                 I'm a computer science student from France, passionate about web development and software engineering. I
                 love creating innovative solutions to complex problems and continuously learning new technologies.
@@ -43,11 +43,11 @@
             </div>
 
             <div class="mb-4">
-              <span class="text-cyan-400">kwikkill@hyperion:~$</span>
-              <span class="ml-2 text-theme-foreground">{{ isEnglish ? 'cat interests.txt' : 'cat interets.txt' }}</span>
+              <span class="text-secondary">kwikkill@hyperion:~$</span>
+              <span class="ml-2 text-primary">{{ isEnglish ? 'cat interests.txt' : 'cat interets.txt' }}</span>
             </div>
 
-            <div class="mb-4 leading-relaxed text-green-400 ">
+            <div class="mb-4 leading-relaxed text-terminal ">
               <template v-if="isEnglish">
                 When I'm not coding, you can find me exploring new technologies, or expanding my knowledge in various
                 computer science domains.
@@ -69,8 +69,8 @@
             </div>
 
             <div class="mb-4">
-              <span class="text-cyan-400">kwikkill@hyperion:~$</span>
-              <span class="ml-2 text-theme-foreground">
+              <span class="text-secondary">kwikkill@hyperion:~$</span>
+              <span class="ml-2 text-primary">
                 {{
                   isEnglish
                     ? 'cat associations.txt'
@@ -79,7 +79,7 @@
               </span>
             </div>
 
-            <div class="mb-4 leading-relaxed text-green-400">
+            <div class="mb-4 leading-relaxed text-terminal">
               <div v-if="isEnglish">
                 <p>
                   Being actively involved in associations has been a significant part of my life. I have been an active
@@ -150,8 +150,8 @@
 
           <template #body>
             <div class="mb-4">
-              <span class="text-cyan-400">kwikkill@hyperion:~$</span>
-              <span class="ml-2 text-theme-foreground">{{ isEnglish ? './list_skills.sh' : './lister_competences.sh'
+              <span class="text-secondary">kwikkill@hyperion:~$</span>
+              <span class="ml-2 text-primary">{{ isEnglish ? './list_skills.sh' : './lister_competences.sh'
               }}</span>
             </div>
 
@@ -159,12 +159,12 @@
               <div v-for="(category, index) in skills" :key="index">
                 <!-- Foldable category header -->
                 <div
-                  class="mb-2 flex cursor-pointer items-center p-1 uppercase text-theme-foreground hover:bg-gray-900/30"
+                  class="mb-2 flex cursor-pointer items-center p-1 uppercase text-primary hover:bg-gray-900/30"
                   @click="toggleCategory(index)"
                   @keydown.enter="toggleCategory(index)"
                 >
                   <span
-                    class="mr-2 text-cyan-400 transition-transform duration-200"
+                    class="mr-2 text-secondary transition-transform duration-200"
                     :class="{ 'rotate-90': expandedCategories[index] }"
                   >
                     ▶
@@ -182,17 +182,17 @@
                     :key="skillIndex"
                     class="skill-item flex items-center"
                   >
-                    <span class="mr-2 text-cyan-400">></span>
-                    <span class="text-green-400">{{ skill }}</span>
+                    <span class="mr-2 text-secondary">></span>
+                    <span class="text-terminal">{{ skill }}</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="mt-4 border-t border-theme-foreground/30 pt-4 text-green-400">
+            <div class="mt-4 border-t border-primary/30 pt-4 text-terminal">
               <div class="flex items-center">
-                <span class="mr-2 text-cyan-400">kwikkill@hyperion:~$</span>
-                <span class="text-theme-foreground">
+                <span class="mr-2 text-secondary">kwikkill@hyperion:~$</span>
+                <span class="text-primary">
                   {{
                     isEnglish
                       ? 'echo "Always learning new technologies"'
@@ -246,9 +246,9 @@ onMounted(() => {
 .circuit-board-bg {
   background-color: #111;
   background-image:
-    radial-gradient(circle at 25px 25px, rgba(255, 215, 0, 0.2) 2px, transparent 0),
-    linear-gradient(to right, rgba(255, 215, 0, 0.2) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 215, 0, 0.2) 1px, transparent 1px);
+    radial-gradient(circle at 25px 25px, rgba(var(--color-primary) / 0.2) 2px, transparent 0),
+    linear-gradient(to right, rgb(var(--color-primary) / 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(var(--color-primary) / 0.2) 1px, transparent 1px);
   background-size: 50px 50px, 25px 25px, 25px 25px;
   background-position: 0 0;
   position: relative;
@@ -263,8 +263,8 @@ onMounted(() => {
   right: 0;
   bottom: 0;
   background-image:
-    linear-gradient(to right, transparent 24px, rgba(255, 215, 0, 0.15) 25px, transparent 26px),
-    linear-gradient(to bottom, transparent 24px, rgba(255, 215, 0, 0.15) 25px, transparent 26px);
+    linear-gradient(to right, transparent 24px, rgba(var(--color-primary) / 0.15) 25px, transparent 26px),
+    linear-gradient(to bottom, transparent 24px, rgba(var(--color-primary) / 0.15) 25px, transparent 26px);
   background-size: 50px 50px;
   background-position: 0 0;
 }
@@ -277,17 +277,17 @@ onMounted(() => {
   right: 0;
   bottom: 0;
   background-image:
-    radial-gradient(circle at 25px 0, rgba(0, 255, 255, 0.2) 5px, transparent 6px),
-    radial-gradient(circle at 0 25px, rgba(0, 255, 255, 0.2) 5px, transparent 6px),
-    radial-gradient(circle at 50px 25px, rgba(0, 255, 255, 0.2) 5px, transparent 6px),
-    radial-gradient(circle at 25px 50px, rgba(0, 255, 255, 0.2) 5px, transparent 6px);
+    radial-gradient(circle at 25px 0, rgba(var(--color-secondary) / 0.2) 5px, transparent 6px),
+    radial-gradient(circle at 0 25px, rgba(var(--color-secondary) / 0.2) 5px, transparent 6px),
+    radial-gradient(circle at 50px 25px, rgba(var(--color-secondary) / 0.2) 5px, transparent 6px),
+    radial-gradient(circle at 25px 50px, rgba(var(--color-secondary) / 0.2) 5px, transparent 6px);
   background-size: 50px 50px;
 }
 
 .scanlines {
   background: linear-gradient(to bottom,
       transparent 50%,
-      rgba(0, 0, 0, 0.5) 50%);
+      rgb(var(--color-background) / 0.5) 50%);
   background-size: 100% 4px;
   pointer-events: none;
 }

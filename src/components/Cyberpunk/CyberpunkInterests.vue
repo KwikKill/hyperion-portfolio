@@ -1,11 +1,11 @@
 <template>
-  <section id="interests" class="cyberpunk-terminal relative min-h-screen py-20">
+  <section id="interests" class="relative min-h-screen py-20">
     <!-- Unique background for this section -->
     <div class="absolute inset-0 z-0">
       <!-- Holographic grid background -->
       <div class="holographic-bg h-full"/>
       <!-- Overlay with gradient -->
-      <div class="absolute inset-0 bg-gradient-to-br from-yellow-900/30 via-black/60 to-orange-800/20"/>
+      <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-bg/60 to-primary/10"/>
       <!-- Animated scan lines -->
       <div class="scanlines absolute inset-0 opacity-20"/>
     </div>
@@ -32,29 +32,29 @@
         <template #body>
           <div class="p-6">
             <!-- Categories tabs -->
-            <div class="mb-8 flex border-b border-yellow-500/30">
+            <div class="mb-8 flex border-b border-hover/30">
               <button
                 class="font-mono relative px-4 py-2 text-sm uppercase transition-colors duration-200"
-                :class="activeCategory === 'movies' ? 'text-yellow-300' : 'text-gray-500 hover:text-yellow-400'"
+                :class="activeCategory === 'movies' ? 'text-primary' : 'text-gray-500 hover:text-primary'"
                 type="button"
                 @click="activeCategory = 'movies'"
               >
                 <span>{{ isEnglish ? 'Movies' : 'Films' }}</span>
                 <span
                   v-if="activeCategory === 'movies'"
-                  class="absolute bottom-0 left-0 h-0.5 w-full bg-yellow-500"
+                  class="absolute bottom-0 left-0 h-0.5 w-full bg-hover"
                 />
               </button>
               <button
                 class="font-mono relative px-4 py-2 text-sm uppercase transition-colors duration-200"
-                :class="activeCategory === 'games' ? 'text-yellow-300' : 'text-gray-500 hover:text-yellow-400'"
+                :class="activeCategory === 'games' ? 'text-primary' : 'text-gray-500 hover:text-primary'"
                 type="button"
                 @click="activeCategory = 'games'"
               >
                 <span>{{ isEnglish ? 'Video Games' : 'Jeux Vidéo' }}</span>
                 <span
                   v-if="activeCategory === 'games'"
-                  class="absolute bottom-0 left-0 h-0.5 w-full bg-yellow-500"
+                  class="absolute bottom-0 left-0 h-0.5 w-full bg-hover"
                 />
               </button>
             </div>
@@ -72,8 +72,8 @@
                 <div class="media-card-inner">
                   <div class="media-card-front">
                     <img :src="movie.image" :alt="movie.title" class="h-48 w-full rounded-t-md object-cover"/>
-                    <div class="rounded-b-md border-t border-yellow-500/50 bg-black/80 p-4">
-                      <h3 class="text-lg font-bold text-yellow-300">
+                    <div class="rounded-b-md border-t border-hover/50 bg-bg/80 p-4">
+                      <h3 class="text-lg font-bold text-primary">
                         {{ movie.title }}
                       </h3>
                       <p class="text-xs text-gray-400">
@@ -81,14 +81,14 @@
                       </p>
                     </div>
                   </div>
-                  <div class="media-card-back bg-black/90 p-4 text-white">
-                    <h3 class="mb-2 text-lg font-bold text-yellow-300">
+                  <div class="media-card-back bg-bg/90 p-4">
+                    <h3 class="mb-2 text-lg font-bold text-primary">
                       {{ movie.title }}
                     </h3>
                     <p class="text-sm">
                       {{ movie.description }}
                     </p>
-                    <div class="mt-2 text-xs text-yellow-300">
+                    <div class="mt-2 text-xs text-primary">
                       {{ isEnglish ? 'Why I love it:' : 'Pourquoi je l\'aime:' }} {{ movie.whyILoveIt }}
                     </div>
                   </div>
@@ -102,8 +102,8 @@
                 <div class="media-card-inner">
                   <div class="media-card-front">
                     <img :src="game.image" :alt="game.title" class="h-48 w-full rounded-t-md object-cover"/>
-                    <div class="rounded-b-md border-t border-yellow-500/50 bg-black/80 p-4">
-                      <h3 class="text-lg font-bold text-yellow-300">
+                    <div class="rounded-b-md border-t border-hover/50 bg-bg/80 p-4">
+                      <h3 class="text-lg font-bold text-primary">
                         {{ game.title }}
                       </h3>
                       <p class="text-xs text-gray-400">
@@ -111,14 +111,14 @@
                       </p>
                     </div>
                   </div>
-                  <div class="media-card-back bg-black/90 p-4 text-white">
-                    <h3 class="mb-2 text-lg font-bold text-yellow-300">
+                  <div class="media-card-back bg-bg/90 p-4">
+                    <h3 class="mb-2 text-lg font-bold text-primary">
                       {{ game.title }}
                     </h3>
                     <p class="text-sm">
                       {{ game.description }}
                     </p>
-                    <div class="mt-2 text-xs text-yellow-300">
+                    <div class="mt-2 text-xs text-primary">
                       {{ isEnglish ? 'Why I love it:' : 'Pourquoi je l\'aime:' }} {{ game.whyILoveIt }}
                     </div>
                   </div>
@@ -127,8 +127,8 @@
             </div>
 
             <!-- Terminal footer -->
-            <div class="mt-8 border-t border-yellow-500/30 pt-4 text-center">
-              <p class="font-mono text-sm text-yellow-400">
+            <div class="mt-8 border-t border-hover/30 pt-4 text-center">
+              <p class="font-mono text-sm text-primary">
                 <template
                   v-if="isEnglish"
                 >
@@ -171,10 +171,10 @@ const activeCard = ref<number | null>(null);
 
 <style scoped>
 .holographic-bg {
-  background-color: #1d1d0c;
+  background-color: rgb(var(--color-background));
   background-image:
-    linear-gradient(0deg, rgba(179, 255, 0, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(183, 255, 0, 0.1) 1px, transparent 1px);
+    linear-gradient(0deg, rgb(var(--color-primary) / 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--color-primary) / 0.1) 1px, transparent 1px);
   background-size: 30px 30px;
   position: relative;
   overflow: hidden;
@@ -188,15 +188,15 @@ const activeCard = ref<number | null>(null);
   right: 0;
   bottom: 0;
   background:
-    radial-gradient(circle at 30% 40%, rgba(255, 251, 0, 0.4) 0%, transparent 40%),
-    radial-gradient(circle at 70% 60%, rgba(229, 255, 0, 0.4) 0%, transparent 40%);
+    radial-gradient(circle at 30% 40%, rgb(var(--color-primary) / 0.4) 0%, transparent 40%),
+    radial-gradient(circle at 70% 60%, rgb(var(--color-primary) / 0.4) 0%, transparent 40%);
   pointer-events: none;
 }
 
 .scanlines {
   background: linear-gradient(to bottom,
       transparent 50%,
-      rgba(255, 242, 0, 0.1) 50%);
+      rgb(var(--color-primary) / 0.1) 50%);
   background-size: 100% 4px;
   pointer-events: none;
 }
@@ -230,7 +230,7 @@ const activeCard = ref<number | null>(null);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 0.375rem;
-  box-shadow: 0 0 15px rgba(255, 230, 0, 0.3);
+  box-shadow: 0 0 15px rgb(var(--color-primary) / 0.3);
 }
 
 .media-card-back {

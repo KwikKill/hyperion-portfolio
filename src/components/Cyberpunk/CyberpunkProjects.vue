@@ -1,5 +1,5 @@
 <template>
-  <section id="projects" class="cyberpunk-terminal relative min-h-screen rounded-md bg-black py-20">
+  <section id="projects" class="relative min-h-screen rounded-md bg-bg py-20">
     <!-- Enhanced cyberpunk background with depth -->
     <div class="absolute inset-0 z-0 overflow-hidden">
       <!-- Improved grid background with perspective -->
@@ -25,9 +25,9 @@
         <template #body>
           <div class="flex flex-col gap-4 md:flex-row">
             <!-- Search input -->
-            <div class="flex flex-1 items-center rounded border border-theme-foreground/30 px-3 py-1 md:border-0">
-              <div class="font-mono mr-2 text-cyan-400">
-                <div class="font-mono mr-2 text-cyan-400">
+            <div class="flex flex-1 items-center rounded border border-primary/30 px-3 py-1 md:border-0">
+              <div class="font-mono mr-2 text-secondary">
+                <div class="font-mono mr-2 text-secondary">
                   <span class="blink-cursor">></span>
                 </div>
               </div>
@@ -36,13 +36,13 @@
                   v-model="searchQuery"
                   type="text"
                   :placeholder="isEnglish ? 'SEARCH PROJECTS...' : 'RECHERCHER DES PROJETS...'"
-                  class="font-mono w-full border-none bg-transparent uppercase text-theme-foreground outline-none placeholder:text-gray-500 focus:ring-0"
+                  class="font-mono w-full border-none bg-transparent uppercase text-primary outline-none focus:ring-0"
                   @focus="isSearchFocused = true"
                   @blur="isSearchFocused = false"
                 />
                 <div
                   v-if="searchQuery"
-                  class="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500 hover:text-theme-foreground"
+                  class="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer hover:text-primary"
                   @click="clearSearch"
                   @keydown.enter="clearSearch"
                 >
@@ -59,7 +59,7 @@
 
             <!-- Technology filter dropdown -->
             <div class="flex items-center">
-              <div class="font-mono mr-2 text-cyan-400">
+              <div class="font-mono mr-2 text-secondary">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="size-5"
@@ -78,7 +78,7 @@
               <div class="relative">
                 <select
                   v-model="selectedTechnology"
-                  class="font-mono w-[180px] appearance-none rounded border border-theme-foreground/30 bg-transparent px-3 py-1 uppercase text-theme-foreground focus:outline-none focus:ring-1 focus:ring-theme-foreground"
+                  class="font-mono w-[180px] appearance-none rounded border border-primary/30 bg-transparent px-3 py-1 uppercase text-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 >
                   <option value="">
                     {{ isEnglish ? 'NO FILTER' : 'PAS DE FILTRE' }}
@@ -92,7 +92,7 @@
                   </option>
                 </select>
                 <div
-                  class="pointer-events-none absolute inset-y-0 right-1 flex items-center px-2 text-theme-foreground"
+                  class="pointer-events-none absolute inset-y-0 right-1 flex items-center px-2 text-primary"
                 >
                   <svg class="size-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
@@ -101,7 +101,7 @@
               </div>
               <div
                 v-if="selectedTechnology"
-                class="ml-2 cursor-pointer text-gray-500 hover:text-theme-foreground"
+                class="ml-2 cursor-pointer hover:text-primary"
                 @click="clearTechnologyFilter"
                 @keydown.enter="clearTechnologyFilter"
               >
@@ -116,8 +116,8 @@
             </div>
 
             <!-- Results counter -->
-            <div class="font-mono hidden items-center text-sm text-cyan-400 md:flex">
-              <span class="rounded border border-theme-foreground/30 bg-black/50 px-2 py-1">
+            <div class="font-mono hidden items-center text-sm text-secondary md:flex">
+              <span class="rounded border border-primary/30 bg-black/50 px-2 py-1">
                 {{ filteredProjects.length }} {{ isEnglish ? 'FILES' : 'FICHIERS' }}
               </span>
             </div>
@@ -133,7 +133,7 @@
               {{ isEnglish ? 'PROJECTS EXPLORER' : 'EXPLORATEUR DE PROJETS' }}
             </div>
             <div v-if="selectedTechnology" class="flex items-center text-sm">
-              <span class="rounded border border-theme-foreground/30 bg-theme-foreground/20 px-2 py-0.5 text-xs">
+              <span class="rounded border border-primary/30 bg-primary/20 px-2 py-0.5 text-xs">
                 {{ selectedTechnology }}
               </span>
             </div>
@@ -143,7 +143,7 @@
           <!-- Search status message -->
           <div
             v-if="(searchQuery || selectedTechnology) && filteredProjects.length === 0"
-            class="rounded border border-red-500/50 bg-black/50 p-4 text-center"
+            class="rounded border border-red-500/50 bg-bg/50 p-4 text-center"
           >
             <div class="font-mono cyberpunk-text-glow flex items-center justify-center uppercase text-red-400">
               <svg
@@ -162,7 +162,7 @@
               </svg>
               {{ isEnglish ? 'NO FILES FOUND' : 'AUCUN FICHIER TROUVÉ' }}
             </div>
-            <div class="font-mono mt-2 text-sm text-cyan-400">
+            <div class="font-mono mt-2 text-sm text-secondary">
               {{ isEnglish ? 'TRY ANOTHER SEARCH TERM OR FILTER' : 'ESSAYEZ UN AUTRE TERME DE RECHERCHE OU FILTRE' }}
             </div>
           </div>
@@ -191,7 +191,7 @@
                   fill="currentColor"
                   :class="[
                     'size-16',
-                    project.starred ? 'star-glow text-theme-foreground' : 'text-theme-foreground/80',
+                    project.starred ? 'star-glow text-primary' : 'text-primary/80',
                   ]"
                 >
                   <path
@@ -211,10 +211,10 @@
 
               <!-- Project name -->
               <div class="text-center">
-                <div class="font-mono cyberpunk-text-glow bg-black/70 px-2 py-1 text-sm text-theme-foreground">
+                <div class="font-mono cyberpunk-text-glow px-2 py-1 text-sm text-primary">
                   {{ project.localizedName }}
                 </div>
-                <div class="font-mono mt-1 text-xs text-cyan-400">
+                <div class="font-mono mt-1 text-xs text-secondary">
                   {{ project.date }}
                 </div>
               </div>
@@ -227,17 +227,17 @@
     <!-- Project Modal -->
     <div
       v-if="selectedProject"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-bg/80 p-4 backdrop-blur-sm"
       @click.self="closeProject"
       @keydown.esc="closeProject"
     >
       <CyberpunkTerminalWindow body-class="max-w-3xl w-full max-h-[80vh] overflow-y-auto p-4">
         <template #title>
           <div
-            class="font-mono cyberpunk-text-glow flex flex-col items-start justify-center text-lg text-theme-foreground md:flex-row md:items-center"
+            class="font-mono cyberpunk-text-glow flex flex-col items-start justify-center text-lg text-primary md:flex-row md:items-center"
           >
             {{ selectedProject.localizedName }}
-            <span v-if="selectedProject.starred" class="star-badge-modal text-theme-foreground md:ml-2">
+            <span v-if="selectedProject.starred" class="star-badge-modal text-primary md:ml-2">
               <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20" fill="currentColor">
                 <path
                   d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
@@ -251,7 +251,7 @@
         <template #buttons>
           <div class="flex justify-end">
             <button
-              class="text-theme-foreground hover:text-yellow-300"
+              class="text-primary hover:text-hover"
               type="button"
               @click="closeProject"
             >
@@ -272,8 +272,18 @@
           <div class="flex flex-col gap-6 md:flex-col">
             <!-- Image Gallery -->
             <div class="relative">
+              <!-- Project Note Badge (if exists) -->
+              <div v-if="selectedProject.localizedNote" class="absolute right-4 top-4 z-10">
+                <div class="project-note-badge font-mono flex items-center rounded-l-md border-l-4 border-primary bg-bg/80 px-3 py-1 text-sm uppercase text-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="mr-1.5 size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  {{ selectedProject.localizedNote }}
+                </div>
+              </div>
+
               <!-- Main Image with transition -->
-              <div class="relative overflow-hidden rounded-md border-2 border-theme-foreground/70">
+              <div class="relative overflow-hidden rounded-md border-2 border-primary/70">
                 <transition name="fade" mode="out-in">
                   <img
                     :key="currentImageIndex"
@@ -289,7 +299,7 @@
                   <button
                     v-if="selectedProject.images.length > 1"
                     type="button"
-                    class="flex size-10 items-center justify-center rounded-full bg-black/50 text-theme-foreground transition-colors hover:bg-theme-foreground/20"
+                    class="flex size-10 items-center justify-center rounded-full bg-bg/50 text-primary transition-colors hover:bg-primary/20"
                     aria-label="Previous image"
                     @click.stop="prevImage"
                   >
@@ -305,7 +315,7 @@
                   <button
                     v-if="selectedProject.images.length > 1"
                     type="button"
-                    class="flex size-10 items-center justify-center rounded-full bg-black/50 text-theme-foreground transition-colors hover:bg-theme-foreground/20"
+                    class="flex size-10 items-center justify-center rounded-full bg-bg/50 text-primary transition-colors hover:bg-primary/20"
                     aria-label="Next image"
                     @click.stop="nextImage"
                   >
@@ -329,7 +339,7 @@
                   :key="index"
                   type="button"
                   class="h-2 w-8 rounded-full transition-colors"
-                  :class="index === currentImageIndex ? 'bg-theme-foreground' : 'bg-gray-600 hover:bg-gray-500'"
+                  :class="index === currentImageIndex ? 'bg-primary' : 'bg-gray-600 hover:bg-gray-500'"
                   :aria-label="`Go to image ${index + 1}`"
                   :aria-current="index === currentImageIndex ? 'true' : 'false'"
                   @click.stop="setCurrentImage(index)"
@@ -339,17 +349,17 @@
               <!-- Image Counter -->
               <div
                 v-if="selectedProject.images.length > 1"
-                class="absolute bottom-7 right-3 rounded bg-black/70 px-2 py-1 text-xs text-theme-foreground"
+                class="absolute bottom-7 right-3 rounded bg-bg/70 px-2 py-1 text-xs text-primary"
               >
                 {{ currentImageIndex + 1 }} / {{ selectedProject.images.length }}
               </div>
             </div>
 
             <div class="">
-              <h4 class="font-mono mb-2 flex items-center text-sm uppercase text-cyan-400">
+              <h4 class="font-mono mb-2 flex items-center text-sm uppercase text-secondary">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="mr-2 size-5 text-cyan-400"
+                  class="mr-2 size-5 text-secondary"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -363,14 +373,14 @@
                 </svg>
                 DESCRIPTION
               </h4>
-              <div class="mb-4 rounded-md border border-theme-foreground/30 bg-black/50 p-4">
-                <div class="font-mono text-justify leading-relaxed text-gray-300">
+              <div class="mb-4 rounded-md border border-primary/30 bg-bg/50 p-4">
+                <div class="font-mono text-justify leading-relaxed">
                   {{ selectedProject.localizedDescription }}
                 </div>
               </div>
 
               <div class="mb-4">
-                <h4 class="font-mono mb-2 flex items-center text-sm uppercase text-cyan-400">
+                <h4 class="font-mono mb-2 flex items-center text-sm uppercase text-secondary">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="mr-1 size-4"
@@ -397,7 +407,7 @@
                   <span
                     v-for="(tech, index) in selectedProject.technologies"
                     :key="index"
-                    class="font-mono cursor-pointer border border-theme-foreground bg-black px-2 py-1 text-xs uppercase text-theme-foreground hover:bg-theme-foreground/10"
+                    class="font-mono cursor-pointer border border-primary bg-bg px-2 py-1 text-xs uppercase text-primary hover:bg-primary/10"
                     @click.stop="filterByTechFromModal(tech)"
                     @keydown.enter.stop="filterByTechFromModal(tech)"
                   >
@@ -412,7 +422,7 @@
                   :href="selectedProject.link"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="font-mono flex items-center bg-theme-foreground px-4 py-2 text-sm uppercase text-black transition-colors hover:bg-yellow-400"
+                  class="font-mono flex items-center bg-primary px-4 py-2 text-sm uppercase text-black transition-colors hover:bg-hover"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -435,7 +445,7 @@
                   :href="selectedProject.github"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="font-mono flex items-center bg-theme-foreground px-4 py-2 text-sm uppercase text-black transition-colors hover:bg-yellow-400"
+                  class="font-mono flex items-center bg-primary px-4 py-2 text-sm uppercase text-black transition-colors hover:bg-hover"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 size-4" fill="currentColor" viewBox="0 0 24 24">
                     <path
@@ -586,10 +596,10 @@ watch(selectedProject, () => {
 <style scoped>
 /* Enhanced cyberpunk grid background */
 .cyber-grid-bg {
-  background-color: #000;
+  background-color: rgb(var(--color-background));
   background-image:
-    linear-gradient(to right, rgba(254, 238, 59, 0.1) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(254, 238, 59, 0.1) 1px, transparent 1px);
+    linear-gradient(to right, rgb(var(--color-primary) / 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--color-primary) / 0.1) 1px, transparent 1px);
   background-size: 30px 30px;
   width: 100%;
   height: 100%;
@@ -627,7 +637,7 @@ watch(selectedProject, () => {
   bottom: 0;
   background: linear-gradient(to bottom,
       transparent 50%,
-      rgba(0, 0, 0, 0.1) 50%);
+      rgb(var(--color-background) / 0.5));
   background-size: 100% 4px;
   opacity: 0.3;
   pointer-events: none;
@@ -642,7 +652,7 @@ watch(selectedProject, () => {
   bottom: 0;
   background: radial-gradient(circle at center,
       transparent 0%,
-      rgba(0, 0, 0, 0.7) 100%);
+      rgb(var(--color-background)));
   pointer-events: none;
 }
 
@@ -654,15 +664,15 @@ watch(selectedProject, () => {
   transform: translateX(-50%);
   width: 20px;
   height: 3px;
-  background-color: rgba(255, 215, 0, 0.5);
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+  background-color: rgb(var(--color-primary) / 0.5);
+  box-shadow: 0 0 10px rgb(var(--color-primary) / 0.7);
   border-radius: 3px;
 }
 
 /* Star badge styling */
 .star-badge {
-  color: #FFDA63;
-  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7));
+  color: rgb(var(--color-primary) / 0.8);
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
   animation: star-pulse 3s infinite;
 }
 
