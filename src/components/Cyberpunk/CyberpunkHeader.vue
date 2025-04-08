@@ -5,24 +5,35 @@
       'top-0 z-50 w-full md:fixed': !isAnyFullScreen,
     }"
   >
-    <div class="container mx-auto flex items-center justify-between px-4">
+    <div class="container mx-auto flex flex-col items-center justify-between px-4 lg:flex-row">
       <div
-        class="cyberpunk-text-glow cursor-pointer text-4xl font-bold text-primary transition-colors hover:text-hover"
+        class="cyberpunk-text-glow flex cursor-pointer items-center justify-center text-4xl font-bold text-primary transition-colors hover:text-hover"
         @click="preferencesStore.resetPreferences"
         @keydown.enter="preferencesStore.resetPreferences"
       >
         <span class="text-gray-500">&lt;</span>
         <img src="@/assets/logo.png" alt="Logo" class="inline-block size-8"/>
-        KwikKill - Porfolio
+        <div
+          class="hidden xl:block"
+        >
+          KwikKill - Porfolio
+        </div>
+        <div
+          class="block xl:hidden"
+        >
+          KwikKill
+        </div>
         <span class="text-gray-500">/&gt;</span>
       </div>
 
-      <div class="flex items-center space-x-4">
+      <div class="hidden items-center space-x-4 sm:flex">
         <!-- Theme Selector -->
-        <CyberpunkThemeSelector/>
+        <CyberpunkThemeSelector
+          class="hidden md:flex"
+        />
 
         <nav>
-          <ul class="hidden space-x-6 md:flex">
+          <ul class="flex space-x-6">
             <li v-for="item in navLinks" :key="item.href">
               <a
                 :href="item.href"

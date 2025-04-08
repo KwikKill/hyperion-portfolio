@@ -379,7 +379,7 @@ onMounted(() => {
     projects.value.forEach((project) => {
       lines.push({
         type: 'response',
-        text: `drwxr-xr-x 23 root root   4096 ${
+        text: `-rwxr-xr-x 23 gabriel gabriel   ${project.localizedDescription.length.toString().padStart(4, ' ')} ${
           project.localizedFile}`,
         link: `#project-${project.localizedFile}`,
       });
@@ -410,7 +410,7 @@ onMounted(() => {
     projects.value.forEach((project) => {
       lines.push({
         type: 'response',
-        text: `drwxr-xr-x 23 root root   4096 ${
+        text: `-rwxr-xr-x 23 gabriel gabriel   ${(project.localizedDescription.length * 8).toString().padStart(4, ' ')} ${
           project.localizedFile}`,
         link: `#project-${project.localizedFile}`,
       });

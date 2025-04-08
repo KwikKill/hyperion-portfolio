@@ -30,7 +30,7 @@
 
     <div
       v-if="isOpen"
-      class="absolute right-0 mt-2 w-48 origin-top-right rounded border border-primary/30 bg-bg/90 shadow-lg backdrop-blur-sm"
+      class="absolute right-0 top-5 mt-2 w-48 rounded border border-primary/30 bg-bg/90 shadow-lg backdrop-blur-sm"
     >
       <div class="py-1">
         <button

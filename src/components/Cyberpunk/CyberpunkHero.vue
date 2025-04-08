@@ -1,5 +1,5 @@
 <template>
-  <section id="home" class="relative flex min-h-screen items-center overflow-hidden py-20">
+  <section id="home" class="relative mt-0 flex min-h-screen items-center overflow-hidden py-20 md:mt-10 lg:mt-0">
     <!-- Cyberpunk background with grid and glow effects -->
     <div class="absolute inset-0 z-0 bg-bg">
       <div class="cyberpunk-grid"/>
