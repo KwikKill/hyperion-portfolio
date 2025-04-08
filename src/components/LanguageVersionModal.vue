@@ -1,5 +1,5 @@
 <template>
-  <div v-if="preferencesStore.showModal" class="inset-0 z-50 flex items-center justify-center">
+  <div v-if="preferencesStore.showModal" class="cyberpunk inset-0 z-50 flex items-center justify-center">
     <!-- Animated background with gradient overlay -->
     <div
       class="fixed inset-0 overflow-hidden bg-gradient-to-br"
