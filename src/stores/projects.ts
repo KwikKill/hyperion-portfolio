@@ -109,8 +109,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Break the code',
         },
         description: {
-          en: 'Participation in the "Break the code" algorithmic competition organized by Sopra Steria. By improving each year, my teammates and I managed to reach the top 6 in the second year and the top 4 in the third and fourth years out of more than 40 teams. The competition is open to all students from computer science schools in Rennes.',
-          fr: "Participation au concours d'algorythmie \"Break the code\" organisée par Sopra Steria. En m'améliorant chaque année, nous avons réussi avec mes coéquipiés à nous hisser au top 6 dès la deuxième année et au top 4 la troisième et quatrième année sur plus de 40 équipes. Le concours est ouvert à tous les étudiants des écoles d'informatique de Rennes.",
+          en: 'Participation in the "Break the code" algorithmic competition organized by Sopra Steria. By improving each year, my teammates and I managed to reach sixth place in the second year and fourth place in the third and fourth years out of more than 40 teams. The competition is open to all students from computer science schools in Rennes.',
+          fr: "Participation au concours d'algorithmique \"Break the code\" organisé par Sopra Steria. En m'améliorant chaque année, nous avons réussi avec mes coéquipiers à nous hisser à la sixième place dès la deuxième année et à atteindre la quatrième place la troisième et quatrième année sur plus de 40 équipes. Le concours est ouvert à tous les étudiants des écoles d'informatique de Rennes.",
         },
         file: {
           en: 'breakthecode.html',
@@ -179,8 +179,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Advent of Codpilote',
         },
         description: {
-          en: 'This project is not finished. The aim was to solve the algorythmic problems of the advent of code only with Github copilot. The main rule was: no code writen by yourself.',
-          fr: "Ce projet n'est pas finis. L'objectif était de résoudre les problème d'algorythmie de l'advent of code uniquement avec Github copilot. Pour cela, la règle principale était la suivante : interdiction d'écrire du code soit même.",
+          en: 'This project is not finished. The aim was to solve the algorithmic problems of the advent of code only with Github copilot. The main rule was: no code written by yourself.',
+          fr: "Ce projet n'est pas finis. L'objectif était de résoudre les problème d’algorithmie de l'advent of code uniquement avec Github copilot. Pour cela, la règle principale était la suivante : interdiction d'écrire du code soit même.",
         },
         file: {
           en: 'adventofcode.html',
@@ -222,7 +222,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'This project was carried out as part of the TALEO (automatic processing of written and oral language) module of my studies at INSA Rennes. The objective was to create a document indexer in Python and a documents search tool. The indexer creates an inverted index from a set of documents. It is then possible to search for words in the documents and display the results as a list. Several algorithms have been implemented (tf.id, bm25, dirichlet,...).',
-          fr: "Ce projet a été réalisé dans le cadre du module TALEO (traitement automatique du langage écrit et oral) de mon cursus à l'INSA Rennes. L'objectif était de créer un indexeur de documents en python ainsi qu'un outil de recherche de documents. L'indexeur permet de créer un index inversé à partir d'un ensemble de documents. Il est ensuite possible de rechercher des mots dans les documents et d'afficher les rsultats sous forme de liste. Plusieurs algorythmes ont été implémentés (tf.id, bm25, dirichlet,...).",
+          fr: "Ce projet a été réalisé dans le cadre du module TALEO (traitement automatique du langage écrit et oral) de mon cursus à l'INSA Rennes. L'objectif était de créer un indexeur de documents en python ainsi qu'un outil de recherche de documents. L'indexeur permet de créer un index inversé à partir d'un ensemble de documents. Il est ensuite possible de rechercher des mots dans les documents et d'afficher les rsultats sous forme de liste. Plusieurs algorithmes ont été implémentés (tf.id, bm25, dirichlet,...).",
         },
         file: {
           en: 'indexer.py',
@@ -268,7 +268,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'Creation of a website for a humanities project related to INSA Rennes. This static site was created to illustrate our topic "What is the impact of digital technology on access to culture?" The support was between a website and a PDF document, the choice was quickly made.',
-          fr: "Création d'un site internet pour un projet de science humaines lié à l'INSA Rennes. Ce site statique a été créé pour illuster notre sujet \" Quel est l'impact du numérique sur l'accès à la culture ? \". Le support était entre un site internet et un document PDF, le choix a été vite fait.",
+          fr: "Création d'un site internet pour un projet de science humaines lié à l'INSA Rennes. Ce site statique a été créé pour illustrer notre sujet \" Quel est l'impact du numérique sur l'accès à la culture ? \". Le support était entre un site internet et un document PDF, le choix a été vite fait.",
         },
         file: {
           en: 'psh.html',
@@ -291,7 +291,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'Creation of a website for my discord bot RankUp. This showcase site allows to present the bot and give information about its use. (Anecdote: the site was entirely made in 3h)',
-          fr: "Création d'un site internet pour mon bot discord RankUp. Ce site vitrine permet de présenter le bot et de donner des informations sur son utilisation. (Annecdote: le site a entierement été fait en 3h)",
+          fr: "Création d'un site internet pour mon bot discord RankUp. Ce site vitrine permet de présenter le bot et de donner des informations sur son utilisation. (Anecdote: le site a entièrement été fait en 3h)",
         },
         file: {
           en: 'rankup-website.html',
@@ -383,7 +383,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'Development of a Minecraft plugin and a website for a Minecraft server. The plugin allows generating random buildings in the server world and interacting with several APIs. The website was a static showcase site.',
-          fr: "Développement d'un plugin minecraft ainsi qu'un site internet pour un serveur Minecraft. Le plugin permet de générer des batiments aléatoires dans le monde du serveur ainsi qu'interragir avec plusieurs API. Le site internet était un site statique vitrine.",
+          fr: "Développement d'un plugin minecraft ainsi qu'un site internet pour un serveur Minecraft. Le plugin permet de générer des bâtiments aléatoires dans le monde du serveur ainsi qu'interragir avec plusieurs API. Le site internet était un site statique vitrine.",
         },
         file: {
           en: 'minecraft-plugin.java',
@@ -444,7 +444,7 @@ export const useProjectsStore = defineStore('projects', {
             'Quantification of regressions on new versions',
           ],
           fr: [
-            'Ajout de critères de performance pour les tests',
+            'Ajout de critères de performance au tests existants',
             'Quantification des régressions lors de nouvelles versions',
           ],
         },
@@ -465,7 +465,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'Maintaining and improving a web application (Flask) for park management for support teams.',
-          fr: 'Maintient et Amélioration d\'une application web (Flask) de gestion de parc à destination des équipes supports.',
+          fr: 'Maintient et Amélioration d\'une application web (Flask) de gestion de parc à destination des équipes support.',
         },
         technologies: ['Python', 'Flask', 'HTML', 'CSS', 'JavaScript', 'Git'],
         achievements: {
@@ -478,7 +478,7 @@ export const useProjectsStore = defineStore('projects', {
       {
         title: {
           en: 'Development Intern (6 weeks)',
-          fr: 'Stage de dévelopement (6 semaines)',
+          fr: 'Stage de développement (6 semaines)',
         },
         company: 'Blacknut',
         location: {
@@ -491,7 +491,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: "Hardware updates and encryption of company computers, optimization of the backup process by integrating the company's API to only back up new data, and technology updates in the back-office team of a cloud gaming startup.",
-          fr: "Mises à jour hardware et chiffrement des ordinateurs de l'entreprise, optimisation du processus de backup en intégrant l'api de l'entreprise pour ne sauvegarder que les nouveautées et mise à jour de technologie dans l'équipe back-office d'une startup de cloud gaming.",
+          fr: "Mises à jour hardware et chiffrement des ordinateurs de l'entreprise, optimisation du processus de backup en intégrant l'api de l'entreprise pour ne sauvegarder que les nouveautés et mise à jour de technologie dans l'équipe back-office d'une startup de cloud gaming.",
         },
         technologies: ['Python', 'Jenkins', 'Golang', 'AWS S3', 'Git'],
         achievements: {
