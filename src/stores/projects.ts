@@ -109,8 +109,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Break the code',
         },
         description: {
-          en: 'Participation in the "Break the code" algorithmic competition organized by Sopra Steria. By improving each year, my teammates and I managed to reach sixth place in the second year and fourth place in the third and fourth years out of more than 40 teams. The competition is open to all students from computer science schools in Rennes.',
-          fr: "Participation au concours d'algorithmique \"Break the code\" organisé par Sopra Steria. En m'améliorant chaque année, nous avons réussi avec mes coéquipiers à nous hisser à la sixième place dès la deuxième année et à atteindre la quatrième place la troisième et quatrième année sur plus de 40 équipes. Le concours est ouvert à tous les étudiants des écoles d'informatique de Rennes.",
+          en: 'Participation in the algorithmic competition "Break the code" organized by Sopra Steria. By improving each year, my teammates and I managed to reach 6th place out of 64 participants in the second year, maintain this position out of 69 participants in the third year, and achieve 4th place out of 42 participants in the fourth year. The competition is open to all students from computer science schools in Rennes.',
+          fr: "Participation au concours d'algorithmique \"Break the code\" organisé par Sopra Steria. En m'améliorant chaque année, nous avons réussi avec mes coéquipiers à nous hisser à la 6ième place sur 64 participants dès la deuxième année, à maintenir cette place sur 69 participants la troisième année et à atteindre la 4ième place sur 42 participants la quatrième année. Le concours est ouvert à tous les étudiants des écoles d'informatique de Rennes.",
         },
         file: {
           en: 'breakthecode.html',
