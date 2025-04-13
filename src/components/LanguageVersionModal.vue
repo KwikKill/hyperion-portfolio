@@ -119,30 +119,6 @@
               <button
                 class="language-btn group relative w-full overflow-hidden"
                 type="button"
-                :class="language === 'en' ? 'active-language' : ''"
-                @click="setLanguage('en')"
-              >
-                <div
-                  class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  :class="{ 'opacity-100': language === 'en' }"
-                />
-                <div class="relative z-10 flex items-center p-4">
-                  <div
-                    class="mr-4 flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-blue-600/20"
-                  >
-                    <img src="@/assets/Flag_UK.svg" alt="English" class="size-full object-cover"/>
-                  </div>
-                  <div class="text-left">
-                    <div class="text-lg font-medium text-white">
-                      English
-                    </div>
-                  </div>
-                </div>
-              </button>
-
-              <button
-                class="language-btn group relative w-full overflow-hidden"
-                type="button"
                 :class="language === 'fr' ? 'active-language' : ''"
                 @click="setLanguage('fr')"
               >
@@ -159,6 +135,30 @@
                   <div class="text-left">
                     <div class="text-lg font-medium text-white">
                       Français
+                    </div>
+                  </div>
+                </div>
+              </button>
+
+              <button
+                class="language-btn group relative w-full overflow-hidden"
+                type="button"
+                :class="language === 'en' ? 'active-language' : ''"
+                @click="setLanguage('en')"
+              >
+                <div
+                  class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  :class="{ 'opacity-100': language === 'en' }"
+                />
+                <div class="relative z-10 flex items-center p-4">
+                  <div
+                    class="mr-4 flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-blue-600/20"
+                  >
+                    <img src="@/assets/Flag_UK.svg" alt="English" class="size-full object-cover"/>
+                  </div>
+                  <div class="text-left">
+                    <div class="text-lg font-medium text-white">
+                      English
                     </div>
                   </div>
                 </div>
@@ -215,48 +215,6 @@
               <button
                 class="version-btn group relative w-full overflow-hidden"
                 type="button"
-                :class="version === 'classic' ? 'active-version-classic' : ''"
-                @click="setVersion('classic')"
-              >
-                <div
-                  class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  :class="{ 'opacity-100': version === 'classic' }"
-                />
-                <div class="relative z-10 flex items-center p-4">
-                  <div class="mr-4 flex size-12 shrink-0 items-center justify-center rounded-full bg-blue-600">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="size-6 text-white"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                      />
-                    </svg>
-                  </div>
-                  <div class="text-left">
-                    <div class="text-lg font-medium text-white">
-                      {{ isEnglish ? 'Classic' : 'Classique' }}
-                    </div>
-                    <div class="text-sm text-gray-300">
-                      {{
-                        isEnglish
-                          ? 'Classic and traditional design'
-                          : 'Design classique et traditionnel'
-                      }}
-                    </div>
-                  </div>
-                </div>
-              </button>
-
-              <button
-                class="version-btn group relative w-full overflow-hidden"
-                type="button"
                 :class="version === 'cyberpunk' ? 'active-version-cyber' : ''"
                 @click="setVersion('cyberpunk')"
               >
@@ -299,6 +257,48 @@
                         isEnglish
                           ? 'fantasy and futuristic Interface'
                           : 'Interface fantaisie et futuriste'
+                      }}
+                    </div>
+                  </div>
+                </div>
+              </button>
+
+              <button
+                class="version-btn group relative w-full overflow-hidden"
+                type="button"
+                :class="version === 'classic' ? 'active-version-classic' : ''"
+                @click="setVersion('classic')"
+              >
+                <div
+                  class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  :class="{ 'opacity-100': version === 'classic' }"
+                />
+                <div class="relative z-10 flex items-center p-4">
+                  <div class="mr-4 flex size-12 shrink-0 items-center justify-center rounded-full bg-blue-600">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="size-6 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                      />
+                    </svg>
+                  </div>
+                  <div class="text-left">
+                    <div class="text-lg font-medium text-white">
+                      {{ isEnglish ? 'Classic' : 'Classique' }}
+                    </div>
+                    <div class="text-sm text-gray-300">
+                      {{
+                        isEnglish
+                          ? 'Classic and traditional design'
+                          : 'Design classique et traditionnel'
                       }}
                     </div>
                   </div>
@@ -356,7 +356,7 @@ const language = ref<'en' | 'fr' | null>(null);
 const version = ref<'classic' | 'cyberpunk' | null>(null);
 const isModalReady = ref(false);
 
-const isEnglish = computed(() => language.value === 'en' || !language.value);
+const isEnglish = computed(() => language.value === 'en');
 
 // Update the setPreferences method to also update URL parameters
 const handleSetPreferences = (

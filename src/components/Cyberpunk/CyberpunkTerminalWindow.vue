@@ -35,37 +35,37 @@
         </div>
         <slot v-if="!noButtons" name="buttons">
           <div class="flex space-x-2">
-            <!-- Minimize button -->
-            <div
-              v-if="noBody"
-              class="size-3 cursor-not-allowed rounded-full bg-gray-500 transition-all"
-              title="Disabled"
-            />
-            <div
-              v-else
-              class="size-3 cursor-pointer rounded-full bg-green-500 transition-all hover:ring-1 hover:ring-white/50"
-              title="Minimize"
-              @click.prevent="toggleMinimize"
-              @keydown.enter.prevent="toggleMinimize"
-            />
-
             <!-- Fullscreen button -->
             <div
               v-if="noBody"
-              class="size-3 cursor-not-allowed rounded-full bg-gray-500 transition-all"
+              class="flex size-3 cursor-not-allowed items-center justify-center rounded-full bg-gray-500 transition-all"
               title="Disabled"
             />
             <div
               v-else
-              class="size-3 cursor-pointer rounded-full bg-yellow-500 transition-all hover:ring-1 hover:ring-white/50"
+              class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-green-500 transition-all hover:ring-1 hover:ring-white/50"
               title="Fullscreen"
               @click.prevent="toggleFullscreen"
               @keydown.enter.prevent="toggleFullscreen"
             />
 
+            <!-- Minimize button -->
+            <div
+              v-if="noBody"
+              class="flex size-3 cursor-not-allowed items-center justify-center rounded-full bg-gray-500 transition-all"
+              title="Disabled"
+            />
+            <div
+              v-else
+              class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-yellow-500 transition-all hover:ring-1 hover:ring-white/50"
+              title="Minimize"
+              @click.prevent="toggleMinimize"
+              @keydown.enter.prevent="toggleMinimize"
+            />
+
             <!-- Close button -->
             <div
-              class="size-3 cursor-pointer rounded-full bg-red-500 transition-all hover:ring-1 hover:ring-white/50"
+              class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-red-500 transition-all hover:ring-1 hover:ring-white/50"
               title="Close"
               @click.prevent="closeTerminal"
               @keydown.enter.prevent="closeTerminal"
