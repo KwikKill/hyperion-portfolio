@@ -44,9 +44,13 @@
       <div class="bt-2 px-8 pb-8">
         <!-- Header -->
         <div class="mb-8 text-center">
-          <h2 class="mb-3 text-3xl font-bold text-white">
-            {{ isEnglish ? 'Welcome to My Portfolio' : 'Bienvenue sur Mon Portfolio' }}
-          </h2>
+          <h1 class="mb-3 text-3xl font-bold text-white">
+            {{
+              isEnglish
+                ? 'Gabriel Blaisot | Developer Portfolio'
+                : 'Gabriel Blaisot | Portfolio Développeur'
+            }}
+          </h1>
           <p class="mx-auto max-w-2xl text-gray-300">
             {{ isEnglish
               ? 'Choose your preferred language and experience style to continue'
@@ -56,7 +60,7 @@
           <div class="mt-4">
             <img
               src="@/assets/logo.png"
-              alt="Logo"
+              alt="Logo Gabriel Blaisot"
               class="mx-auto size-24 rounded-full border-4 shadow-lg"
               :class="{
                 'border-white/20': version !== 'cyberpunk',
@@ -64,12 +68,6 @@
               }"
             />
           </div>
-          <p class="mt-2 text-gray-300">
-            {{ isEnglish
-              ? 'This portfolio is still under construction, but you can already see my projects and skills.'
-              : 'Ce portfolio est encore en construction, mais vous pouvez déjà voir mes projets et compétences.'
-            }}
-          </p>
         </div>
 
         <!-- Selection Sections -->

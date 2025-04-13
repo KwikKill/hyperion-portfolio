@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gabriel.blaisot.org/sitemap.xml
