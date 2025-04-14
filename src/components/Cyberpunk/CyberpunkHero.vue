@@ -23,8 +23,8 @@
           <h2 class="mb-6 text-2xl font-semibold md:text-3xl ">
             {{
               isEnglish
-                ? 'Computer Science Student'
-                : 'Étudiant en Informatique'
+                ? 'Computer Science student'
+                : 'Étudiant en informatique'
             }}
             <br/>
             INSA Rennes
@@ -42,13 +42,13 @@
                   <template
                     v-if="isEnglish"
                   >
-                    Passionate about web development and software engineering.
+                    Passionate about Web development and software engineering.
                     I love video games, technology, and learning new things. Also passionate about Greek mythology.
                   </template>
                   <template
                     v-else
                   >
-                    Etudiant en Informatique passionné par le développement web et l'ingénierie logicielle.
+                    Etudiant en informatique passionné par le développement Web et l'ingénierie logicielle.
                     J'adore les jeux vidéo, la technologie et apprendre de nouvelles choses.
                     Également passionné par la mythologie grecque.
                   </template>

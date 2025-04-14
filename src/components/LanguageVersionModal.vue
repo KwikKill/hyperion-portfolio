@@ -45,11 +45,38 @@
         <!-- Header -->
         <div class="mb-8 text-center">
           <h1 class="mb-3 text-3xl font-bold text-white">
-            {{
-              isEnglish
-                ? 'Gabriel Blaisot | Developer Portfolio'
-                : 'Gabriel Blaisot | Portfolio Développeur'
-            }}
+            <template
+              v-if="isEnglish"
+            >
+              <div
+                class="hidden md:block"
+              >
+                Gabriel Blaisot | Developer Portfolio
+              </div>
+              <div
+                class="block md:hidden"
+              >
+                Gabriel Blaisot
+                <br/>
+                Developer Portfolio
+              </div>
+            </template>
+            <template
+              v-else
+            >
+              <div
+                class="hidden md:block"
+              >
+                Gabriel Blaisot | Portfolio Développeur
+              </div>
+              <div
+                class="block md:hidden"
+              >
+                Gabriel Blaisot
+                <br/>
+                Portfolio Développeur
+              </div>
+            </template>
           </h1>
           <p class="mx-auto max-w-2xl text-gray-300">
             {{ isEnglish
@@ -253,7 +280,7 @@
                     <div class="text-sm text-gray-300">
                       {{
                         isEnglish
-                          ? 'fantasy and futuristic Interface'
+                          ? 'Fantasy and futuristic Interface'
                           : 'Interface fantaisie et futuriste'
                       }}
                     </div>

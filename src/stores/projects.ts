@@ -66,8 +66,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Site Insalan.fr',
         },
         description: {
-          en: "Improvement of the Insalan association's website as development manager. Under my leadership, the association's website was rewritten in Django and DjangoREST for the backend, and Vue.js and tailwind for the frontend. The site is hosted on a VPS at INSA Rennes and uses Nginx as a reverse proxy.",
-          fr: "Amélioration du site de l'association Insalan en tant que responsable développement. Sous mon mandat de responsable, le site de l'association a été réécrit en Django et DjangoREST pour le backend, et Vue.js et tailwind pour le frontend. Le site est hébergé sur un VPS de l'INSA Rennes et utilise Nginx comme reverse proxy.",
+          en: "Improvement of the INSALAN association's website as development manager. Under my leadership, the association's website was rewritten in Django and DjangoREST for the backend, and Vue.js and tailwind for the frontend. The site is hosted on a VPS at INSA Rennes and uses Nginx as a reverse proxy.",
+          fr: "Amélioration du site de l'association INSALAN en tant que responsable développement. Sous mon mandat de responsable, le site de l'association a été réécrit en Django et DjangoREST pour le backend, et Vue.js et tailwind pour le frontend. Le site est hébergé sur un VPS de l'INSA Rennes et utilise Nginx comme reverse proxy.",
         },
         file: {
           en: 'insalan.html',
@@ -132,8 +132,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Infographique',
         },
         description: {
-          en: 'Infographique is a project from the graphic computing module at INSA Rennes. The project consisted of creating a 2D video using SFML. For this project, we used C++ and SFML.',
-          fr: "Infographique est un projet du module informatique graphique de l'INSA Rennes. Le projet consistait à créer une vidéo en 2D en utilisant SFML. Pour ce projet, nous avons utilisé C++ et SFML.",
+          en: 'Infographique is a project from the graphic computing module at INSA Rennes. The project consisted of creating video from a 3D modeling using SFML. For this project, we used C++ and SFML.',
+          fr: "Infographique est un projet du module informatique graphique de l'INSA Rennes. Le projet consistait à créer une vidéo à partir d'une modélisation 3D en utilisant SFML. Pour ce projet, nous avons utilisé C++ et SFML.",
         },
         file: {
           en: 'infographique.html',
@@ -222,7 +222,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'This project was carried out as part of the TALEO (automatic processing of written and oral language) module of my studies at INSA Rennes. The objective was to create a document indexer in Python and a documents search tool. The indexer creates an inverted index from a set of documents. It is then possible to search for words in the documents and display the results as a list. Several algorithms have been implemented (tf.id, bm25, dirichlet,...).',
-          fr: "Ce projet a été réalisé dans le cadre du module TALEO (traitement automatique du langage écrit et oral) de mon cursus à l'INSA Rennes. L'objectif était de créer un indexeur de documents en python ainsi qu'un outil de recherche de documents. L'indexeur permet de créer un index inversé à partir d'un ensemble de documents. Il est ensuite possible de rechercher des mots dans les documents et d'afficher les résultats sous forme de liste. Plusieurs algorithmes ont été implémentés (tf.id, bm25, dirichlet,...).",
+          fr: "Ce projet a été réalisé dans le cadre du module TALEO (Traitement Automatique du Langage Ecrit et Oral) de mon cursus à l'INSA Rennes. L'objectif était de créer un indexeur de documents en python ainsi qu'un outil de recherche de documents. L'indexeur permet de créer un index inversé à partir d'un ensemble de documents. Il est ensuite possible de rechercher des mots dans les documents et d'afficher les résultats sous forme de liste. Plusieurs algorithmes ont été implémentés (tf.id, bm25, dirichlet,...).",
         },
         file: {
           en: 'indexer.py',
@@ -245,7 +245,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'This research project was carried out as part of my studies at INSA Rennes. The objective was to improve a python pipeline for generating historical reviews on soldiers from the old regime.',
-          fr: "Ce projet inscrit dans la recherche a été réalisé dans le cadre de mon cursus à l'INSA Rennes. L'objectif était l'amélioration d'un pipeline python de génération de revues historique sur les soldats de l'ancien régime.",
+          fr: "Ce projet inscrit dans la recherche a été réalisé dans le cadre de mon cursus à l'INSA Rennes. L'objectif était l'amélioration d'un pipeline python de génération de revues historiques sur les soldats de l'ancien régime.",
         },
         file: {
           en: 'journals.py',
@@ -291,7 +291,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'Creation of a website for my discord bot RankUp. This showcase site allows to present the bot and give information about its use. (Anecdote: the site was entirely made in 3h)',
-          fr: "Création d'un site internet pour mon bot discord RankUp. Ce site vitrine permet de présenter le bot et de donner des informations sur son utilisation. (Anecdote: le site a entièrement été fait en 3h)",
+          fr: "Création d'un site internet pour mon bot Discord RankUp. Ce site vitrine permet de présenter le bot et de donner des informations sur son utilisation. (Anecdote: le site a entièrement été fait en 3h)",
         },
         file: {
           en: 'rankup-website.html',
@@ -383,7 +383,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'Development of a Minecraft plugin and a website for a Minecraft server. The plugin allows generating random buildings in the server world and interacting with several APIs. The website was a static showcase site.',
-          fr: "Développement d'un plugin minecraft ainsi qu'un site internet pour un serveur Minecraft. Le plugin permet de générer des bâtiments aléatoires dans le monde du serveur ainsi qu'interragir avec plusieurs API. Le site internet était un site statique vitrine.",
+          fr: "Développement d'un plugin Minecraft ainsi qu'un site internet pour un serveur Minecraft. Le plugin permet de générer des bâtiments aléatoires dans le monde du serveur ainsi qu'interragir avec plusieurs API. Le site internet était un site statique vitrine.",
         },
         file: {
           en: 'minecraft-plugin.java',
@@ -464,8 +464,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Juin 2023 - Juillet 2023',
         },
         description: {
-          en: 'Maintaining and improving a web application (Flask) for park management for support teams.',
-          fr: 'Maintient et Amélioration d\'une application web (Flask) de gestion de parc à destination des équipes support.',
+          en: 'Maintaining and improving a Web application (Flask) for park management for support teams.',
+          fr: 'Maintient et amélioration d\'une application Web (Flask) de gestion de parc à destination des équipes support.',
         },
         technologies: ['Python', 'Flask', 'HTML', 'CSS', 'JavaScript', 'Git'],
         achievements: {
@@ -490,8 +490,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Juin 2022 - Juillet 2022',
         },
         description: {
-          en: "Hardware updates and encryption of company computers, optimization of the backup process by integrating the company's API to only back up new data, and technology updates in the back-office team of a cloud gaming startup.",
-          fr: "Mises à jour hardware et chiffrement des ordinateurs de l'entreprise, optimisation du processus de backup en intégrant l'api de l'entreprise pour ne sauvegarder que les nouveautés et mise à jour de technologie dans l'équipe back-office d'une startup de cloud gaming.",
+          en: "Hardware updates and encryption of company computers, optimization of the backup process by integrating the company's API to only back up new data, and technology updates (installation of a Hashicorp Vault and Consul cluster) in the back-office team of a cloud gaming startup.",
+          fr: "Mises à jour hardware et chiffrement des ordinateurs de l'entreprise, optimisation du processus de backup en intégrant l'API de l'entreprise pour ne sauvegarder que les nouveautés et mise à jour de technologie (installation d'un cluster Hashicorp Vault et Consul) dans l'équipe back-office d'une startup de cloud gaming.",
         },
         technologies: ['Python', 'Jenkins', 'Golang', 'AWS S3', 'Git'],
         achievements: {

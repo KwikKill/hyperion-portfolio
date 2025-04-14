@@ -33,11 +33,11 @@
 
             <div class="mb-4 leading-relaxed text-terminal">
               <template v-if="isEnglish">
-                I'm a computer science student from France, passionate about web development and software engineering. I
-                love creating innovative solutions to complex problems and continuously learning new technologies.
+                Computer science student at INSA Rennes, passionate about Web development and software engineering. I
+                enjoy technology and learning new things.
               </template>
               <template v-else>
-                Etudiant en Informatique à l'INSA de Rennes passionné par le développement web et l'ingénierie
+                Etudiant en informatique à l'INSA Rennes passionné par le développement Web et l'ingénierie
                 logicielle. J'apprécie la technologie et apprendre de nouvelles choses.
               </template>
             </div>
@@ -62,7 +62,7 @@
                 mes connaissances dans divers domaines de l'informatique.
                 <br/>
                 En dehors de ces sujets, j'apprécie les jeux vidéos, les films et les livres (principalement la science
-                fiction), les jeux de société, les jeux de rôles et la mythologie Grecque.
+                fiction), les jeux de société, les jeux de rôles et la mythologie grecque.
                 <br/>
                 J'ai également fait 5 ans de tennis de table en club.
               </template>
