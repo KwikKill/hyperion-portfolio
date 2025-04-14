@@ -180,7 +180,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'This project is not finished. The aim was to solve the algorithmic problems of the advent of code only with Github copilot. The main rule was: no code written by yourself.',
-          fr: "Ce projet n'est pas finis. L'objectif était de résoudre les problème d’algorithmie de l'advent of code uniquement avec Github copilot. Pour cela, la règle principale était la suivante : interdiction d'écrire du code soit même.",
+          fr: "Ce projet n'est pas terminé. L'objectif était de résoudre les problèmes algorithmiques de l'advent of code uniquement avec Github copilot. La règle principale était : interdiction d'écrire du code soi-même.",
         },
         file: {
           en: 'adventofcode.html',
@@ -222,7 +222,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'This project was carried out as part of the TALEO (automatic processing of written and oral language) module of my studies at INSA Rennes. The objective was to create a document indexer in Python and a documents search tool. The indexer creates an inverted index from a set of documents. It is then possible to search for words in the documents and display the results as a list. Several algorithms have been implemented (tf.id, bm25, dirichlet,...).',
-          fr: "Ce projet a été réalisé dans le cadre du module TALEO (traitement automatique du langage écrit et oral) de mon cursus à l'INSA Rennes. L'objectif était de créer un indexeur de documents en python ainsi qu'un outil de recherche de documents. L'indexeur permet de créer un index inversé à partir d'un ensemble de documents. Il est ensuite possible de rechercher des mots dans les documents et d'afficher les rsultats sous forme de liste. Plusieurs algorithmes ont été implémentés (tf.id, bm25, dirichlet,...).",
+          fr: "Ce projet a été réalisé dans le cadre du module TALEO (traitement automatique du langage écrit et oral) de mon cursus à l'INSA Rennes. L'objectif était de créer un indexeur de documents en python ainsi qu'un outil de recherche de documents. L'indexeur permet de créer un index inversé à partir d'un ensemble de documents. Il est ensuite possible de rechercher des mots dans les documents et d'afficher les résultats sous forme de liste. Plusieurs algorithmes ont été implémentés (tf.id, bm25, dirichlet,...).",
         },
         file: {
           en: 'indexer.py',
@@ -268,7 +268,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'Creation of a website for a humanities project related to INSA Rennes. This static site was created to illustrate our topic "What is the impact of digital technology on access to culture?" The support was between a website and a PDF document, the choice was quickly made.',
-          fr: "Création d'un site internet pour un projet de science humaines lié à l'INSA Rennes. Ce site statique a été créé pour illustrer notre sujet \" Quel est l'impact du numérique sur l'accès à la culture ? \". Le support était entre un site internet et un document PDF, le choix a été vite fait.",
+          fr: "Création d'un site internet pour un projet de sciences humaines lié à l'INSA Rennes. Ce site statique a été créé pour illustrer notre sujet \" Quel est l'impact du numérique sur l'accès à la culture ? \". Le support était entre un site internet et un document PDF, le choix a été vite fait.",
         },
         file: {
           en: 'psh.html',
@@ -336,7 +336,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'A Discord bot providing detailed League of Legends stats, rank tracking, and server leaderboards. This bot uses the RiotGames API to fetch League of Legends match data and display it on Discord using Discord.js.',
-          fr: "Un bot Discord offrant des statistiques détaillées sur League of Legends, suivi des rangs et classements de serveur. Ce bot utilise l'API de RiotGames pour récupérer les données de match League of Legends et les afficher sur Discord en utilisant Discord.js.",
+          fr: 'Un bot Discord qui offre des statistiques détaillées sur League of Legends, assure le suivi des rangs et des classements du serveur. Il utilise l’API de Riot Games pour récupérer les données de match et les affiche sur Discord via la bibliothèque Discord.js.',
         },
         file: {
           en: 'rankup.js',
