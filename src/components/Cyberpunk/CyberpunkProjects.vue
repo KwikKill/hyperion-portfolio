@@ -3,7 +3,7 @@
     <!-- Enhanced cyberpunk background with depth -->
     <div class="absolute inset-0 z-0 overflow-hidden">
       <!-- Improved grid background with perspective -->
-      <div class="cyber-grid-bg"/>
+      <div class="cyber-grid-bg hidden md:block"/>
       <!-- Digital circuit lines -->
       <div class="circuit-lines"/>
       <!-- Scan lines effect -->
