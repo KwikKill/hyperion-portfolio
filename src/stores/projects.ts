@@ -13,8 +13,10 @@ import lcdlpImage from '@/assets/movies/la_cité_de_la_peur.webp';
 import matrixImage from '@/assets/movies/matrix.webp';
 import tenetImage from '@/assets/movies/tenet.webp';
 import codepilotImage from '@/assets/projects/advent.webp';
+import atlasImage from '@/assets/projects/atlas.webp';
 import bombermanImage from '@/assets/projects/bomberman.webp';
 import btcImage from '@/assets/projects/btc.webp';
+import ceosImage from '@/assets/projects/ceos.webp';
 import indexerImage from '@/assets/projects/indexer.webp';
 import infographiqueImage from '@/assets/projects/infographique.webp';
 import insalanImage from '@/assets/projects/insalan.webp';
@@ -40,6 +42,46 @@ import { usePreferencesStore } from './preferences';
 export const useProjectsStore = defineStore('projects', {
   state: () => ({
     projects: [
+      {
+        name: {
+          en: 'Atlas',
+          fr: 'Atlas',
+        },
+        description: {
+          en: 'A web application that allows you to visualize the world in 3D. This application uses Three.js to display the globe and allows you to interact with countries around the world. You can zoom in, zoom out, and click on countries to display information about them. The information is retrieved via the RestCountries and geojson.xyz REST APIs.',
+          fr: 'Une application de carte du monde en 3D interactive. Cette application utilise Three.js pour afficher le globe et permet d\'interagir avec les pays du monde entier. Il est possible de zoomer, dézoomer et cliquer sur les pays pour afficher des informations à leur sujet. Les informations sont récupérées via l\'API REST de RestCountries et de geojson.xyz.',
+        },
+        file: {
+          en: 'atlas.html',
+          fr: 'atlas.html',
+        },
+        date: '2025',
+        starred: true,
+        technologies: ['React', 'Three.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        images: [atlasImage],
+        link: 'https://atlas.somi.blaisot.org/',
+        github: 'https://github.com/KwikKill/Atlas',
+      },
+      {
+        name: {
+          en: 'Ceos - Todo App',
+          fr: 'Ceos - Todo App',
+        },
+        description: {
+          en: 'A todo app built with React and Tailwind CSS. This app allows you to create, edit, and delete tasks. It also allows you to filter tasks by status (completed or not completed). This app was built as a personal project to learn React.',
+          fr: 'Une application de todo construite avec React et Tailwind CSS. Cette application vous permet de créer, modifier et supprimer des tâches. Elle vous permet également de filtrer les tâches par statut (terminées ou non terminées). Cette application a été construite comme un projet personnel pour apprendre React.',
+        },
+        file: {
+          en: 'ceos.html',
+          fr: 'ceos.html',
+        },
+        date: '2025',
+        starred: true,
+        technologies: ['React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        images: [ceosImage],
+        link: 'https://ceos.somi.blaisot.org/',
+        github: 'https://github.com/KwikKill/ceos',
+      },
       {
         name: {
           en: 'Portfolio Website',
@@ -534,6 +576,8 @@ export const useProjectsStore = defineStore('projects', {
             'Django',
             'DjangoREST',
             'Vue.js',
+            'React',
+            'Three.js',
             'Express.js',
             'FastAPI',
             'Vite',
