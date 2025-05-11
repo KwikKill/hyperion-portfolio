@@ -17,6 +17,7 @@ import atlasImage from '@/assets/projects/atlas.webp';
 import bombermanImage from '@/assets/projects/bomberman.webp';
 import btcImage from '@/assets/projects/btc.webp';
 import ceosImage from '@/assets/projects/ceos.webp';
+import hephaistosImage from '@/assets/projects/hephaistos.webp';
 import indexerImage from '@/assets/projects/indexer.webp';
 import infographiqueImage from '@/assets/projects/infographique.webp';
 import insalanImage from '@/assets/projects/insalan.webp';
@@ -42,6 +43,26 @@ import { usePreferencesStore } from './preferences';
 export const useProjectsStore = defineStore('projects', {
   state: () => ({
     projects: [
+      {
+        name: {
+          en: 'Hephaistos',
+          fr: 'Hephaistos',
+        },
+        description: {
+          en: 'Hephaistos is a website builder that allows users to create their own simple websites with ease. It is built using React and provides a user-friendly interface for creating and customizing web pages.',
+          fr: 'Hephaistos est un constructeur de site web qui permet aux utilisateurs de créer facilement leurs propres sites web simples. Il est construit avec React et fournit une interface conviviale pour créer et personnaliser des pages web.',
+        },
+        file: {
+          en: 'hephaistos.html',
+          fr: 'hephaistos.html',
+        },
+        date: '2025',
+        starred: true,
+        technologies: ['React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        images: [hephaistosImage],
+        link: 'https://hephaistos.somi.blaisot.org/',
+        github: 'https://github.com/KwikKill/hephaistos',
+      },
       {
         name: {
           en: 'Atlas',
