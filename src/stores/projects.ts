@@ -31,6 +31,7 @@ import rankupImage from '@/assets/projects/rankup.webp';
 import rankupwebImage from '@/assets/projects/rankup-website.webp';
 import revuesImage from '@/assets/projects/revues.webp';
 import stackImage from '@/assets/projects/stack.webp';
+import talosImage from '@/assets/projects/talos.webp';
 import vfsImage from '@/assets/projects/vfs.webp';
 import type { Experience } from '@/models/experience';
 import type { Games } from '@/models/game';
@@ -45,8 +46,28 @@ export const useProjectsStore = defineStore('projects', {
     projects: [
       {
         name: {
-          en: 'Hephaistos',
-          fr: 'Hephaistos',
+          en: 'Talos - Virtual OS',
+          fr: 'Talos - OS Virtuel',
+        },
+        description: {
+          en: 'Talos is a virtual operating system that allows you to run Linux applications in a virtual environment. It is built using React and provides a user-friendly interface for managing applications and files.',
+          fr: 'Talos est un site web simulant un système d\'exploitation virtuel. Il est construit avec React et utilise une interface utilisateur inspirée de Windows 95 et de linux. Le site permet aux utilisateurs d\'interagir avec le système d\'exploitation virtuel, de naviguer dans les fichiers et d\'exécuter des applications. Cette application est un projet purement démonstratif et n\'a pas de fonctionnalité réelle.',
+        },
+        file: {
+          en: 'talos.html',
+          fr: 'talos.html',
+        },
+        date: '2025',
+        starred: true,
+        technologies: ['React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        images: [talosImage],
+        link: 'https://talos.somi.blaisot.org/',
+        github: 'https://github.com/KwikKill/talos',
+      },
+      {
+        name: {
+          en: 'Hephaistos - Website Builder',
+          fr: 'Hephaistos - Constructeur de site web',
         },
         description: {
           en: 'Hephaistos is a website builder that allows users to create their own simple websites with ease. It is built using React and provides a user-friendly interface for creating and customizing web pages.',
@@ -65,8 +86,8 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         name: {
-          en: 'Atlas',
-          fr: 'Atlas',
+          en: 'Atlas - 3D World Map',
+          fr: 'Atlas - Carte du Monde 3D',
         },
         description: {
           en: 'A web application that allows you to visualize the world in 3D. This application uses Three.js to display the globe and allows you to interact with countries around the world. You can zoom in, zoom out, and click on countries to display information about them. The information is retrieved via the RestCountries and geojson.xyz REST APIs.',
