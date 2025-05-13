@@ -50,7 +50,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Talos - OS Virtuel',
         },
         description: {
-          en: 'Talos is a virtual operating system that allows you to run Linux applications in a virtual environment. It is built using React and provides a user-friendly interface for managing applications and files.',
+          en: 'Talos is a website simulating a virtual operating system. It is built with React and uses a Windows 95 and linux inspired UI. The site allows users to interact with the virtual operating system, navigate files, and run applications. This application is purely demonstrative and has no real functionality.',
           fr: 'Talos est un site web simulant un système d\'exploitation virtuel. Il est construit avec React et utilise une interface utilisateur inspirée de Windows 95 et de linux. Le site permet aux utilisateurs d\'interagir avec le système d\'exploitation virtuel, de naviguer dans les fichiers et d\'exécuter des applications. Cette application est un projet purement démonstratif et n\'a pas de fonctionnalité réelle.',
         },
         file: {
