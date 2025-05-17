@@ -63,6 +63,7 @@ export const useProjectsStore = defineStore('projects', {
         images: [talosImage],
         link: 'https://talos.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/talos',
+        completed: true,
       },
       {
         name: {
@@ -83,6 +84,7 @@ export const useProjectsStore = defineStore('projects', {
         images: [hephaistosImage],
         link: 'https://hephaistos.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/hephaistos',
+        completed: true,
       },
       {
         name: {
@@ -103,6 +105,7 @@ export const useProjectsStore = defineStore('projects', {
         images: [atlasImage],
         link: 'https://atlas.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/Atlas',
+        completed: false,
       },
       {
         name: {
@@ -123,6 +126,7 @@ export const useProjectsStore = defineStore('projects', {
         images: [ceosImage],
         link: 'https://ceos.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/ceos',
+        completed: false,
       },
       {
         name: {
@@ -143,6 +147,7 @@ export const useProjectsStore = defineStore('projects', {
         images: [portfolioImage],
         link: '#',
         github: 'https://github.com/KwikKill/hyperion-portfolio',
+        completed: true,
       },
       {
         name: {
@@ -167,6 +172,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         link: 'https://insalan.fr',
         github: 'https://github.com/InsaLan/infra-insalan.fr',
+        completed: true,
       },
       {
         name: {
@@ -186,6 +192,7 @@ export const useProjectsStore = defineStore('projects', {
         technologies: ['Grafana', 'Telegraf', 'InfluxDB', 'Nginx', 'Docker'],
         images: [monitImage],
         github: 'https://github.com/InsaLan/infra-insalan.fr/blob/main/docker-compose-analytics.yml',
+        completed: false,
       },
       {
         name: {
@@ -209,6 +216,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Compétition',
         },
         link: 'https://www.linkedin.com/posts/m-paris_breakthecode-challenge-codage-activity-7272240941552340992-maS5',
+        completed: false,
       },
       {
         name: {
@@ -233,6 +241,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         link: 'https://youtu.be/HfP1gKB0Cpg',
         github: 'https://github.com/KwikKill/infographique',
+        completed: false,
       },
       {
         name: {
@@ -256,6 +265,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Projet Scolaire',
         },
         github: 'https://github.com/KwikKill/Bomberman',
+        completed: false,
       },
       {
         name: {
@@ -275,6 +285,7 @@ export const useProjectsStore = defineStore('projects', {
         technologies: ['Python', 'JavaScript', 'TypeScript'],
         images: [codepilotImage],
         github: 'https://github.com/KwikKill/advent-of-codpilote',
+        completed: false,
       },
       {
         name: {
@@ -298,6 +309,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Contribution Open Source',
         },
         github: 'https://github.com/KwikKill/Lightshield',
+        completed: false,
       },
       {
         name: {
@@ -321,6 +333,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Projet Scolaire',
         },
         github: 'https://github.com/KwikKill/TALEO',
+        completed: false,
       },
       {
         name: {
@@ -344,6 +357,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Projet de Recherche',
         },
         link: 'https://www.irisa.fr/article/2023-09/la-creation-de-revues-numeriques-des-registres-des-soldats-de-lancien-regime-un',
+        completed: false,
       },
       {
         name: {
@@ -367,6 +381,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Projet Scolaire',
         },
         link: 'https://psh.blaisot.org/',
+        completed: false,
       },
       {
         name: {
@@ -390,6 +405,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Projet Personnel',
         },
         link: 'https://rankup.somi.blaisot.org/',
+        completed: true,
       },
       {
         name: {
@@ -412,6 +428,7 @@ export const useProjectsStore = defineStore('projects', {
           en: 'Used in Production',
           fr: 'Utilisé en Production',
         },
+        completed: false,
       },
       {
         name: {
@@ -436,6 +453,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         link: 'https://rankup.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/Kwik_bot',
+        completed: true,
       },
       {
         name: {
@@ -459,6 +477,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Projet Scolaire',
         },
         github: 'https://github.com/KwikKill/Virtual-File-System',
+        completed: false,
       },
       {
         name: {
@@ -477,6 +496,7 @@ export const useProjectsStore = defineStore('projects', {
         starred: false,
         technologies: ['Java', 'HTML', 'CSS'],
         images: [minecraftImage],
+        completed: false,
       },
       {
         name: {
@@ -500,6 +520,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Contribution Open Source',
         },
         github: 'https://github.com/KwikKill/Anuken-Mindustry',
+        completed: false,
       },
     ] as Project[],
     experiences: [

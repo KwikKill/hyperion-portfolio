@@ -169,12 +169,76 @@
           <div
             class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
             :class="{
-              'mt-5': !((searchQuery || selectedTechnology) && filteredProjects.length === 0),
+              'mt-5': !((searchQuery || selectedTechnology) && completedFilteredProjects.length === 0),
             }"
           >
             <!-- Project items remain the same -->
             <button
-              v-for="project in filteredProjects"
+              v-for="project in completedFilteredProjects"
+              :id="'project-' + project.file[language ?? 'en']"
+              :key="project.localizedName"
+              type="button"
+              class="group flex cursor-pointer flex-col items-center"
+              :class="{ 'search-match': isSearchMatch(project) }"
+              :data-umami-event="project.localizedName"
+              @click="openProject(project)"
+              @keydown.enter="openProject(project)"
+            >
+              <div class="desktop-folder relative mb-2 transition-transform group-hover:scale-110">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  :class="[
+                    'size-16',
+                    project.starred ? 'star-glow text-primary' : 'text-primary/80',
+                  ]"
+                >
+                  <path
+                    d="M19.5 21a3 3 0 003-3v-4.5a3 3 0 00-3-3h-15a3 3 0 00-3 3V18a3 3 0 003 3h15zM1.5 10.146V6a3 3 0 013-3h5.379a2.25 2.25 0 011.59.659l2.122 2.121c.14.141.331.22.53.22H19.5a3 3 0 013 3v1.146A4.483 4.483 0 0019.5 9h-15a4.483 4.483 0 00-3 1.146z"
+                  />
+                </svg>
+
+                <!-- Star badge for starred projects -->
+                <div v-if="project.starred" class="star-badge absolute -right-2 -top-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                      d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Project name -->
+              <div class="text-center">
+                <div class="font-mono cyberpunk-text-glow px-2 py-1 text-sm text-primary">
+                  {{ project.localizedName }}
+                </div>
+                <div class="font-mono mt-1 text-xs text-secondary">
+                  {{ project.date }}
+                </div>
+              </div>
+            </button>
+          </div>
+          <div
+            v-if="uncompletedFilteredProjects.length > 0"
+            class="mt-10 flex items-center justify-center gap-2"
+          >
+            <div class="h-1 flex-1 rounded bg-primary/30"/>
+            <div class="font-mono text-center text-sm text-secondary">
+              {{ isEnglish ? 'LEARNING PROJECTS & SCHOOL PROJECTS' : 'PROJETS D\'APPRENTISSAGE & PROJETS SCOLAIRES' }}
+            </div>
+            <div class="h-1 flex-1 rounded bg-primary/30"/>
+          </div>
+          <div
+            class="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+            :class="{
+              'mt-5': !((searchQuery || selectedTechnology) && uncompletedFilteredProjects.length === 0),
+            }"
+          >
+            <!-- Project items remain the same -->
+            <button
+              v-for="project in uncompletedFilteredProjects"
               :id="'project-' + project.file[language ?? 'en']"
               :key="project.localizedName"
               type="button"
@@ -517,6 +581,10 @@ const filteredProjects = computed(() => {
 
   return result;
 });
+
+const completedFilteredProjects = computed(() => filteredProjects.value.filter((project) => project.completed));
+
+const uncompletedFilteredProjects = computed(() => filteredProjects.value.filter((project) => !project.completed));
 
 // Check if a project is a new match for animation purposes
 function isSearchMatch(project: localizedProject) {

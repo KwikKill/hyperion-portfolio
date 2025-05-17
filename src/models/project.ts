@@ -21,6 +21,7 @@ export interface Project {
   };
   link?: string;
   github?: string;
+  completed?: boolean;
 }
 
 export interface localizedProject {
