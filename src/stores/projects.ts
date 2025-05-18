@@ -22,6 +22,7 @@ import indexerImage from '@/assets/projects/indexer.webp';
 import infographiqueImage from '@/assets/projects/infographique.webp';
 import insalanImage from '@/assets/projects/insalan.webp';
 import lightshieldImage from '@/assets/projects/lightshield.webp';
+import metisImage from '@/assets/projects/metis.webp';
 import mindustryImage from '@/assets/projects/mindustry.webp';
 import minecraftImage from '@/assets/projects/minecraft.webp';
 import monitImage from '@/assets/projects/monit.webp';
@@ -44,6 +45,27 @@ import { usePreferencesStore } from './preferences';
 export const useProjectsStore = defineStore('projects', {
   state: () => ({
     projects: [
+      {
+        name: {
+          en: 'Metis - Job search Dashboard',
+          fr: 'Metis - Dashboard de recherche d\'emploi',
+        },
+        description: {
+          en: 'Metis is a job search dashboard that allows you to manage your job applications. It is built with React and uses a PostgreSQL database to store data. The site allows you to add, edit, and delete job applications, as well as filter them by status (applied, interview, etc.).',
+          fr: 'Metis est un tableau de bord de recherche d\'emploi qui vous permet de gérer vos candidatures. Il est construit avec React et enregistre les données dans le stockage locale du navigateur. Le site vous permet d\'ajouter, de modifier et de supprimer des candidatures, ainsi que de les filtrer par statut (candidature envoyée, entretien, etc.).',
+        },
+        file: {
+          en: 'metis.html',
+          fr: 'metis.html',
+        },
+        date: '2025',
+        starred: false,
+        technologies: ['React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        images: [metisImage],
+        link: 'https://metis.somi.blaisot.org/',
+        github: 'https://github.com/KwikKill/metis',
+        completed: true,
+      },
       {
         name: {
           en: 'Talos - Virtual OS',
