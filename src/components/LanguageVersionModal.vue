@@ -10,10 +10,15 @@
     >
       <div class="absolute inset-0 opacity-20">
         <div class="bggrid absolute left-0 top-0 grid size-full grid-cols-12 grid-rows-12 gap-4">
-          <div v-for="i in 144" :key="i" class="rounded-md bg-white"/>
+          <div
+            v-for="i in 144"
+            :key="i"
+            class="rounded-md bg-white shadow-xl"
+            :style="{ '--delay': `${((i % 12) + Math.floor(i / 12)) * 0.1}s` }"
+          />
         </div>
       </div>
-      <div class="absolute inset-0 bg-black/40"/>
+      <div class="pointer-events-none absolute inset-0 bg-black/50 backdrop-blur-sm"/>
     </div>
 
     <!-- Modal content with glass effect -->
@@ -445,27 +450,31 @@ onMounted(() => {
 
 /* Animation for background grid */
 @keyframes pulse {
-
-  0%,
-  100% {
+  0%, 100% {
     opacity: 0.1;
+    transform: scale(1);
   }
-
   50% {
     opacity: 0.3;
+    transform: scale(1.05);
   }
 }
 
-.bggrid>div {
-  animation: pulse 10s infinite;
-  animation-delay: calc(var(--index) * 0.1s);
+.bggrid > div {
+  animation: pulse 10s infinite ease-in-out;
+  animation-delay: calc(var(--delay, 0s));
+  transition: all 300ms ease-in-out;
 }
 
-.bggrid>div:nth-child(3n) {
-  animation-delay: calc(var(--index) * 0.2s + 1s);
+/* Hover IN (fast) */
+.bggrid > div:hover {
+  transition-duration: 300ms;
+  transform: scale(0.5);
+  background-color: rgb(0, 0, 0);
 }
 
-.bggrid>div:nth-child(5n) {
-  animation-delay: calc(var(--index) * 0.3s + 2s);
+/* Hover OUT (slow) */
+.bggrid > div:not(:hover) {
+  transition-duration: 4000ms;
 }
 </style>
