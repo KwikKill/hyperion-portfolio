@@ -102,6 +102,49 @@
           </div>
         </div>
       </div>
+
+      <!-- Freelance Section -->
+      <div class="mt-12 rounded-lg bg-gray-50 p-8 shadow-md dark:bg-gray-700">
+        <h3 class="mb-6 text-center text-2xl font-semibold text-gray-900 dark:text-white">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="mr-2 inline-block size-6 text-blue-600 dark:text-blue-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          {{ isEnglish ? 'Freelance Work' : 'Travail en Freelance' }}
+        </h3>
+
+        <p class="mx-auto mb-6 max-w-3xl text-gray-700 dark:text-gray-300">
+          <template v-if="isEnglish">
+            Needing a website?
+            <br/>
+            Access my complete service catalog and get a personalized quote.
+          </template>
+          <template v-else>
+            Besoin d'un site web ?
+            <br/>
+            Accédez à mon catalogue complet de services et obtenez un devis personnalisé.
+          </template>
+        </p>
+
+        <div class="text-center">
+          <a
+            href="https://freelance.somi.blaisot.org"
+            class="inline-block rounded bg-blue-600 px-6 py-3 text-white hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600"
+          >
+            {{ isEnglish ? 'View My Freelance Work' : 'Voir Mon Travail en Freelance' }}
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 </template>
