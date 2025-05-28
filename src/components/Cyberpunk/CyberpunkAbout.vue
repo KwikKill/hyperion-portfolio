@@ -18,7 +18,7 @@
         </template>
       </CyberpunkTerminalWindow>
 
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
         <!-- About Me Terminal -->
         <CyberpunkTerminalWindow>
           <template #title>
@@ -211,6 +211,66 @@
           </template>
         </CyberpunkTerminalWindow>
       </div>
+
+      <!-- Call to Action Terminal -->
+      <CyberpunkTerminalWindow>
+        <template #title>
+          FREELANCE.EXE
+        </template>
+
+        <template #body>
+          <div class="mb-6 text-center">
+            <!-- Cyberpunk icon -->
+            <div class="mx-auto mb-4 flex size-20 items-center justify-center rounded-lg border-2 border-primary bg-bg/50">
+              <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="text-primary">
+                <!-- Define Hexagon as Clip Path -->
+                <defs>
+                  <clipPath id="hexClip">
+                    <polygon points="50,10 86.6,30 86.6,70 50,90 13.4,70 13.4,30"/>
+                  </clipPath>
+                </defs>
+
+                <!-- Outer Hexagon -->
+                <polygon points="50,10 86.6,30 86.6,70 50,90 13.4,70 13.4,30" stroke-width="4" fill="none"/>
+
+                <!-- Clipped Content: Rounded globe and horizontal lines -->
+                <g clip-path="url(#hexClip)">
+                  <!-- Vertical ellipses (longitude lines) -->
+                  <ellipse cx="50" cy="50" rx="25" ry="40" stroke-width="2" fill="none"/>
+                  <ellipse cx="50" cy="50" rx="10" ry="40" stroke-width="1.5" fill="none"/>
+
+                  <!-- Horizontal latitude lines -->
+                  <line x1="13.4" y1="30" x2="86.6" y2="30" stroke-width="1.5"/>
+                  <line x1="13.4" y1="50" x2="86.6" y2="50" stroke-width="2"/>
+                  <line x1="13.4" y1="70" x2="86.6" y2="70" stroke-width="1.5"/>
+                </g>
+              </svg>
+            </div>
+
+            <h3 class="mb-3 text-xl font-bold text-primary">
+              {{ isEnglish ? 'NEED A WEBSITE?' : 'BESOIN D\'UN SITE WEB ?' }}
+            </h3>
+
+            <p class="mb-6 text-terminal">
+              {{ isEnglish ? 'Access my complete service catalog and get a personalized quote.' : 'Accédez à mon catalogue complet de services et obtenez un devis personnalisé.' }}
+            </p>
+          </div>
+
+          <div class="text-center">
+            <a
+              href="https://freelance.somi.blaisot.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cyberpunk-button inline-flex items-center rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-black transition-all duration-300 hover:scale-105 hover:bg-hover"
+            >
+              {{ isEnglish ? 'VIEW SERVICES & PRICING' : 'VOIR SERVICES & TARIFS' }}
+              <svg class="ml-2 size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+          </div>
+        </template>
+      </CyberpunkTerminalWindow>
     </div>
   </section>
 </template>
