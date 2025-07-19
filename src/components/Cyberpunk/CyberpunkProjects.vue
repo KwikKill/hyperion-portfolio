@@ -2,8 +2,6 @@
   <section id="projects" class="relative min-h-screen rounded-md bg-bg py-20">
     <!-- Enhanced cyberpunk background with depth -->
     <div class="absolute inset-0 z-0 overflow-hidden">
-      <!-- Improved grid background with perspective -->
-      <div class="cyber-grid-bg hidden md:block"/>
       <!-- Digital circuit lines -->
       <div class="circuit-lines"/>
       <!-- Scan lines effect -->
@@ -78,6 +76,7 @@
               <div class="relative">
                 <select
                   v-model="selectedTechnology"
+                  label="Technology Filter"
                   class="font-mono w-[180px] appearance-none rounded border border-primary/30 bg-transparent px-3 py-1 uppercase text-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 >
                   <option value="">

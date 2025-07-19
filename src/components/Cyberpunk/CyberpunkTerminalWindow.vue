@@ -9,116 +9,118 @@
     }"
     :style="terminalStyle"
   >
-    <div
-      :class="{
-        invisible: isClosed,
-      }"
-    >
-      <!-- Terminal header -->
+    <div>
       <div
-        v-if="!noTitle"
-        class="terminal-header flex items-center"
         :class="{
-          'border-b border-primary/30 pb-2': !noBody,
-          'mb-0': isMinimized,
-          'justify-center text-center': noButtons,
-          'justify-between': !noButtons,
+          invisible: isClosed,
         }"
       >
-        <div class="flex items-center">
-          <div v-if="showIcon" class="mr-2 size-4 bg-primary"/>
-          <div class="font-mono uppercase tracking-wider text-primary">
-            <slot name="title">
-              Terminal Window
-            </slot>
+        <!-- Terminal header -->
+        <div
+          v-if="!noTitle"
+          class="terminal-header flex items-center"
+          :class="{
+            'border-b border-primary/30 pb-2': !noBody,
+            'mb-0': isMinimized,
+            'justify-center text-center': noButtons,
+            'justify-between': !noButtons,
+          }"
+        >
+          <div class="flex items-center">
+            <div v-if="showIcon" class="mr-2 size-4 bg-primary"/>
+            <div class="font-mono uppercase tracking-wider text-primary">
+              <slot name="title">
+                Terminal Window
+              </slot>
+            </div>
           </div>
+          <slot v-if="!noButtons" name="buttons">
+            <div class="flex space-x-2">
+              <!-- Fullscreen button -->
+              <div
+                v-if="noBody"
+                class="flex size-3 cursor-not-allowed items-center justify-center rounded-full bg-gray-500 transition-all"
+                title="Disabled"
+              />
+              <div
+                v-else
+                class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-green-500 transition-all hover:ring-1 hover:ring-white/50"
+                title="Fullscreen"
+                @click.prevent="toggleFullscreen"
+                @keydown.enter.prevent="toggleFullscreen"
+              />
+
+              <!-- Minimize button -->
+              <div
+                v-if="noBody"
+                class="flex size-3 cursor-not-allowed items-center justify-center rounded-full bg-gray-500 transition-all"
+                title="Disabled"
+              />
+              <div
+                v-else
+                class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-yellow-500 transition-all hover:ring-1 hover:ring-white/50"
+                title="Minimize"
+                @click.prevent="toggleMinimize"
+                @keydown.enter.prevent="toggleMinimize"
+              />
+
+              <!-- Close button -->
+              <div
+                class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-red-500 transition-all hover:ring-1 hover:ring-white/50"
+                title="Close"
+                @click.prevent="closeTerminal"
+                @keydown.enter.prevent="closeTerminal"
+              />
+            </div>
+          </slot>
         </div>
-        <slot v-if="!noButtons" name="buttons">
-          <div class="flex space-x-2">
-            <!-- Fullscreen button -->
-            <div
-              v-if="noBody"
-              class="flex size-3 cursor-not-allowed items-center justify-center rounded-full bg-gray-500 transition-all"
-              title="Disabled"
-            />
-            <div
-              v-else
-              class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-green-500 transition-all hover:ring-1 hover:ring-white/50"
-              title="Fullscreen"
-              @click.prevent="toggleFullscreen"
-              @keydown.enter.prevent="toggleFullscreen"
-            />
 
-            <!-- Minimize button -->
-            <div
-              v-if="noBody"
-              class="flex size-3 cursor-not-allowed items-center justify-center rounded-full bg-gray-500 transition-all"
-              title="Disabled"
-            />
-            <div
-              v-else
-              class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-yellow-500 transition-all hover:ring-1 hover:ring-white/50"
-              title="Minimize"
-              @click.prevent="toggleMinimize"
-              @keydown.enter.prevent="toggleMinimize"
-            />
-
-            <!-- Close button -->
-            <div
-              class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-red-500 transition-all hover:ring-1 hover:ring-white/50"
-              title="Close"
-              @click.prevent="closeTerminal"
-              @keydown.enter.prevent="closeTerminal"
-            />
-          </div>
-        </slot>
+        <!-- Terminal content -->
+        <div
+          v-if="!noBody && !isMinimized"
+          class="font-mono p-2 transition-all duration-300"
+          :class="{
+            [bodyClass]: !isFullscreen,
+            'max-h-0 overflow-hidden': isMinimized,
+            'max-h-screen overflow-auto': isFullscreen,
+            'overflow-hidden': !isFullscreen && !isMinimized,
+          }"
+          :style="bodyStyle"
+        >
+          <slot name="body">
+            <!-- Default content if no body is provided -->
+            <div class="text-secondary">
+              kwikkill@hyperion:~$ echo "Terminal content goes here"
+            </div>
+          </slot>
+        </div>
       </div>
-
-      <!-- Terminal content -->
-      <div
-        v-if="!noBody && !isMinimized"
-        class="font-mono p-2 transition-all duration-300"
-        :class="{
-          [bodyClass]: !isFullscreen,
-          'max-h-0 overflow-hidden': isMinimized,
-          'max-h-screen overflow-auto': isFullscreen,
-          'overflow-hidden': !isFullscreen && !isMinimized,
-        }"
-        :style="bodyStyle"
-      >
-        <slot name="body">
-          <!-- Default content if no body is provided -->
-          <div class="text-secondary">
-            kwikkill@hyperion:~$ echo "Terminal content goes here"
-          </div>
-        </slot>
-      </div>
-    </div>
-    <div v-if="isMinimized" class="font-mono overflow-hidden p-2 text-primary/50 transition-all duration-300">
-      {{ isEnglish
-        ? 'Terminal is minimized. Click the button to restore.'
-        : 'Le terminal est minimisé. Cliquez sur le bouton pour le restaurer.'
-      }}
-    </div>
-
-    <div
-      v-if="isClosed"
-      class="z-5 absolute left-0 top-0 flex size-full items-center justify-center rounded-md bg-black"
-      @click="reopenTerminal"
-      @keydown.enter="reopenTerminal"
-    >
-      <span
-        class="font-mono glitch-text text-primary"
-        :data-text="isEnglish
-          ? '[ CLICK TO RESTORE TERMINAL ]'
-          : '[ CLIQUEZ POUR RESTAURER LE TERMINAL ]'"
-      >
-        {{
-          isEnglish
-            ? '[ CLICK TO RESTORE TERMINAL ]'
-            : '[ CLIQUEZ POUR RESTAURER LE TERMINAL ]'
+      <div v-if="isMinimized" class="font-mono overflow-hidden p-2 text-primary/50 transition-all duration-300">
+        {{ isEnglish
+          ? 'Terminal is minimized. Click the button to restore.'
+          : 'Le terminal est minimisé. Cliquez sur le bouton pour le restaurer.'
         }}
-      </span>
+      </div>
+
+      <div
+        v-if="isClosed"
+        class="z-5 absolute left-0 top-0 flex size-full items-center justify-center rounded-md bg-black"
+        @click="reopenTerminal"
+        @keydown.enter="reopenTerminal"
+      >
+        <span
+          class="font-mono glitch-text text-primary"
+          :data-text="isEnglish
+            ? '[ CLICK TO RESTORE TERMINAL ]'
+            : '[ CLIQUEZ POUR RESTAURER LE TERMINAL ]'"
+        >
+          {{
+            isEnglish
+              ? '[ CLICK TO RESTORE TERMINAL ]'
+              : '[ CLIQUEZ POUR RESTAURER LE TERMINAL ]'
+          }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -232,80 +234,3 @@ const bodyStyle = computed(() => {
   return {};
 });
 </script>
-
-<style scoped>
-.cyberpunk-terminal {
-  overflow: hidden;
-}
-
-.terminal-fullscreen {
-  display: flex;
-  flex-direction: column;
-}
-
-.terminal-fullscreen .terminal-header {
-  flex-shrink: 0;
-}
-
-.terminal-fullscreen .font-mono {
-  flex-grow: 1;
-  overflow: auto;
-}
-
-.glitch-text {
-  position: relative;
-  display: inline-block;
-  z-index: 10;
-}
-
-.glitch-text::before,
-.glitch-text::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.8;
-}
-
-.glitch-text::before {
-  color: rgb(var(--color-secondary));
-  z-index: -1;
-  animation: glitch 1s cubic-bezier(0.5, 0, 0.5, 1) both infinite;
-  animation-delay: 0.1s;
-}
-
-.glitch-text::after {
-  color: rgb(var(--color-accent));
-  z-index: -1;
-  animation: glitch 1s cubic-bezier(0.5, 0, 0.5, 1) reverse both infinite;
-  animation-delay: 0.2s;
-}
-
-@keyframes glitch {
-  0% {
-    transform: translate(0);
-  }
-
-  20% {
-    transform: translate(-2px, 1px);
-  }
-
-  40% {
-    transform: translate(-2px, 1px);
-  }
-
-  60% {
-    transform: translate(2px, 1px);
-  }
-
-  80% {
-    transform: translate(2px, 1px);
-  }
-
-  100% {
-    transform: translate(0);
-  }
-}
-</style>

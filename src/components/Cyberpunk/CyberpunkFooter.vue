@@ -9,7 +9,7 @@
             KwikKill
             <span class="text-gray-500">/&gt;</span>
           </div>
-          <div class="mt-1 text-gray-500">
+          <div class="mt-1 text-gray-300">
             {{ isEnglish ? '© 2025 All rights reserved' : '© 2025 Tous droits réservés' }}
           </div>
         </div>

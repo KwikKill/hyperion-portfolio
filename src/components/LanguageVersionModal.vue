@@ -18,7 +18,7 @@
           />
         </div>
       </div>
-      <div class="pointer-events-none absolute inset-0 bg-black/50 backdrop-blur-sm"/>
+      <div class="pointer-events-none absolute inset-0 bg-black/50"/>
     </div>
 
     <!-- Modal content with glass effect -->
