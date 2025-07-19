@@ -74,9 +74,12 @@
                 </svg>
               </div>
               <div class="relative">
+                <label class="sr-only" :for="'technology-filter'">
+                  {{ isEnglish ? 'Filter by technology' : 'Filtrer par technologie' }}
+                </label>
                 <select
+                  id="technology-filter"
                   v-model="selectedTechnology"
-                  label="Technology Filter"
                   class="font-mono w-[180px] appearance-none rounded border border-primary/30 bg-transparent px-3 py-1 uppercase text-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 >
                   <option value="">
