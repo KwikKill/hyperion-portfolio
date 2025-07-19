@@ -15,9 +15,7 @@
             :key="i"
             class="rounded-md bg-white shadow-xl"
             :style="{ '--delay': `${(((i - 1) % 12) + Math.floor((i - 1) / 12)) * 0.1}s` }"
-          >
-            {{ i }}
-          </div>
+          />
         </div>
       </div>
       <div class="pointer-events-none absolute inset-0 bg-black/50"/>
