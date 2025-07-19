@@ -23,7 +23,7 @@
             }}
           </div>
           <div
-            class="absolute right-2 top-2 mb-2 rounded-full bg-gray-200 px-2 py-1 text-right text-sm text-gray-500 dark:bg-gray-700 dark:text-gray-300"
+            class="absolute right-2 top-2 mb-2 rounded-full bg-gray-200 px-2 py-1 text-right text-sm text-gray-600 dark:bg-gray-700 dark:text-gray-300"
           >
             {{ project.date }}
           </div>
@@ -88,7 +88,7 @@
           <img :src="project.images[0]" :alt="project.localizedName" class="h-48 w-full object-cover"/>
           <div
             v-if="project.starred"
-            class="absolute left-0 top-0 rounded-br-lg bg-yellow-500 px-2 py-1 text-sm font-bold text-white"
+            class="absolute left-0 top-0 rounded-br-lg bg-yellow-500 px-2 py-1 text-sm font-bold text-black"
           >
             {{
               isEnglish
@@ -97,7 +97,7 @@
             }}
           </div>
           <div
-            class="absolute right-2 top-2 mb-2 rounded-full bg-gray-200 px-2 py-1 text-right text-sm text-gray-500 dark:bg-gray-700 dark:text-gray-400"
+            class="absolute right-2 top-2 mb-2 rounded-full bg-gray-200 px-2 py-1 text-right text-sm text-gray-600 dark:bg-gray-700 dark:text-gray-300"
           >
             {{ project.date }}
           </div>
