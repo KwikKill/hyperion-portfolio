@@ -2,9 +2,9 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import aptImage from '@/assets/games/a_plague_tale.webp';
 import baldurImage from '@/assets/games/baldurs_gate_3.webp';
+import clairobscureImage from '@/assets/games/clairobscure.webp';
 import cp2077Image from '@/assets/games/cyberpunk_2077.webp';
 import hollowknightImage from '@/assets/games/hollow_knight.webp';
-import lmfImage from '@/assets/games/little_miss_fortune.webp';
 import thewitcherImage from '@/assets/games/the_witcher_3.webp';
 import exMachinaImage from '@/assets/movies/ex_machina.webp';
 import gitsImage from '@/assets/movies/ghost_in_the_shell.webp';
@@ -17,6 +17,10 @@ import atlasImage from '@/assets/projects/atlas.webp';
 import bombermanImage from '@/assets/projects/bomberman.webp';
 import btcImage from '@/assets/projects/btc.webp';
 import ceosImage from '@/assets/projects/ceos.webp';
+import esport1 from '@/assets/projects/esportrecrutement1.webp';
+import esport2 from '@/assets/projects/esportrecrutement2.webp';
+import esport3 from '@/assets/projects/esportrecrutement3.webp';
+import esport4 from '@/assets/projects/esportrecrutement4.webp';
 import hephaistosImage from '@/assets/projects/hephaistos.webp';
 import indexerImage from '@/assets/projects/indexer.webp';
 import infographiqueImage from '@/assets/projects/infographique.webp';
@@ -47,6 +51,35 @@ export const useProjectsStore = defineStore('projects', {
     projects: [
       {
         name: {
+          en: 'EsportRecrutement.fr',
+          fr: 'EsportRecrutement.fr',
+        },
+        description: {
+          en: 'EsportRecrutement.fr is a website dedicated to esports player recruitment.\nIt allows players to:\n- create profiles in the directory\n- search for teams\n- apply for positions in various esports teams.\nThe site includes a system of announcements, a blog, user chat, payment, and a complete admin panel.\nIt is built with Next.js and uses a PostgreSQL database to store data. This full stack project was done as freelance work for a client.',
+          fr: 'EsportRecrutement.fr est un site dédié au recrutement de joueurs esports.\nIl permet aux joueurs de :\n- créer des profils dans l\'annuaire\n- rechercher des équipes\n- de postuler à des postes dans diverses équipes esports.\nLe site inclus un système d\'annonces, de blog, de chat entre utilisteurs, de paiement et un panel admin complet.\n Il est construit avec Next.js et utilise une base de données PostgreSQL pour stocker les données. Ce projet full stack a été réalisé en freelance pour un client.',
+        },
+        file: {
+          en: 'esportrecrutement.html',
+          fr: 'esportrecrutement.html',
+        },
+        date: '2025',
+        starred: true,
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'PostgreSQL', 'Docker', 'Nginx'],
+        images: [
+          esport1,
+          esport2,
+          esport3,
+          esport4,
+        ],
+        link: 'https://esportrecrutement.fr/',
+        completed: true,
+        note: {
+          en: 'Freelance Project',
+          fr: 'Projet Freelance',
+        },
+      },
+      {
+        name: {
           en: 'Metis - Job search Dashboard',
           fr: 'Metis - Dashboard de recherche d\'emploi',
         },
@@ -60,7 +93,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
-        technologies: ['React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
         images: [metisImage],
         link: 'https://metis.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/metis',
@@ -81,7 +114,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
-        technologies: ['React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
         images: [talosImage],
         link: 'https://talos.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/talos',
@@ -102,7 +135,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
-        technologies: ['React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
         images: [hephaistosImage],
         link: 'https://hephaistos.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/hephaistos',
@@ -123,7 +156,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
-        technologies: ['React', 'Three.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        technologies: ['Next.js', 'React', 'Three.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
         images: [atlasImage],
         link: 'https://atlas.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/Atlas',
@@ -144,7 +177,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
-        technologies: ['React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
         images: [ceosImage],
         link: 'https://ceos.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/ceos',
@@ -165,7 +198,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
-        technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Pinia', 'Docker', 'PostgreSQL'],
+        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Pinia', 'Docker', 'PostgreSQL'],
         images: [portfolioImage],
         link: '#',
         github: 'https://github.com/KwikKill/hyperion-portfolio',
@@ -186,7 +219,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023-2025',
         starred: true,
-        technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Pinia', 'JavaScript', 'TypeScript', 'Django', 'DjangoREST', 'Docker', 'Nginx', 'Postgres'],
+        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Pinia', 'JavaScript', 'TypeScript', 'Django', 'DjangoREST', 'Docker', 'Nginx', 'Postgres'],
         images: [insalanImage],
         note: {
           en: 'Team Management',
@@ -470,8 +503,8 @@ export const useProjectsStore = defineStore('projects', {
         technologies: ['JavaScript', 'Discord.js', 'Docker', 'Postgres'],
         images: [rankupImage],
         note: {
-          en: '150+ Users',
-          fr: '150+ Utilisateurs',
+          en: '200+ Users',
+          fr: '200+ Utilisateurs',
         },
         link: 'https://rankup.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/Kwik_bot',
@@ -546,6 +579,34 @@ export const useProjectsStore = defineStore('projects', {
       },
     ] as Project[],
     experiences: [
+      {
+        title: {
+          fr: 'Développeur Freelance (4 mois)',
+          en: 'Freelance Developer (4 months)',
+        },
+        company: 'Gabriel Blaisot',
+        location: {
+          en: 'Rennes, France',
+          fr: 'Rennes, France',
+        },
+        period: {
+          en: 'June 2024 - September 2024',
+          fr: 'Juin 2024 - Septembre 2024',
+        },
+        description: {
+          fr: 'Développement de site internet en tant que développeur freelance en micro entreprise. Cette activité m\'a permis de gérer plusieurs facette de l\'entreprise : la recherche et la relation client, la gestion de projet et le développement web.',
+          en: 'Development of websites as a freelance developer in a micro-enterprise. This activity allowed me to manage several aspects of the business: client research and relations, project management, and web development.',
+        },
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'PostgreSQL', 'Docker'],
+        achievements: {
+          en: [
+            'Developed a community esports recruitment website from scratch',
+          ],
+          fr: [
+            'Développement de A à Z d\'un site de recrutement esports communautaire',
+          ],
+        },
+      },
       {
         title: {
           en: 'Development Intern (12 weeks)',
@@ -666,6 +727,7 @@ export const useProjectsStore = defineStore('projects', {
             'Express.js',
             'FastAPI',
             'Vite',
+            'Next.js',
             'TailwindCSS',
             'jQuery',
             'Bootstrap',
@@ -977,11 +1039,11 @@ export const useProjectsStore = defineStore('projects', {
           whyILoveIt: 'Extremely immersive with meaningful choices and a rich world.',
         },
         {
-          title: 'Little Miss Fortune',
-          year: '2019',
-          image: lmfImage,
-          description: 'A narrative adventure game where you follow a little girl as she tries to find a treasure.',
-          whyILoveIt: 'Disturbing story and unique aesthetic.',
+          title: 'Clair Obscur: Expedition 33',
+          year: '2025',
+          image: clairobscureImage,
+          description: 'a turn-based RPG set in a dark Belle Époque atmosphere, blending tactics and real-time reactions in an emotional narrative against the mysterious Peintresse.',
+          whyILoveIt: 'Visually striking universe, playing on the contrast of light and darkness as well as emotions.',
         },
         {
           title: 'Hollow Knight',
@@ -1025,11 +1087,11 @@ export const useProjectsStore = defineStore('projects', {
           whyILoveIt: 'Extrêmement immersif avec des choix significatifs et un monde riche.',
         },
         {
-          title: 'Little Miss Fortune',
-          year: '2019',
-          image: lmfImage,
-          description: "Un jeu d'aventure narratif où vous suivez une petite fille qui cherche à trouver un trésor.",
-          whyILoveIt: "L'histoire dérangeante et l'esthétique unique.",
+          title: 'Clair Obscur: Expedition 33',
+          year: '2025',
+          image: clairobscureImage,
+          description: 'un RPG tour par tour à l’ambiance Belle Époque sombre, mêlant tactique et reactions temps réel dans un récit émouvant contre la mystérieuse Peintresse.',
+          whyILoveIt: 'Univers visuellement frappant, jouant sur le contraste lumière / obscurité autant que sur les émotions.',
         },
         {
           title: 'Hollow Knight',

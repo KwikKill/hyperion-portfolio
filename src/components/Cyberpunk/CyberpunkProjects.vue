@@ -349,13 +349,13 @@
               </div>
 
               <!-- Main Image with transition -->
-              <div class="relative overflow-hidden rounded-md border-2 border-primary/70">
+              <div class="relative flex aspect-video items-center justify-center overflow-hidden rounded-md border-2 border-primary/70">
                 <transition name="fade" mode="out-in">
                   <img
                     :key="currentImageIndex"
                     :src="selectedProject.images[currentImageIndex]"
                     :alt="`${selectedProject.localizedName} - Image ${currentImageIndex + 1}`"
-                    class="h-auto w-full object-cover"
+                    class="h-full w-auto object-cover object-center"
                   />
                 </transition>
 
@@ -440,7 +440,7 @@
                 DESCRIPTION
               </h4>
               <div class="mb-4 rounded-md border border-primary/30 bg-bg/50 p-4">
-                <div class="font-mono text-justify leading-relaxed">
+                <div class="font-mono whitespace-pre-line text-justify leading-relaxed">
                   {{ selectedProject.localizedDescription }}
                 </div>
               </div>

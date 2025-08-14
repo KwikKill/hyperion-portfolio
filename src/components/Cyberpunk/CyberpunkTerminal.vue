@@ -376,7 +376,7 @@ onMounted(() => {
     });
     lines.push({ type: 'command', text: 'ls -la projects/' });
     // format the date string to be the same length
-    projects.value.forEach((project) => {
+    projects.value.slice().reverse().forEach((project) => {
       lines.push({
         type: 'response',
         text: `-rwxr-xr-x 23 gabriel gabriel   ${project.localizedDescription.length.toString().padStart(4, ' ')} ${
@@ -407,7 +407,7 @@ onMounted(() => {
       });
     });
     lines.push({ type: 'command', text: 'ls -la projets/' });
-    projects.value.forEach((project) => {
+    projects.value.slice().reverse().forEach((project) => {
       lines.push({
         type: 'response',
         text: `-rwxr-xr-x 23 gabriel gabriel   ${(project.localizedDescription.length * 8).toString().padStart(4, ' ')} ${
