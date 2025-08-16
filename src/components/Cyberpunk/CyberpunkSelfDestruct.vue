@@ -175,6 +175,8 @@
       v-if="showDestruction"
       class="fixed inset-0 z-50 overflow-hidden"
     >
+      <div class="absolute inset-0 bg-black/50"/>
+
       <!-- Current section info -->
       <div class="absolute left-8 top-8 z-10">
         <div class="font-mono rounded border border-primary bg-black/80 px-4 py-2 text-primary">
@@ -210,13 +212,11 @@
     >
       <CyberpunkTerminalWindow>
         <template #title>
-          <h2 class="font-mono text-2xl font-bold uppercase tracking-wider text-primary">
-            {{
-              isEnglish
-                ? 'SYSTEM RESET'
-                : 'SYSTÈME RÉINITIALISÉ'
-            }}
-          </h2>
+          {{
+            isEnglish
+              ? 'SYSTEM RESET'
+              : 'SYSTÈME RÉINITIALISÉ'
+          }}
         </template>
         <template #body>
           <div class="text-center">
@@ -331,13 +331,10 @@ const destroyNextSection = () => {
 
   if (sectionElement) {
     // Scroll to the section
-    sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    sectionElement.scrollIntoView({ behavior: 'instant', block: 'start' });
 
-    // Wait for scroll to complete, then start grid animation
-    setTimeout(() => {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      animateGridDestruction(sectionElement);
-    }, 1000);
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    animateGridDestruction(sectionElement);
   } else {
     // Section not found, move to next
     currentSection.value += 1;
@@ -361,6 +358,27 @@ function randomCoord(size: number) {
 
   // clamp entre 0 et size-1
   return Math.max(0, Math.min(size - 1, x));
+}
+
+function createCyberPattern(color: string): CanvasPattern | null {
+  const pCanvas = document.createElement('canvas');
+  pCanvas.width = 8;
+  pCanvas.height = 8;
+  const pCtx = pCanvas.getContext('2d');
+
+  if (!pCtx) return null;
+
+  pCtx.fillStyle = color;
+  pCtx.fillRect(0, 0, 8, 8);
+
+  // tracer une ligne diagonale style "glitch"
+  pCtx.strokeStyle = 'black';
+  pCtx.beginPath();
+  pCtx.moveTo(0, 8);
+  pCtx.lineTo(8, 0);
+  pCtx.stroke();
+
+  return pCtx.createPattern(pCanvas, 'repeat');
 }
 
 // Animate the grid destruction for a section
@@ -390,6 +408,10 @@ const animateGridDestruction = (sectionElement: HTMLElement) => {
   const squares: boolean[][] = Array(gridSize).fill(null).map(() => Array(gridSize).fill(false));
   let filledSquares = 0;
   const totalSquares = gridSize * gridSize;
+
+  // Track extra frames after destruction
+  let extraFrames = 0;
+  const EXTRA_FRAMES = 5;
 
   gridProgress.value = 0;
 
@@ -436,7 +458,8 @@ const animateGridDestruction = (sectionElement: HTMLElement) => {
 
           // Draw primary color square if in recentSquares
           if (recentSquares.some((s) => s.row === row && s.col === col)) {
-            ctx.fillStyle = `rgb(${getComputedStyle(document.documentElement).getPropertyValue('--color-primary')})`;
+            const pattern = createCyberPattern(`rgb(${getComputedStyle(document.documentElement).getPropertyValue('--color-primary')})`);
+            ctx.fillStyle = pattern ?? `rgb(${getComputedStyle(document.documentElement).getPropertyValue('--color-primary')})`;
             ctx.fillRect(x, y, squareWidth, squareHeight);
           } else {
             ctx.fillStyle = '#000000';
@@ -484,9 +507,12 @@ const animateGridDestruction = (sectionElement: HTMLElement) => {
     // Update progress
     gridProgress.value = (filledSquares / totalSquares) * 100;
 
-    if (filledSquares < totalSquares) {
+    if (filledSquares < totalSquares || extraFrames < EXTRA_FRAMES) {
       // Continue animation
       setTimeout(animateSquares, 50);
+      if (filledSquares >= totalSquares) {
+        extraFrames += 1; // Count extra frames after full destruction
+      }
     } else {
       // Fill the whole section with black
       ctx.fillStyle = '#000000';
@@ -505,10 +531,8 @@ const animateGridDestruction = (sectionElement: HTMLElement) => {
         currentSection.value += 1;
 
         // Small delay before next section
-        setTimeout(() => {
-          destroyNextSection();
-        }, 500);
-      }, 500);
+        destroyNextSection();
+      }, 1000);
     }
   };
 
@@ -530,6 +554,12 @@ const startSelfDestruct = () => {
 
   // Disable scrolling
   document.body.style.overflow = 'hidden';
+
+  // scroll to the first section
+  const firstSection = document.getElementById(sections[0]);
+  if (firstSection) {
+    firstSection.scrollIntoView({ behavior: 'instant', block: 'start' });
+  }
 
   // Start countdown
   const countdownInterval = setInterval(() => {
@@ -640,7 +670,7 @@ onMounted(() => {
 }
 
 .alarm-overlay {
-  animation: alarm-flash 0.3s infinite;
+  animation: alarm-flash 0.5s infinite;
 }
 
 .alarm-ring-wrapper {
