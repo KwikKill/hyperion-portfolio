@@ -590,8 +590,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Rennes, France',
         },
         period: {
-          en: 'June 2024 - September 2024',
-          fr: 'Juin 2024 - Septembre 2024',
+          en: 'June 2025 - September 2025',
+          fr: 'Juin 2025 - Septembre 2025',
         },
         description: {
           fr: 'Développement de site internet en tant que développeur freelance en micro entreprise. Cette activité m\'a permis de gérer plusieurs facette de l\'entreprise : la recherche et la relation client, la gestion de projet et le développement web.',
