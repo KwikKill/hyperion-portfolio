@@ -8,7 +8,7 @@
       <div class="mb-16 grid grid-cols-1 gap-10 md:grid-cols-1">
         <div class="rounded-lg bg-gray-50 p-8 shadow-md dark:bg-gray-700">
           <h3 class="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">
-            {{ isEnglish ? 'Who I Am' : 'Qui Je Suis' }}
+            {{ isEnglish ? 'Who I Am ?' : 'Qui Suis-Je ?' }}
           </h3>
           <p class="mb-4 text-gray-700 dark:text-gray-300">
             <template v-if="isEnglish">
@@ -123,7 +123,7 @@
           {{ isEnglish ? 'Freelance Work' : 'Travail en Freelance' }}
         </h3>
 
-        <p class="mx-auto mb-6 max-w-3xl text-gray-700 dark:text-gray-300">
+        <p class="mx-auto mb-6 max-w-3xl text-center text-gray-700 dark:text-gray-300">
           <template v-if="isEnglish">
             Needing a website?
             <br/>

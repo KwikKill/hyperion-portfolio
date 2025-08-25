@@ -21,6 +21,10 @@ import esport1 from '@/assets/projects/esportrecrutement1.webp';
 import esport2 from '@/assets/projects/esportrecrutement2.webp';
 import esport3 from '@/assets/projects/esportrecrutement3.webp';
 import esport4 from '@/assets/projects/esportrecrutement4.webp';
+import freelance1 from '@/assets/projects/freelance1.webp';
+import freelance2 from '@/assets/projects/freelance2.webp';
+import freelance3 from '@/assets/projects/freelance3.webp';
+import freelance4 from '@/assets/projects/freelance4.webp';
 import hephaistosImage from '@/assets/projects/hephaistos.webp';
 import indexerImage from '@/assets/projects/indexer.webp';
 import infographiqueImage from '@/assets/projects/infographique.webp';
@@ -55,8 +59,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'EsportRecrutement.fr',
         },
         description: {
-          en: 'EsportRecrutement.fr is a website dedicated to esports player recruitment.\nIt allows players to:\n- create profiles in the directory\n- search for teams\n- apply for positions in various esports teams.\nThe site includes a system of announcements, a blog, user chat, payment, and a complete admin panel.\nIt is built with Next.js and uses a PostgreSQL database to store data. This full stack project was done as freelance work for a client.',
-          fr: 'EsportRecrutement.fr est un site dédié au recrutement de joueurs esports.\nIl permet aux joueurs de :\n- créer des profils dans l\'annuaire\n- rechercher des équipes\n- de postuler à des postes dans diverses équipes esports.\nLe site inclus un système d\'annonces, de blog, de chat entre utilisteurs, de paiement et un panel admin complet.\n Il est construit avec Next.js et utilise une base de données PostgreSQL pour stocker les données. Ce projet full stack a été réalisé en freelance pour un client.',
+          en: 'EsportRecrutement.fr is a website dedicated to esports player recruitment. It allows players to:\n- create profiles in the directory\n- search for teams\n- apply for positions in various esports teams.\nThe site includes a system of announcements, a blog, user chat, payment, and a complete admin panel.\nIt is built with Next.js and uses a PostgreSQL database to store data. This full stack project was done as freelance work for a client.',
+          fr: 'EsportRecrutement.fr est un site dédié au recrutement de joueurs esports. Il permet aux joueurs de :\n- créer des profils dans l\'annuaire\n- rechercher des équipes\n- de postuler à des postes dans diverses équipes esports.\nLe site inclus un système d\'annonces, de blog, de chat entre utilisteurs, de paiement et un panel admin complet.\n Il est construit avec Next.js et utilise une base de données PostgreSQL pour stocker les données. Ce projet full stack a été réalisé en freelance pour un client.',
         },
         file: {
           en: 'esportrecrutement.html',
@@ -76,6 +80,35 @@ export const useProjectsStore = defineStore('projects', {
         note: {
           en: 'Freelance Project',
           fr: 'Projet Freelance',
+        },
+      },
+      {
+        name: {
+          en: 'Freelance Website',
+          fr: 'Site freelancing',
+        },
+        description: {
+          en: 'Creation of my freelance showcase website. This site aims to present my services, skills, and achievements as a freelance web developer. The site is built with Vue.js and uses a PostgreSQL database to store data.',
+          fr: 'Création de mon site vitrine de freelance. Ce site a pour but de présenter mes services, mes compétences et mes réalisations en tant que développeur web freelance. Le site est construit avec Vue.js et utilise une base de données PostgreSQL pour stocker les données.',
+        },
+        file: {
+          en: 'freelance.html',
+          fr: 'freelance.html',
+        },
+        date: '2025',
+        starred: false,
+        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Nginx'],
+        images: [
+          freelance1,
+          freelance2,
+          freelance3,
+          freelance4,
+        ],
+        link: 'https://freelance.somi.blaisot.org/',
+        completed: true,
+        note: {
+          en: 'Freelance Website',
+          fr: 'Site vitrine freelance',
         },
       },
       {
@@ -143,6 +176,30 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         name: {
+          en: 'Break the code',
+          fr: 'Break the code',
+        },
+        description: {
+          en: 'Participation in the algorithmic competition "Break the code" organized by Sopra Steria. By improving each year, my teammates and I managed to reach 6th place out of 64 participants in the second year, maintain this position out of 69 participants in the third year, and achieve 4th place out of 42 participants in the fourth year. The competition is open to all students from computer science schools in Rennes.',
+          fr: "Participation au concours d'algorithmique \"Break the code\" organisé par Sopra Steria. En m'améliorant chaque année, nous avons réussi avec mes coéquipiers à nous hisser à la 6ième place sur 64 participants dès la deuxième année, à maintenir cette place sur 69 participants la troisième année et à atteindre la 4ième place sur 42 participants la quatrième année. Le concours est ouvert à tous les étudiants des écoles d'informatique de Rennes.",
+        },
+        file: {
+          en: 'breakthecode.html',
+          fr: 'breakthecode.html',
+        },
+        date: '2021-2024',
+        starred: true,
+        technologies: ['Python', 'JavaScript'],
+        images: [btcImage],
+        note: {
+          en: 'Competition',
+          fr: 'Compétition',
+        },
+        link: 'https://www.linkedin.com/posts/m-paris_breakthecode-challenge-codage-activity-7272240941552340992-maS5',
+        completed: false,
+      },
+      {
+        name: {
           en: 'Atlas - 3D World Map',
           fr: 'Atlas - Carte du Monde 3D',
         },
@@ -198,7 +255,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
-        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Pinia', 'Docker', 'PostgreSQL'],
+        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Pinia', 'Docker'],
         images: [portfolioImage],
         link: '#',
         github: 'https://github.com/KwikKill/hyperion-portfolio',
@@ -219,7 +276,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023-2025',
         starred: true,
-        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Pinia', 'JavaScript', 'TypeScript', 'Django', 'DjangoREST', 'Docker', 'Nginx', 'Postgres'],
+        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Pinia', 'JavaScript', 'TypeScript', 'Django', 'DjangoREST', 'Docker', 'Nginx', 'PostgreSQL'],
         images: [insalanImage],
         note: {
           en: 'Team Management',
@@ -247,30 +304,6 @@ export const useProjectsStore = defineStore('projects', {
         technologies: ['Grafana', 'Telegraf', 'InfluxDB', 'Nginx', 'Docker'],
         images: [monitImage],
         github: 'https://github.com/InsaLan/infra-insalan.fr/blob/main/docker-compose-analytics.yml',
-        completed: false,
-      },
-      {
-        name: {
-          en: 'Break the code',
-          fr: 'Break the code',
-        },
-        description: {
-          en: 'Participation in the algorithmic competition "Break the code" organized by Sopra Steria. By improving each year, my teammates and I managed to reach 6th place out of 64 participants in the second year, maintain this position out of 69 participants in the third year, and achieve 4th place out of 42 participants in the fourth year. The competition is open to all students from computer science schools in Rennes.',
-          fr: "Participation au concours d'algorithmique \"Break the code\" organisé par Sopra Steria. En m'améliorant chaque année, nous avons réussi avec mes coéquipiers à nous hisser à la 6ième place sur 64 participants dès la deuxième année, à maintenir cette place sur 69 participants la troisième année et à atteindre la 4ième place sur 42 participants la quatrième année. Le concours est ouvert à tous les étudiants des écoles d'informatique de Rennes.",
-        },
-        file: {
-          en: 'breakthecode.html',
-          fr: 'breakthecode.html',
-        },
-        date: '2021-2024',
-        starred: true,
-        technologies: ['Python', 'JavaScript'],
-        images: [btcImage],
-        note: {
-          en: 'Competition',
-          fr: 'Compétition',
-        },
-        link: 'https://www.linkedin.com/posts/m-paris_breakthecode-challenge-codage-activity-7272240941552340992-maS5',
         completed: false,
       },
       {
@@ -357,7 +390,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2024',
         starred: false,
-        technologies: ['Python', 'JavaScript', 'Docker', 'Redis', 'Postgres'],
+        technologies: ['Python', 'JavaScript', 'Docker', 'Redis', 'PostgreSQL'],
         images: [lightshieldImage],
         note: {
           en: 'Open Source Contribution',
@@ -500,7 +533,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2019-2025',
         starred: true,
-        technologies: ['JavaScript', 'Discord.js', 'Docker', 'Postgres'],
+        technologies: ['JavaScript', 'Discord.js', 'Docker', 'PostgreSQL'],
         images: [rankupImage],
         note: {
           en: '200+ Users',
@@ -738,7 +771,7 @@ export const useProjectsStore = defineStore('projects', {
         {
           name: 'Databases',
           skills: [
-            'Postgres',
+            'PostgreSQL',
             'MongoDB',
             'MySQL',
             'Redis',
@@ -835,7 +868,7 @@ export const useProjectsStore = defineStore('projects', {
         {
           name: 'Bases de Données',
           skills: [
-            'Postgres',
+            'PostgreSQL',
             'MongoDB',
             'MySQL',
             'Redis',

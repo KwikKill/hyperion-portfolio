@@ -34,7 +34,7 @@
                 {{ project.localizedName }}
               </h3>
 
-              <p class="mb-4 text-gray-700 dark:text-gray-300">
+              <p class="mb-4 whitespace-pre-line leading-relaxed text-gray-700 dark:text-gray-300">
                 {{ project.localizedDescription }}
               </p>
             </div>

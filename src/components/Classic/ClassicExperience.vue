@@ -98,7 +98,7 @@
                 </div>
 
                 <!-- Key achievements -->
-                <div>
+                <div v-if="experience.localizedAchievements.length > 0">
                   <h4 class="mb-2 text-sm font-semibold text-gray-900 dark:text-white">
                     {{ isEnglish ? 'Key Achievements:' : 'Réalisations Principales:' }}
                   </h4>
