@@ -13,6 +13,8 @@ import lcdlpImage from '@/assets/movies/la_cité_de_la_peur.webp';
 import matrixImage from '@/assets/movies/matrix.webp';
 import tenetImage from '@/assets/movies/tenet.webp';
 import codepilotImage from '@/assets/projects/advent.webp';
+import athena1 from '@/assets/projects/athena1.webp';
+import athena2 from '@/assets/projects/athena2.webp';
 import atlasImage from '@/assets/projects/atlas.webp';
 import bombermanImage from '@/assets/projects/bomberman.webp';
 import btcImage from '@/assets/projects/btc.webp';
@@ -81,6 +83,29 @@ export const useProjectsStore = defineStore('projects', {
           en: 'Freelance Project',
           fr: 'Projet Freelance',
         },
+      },
+      {
+        name: {
+          en: 'Athena - Dashboard Builder',
+          fr: 'Athena - Constructeur de Dashboard',
+        },
+        description: {
+          en: 'Athena is a dashboard builder that allows users to easily create their own custom dashboards from REST API data sources. Athena is inspired by Grafana and Jquery for data transformations. The site is built with Next.js and uses Supabase to store data and authentication.',
+          fr: 'Athena est un constructeur de dashboard qui permet aux utilisateurs de créer facilement leurs propres tableaux de bord personnalisés à partir de source de données d\'API REST. Athena est inspiré de Grafana et Jquery pour les transformations de données. Le site est construit avec Next.js et utilise Supabase pour stocker les données et l\'authentification.',
+        },
+        file: {
+          en: 'athena.html',
+          fr: 'athena.html',
+        },
+        date: '2025',
+        starred: true,
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Supabase', 'Docker', 'Nginx'],
+        images: [
+          athena1,
+          athena2,
+        ],
+        link: 'https://athena.somi.blaisot.org/',
+        completed: true,
       },
       {
         name: {
@@ -774,6 +799,7 @@ export const useProjectsStore = defineStore('projects', {
             'PostgreSQL',
             'MongoDB',
             'MySQL',
+            'Supabase',
             'Redis',
             'SQLite',
             'MariaDB',
