@@ -315,16 +315,16 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         name: {
-          en: 'Insalaplace',
-          fr: 'Insalaplace',
+          en: 'Insaplace',
+          fr: 'Insaplace',
         },
         description: {
-          en: 'Insalaplace is a web application for "pixel war" (inspired by Reddit\'s r/place project) made for INSA students. The principle is simple: each user can color a pixel every X minutes on a large shared canvas. The goal is to collaborate with other users to create drawings, messages, or simply have fun coloring pixels randomly. The event brought together over 1000 users in one week. My role in this collaborative project was to implement a system of achievements, visual events, and to supervise the site during the event period.',
-          fr: "Insalaplace est une application web de \"guerre de pixel\" (inspirée du projet r/place de Reddit) réalisée pour les étudiants INSA. Le principe est simple : chaque utilisateur peut colorier un pixel toutes les X minutes sur une grande toile partagée. Le but est de collaborer avec les autres utilisateurs pour créer des dessins, des messages, ou simplement s'amuser à colorier des pixels au hasard. L'événement a regroupé plus de 1000 utilisateurs sur une semaine. Mon rôle dans ce projet collaboratif a été d'implémenter un systeme de succès, d'événements visuels et de supperviser le site pendant la période de l'événement.",
+          en: 'Insaplace is a web application for "pixel war" (inspired by Reddit\'s r/place project) made for INSA students. The principle is simple: each user can color a pixel every X minutes on a large shared canvas. The goal is to collaborate with other users to create drawings, messages, or simply have fun coloring pixels randomly. The event brought together over 1000 users in one week. My role in this collaborative project was to implement a system of achievements, visual events, and to supervise the site during the event period.',
+          fr: "Insaplace est une application web de \"guerre de pixel\" (inspirée du projet r/place de Reddit) réalisée pour les étudiants INSA. Le principe est simple : chaque utilisateur peut colorier un pixel toutes les X minutes sur une grande toile partagée. Le but est de collaborer avec les autres utilisateurs pour créer des dessins, des messages, ou simplement s'amuser à colorier des pixels au hasard. L'événement a regroupé plus de 1000 utilisateurs sur une semaine. Mon rôle dans ce projet collaboratif a été d'implémenter un systeme de succès, d'événements visuels et de supperviser le site pendant la période de l'événement.",
         },
         file: {
-          en: 'insalaplace.html',
-          fr: 'insalaplace.html',
+          en: 'insaplace.html',
+          fr: 'insaplace.html',
         },
         date: '2025',
         starred: true,
