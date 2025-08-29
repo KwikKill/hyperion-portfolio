@@ -31,6 +31,8 @@ import hephaistosImage from '@/assets/projects/hephaistos.webp';
 import indexerImage from '@/assets/projects/indexer.webp';
 import infographiqueImage from '@/assets/projects/infographique.webp';
 import insalanImage from '@/assets/projects/insalan.webp';
+import insaplace1 from '@/assets/projects/insaplace1.webp';
+import insaplace2 from '@/assets/projects/insaplace2.webp';
 import lightshieldImage from '@/assets/projects/lightshield.webp';
 import metisImage from '@/assets/projects/metis.webp';
 import mindustryImage from '@/assets/projects/mindustry.webp';
@@ -313,6 +315,31 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         name: {
+          en: 'Insalaplace',
+          fr: 'Insalaplace',
+        },
+        description: {
+          en: 'Insalaplace is a web application for "pixel war" (inspired by Reddit\'s r/place project) made for INSA students. The principle is simple: each user can color a pixel every X minutes on a large shared canvas. The goal is to collaborate with other users to create drawings, messages, or simply have fun coloring pixels randomly. The event brought together over 1000 users in one week. My role in this collaborative project was to implement a system of achievements, visual events, and to supervise the site during the event period.',
+          fr: "Insalaplace est une application web de \"guerre de pixel\" (inspirée du projet r/place de Reddit) réalisée pour les étudiants INSA. Le principe est simple : chaque utilisateur peut colorier un pixel toutes les X minutes sur une grande toile partagée. Le but est de collaborer avec les autres utilisateurs pour créer des dessins, des messages, ou simplement s'amuser à colorier des pixels au hasard. L'événement a regroupé plus de 1000 utilisateurs sur une semaine. Mon rôle dans ce projet collaboratif a été d'implémenter un systeme de succès, d'événements visuels et de supperviser le site pendant la période de l'événement.",
+        },
+        file: {
+          en: 'insalaplace.html',
+          fr: 'insalaplace.html',
+        },
+        date: '2025',
+        starred: true,
+        technologies: ['Go', 'GoFiber', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Traefik', 'PostgreSQL', 'Kafka', 'Protobuf'],
+        images: [
+          insaplace1,
+          insaplace2,
+        ],
+        note: {
+          en: 'Event Project',
+          fr: 'Projet Événementiel',
+        },
+      },
+      {
+        name: {
           en: 'Insalan.fr Monitoring',
           fr: 'Métrologie Insalan.fr',
         },
@@ -487,7 +514,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023',
         starred: false,
-        technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker'],
+        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker'],
         images: [pshImage],
         note: {
           en: 'School Assignment',
@@ -511,7 +538,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023',
         starred: false,
-        technologies: ['Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker'],
+        technologies: ['Nuxt', 'Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker'],
         images: [rankupwebImage],
         note: {
           en: 'Personal Project',
@@ -777,9 +804,10 @@ export const useProjectsStore = defineStore('projects', {
           name: 'Web Development',
           skills: [
             'Vue.js',
-            'Vite',
             'React',
             'Next.js',
+            'Vite',
+            'Nuxt',
             'TailwindCSS',
             'Angular',
             'Django',
@@ -787,7 +815,9 @@ export const useProjectsStore = defineStore('projects', {
             'Express.js',
             'FastAPI',
             'Nginx',
+            'Traefik',
             'Three.js',
+            'GoFiber',
             'jQuery',
             'Bootstrap',
             'Swagger',
@@ -877,18 +907,24 @@ export const useProjectsStore = defineStore('projects', {
         {
           name: 'Développement Web',
           skills: [
+            'Vue.js',
+            'React',
+            'Next.js',
+            'Vite',
+            'Nuxt',
+            'TailwindCSS',
             'Angular',
             'Django',
             'DjangoREST',
-            'Vue.js',
             'Express.js',
             'FastAPI',
-            'Vite',
-            'TailwindCSS',
+            'Nginx',
+            'Traefik',
+            'Three.js',
+            'GoFiber',
             'jQuery',
             'Bootstrap',
             'Swagger',
-            'Nginx',
           ],
         },
         {
@@ -897,6 +933,7 @@ export const useProjectsStore = defineStore('projects', {
             'PostgreSQL',
             'MongoDB',
             'MySQL',
+            'Supabase',
             'Redis',
             'SQLite',
             'MariaDB',
