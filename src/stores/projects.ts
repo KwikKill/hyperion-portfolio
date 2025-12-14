@@ -207,8 +207,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Break the code',
         },
         description: {
-          en: 'Participation in the algorithmic competition "Break the code" organized by Sopra Steria. By improving each year, my teammates and I managed to reach 6th place out of 64 participants in the second year, maintain this position out of 69 participants in the third year, and achieve 4th place out of 42 participants in the fourth year. The competition is open to all students from computer science schools in Rennes.',
-          fr: "Participation au concours d'algorithmique \"Break the code\" organisé par Sopra Steria. En m'améliorant chaque année, nous avons réussi avec mes coéquipiers à nous hisser à la 6ième place sur 64 participants dès la deuxième année, à maintenir cette place sur 69 participants la troisième année et à atteindre la 4ième place sur 42 participants la quatrième année. Le concours est ouvert à tous les étudiants des écoles d'informatique de Rennes.",
+          en: 'Participation in the algorithmic competition "Break the code" organized by Sopra Steria. By improving each year, my teammates and I managed to reach 6th place out of 64 participants in the second year, maintain this position out of 69 participants in the third year, reach 4th place out of 42 participants in the fourth year, and 8th place in the fifth and final year. The competition is open to all computer science students in Rennes schools.',
+          fr: "Participation au concours d'algorithmique \"Break the code\" organisé par Sopra Steria. En m'améliorant chaque année, nous avons réussi avec mes coéquipiers à nous hisser à la 6ième place sur 64 participants dès la deuxième année, à maintenir cette place sur 69 participants la troisième année, à atteindre la 4ième place sur 42 participants la quatrième année et la 8ième place la cinquième et dernière année. Le concours est ouvert à tous les étudiants des écoles d'informatique de Rennes.",
         },
         file: {
           en: 'breakthecode.html',
@@ -588,8 +588,8 @@ export const useProjectsStore = defineStore('projects', {
         technologies: ['JavaScript', 'Discord.js', 'Docker', 'PostgreSQL'],
         images: [rankupImage],
         note: {
-          en: '250+ Users',
-          fr: '250+ Utilisateurs',
+          en: '300+ Users',
+          fr: '300+ Utilisateurs',
         },
         link: 'https://rankup.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/Kwik_bot',
