@@ -21,6 +21,26 @@ export default defineNuxtConfig({
           src: 'https://um.somi.blaisot.org/script.js',
           defer: true,
           'data-website-id': '53342678-6638-496c-961b-c1a14cfe1e8a'
+        },
+        {
+          type: 'application/ld+json',
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Gabriel Blaisot",
+            "url": "https://gabriel.blaisot.org",
+            "sameAs": [
+              "https://github.com/KwikKill",
+              "https://www.linkedin.com/in/gabriel-blaisot-a89480233/"
+            ],
+            "jobTitle": "Étudiant en Informatique",
+            "worksFor": {
+              "@type": "EducationalOrganization",
+              "name": "INSA Rennes"
+            },
+            "description": "Étudiant en informatique à l’INSA Rennes, spécialisé en data science et développement d'applications web.",
+            "image": "https://gabriel.blaisot.org/logo.png"
+          }, null, 2)
         }
       ]
     }

@@ -1,3 +1,4 @@
+import { navigateTo, useRoute } from 'nuxt/app';
 import { defineStore } from 'pinia';
 
 export const usePreferencesStore = defineStore('preferences', {
@@ -20,9 +21,9 @@ export const usePreferencesStore = defineStore('preferences', {
     },
     checkUrlParameters() {
       // Get URL parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      const langParam = urlParams.get('lang');
-      const themeParam = urlParams.get('theme');
+      const urlParams = useRoute().query;
+      const langParam = urlParams.lang as string | null;
+      const themeParam = urlParams.theme as string | null;
 
       // Check if both parameters are valid
       const validLang = langParam !== null && ['en', 'fr'].includes(langParam);
@@ -44,11 +45,14 @@ export const usePreferencesStore = defineStore('preferences', {
     updateUrlParameters() {
       // Only update URL if preferences are set
       if (this.language) {
-        const url = new URL(window.location.href);
-        url.searchParams.set('lang', this.language);
-        url.searchParams.set('theme', this.cyberpunkTheme);
+        const url = useRoute().fullPath
+          .replace(/([?&])lang=[^&]*/g, '') // Remove existing lang param
+          .replace(/([?&])theme=[^&]*/g, ''); // Remove existing theme param
 
-        window.history.replaceState({}, '', url);
+        const separator = url.includes('?') ? '&' : '?';
+        const newUrl = `${url}${separator}lang=${this.language}&theme=${this.cyberpunkTheme}`;
+
+        navigateTo(newUrl, { replace: true });
       }
     },
     setCyberpunkTheme(theme: 'default' | 'ghost' | 'matrix' | 'solarpunk') {

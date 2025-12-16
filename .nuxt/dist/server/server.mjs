@@ -1,1 +1,0 @@
-export { default } from "file:///home/gabriel/Documents/dev/Infra-Site/hyperion/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"
