@@ -19,14 +19,14 @@
     ],
     "paths": {
       "@/*": [
-        "./src/*"
+        "app/*"
       ]
     }
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.vue",
+    "app/**/*.ts",
+    "app/**/*.d.ts",
+    "app/**/*.vue",
     "*.config.ts"
   ]
 }

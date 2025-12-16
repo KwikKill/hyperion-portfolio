@@ -38,5 +38,4 @@ export default {
       sans: ['Inter', 'sans-serif'],
     },
   },
-  plugins: [require('@tailwindcss/forms')],
 };
