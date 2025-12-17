@@ -225,10 +225,14 @@ html {
   src: url(./assets/fonts/Valorax-lg25V.otf);
 }
 
-#app {
+#__nuxt {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+html {
+  background-color: black;
 }
 
 .cyberpunk-terminal {
