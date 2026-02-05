@@ -59,6 +59,31 @@ export const useProjectsStore = defineStore('projects', {
     projects: [
       {
         name: {
+          en: 'RankUp LoL Discord Bot',
+          fr: 'Bot Discord RankUp LoL',
+        },
+        description: {
+          en: 'A Discord bot providing detailed League of Legends stats, rank tracking, and server leaderboards. This bot uses the RiotGames API to fetch League of Legends match data and display it on Discord using Discord.js.',
+          fr: 'Un bot Discord qui offre des statistiques détaillées sur League of Legends, assure le suivi des rangs et des classements du serveur. Il utilise l’API de Riot Games pour récupérer les données de match et les affiche sur Discord via la bibliothèque Discord.js.',
+        },
+        file: {
+          en: 'rankup.js',
+          fr: 'rankup.js',
+        },
+        date: '2019-2026',
+        starred: true,
+        technologies: ['JavaScript', 'Discord.js', 'Docker', 'PostgreSQL'],
+        images: [rankupImage],
+        note: {
+          en: '450+ Users',
+          fr: '450+ Utilisateurs',
+        },
+        link: 'https://rankup.somi.blaisot.org/',
+        github: 'https://github.com/KwikKill/Kwik_bot',
+        completed: true,
+      },
+      {
+        name: {
           en: 'EsportRecrutement.fr',
           fr: 'EsportRecrutement.fr',
         },
@@ -70,7 +95,7 @@ export const useProjectsStore = defineStore('projects', {
           en: 'esportrecrutement.html',
           fr: 'esportrecrutement.html',
         },
-        date: '2025',
+        date: '2025-2026',
         starred: true,
         technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'PostgreSQL', 'Docker', 'Nginx'],
         images: [
@@ -569,31 +594,6 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Utilisé en Production',
         },
         completed: false,
-      },
-      {
-        name: {
-          en: 'RankUp LoL Discord Bot',
-          fr: 'Bot Discord RankUp LoL',
-        },
-        description: {
-          en: 'A Discord bot providing detailed League of Legends stats, rank tracking, and server leaderboards. This bot uses the RiotGames API to fetch League of Legends match data and display it on Discord using Discord.js.',
-          fr: 'Un bot Discord qui offre des statistiques détaillées sur League of Legends, assure le suivi des rangs et des classements du serveur. Il utilise l’API de Riot Games pour récupérer les données de match et les affiche sur Discord via la bibliothèque Discord.js.',
-        },
-        file: {
-          en: 'rankup.js',
-          fr: 'rankup.js',
-        },
-        date: '2019-2025',
-        starred: true,
-        technologies: ['JavaScript', 'Discord.js', 'Docker', 'PostgreSQL'],
-        images: [rankupImage],
-        note: {
-          en: '450+ Users',
-          fr: '450+ Utilisateurs',
-        },
-        link: 'https://rankup.somi.blaisot.org/',
-        github: 'https://github.com/KwikKill/Kwik_bot',
-        completed: true,
       },
       {
         name: {
