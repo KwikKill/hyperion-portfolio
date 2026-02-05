@@ -588,8 +588,8 @@ export const useProjectsStore = defineStore('projects', {
         technologies: ['JavaScript', 'Discord.js', 'Docker', 'PostgreSQL'],
         images: [rankupImage],
         note: {
-          en: '300+ Users',
-          fr: '300+ Utilisateurs',
+          en: '450+ Users',
+          fr: '450+ Utilisateurs',
         },
         link: 'https://rankup.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/Kwik_bot',
