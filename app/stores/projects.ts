@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import amphionImage from '@/assets/projects/amphion.webp';
 import aptImage from '@/assets/games/a_plague_tale.webp';
 import baldurImage from '@/assets/games/baldurs_gate_3.webp';
 import clairobscureImage from '@/assets/games/clairobscure.webp';
@@ -110,6 +111,28 @@ export const useProjectsStore = defineStore('projects', {
           en: 'Freelance Project',
           fr: 'Projet Freelance',
         },
+      },
+      {
+        name: {
+          en: 'Amphion - Music Sequencer',
+          fr: 'Amphion - Séquenceur Musical',
+        },
+        description: {
+          en: 'Amphion is a music sequencer that allows users to create their own music by arranging sounds on a timeline. The site is built with Next.js is focused around animations and a smooth user experience.',
+          fr: 'Amphion est un séquenceur musical qui permet aux utilisateurs de créer leur propre musique en disposant des sons sur une timeline. Le site est construit avec Next.js et est axé sur les animations et une expérience utilisateur fluide.',
+        },
+        file: {
+          en: 'amphion.html',
+          fr: 'amphion.html',
+        },
+        date: '2026',
+        starred: true,
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Nginx'],
+        images: [
+          amphionImage,
+        ],
+        link: 'https://amphion.somi.blaisot.org/',
+        completed: true,
       },
       {
         name: {
@@ -666,6 +689,38 @@ export const useProjectsStore = defineStore('projects', {
     experiences: [
       {
         title: {
+          en: 'Development Intern web(6 months)',
+          fr: 'Stage de développement web (6 mois)',
+        },
+        company: 'Sopra Steria',
+        location: {
+          en: 'Rennes, France',
+          fr: 'Rennes, France',
+        },
+        period: {
+          en: 'February 2026 - August 2026',
+          fr: 'Février 2026 - Août 2026',
+        },
+        description: {
+          fr: 'Refonte d\'une application web de gestion monétaire et de suivi de contrats pour un client au sein d\'une équipe agile. Cette refonte a été réalisée avec Angular et Spring Boot.',
+          en: 'Redesign of a web application for monetary management and contract tracking for a client within an agile team. This redesign was carried out with Angular and Spring Boot.',
+        },
+        technologies: ['Angular', 'Spring Boot', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Oracle SQL', 'Tomcat', 'OpenAPI', 'OpenAPI Generator', 'Jira'],
+        achievements: {
+          en: [
+            'Redesign of a web application for monetary management and contract tracking',
+            'Integration of accessibility and ergonomics criteria to improve user experience',
+            'Collaboration with a team of developers, designers, and project managers',
+          ],
+          fr: [
+            'Refonte d\'une application web de gestion monétaire et de suivi de contrats',
+            'Intégration de critères d\'accessibilité et d\'ergonomie pour améliorer l\'expérience utilisateur',
+            'Collaboration avec une équipe de développeurs, designers et chefs de projet',
+          ],
+        },
+      },
+      {
+        title: {
           fr: 'Développeur Freelance (4 mois)',
           en: 'Freelance Developer (4 months)',
         },
@@ -810,6 +865,7 @@ export const useProjectsStore = defineStore('projects', {
             'Nuxt',
             'TailwindCSS',
             'Angular',
+            'Spring Boot',
             'Django',
             'DjangoREST',
             'Express.js',
@@ -821,6 +877,7 @@ export const useProjectsStore = defineStore('projects', {
             'jQuery',
             'Bootstrap',
             'Swagger',
+            'OpenAPI',
           ],
         },
         {
@@ -914,6 +971,7 @@ export const useProjectsStore = defineStore('projects', {
             'Nuxt',
             'TailwindCSS',
             'Angular',
+            'Spring Boot',
             'Django',
             'DjangoREST',
             'Express.js',
@@ -925,6 +983,7 @@ export const useProjectsStore = defineStore('projects', {
             'jQuery',
             'Bootstrap',
             'Swagger',
+            'OpenAPI',
           ],
         },
         {
