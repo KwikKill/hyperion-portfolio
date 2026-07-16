@@ -76,8 +76,8 @@ export const useProjectsStore = defineStore('projects', {
         technologies: ['JavaScript', 'Discord.js', 'Docker', 'PostgreSQL'],
         images: [rankupImage],
         note: {
-          en: '450+ Users',
-          fr: '450+ Utilisateurs',
+          en: '600+ Users',
+          fr: '600+ Utilisateurs',
         },
         link: 'https://rankup.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/Kwik_bot',
@@ -132,6 +132,7 @@ export const useProjectsStore = defineStore('projects', {
           amphionImage,
         ],
         link: 'https://amphion.somi.blaisot.org/',
+        github: 'https://github.com/KwikKill/amphion/',
         completed: true,
       },
       {
