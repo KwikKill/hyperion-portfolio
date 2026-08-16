@@ -40,6 +40,8 @@ import mindustryImage from '@/assets/projects/mindustry.webp';
 import minecraftImage from '@/assets/projects/minecraft.webp';
 import monitImage from '@/assets/projects/monit.webp';
 import portfolioImage from '@/assets/projects/portfolio.webp';
+import polis1 from '@/assets/projects/polis1.webp';
+import polis2 from '@/assets/projects/polis2.webp';
 import pshImage from '@/assets/projects/psh.webp';
 import rankupImage from '@/assets/projects/rankup.webp';
 import rankupwebImage from '@/assets/projects/rankup-website.webp';
@@ -81,6 +83,30 @@ export const useProjectsStore = defineStore('projects', {
         },
         link: 'https://rankup.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/Kwik_bot',
+        completed: true,
+      },
+      {
+        name: {
+          en: 'Polis - Generative GitHub City',
+          fr: 'Polis - Ville Générative GitHub',
+        },
+        description: {
+          en: 'Polis turns a GitHub account into a generative night city: every repository becomes a building, height maps to commit count, color maps to primary language, and glow maps to stars. Cities can then be published to a shared, persistent 3D planet where every connected user\'s city sits on the same sphere, linked by roads. Built with Next.js, React Three Fiber, Prisma/PostgreSQL, and GitHub OAuth via Auth.js.',
+          fr: 'Polis transforme un compte GitHub en une ville générative nocturne : chaque dépôt devient un bâtiment, la hauteur correspond au nombre de commits, la couleur au langage principal et la luminosité au nombre d\'étoiles. Les villes peuvent ensuite être publiées sur une planète 3D partagée et persistante où la ville de chaque utilisateur connecté se place sur la même sphère, reliée par des routes. Construit avec Next.js, React Three Fiber, Prisma/PostgreSQL et l\'authentification GitHub via Auth.js.',
+        },
+        file: {
+          en: 'polis.html',
+          fr: 'polis.html',
+        },
+        date: '2026',
+        starred: true,
+        technologies: ['Next.js', 'React', 'Three.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Prisma', 'PostgreSQL', 'Docker', 'Nginx'],
+        images: [
+          polis1,
+          polis2,
+        ],
+        link: 'https://polis.somi.blaisot.org/',
+        github: 'https://github.com/KwikKill/polis',
         completed: true,
       },
       {
