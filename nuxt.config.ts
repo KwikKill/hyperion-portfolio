@@ -9,8 +9,8 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-        { name: 'description', content: 'Portfolio de Gabriel Blaisot, étudiant en informatique à l\'INSA Rennes, spécialisé en data science et développement d\'applications web.' },
-        { name: 'keywords', content: 'Gabriel Blaisot, Portfolio, Développeur, INSA Rennes, Informatique, Data Science, Web, Applications Web' },
+        { name: 'description', content: 'Portfolio de Gabriel Blaisot, ingénieur informatique et développeur web freelance, spécialisé en data science et développement d\'applications web.' },
+        { name: 'keywords', content: 'Gabriel Blaisot, Portfolio, Développeur, Ingénieur Informatique, Sopra Steria, Freelance, Informatique, Data Science, Web, Applications Web' },
         { name: 'google-site-verification', content: '0N3KiBJueVNiIVXQ5JOPdmZ9-83xFFU8vGkdaLqvyL8' },
       ],
       link: [
@@ -33,12 +33,12 @@ export default defineNuxtConfig({
               "https://github.com/KwikKill",
               "https://www.linkedin.com/in/gabriel-blaisot-a89480233/"
             ],
-            "jobTitle": "Étudiant en Informatique",
+            "jobTitle": "Ingénieur Informatique (Développeur Web)",
             "worksFor": {
-              "@type": "EducationalOrganization",
-              "name": "INSA Rennes"
+              "@type": "Organization",
+              "name": "Sopra Steria"
             },
-            "description": "Étudiant en informatique à l’INSA Rennes, spécialisé en data science et développement d'applications web.",
+            "description": "Ingénieur informatique et développeur web freelance, spécialisé en data science et développement d'applications web.",
             "image": "https://gabriel.blaisot.org/logo.png"
           }, null, 2)
         }

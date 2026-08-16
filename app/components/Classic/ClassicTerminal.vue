@@ -85,7 +85,7 @@ onMounted(() => {
   if (isEnglish.value) {
     lines = [
       { type: 'command', text: 'whoami' },
-      { type: 'response', text: 'Gabriel Blaisot (kwikkill) - Computer Science Student' },
+      { type: 'response', text: 'Gabriel Blaisot (kwikkill) - Software Engineer at Sopra Steria & Freelance Web Developer' },
       { type: 'response', text: 'Passionate about web development and software engineering.', inline: true },
       { type: 'response', text: 'Interested in AI and Machine Learning.', inline: true },
       { type: 'response', text: 'Always eager to learn new technologies and improve my skills.', inline: true },
@@ -114,7 +114,7 @@ onMounted(() => {
   } else {
     lines = [
       { type: 'command', text: 'whoami' },
-      { type: 'response', text: 'Gabriel Blaisot (kwikkill) - Étudiant en Informatique' },
+      { type: 'response', text: 'Gabriel Blaisot (kwikkill) - Ingénieur Informatique chez Sopra Steria & Développeur Web Freelance' },
       { type: 'response', text: 'Passionné par le développement web et l\'ingénierie logicielle.', inline: true },
       { type: 'response', text: 'Intéressé par l\'IA et le Machine Learning.', inline: true },
       { type: 'response', text: 'Toujours désireux d\'apprendre de nouvelles technologies et d\'améliorer mes compétences.', inline: true },

@@ -23,11 +23,11 @@
           <h2 class="mb-6 text-2xl font-semibold md:text-3xl ">
             {{
               isEnglish
-                ? 'Computer Science student'
-                : 'Étudiant en informatique'
+                ? 'Software Engineer - Web Developer'
+                : 'Ingénieur Informatique - Développeur Web'
             }}
             <br/>
-            INSA Rennes
+            Sopra Steria & Freelance
           </h2>
 
           <CyberpunkTerminalWindow class="md:max-w-lg">
@@ -42,13 +42,13 @@
                   <template
                     v-if="isEnglish"
                   >
-                    Passionate about Web development and software engineering.
+                    Software engineer at Sopra Steria and freelance web developer, passionate about Web development and software engineering.
                     I love video games, technology, and learning new things. Also passionate about Greek mythology.
                   </template>
                   <template
                     v-else
                   >
-                    Etudiant en informatique passionné par le développement Web et l'ingénierie logicielle.
+                    Ingénieur informatique chez Sopra Steria et développeur web freelance, passionné par le développement Web et l'ingénierie logicielle.
                     J'adore les jeux vidéo, la technologie et apprendre de nouvelles choses.
                     Également passionné par la mythologie grecque.
                   </template>

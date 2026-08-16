@@ -33,11 +33,11 @@
 
             <div class="mb-4 leading-relaxed text-terminal">
               <template v-if="isEnglish">
-                Computer science student at INSA Rennes, passionate about Web development and software engineering. I
+                Software engineer and freelance web developer, passionate about Web development and software engineering. I
                 enjoy technology and learning new things.
               </template>
               <template v-else>
-                Etudiant en informatique à l'INSA Rennes passionné par le développement Web et l'ingénierie
+                Ingénieur informatique et développeur web freelance, passionné par le développement Web et l'ingénierie
                 logicielle. J'apprécie la technologie et apprendre de nouvelles choses.
               </template>
             </div>

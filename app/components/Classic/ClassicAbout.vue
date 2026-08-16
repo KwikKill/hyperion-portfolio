@@ -12,11 +12,11 @@
           </h3>
           <p class="mb-4 text-gray-700 dark:text-gray-300">
             <template v-if="isEnglish">
-              I'm a computer science student from France, passionate about web development and software engineering. I
+              I'm a software engineer at Sopra Steria and a freelance web developer from France, passionate about web development and software engineering. I
               love creating innovative solutions to complex problems and continuously learning new technologies.
             </template>
             <template v-else>
-              Etudiant en Informatique à l'INSA de Rennes passionné par le développement web et l'ingénierie logicielle.
+              Ingénieur informatique chez Sopra Steria et développeur web freelance, passionné par le développement web et l'ingénierie logicielle.
               J'apprécie la technologie et apprendre de nouvelles choses.
             </template>
           </p>

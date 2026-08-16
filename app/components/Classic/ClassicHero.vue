@@ -7,18 +7,18 @@
             {{ isEnglish ? 'Hi, I\'m Gabriel Blaisot' : 'Bonjour, je suis Gabriel Blaisot' }}
           </h1>
           <h2 class="mb-6 text-2xl font-semibold text-blue-600 md:text-3xl dark:text-blue-400">
-            {{ isEnglish ? 'Computer Science Student' : 'Étudiant en Informatique' }}
+            {{ isEnglish ? 'Software Engineer - Web Developer' : 'Ingénieur Informatique - Développeur Web' }}
             <br/>
-            INSA Rennes
+            Sopra Steria & Freelance
           </h2>
           <div class="flex flex-col gap-4">
             <p class="text-lg text-gray-700 dark:text-gray-300">
               <template v-if="isEnglish">
-                Passionate about web development and software engineering. I love video games, technology, and learning
+                Software engineer at Sopra Steria and freelance web developer, passionate about web development and software engineering. I love video games, technology, and learning
                 new things. Also passionate about Greek mythology.
               </template>
               <template v-else>
-                Etudiant en Informatique passionné par le développement web et l'ingénierie logicielle. J'adore les jeux
+                Ingénieur informatique chez Sopra Steria et développeur web freelance, passionné par le développement web et l'ingénierie logicielle. J'adore les jeux
                 vidéo, la technologie et apprendre de nouvelles choses. Également passionné par la mythologie grecque.
               </template>
             </p>
