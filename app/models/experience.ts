@@ -21,4 +21,16 @@ export interface Experience {
     en: string[];
     fr: string[];
   };
+  internship?: boolean;
+}
+
+export interface LocalizedExperience {
+  localizedTitle: string;
+  company: string;
+  localizedLocation: string;
+  localizedPeriod: string;
+  localizedDescription: string;
+  technologies: string[];
+  localizedAchievements: string[];
+  internship?: boolean;
 }

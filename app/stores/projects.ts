@@ -716,8 +716,8 @@ export const useProjectsStore = defineStore('projects', {
     experiences: [
       {
         title: {
-          en: 'Development Intern web(6 months)',
-          fr: 'Stage de développement web (6 mois)',
+          en: 'Software Engineer - Web Developer (Permanent Contract)',
+          fr: 'Ingénieur Informatique - Développeur Web (CDI)',
         },
         company: 'Sopra Steria',
         location: {
@@ -725,8 +725,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Rennes, France',
         },
         period: {
-          en: 'February 2026 - August 2026',
-          fr: 'Février 2026 - Août 2026',
+          en: 'September 2026 - Present',
+          fr: 'Depuis Septembre 2026',
         },
         description: {
           fr: 'Refonte d\'une application web de gestion monétaire et de suivi de contrats pour un client au sein d\'une équipe agile. Cette refonte a été réalisée avec Angular et Spring Boot.',
@@ -776,6 +776,39 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         title: {
+          en: 'Development Intern web(6 months)',
+          fr: 'Stage de développement web (6 mois)',
+        },
+        company: 'Sopra Steria',
+        location: {
+          en: 'Rennes, France',
+          fr: 'Rennes, France',
+        },
+        period: {
+          en: 'February 2026 - August 2026',
+          fr: 'Février 2026 - Août 2026',
+        },
+        description: {
+          fr: 'Refonte d\'une application web de gestion monétaire et de suivi de contrats pour un client au sein d\'une équipe agile. Cette refonte a été réalisée avec Angular et Spring Boot.',
+          en: 'Redesign of a web application for monetary management and contract tracking for a client within an agile team. This redesign was carried out with Angular and Spring Boot.',
+        },
+        technologies: ['Angular', 'Spring Boot', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Oracle SQL', 'Tomcat', 'OpenAPI', 'OpenAPI Generator', 'Jira'],
+        achievements: {
+          en: [
+            'Redesign of a web application for monetary management and contract tracking',
+            'Integration of accessibility and ergonomics criteria to improve user experience',
+            'Collaboration with a team of developers, designers, and project managers',
+          ],
+          fr: [
+            'Refonte d\'une application web de gestion monétaire et de suivi de contrats',
+            'Intégration de critères d\'accessibilité et d\'ergonomie pour améliorer l\'expérience utilisateur',
+            'Collaboration avec une équipe de développeurs, designers et chefs de projet',
+          ],
+        },
+        internship: true,
+      },
+      {
+        title: {
           en: 'Development Intern (12 weeks)',
           fr: 'Stage de développement (12 semaines)',
         },
@@ -803,6 +836,7 @@ export const useProjectsStore = defineStore('projects', {
             'Quantification des régressions lors de nouvelles versions',
           ],
         },
+        internship: true,
       },
       {
         title: {
@@ -829,6 +863,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: [
           ],
         },
+        internship: true,
       },
       {
         title: {
@@ -861,6 +896,7 @@ export const useProjectsStore = defineStore('projects', {
             'Traduction de job Jenkins en JenkinsFiles',
           ],
         },
+        internship: true,
       },
     ] as Experience[],
     skills: {
