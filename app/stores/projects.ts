@@ -38,6 +38,8 @@ import lightshieldImage from '@/assets/projects/lightshield.webp';
 import metisImage from '@/assets/projects/metis.webp';
 import mindustryImage from '@/assets/projects/mindustry.webp';
 import minecraftImage from '@/assets/projects/minecraft.webp';
+import mnemosyne1 from '@/assets/projects/mnemosyne1.webp';
+import mnemosyne2 from '@/assets/projects/mnemosyne2.webp';
 import monitImage from '@/assets/projects/monit.webp';
 import portfolioImage from '@/assets/projects/portfolio.webp';
 import polis1 from '@/assets/projects/polis1.webp';
@@ -107,6 +109,30 @@ export const useProjectsStore = defineStore('projects', {
         ],
         link: 'https://polis.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/polis',
+        completed: true,
+      },
+      {
+        name: {
+          en: 'Mnemosyne - Neural Diagnostic Terminal',
+          fr: 'Mnemosyne - Terminal de Diagnostic Neuronal',
+        },
+        description: {
+          en: 'A hand-written multilayer perceptron, trained live in the browser and inspected through a Signalis-inspired terminal interface. No ML library: forward pass, backpropagation, and gradient descent are all written from scratch, running in a Web Worker while a live network diagram, decision-boundary heatmap, and loss chart render on canvas. Supports custom-painted datasets, learning-rate scheduling, synaptic pruning, classification metrics, and scrubbable training replay.',
+          fr: 'Un perceptron multicouche codé à la main, entraîné en direct dans le navigateur et inspecté via une interface terminal inspirée de Signalis. Aucune bibliothèque de ML : la propagation avant, la rétropropagation et la descente de gradient sont entièrement écrites à la main, exécutées dans un Web Worker pendant qu\'un diagramme de réseau, une carte de frontière de décision et une courbe de perte s\'affichent en direct sur canvas. Prend en charge les jeux de données peints à la main, la planification du taux d\'apprentissage, l\'élagage synaptique, les métriques de classification et la relecture de l\'entraînement.',
+        },
+        file: {
+          en: 'mnemosyne.html',
+          fr: 'mnemosyne.html',
+        },
+        date: '2026',
+        starred: true,
+        technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Web Workers', 'Canvas API', 'Docker', 'Nginx'],
+        images: [
+          mnemosyne1,
+          mnemosyne2,
+        ],
+        link: 'https://mnemosyne.somi.blaisot.org/',
+        github: 'https://github.com/KwikKill/mnemosyne',
         completed: true,
       },
       {
