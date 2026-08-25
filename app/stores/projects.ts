@@ -50,6 +50,7 @@ import rankupwebImage from '@/assets/projects/rankup-website.webp';
 import revuesImage from '@/assets/projects/revues.webp';
 import stackImage from '@/assets/projects/stack.webp';
 import talosImage from '@/assets/projects/talos.webp';
+import umamiImage from '@/assets/projects/umami.webp';
 import vfsImage from '@/assets/projects/vfs.webp';
 import type { Experience } from '@/models/experience';
 import type { Games } from '@/models/game';
@@ -102,7 +103,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2026',
         starred: true,
-        technologies: ['Next.js', 'React', 'Three.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Prisma', 'PostgreSQL', 'Docker', 'Nginx'],
+        technologies: ['Next.js', 'React', 'Three.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Prisma', 'PostgreSQL', 'Docker', 'Caddy'],
         images: [
           polis1,
           polis2,
@@ -126,13 +127,37 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2026',
         starred: true,
-        technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Web Workers', 'Canvas API', 'Docker', 'Nginx'],
+        technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Web Workers', 'Canvas API', 'Docker', 'Caddy'],
         images: [
           mnemosyne1,
           mnemosyne2,
         ],
         link: 'https://mnemosyne.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/mnemosyne',
+        completed: true,
+      },
+      {
+        name: {
+          en: 'Umami (personal fork)',
+          fr: 'Umami (fork personnel)',
+        },
+        description: {
+          en: 'Personal fork of the open-source Umami analytics platform, maintained to run a self-hosted, privacy-first analytics instance across my personal websites. On top of upstream Umami, it adds a cross-site dashboard aggregating stats across every registered site, accurate SPA bounce/duration tracking via a heartbeat ping, chart annotations, scoped API keys, and an MCP server exposing stats to LLM agents. Every push to master is tested, built, and published automatically to GHCR.',
+          fr: "Fork personnel de la plateforme d'analytics open-source Umami, maintenu pour faire tourner une instance auto-hébergée et respectueuse de la vie privée sur mes différents sites personnels. En plus d'Umami officiel, il ajoute un dashboard multi-sites agrégeant les statistiques de tous les sites enregistrés, un suivi précis des rebonds/durées de session sur SPA via un ping de heartbeat, des annotations sur les graphiques, des clés API à portée limitée, et un serveur MCP exposant les statistiques aux agents LLM. Chaque push sur master est testé, buildé et publié automatiquement sur GHCR.",
+        },
+        file: {
+          en: 'umami.html',
+          fr: 'umami.html',
+        },
+        date: '2026',
+        starred: true,
+        technologies: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Docker', 'GitHub Actions'],
+        images: [umamiImage],
+        note: {
+          en: 'Used in Production',
+          fr: 'Utilisé en Production',
+        },
+        github: 'https://github.com/KwikKill/umami',
         completed: true,
       },
       {
@@ -150,7 +175,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025-2026',
         starred: true,
-        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'PostgreSQL', 'Docker', 'Nginx'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'PostgreSQL', 'Docker', 'Caddy'],
         images: [
           esport1,
           esport2,
@@ -179,7 +204,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2026',
         starred: true,
-        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Nginx'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Caddy'],
         images: [
           amphionImage,
         ],
@@ -202,7 +227,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
-        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Supabase', 'Docker', 'Nginx'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Supabase', 'Docker', 'Caddy'],
         images: [
           athena1,
           athena2,
@@ -225,7 +250,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
-        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Nginx'],
+        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Caddy'],
         images: [
           freelance1,
           freelance2,
@@ -654,8 +679,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Stack Web',
         },
         description: {
-          en: 'Setting up a deployment stack for dockerized sites. This environment contains a nginx server, docker containers and their associated configurations, enabling me to easily host my sites (like this one).',
-          fr: "Mise en place d'une stack de déploiement pour sites dockerisés. Cet environnement contient un serveur nginx, des containers dockers et leurs configurations associées et me permet de facilement héberger mes sites (comme celui là).",
+          en: 'Setting up a deployment stack for dockerized sites. This environment contains a Caddy server (automatic HTTPS, one dynamically-discovered config fragment per site), docker containers and their associated configurations, enabling me to easily host my sites (like this one).',
+          fr: "Mise en place d'une stack de déploiement pour sites dockerisés. Cet environnement contient un serveur Caddy (HTTPS automatique, un fragment de configuration découvert dynamiquement par site), des containers dockers et leurs configurations associées et me permet de facilement héberger mes sites (comme celui là).",
         },
         file: {
           en: 'stack.html',
@@ -663,7 +688,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023',
         starred: false,
-        technologies: ['Docker', 'Nginx', 'Shell'],
+        technologies: ['Docker', 'Caddy', 'Shell'],
         images: [stackImage],
         note: {
           en: 'Used in Production',
@@ -960,6 +985,7 @@ export const useProjectsStore = defineStore('projects', {
             'Express.js',
             'FastAPI',
             'Nginx',
+            'Caddy',
             'Traefik',
             'Three.js',
             'GoFiber',
@@ -1066,6 +1092,7 @@ export const useProjectsStore = defineStore('projects', {
             'Express.js',
             'FastAPI',
             'Nginx',
+            'Caddy',
             'Traefik',
             'Three.js',
             'GoFiber',
