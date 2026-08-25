@@ -1,0 +1,14 @@
+services:
+  hyperion:
+    build:
+      context: ./hyperion
+      dockerfile: Dockerfile
+    image: site/hyperion
+    volumes:
+      - ./volumes/hyperion:/build
+    expose:
+      - "5173"
+    networks:
+      - sites
+    environment:
+      - VITE_WEBSITE_HOST=gabriel.${WEBSITE_HOST}
