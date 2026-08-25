@@ -1,0 +1,3 @@
+gabriel.{$WEBSITE_HOST} {
+	reverse_proxy hyperion:5173
+}
