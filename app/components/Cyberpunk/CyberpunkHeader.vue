@@ -16,7 +16,7 @@
         <div
           class="hidden xl:block"
         >
-          KwikKill - Porfolio
+          KwikKill - Portfolio
         </div>
         <div
           class="block xl:hidden"

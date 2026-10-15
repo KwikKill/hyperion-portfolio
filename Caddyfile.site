@@ -2,7 +2,10 @@ gabriel.{$WEBSITE_HOST} {
 	import cors
 
 	root * /srv/infra/volumes/hyperion
-	try_files {path} /index.html
+	# Prerendered routes live in <route>/index.html. Anything else falls back to
+	# Nuxt's SPA shell (200.html), which renders the route client-side; falling
+	# back to /index.html would serve the prerendered home page instead.
+	try_files {path} {path}/index.html /200.html
 
 	handle /assets/* {
 		header Cache-Control "public, immutable, max-age=31536000"

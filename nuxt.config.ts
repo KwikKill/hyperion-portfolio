@@ -2,6 +2,13 @@
 export default defineNuxtConfig({
   modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
   css: ['~/assets/css/tailwind.css'],
+  nitro: {
+    prerender: {
+      // The home page navigates with navigateTo(), so the `nuxt generate` crawler
+      // never discovers these routes: list them explicitly.
+      routes: ['/cyberpunk', '/classic'],
+    },
+  },
   app: {
     head: {
       title: 'Gabriel Blaisot | Portfolio Développeur',
