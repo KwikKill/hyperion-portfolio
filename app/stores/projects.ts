@@ -53,6 +53,7 @@ import talosImage from '@/assets/projects/talos.webp';
 import umamiImage from '@/assets/projects/umami.webp';
 import vfsImage from '@/assets/projects/vfs.webp';
 import type { Experience } from '@/models/experience';
+import type { Formation } from '@/models/formation';
 import type { Games } from '@/models/game';
 import type { Movies } from '@/models/movie';
 import type { localizedProject, Project } from '@/models/project';
@@ -78,7 +79,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2019-2026',
         starred: true,
-        technologies: ['JavaScript', 'Discord.js', 'Docker', 'PostgreSQL'],
+        technologies: ['JavaScript', 'Discord.js', 'Docker', 'PostgreSQL', 'Git'],
         images: [rankupImage],
         note: {
           en: '600+ Users',
@@ -103,7 +104,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2026',
         starred: true,
-        technologies: ['Next.js', 'React', 'Three.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Prisma', 'PostgreSQL', 'Docker', 'Caddy'],
+        technologies: ['Next.js', 'React', 'Three.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Prisma', 'PostgreSQL', 'Docker', 'Caddy', 'Git'],
         images: [
           polis1,
           polis2,
@@ -127,7 +128,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2026',
         starred: true,
-        technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Web Workers', 'Canvas API', 'Docker', 'Caddy'],
+        technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Web Workers', 'Canvas API', 'Docker', 'Caddy', 'Git'],
         images: [
           mnemosyne1,
           mnemosyne2,
@@ -151,7 +152,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2026',
         starred: true,
-        technologies: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Docker', 'GitHub Actions'],
+        technologies: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Docker', 'GitHub Actions', 'Git'],
         images: [umamiImage],
         note: {
           en: 'Used in Production',
@@ -175,7 +176,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025-2026',
         starred: true,
-        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'PostgreSQL', 'Docker', 'Caddy'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'PostgreSQL', 'Docker', 'Caddy', 'Git'],
         images: [
           esport1,
           esport2,
@@ -204,7 +205,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2026',
         starred: true,
-        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Caddy'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Caddy', 'Git'],
         images: [
           amphionImage,
         ],
@@ -227,7 +228,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
-        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Supabase', 'Docker', 'Caddy'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Supabase', 'Docker', 'Caddy', 'Git'],
         images: [
           athena1,
           athena2,
@@ -250,7 +251,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
-        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Caddy'],
+        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Caddy', 'Git'],
         images: [
           freelance1,
           freelance2,
@@ -279,7 +280,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
-        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Git'],
         images: [metisImage],
         link: 'https://metis.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/metis',
@@ -300,7 +301,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
-        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Git'],
         images: [talosImage],
         link: 'https://talos.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/talos',
@@ -321,7 +322,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
-        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Git'],
         images: [hephaistosImage],
         link: 'https://hephaistos.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/hephaistos',
@@ -366,7 +367,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
-        technologies: ['Next.js', 'React', 'Three.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        technologies: ['Next.js', 'React', 'Three.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Git'],
         images: [atlasImage],
         link: 'https://atlas.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/Atlas',
@@ -387,7 +388,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
-        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker'],
+        technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Git'],
         images: [ceosImage],
         link: 'https://ceos.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/ceos',
@@ -408,7 +409,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
-        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Pinia', 'Docker'],
+        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Pinia', 'Docker', 'Git'],
         images: [portfolioImage],
         link: '#',
         github: 'https://github.com/KwikKill/hyperion-portfolio',
@@ -429,7 +430,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023-2025',
         starred: true,
-        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Pinia', 'JavaScript', 'TypeScript', 'Django', 'DjangoREST', 'Docker', 'Nginx', 'PostgreSQL'],
+        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Pinia', 'JavaScript', 'TypeScript', 'Django', 'DjangoREST', 'Docker', 'Nginx', 'PostgreSQL', 'Git'],
         images: [insalanImage],
         note: {
           en: 'Team Management',
@@ -454,7 +455,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
-        technologies: ['Go', 'GoFiber', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Traefik', 'PostgreSQL', 'Kafka', 'Protobuf'],
+        technologies: ['Go', 'GoFiber', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Traefik', 'PostgreSQL', 'Kafka', 'Protobuf', 'Git'],
         images: [
           insaplace1,
           insaplace2,
@@ -479,7 +480,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
-        technologies: ['Grafana', 'Telegraf', 'InfluxDB', 'Nginx', 'Docker'],
+        technologies: ['Grafana', 'Telegraf', 'InfluxDB', 'Nginx', 'Docker', 'Git'],
         images: [monitImage],
         github: 'https://github.com/InsaLan/infra-insalan.fr/blob/main/docker-compose-analytics.yml',
         completed: false,
@@ -499,7 +500,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2024',
         starred: false,
-        technologies: ['C++', 'SFML', 'Blender'],
+        technologies: ['C++', 'SFML', 'Blender', 'Git'],
         images: [infographiqueImage],
         note: {
           en: 'School Assignment',
@@ -524,7 +525,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2024',
         starred: false,
-        technologies: ['C++', 'SFML'],
+        technologies: ['C++', 'SFML', 'Git'],
         images: [bombermanImage],
         note: {
           en: 'School Assignment',
@@ -548,7 +549,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023-2024',
         starred: false,
-        technologies: ['Python', 'JavaScript', 'TypeScript'],
+        technologies: ['Python', 'JavaScript', 'TypeScript', 'Git'],
         images: [codepilotImage],
         github: 'https://github.com/KwikKill/advent-of-codpilote',
         completed: false,
@@ -568,7 +569,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2024',
         starred: false,
-        technologies: ['Python', 'JavaScript', 'Docker', 'Redis', 'PostgreSQL'],
+        technologies: ['Python', 'JavaScript', 'Docker', 'Redis', 'PostgreSQL', 'Git'],
         images: [lightshieldImage],
         note: {
           en: 'Open Source Contribution',
@@ -592,7 +593,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2024',
         starred: false,
-        technologies: ['Python'],
+        technologies: ['Python', 'Git'],
         images: [indexerImage],
         note: {
           en: 'School Assignment',
@@ -640,7 +641,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023',
         starred: false,
-        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker'],
+        technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker', 'Git'],
         images: [pshImage],
         note: {
           en: 'School Assignment',
@@ -664,7 +665,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023',
         starred: false,
-        technologies: ['Nuxt', 'Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker'],
+        technologies: ['Nuxt', 'Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker', 'Git'],
         images: [rankupwebImage],
         note: {
           en: 'Personal Project',
@@ -688,7 +689,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023',
         starred: false,
-        technologies: ['Docker', 'Caddy', 'Shell'],
+        technologies: ['Docker', 'Caddy', 'Shell Script', 'Git'],
         images: [stackImage],
         note: {
           en: 'Used in Production',
@@ -711,7 +712,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2020',
         starred: false,
-        technologies: ['Python'],
+        technologies: ['Python', 'Git'],
         images: [vfsImage],
         note: {
           en: 'School Assignment',
@@ -754,7 +755,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2018',
         starred: false,
-        technologies: ['Java'],
+        technologies: ['Java', 'Git'],
         images: [mindustryImage],
         note: {
           en: 'Open Source Contribution',
@@ -783,7 +784,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Refonte d\'une application web de gestion monétaire et de suivi de contrats pour un client au sein d\'une équipe agile. Cette refonte a été réalisée avec Angular et Spring Boot.',
           en: 'Redesign of a web application for monetary management and contract tracking for a client within an agile team. This redesign was carried out with Angular and Spring Boot.',
         },
-        technologies: ['Angular', 'Spring Boot', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Oracle SQL', 'Tomcat', 'OpenAPI', 'OpenAPI Generator', 'Jira'],
+        technologies: ['Angular', 'Spring Boot', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Oracle SQL', 'Tomcat', 'OpenAPI', 'OpenAPI Generator', 'Jira', 'GitLab', 'Figma'],
         achievements: {
           en: [
             'Redesign of a web application for monetary management and contract tracking',
@@ -803,6 +804,7 @@ export const useProjectsStore = defineStore('projects', {
           en: 'Freelance Developer (4 months)',
         },
         company: 'Gabriel Blaisot',
+        freelance: true,
         location: {
           en: 'Rennes, France',
           fr: 'Rennes, France',
@@ -843,7 +845,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Refonte d\'une application web de gestion monétaire et de suivi de contrats pour un client au sein d\'une équipe agile. Cette refonte a été réalisée avec Angular et Spring Boot.',
           en: 'Redesign of a web application for monetary management and contract tracking for a client within an agile team. This redesign was carried out with Angular and Spring Boot.',
         },
-        technologies: ['Angular', 'Spring Boot', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Oracle SQL', 'Tomcat', 'OpenAPI', 'OpenAPI Generator', 'Jira'],
+        technologies: ['Angular', 'Spring Boot', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Oracle SQL', 'Tomcat', 'OpenAPI', 'OpenAPI Generator', 'Jira', 'GitLab', 'Figma'],
         achievements: {
           en: [
             'Redesign of a web application for monetary management and contract tracking',
@@ -876,7 +878,7 @@ export const useProjectsStore = defineStore('projects', {
           en: 'Integration of an auto benchmark step using a company tool in a Jenkins pipeline and development of a plugin to allow visualization and interpretation of results.',
           fr: "Intégration d'une étape de benchmark auto en utilisant un outil de l'entreprise dans un pipeline Jenkins et développement d'un plugin pour permettre la visualisation et d'interprétation des résultats.",
         },
-        technologies: ['Jenkins', 'Java', 'Groovy', 'HTML', 'CSS', 'Javascript', 'Chart.js', 'Ansible', 'ESXI', 'Git'],
+        technologies: ['Jenkins', 'Java', 'Apache Groovy', 'HTML', 'CSS', 'JavaScript', 'Chart.js', 'Ansible', 'ESXI', 'Git'],
         achievements: {
           en: [
             'Add performance criteria for tests',
@@ -934,7 +936,7 @@ export const useProjectsStore = defineStore('projects', {
           en: "Hardware updates and encryption of company computers, optimization of the backup process by integrating the company's API to only back up new data, and technology updates (installation of a Hashicorp Vault and Consul cluster) in the back-office team of a cloud gaming startup.",
           fr: "Mises à jour hardware et chiffrement des ordinateurs de l'entreprise, optimisation du processus de backup en intégrant l'API de l'entreprise pour ne sauvegarder que les nouveautés et mise à jour de technologie (installation d'un cluster Hashicorp Vault et Consul) dans l'équipe back-office d'une startup de cloud gaming.",
         },
-        technologies: ['Python', 'Jenkins', 'Golang', 'AWS S3', 'Git'],
+        technologies: ['Python', 'Jenkins', 'Go', 'AWS S3', 'Git'],
         achievements: {
           en: [
             'Disk encryption for data security',
@@ -950,10 +952,51 @@ export const useProjectsStore = defineStore('projects', {
         internship: true,
       },
     ] as Experience[],
+    formation: {
+      school: 'INSA Rennes',
+      technologies: [
+        'Docker',
+        'JavaScript',
+        'CSS',
+        'HTML',
+        'TypeScript',
+        'PostgreSQL',
+        'Python',
+        'Java',
+        'C++',
+        'Go',
+        'LaTeX',
+        'Grafana',
+        'InfluxDB',
+        'Shell Script',
+        'Telegraf',
+        'Git',
+        'Angular',
+        'OpenAPI',
+        'Spring Boot',
+        'Ansible',
+        'ApacheCassandra',
+        'C',
+        'CMake',
+        'GitLab',
+        'Makefile',
+        'MongoDB',
+        'MySQL',
+        'OCaml',
+        'PyTorch',
+        'R',
+        'Scipy',
+        'SQLite',
+        'TensorFlow',
+        'Prometheus',
+        'Figma',
+      ],
+    } as Formation,
     skills: {
       en: [
         {
           name: 'Languages',
+          short: 'Languages',
           skills: [
             'Shell Script',
             'HTML',
@@ -971,13 +1014,14 @@ export const useProjectsStore = defineStore('projects', {
         },
         {
           name: 'Web Development',
+          short: 'Web',
           skills: [
             'Vue.js',
             'React',
             'Next.js',
             'Vite',
             'Nuxt',
-            'TailwindCSS',
+            'Tailwind CSS',
             'Angular',
             'Spring Boot',
             'Django',
@@ -991,12 +1035,12 @@ export const useProjectsStore = defineStore('projects', {
             'GoFiber',
             'jQuery',
             'Bootstrap',
-            'Swagger',
             'OpenAPI',
           ],
         },
         {
           name: 'Databases',
+          short: 'Databases',
           skills: [
             'PostgreSQL',
             'MongoDB',
@@ -1014,10 +1058,12 @@ export const useProjectsStore = defineStore('projects', {
         },
         {
           name: 'CI/CD',
+          short: 'CI/CD',
           skills: ['Jenkins', 'Apache Groovy', 'TravisCI', 'GitLab CI', 'GitHub Actions'],
         },
         {
           name: 'Tools',
+          short: 'Tools',
           skills: [
             'GithubPages',
             'Makefile',
@@ -1039,28 +1085,34 @@ export const useProjectsStore = defineStore('projects', {
         },
         {
           name: 'Design',
+          short: 'Design',
           skills: ['Gimp', 'Figma'],
         },
         {
           name: 'Data Science and Data Visualization',
+          short: 'Data',
           skills: ['Scipy', 'TensorFlow', 'PyTorch', 'Chart.js'],
         },
         {
           name: 'Version Control',
+          short: 'Versioning',
           skills: ['Git', 'Gitea', 'Bitbucket', 'GitHub', 'GitLab'],
         },
         {
           name: 'Cloud providers',
+          short: 'Cloud',
           skills: ['Scaleway', 'OVH', 'Hetzner'],
         },
         {
           name: 'Other',
+          short: 'Other',
           skills: ['Markdown', 'LaTeX', 'Typst'],
         },
       ],
       fr: [
         {
           name: 'Langages',
+          short: 'Langages',
           skills: [
             'Shell Script',
             'HTML',
@@ -1078,13 +1130,14 @@ export const useProjectsStore = defineStore('projects', {
         },
         {
           name: 'Développement Web',
+          short: 'Web',
           skills: [
             'Vue.js',
             'React',
             'Next.js',
             'Vite',
             'Nuxt',
-            'TailwindCSS',
+            'Tailwind CSS',
             'Angular',
             'Spring Boot',
             'Django',
@@ -1098,12 +1151,12 @@ export const useProjectsStore = defineStore('projects', {
             'GoFiber',
             'jQuery',
             'Bootstrap',
-            'Swagger',
             'OpenAPI',
           ],
         },
         {
           name: 'Bases de Données',
+          short: 'Données',
           skills: [
             'PostgreSQL',
             'MongoDB',
@@ -1121,10 +1174,12 @@ export const useProjectsStore = defineStore('projects', {
         },
         {
           name: 'CI/CD',
+          short: 'CI/CD',
           skills: ['Jenkins', 'Apache Groovy', 'TravisCI', 'GitLab CI', 'GitHub Actions'],
         },
         {
           name: 'Outils',
+          short: 'Outils',
           skills: [
             'GithubPages',
             'Makefile',
@@ -1146,22 +1201,27 @@ export const useProjectsStore = defineStore('projects', {
         },
         {
           name: 'Design',
+          short: 'Design',
           skills: ['Gimp', 'Figma'],
         },
         {
           name: 'Science des Données et Visualisation',
+          short: 'Data',
           skills: ['Scipy', 'TensorFlow', 'PyTorch', 'Chart.js'],
         },
         {
           name: 'Contrôle de Version',
+          short: 'Versions',
           skills: ['Git', 'Gitea', 'Bitbucket', 'GitHub', 'GitLab'],
         },
         {
           name: 'Fournisseurs Cloud',
+          short: 'Cloud',
           skills: ['Scaleway', 'OVH', 'Hetzner'],
         },
         {
           name: 'Autres',
+          short: 'Autres',
           skills: ['Markdown', 'LaTeX', 'Typst'],
         },
       ],

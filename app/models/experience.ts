@@ -22,6 +22,7 @@ export interface Experience {
     fr: string[];
   };
   internship?: boolean;
+  freelance?: boolean;
 }
 
 export interface LocalizedExperience {
@@ -33,4 +34,5 @@ export interface LocalizedExperience {
   technologies: string[];
   localizedAchievements: string[];
   internship?: boolean;
+  freelance?: boolean;
 }

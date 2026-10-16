@@ -19,6 +19,9 @@
       </CyberpunkTerminalWindow>
 
       <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+        <!-- Profile: facts, role and short bio -->
+        <CyberpunkNeofetch/>
+
         <!-- About Me Terminal -->
         <CyberpunkTerminalWindow>
           <template #title>
@@ -26,22 +29,6 @@
           </template>
 
           <template #body>
-            <div class="mb-4">
-              <span class="text-secondary">kwikkill@hyperion:~$</span>
-              <span class="ml-2 text-primary">{{ isEnglish ? 'cat profile.txt' : 'cat profil.txt' }}</span>
-            </div>
-
-            <div class="mb-4 leading-relaxed text-terminal">
-              <template v-if="isEnglish">
-                Software engineer and freelance web developer, passionate about Web development and software engineering. I
-                enjoy technology and learning new things.
-              </template>
-              <template v-else>
-                Ingénieur informatique et développeur web freelance, passionné par le développement Web et l'ingénierie
-                logicielle. J'apprécie la technologie et apprendre de nouvelles choses.
-              </template>
-            </div>
-
             <div class="mb-4">
               <span class="text-secondary">kwikkill@hyperion:~$</span>
               <span class="ml-2 text-primary">{{ isEnglish ? 'cat interests.txt' : 'cat interets.txt' }}</span>
@@ -142,75 +129,10 @@
           </template>
         </CyberpunkTerminalWindow>
 
-        <!-- Skills Terminal - Keeping the original structure for this one as an example -->
-        <CyberpunkTerminalWindow>
-          <template #title>
-            {{ isEnglish ? 'SKILLS.EXE' : 'COMPETENCES.EXE' }}
-          </template>
-
-          <template #body>
-            <div class="mb-4">
-              <span class="text-secondary">kwikkill@hyperion:~$</span>
-              <span class="ml-2 text-primary">{{ isEnglish ? './list_skills.sh' : './lister_competences.sh'
-              }}</span>
-            </div>
-
-            <div class="space-y-4">
-              <div v-for="(category, index) in skills" :key="index">
-                <!-- Foldable category header -->
-                <div
-                  class="mb-2 flex cursor-pointer items-center p-1 uppercase text-primary hover:bg-gray-900/30"
-                  @click="toggleCategory(index)"
-                  @keydown.enter="toggleCategory(index)"
-                >
-                  <span
-                    class="mr-2 text-secondary transition-transform duration-200"
-                    :class="{ 'rotate-90': expandedCategories[index] }"
-                  >
-                    ▶
-                  </span>
-                  {{ category.name }}
-                </div>
-
-                <!-- Skills list (collapsible) -->
-                <div
-                  v-if="expandedCategories[index]"
-                  class="ml-6 space-y-1 overflow-hidden transition-all duration-300"
-                >
-                  <div
-                    v-for="(skill, skillIndex) in category.skills"
-                    :key="skillIndex"
-                    class="skill-item flex items-center"
-                  >
-                    <span class="mr-2 text-secondary">></span>
-                    <span class="text-terminal">{{ skill }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-4 border-t border-primary/30 pt-4 text-terminal">
-              <div class="flex items-center">
-                <span class="mr-2 text-secondary">kwikkill@hyperion:~$</span>
-                <span class="text-primary">
-                  {{
-                    isEnglish
-                      ? 'echo "Always learning new technologies"'
-                      : 'echo "Toujours en train d\'apprendre de nouvelles technologies"'
-                  }}
-                </span>
-              </div>
-              <div class="mt-1">
-                {{
-                  isEnglish
-                    ? 'Always learning new technologies'
-                    : 'Toujours en train d\'apprendre de nouvelles technologies'
-                }}
-              </div>
-            </div>
-          </template>
-        </CyberpunkTerminalWindow>
       </div>
+
+      <!-- Skills: htop and the ps panel of the selected one -->
+      <CyberpunkSkills class="mb-8"/>
 
       <!-- Call to Action Terminal -->
       <CyberpunkTerminalWindow>
@@ -276,30 +198,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed } from 'vue';
 
 import { usePreferencesStore } from '../../stores/preferences';
-import { useProjectsStore } from '../../stores/projects';
+import CyberpunkNeofetch from './CyberpunkNeofetch.vue';
+import CyberpunkSkills from './CyberpunkSkills.vue';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
-const projectsStore = useProjectsStore();
-
-const skills = computed(() => projectsStore.getLocalizedSkills);
 const preferencesStore = usePreferencesStore();
 const isEnglish = computed(() => preferencesStore.isEnglish);
-
-// Track which categories are expanded
-const expandedCategories = ref<Record<string | number, boolean>>({});
-
-// Toggle category expansion
-function toggleCategory(index: string | number) {
-  expandedCategories.value[index] = !expandedCategories.value[index];
-}
-
-// Initialize with first category expanded
-onMounted(() => {
-  expandedCategories.value[0] = true;
-});
 </script>
 
 <style scoped>
@@ -350,9 +257,5 @@ onMounted(() => {
       rgb(var(--color-background) / 0.5) 50%);
   background-size: 100% 4px;
   pointer-events: none;
-}
-
-.skill-item {
-  position: relative;
 }
 </style>

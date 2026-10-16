@@ -6,13 +6,15 @@
       'terminal-fullscreen fixed inset-0 z-50': isFullscreen,
       relative: !isFullscreen,
       'cursor-pointer rounded-md border-2 border-dashed border-primary/50 bg-black/0 transition-all': isClosed,
+      'flex flex-col': fillHeight && !isFullscreen,
     }"
     :style="terminalStyle"
   >
-    <div>
+    <div :class="{ 'flex min-h-0 flex-1 flex-col': fillHeight }">
       <div
         :class="{
           invisible: isClosed,
+          'flex min-h-0 flex-1 flex-col': fillHeight,
         }"
       >
         <!-- Terminal header -->
@@ -84,6 +86,7 @@
             'max-h-0 overflow-hidden': isMinimized,
             'max-h-screen overflow-auto': isFullscreen,
             'overflow-hidden': !isFullscreen && !isMinimized,
+            'flex min-h-0 flex-1 flex-col': fillHeight,
           }"
           :style="bodyStyle"
         >
@@ -157,6 +160,11 @@ defineProps({
   bodyClass: {
     type: String,
     default: '',
+  },
+  // Lets the body fill the window's height (e.g. when a grid stretches the window).
+  fillHeight: {
+    type: Boolean,
+    default: false,
   },
 });
 

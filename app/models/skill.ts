@@ -1,5 +1,7 @@
 export interface SkillCategory {
   name: string;
+  // Compact label, for the htop meters and CAT column.
+  short?: string;
   skills: string[];
 }
 

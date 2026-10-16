@@ -38,7 +38,7 @@
   --color-background: 0 0 0; /* Black */
   --color-text: 255 255 255; /* White */
   --color-hover: 204 204 0; /* Dark Yellow */
-  --color-terminal: 74, 222, 128; /* Green */
+  --color-terminal: 74 222 128; /* Green */
   --color-terminal-hover: 22 163 74; /* Dark Green */
   --color-text: 255 255 255; /* White */
   color: rgb(var(--color-text));
@@ -52,7 +52,7 @@
   --color-background: 25 25 35; /* Dark purple-ish */
   --color-text: 255 255 255; /* White */
   --color-hover: 138 43 226; /* Deep pink */
-  --color-terminal: 255, 20, 147; /* Deep pink */
+  --color-terminal: 255 20 147; /* Deep pink */
   --color-terminal-hover: 255 105 180; /* Hot pink */
 }
 
@@ -64,7 +64,7 @@
   --color-background: 0 10 0; /* Near black */
   --color-text: 0 255 0; /* Bright green */
   --color-hover: 0 128 0; /* Dark green */
-  --color-terminal: 0, 255, 0; /* Bright green */
+  --color-terminal: 0 255 0; /* Bright green */
   --color-terminal-hover: 0 128 0; /* Dark green */
 }
 
@@ -75,7 +75,7 @@
   --color-background: 240 255 244;  /* Soft Mint (eco-paper vibe) */
   --color-text: 34 45 34;           /* Forest Green (for contrast) */
   --color-hover: 72 160 120;        /* Emerald Green */
-  --color-terminal: 85, 170, 85;    /* Bright Green Terminal */
+  --color-terminal: 85 170 85;    /* Bright Green Terminal */
   --color-terminal-hover: 255 204 92; /* Sunflower Yellow */
 }
 

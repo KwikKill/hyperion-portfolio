@@ -92,11 +92,11 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
 import {
   computed, nextTick, onBeforeUnmount, onMounted, ref,
 } from 'vue';
 
+import { useOpenProject } from '../../composables/useOpenProject';
 import type { Command } from '../../models/command';
 import { usePreferencesStore } from '../../stores/preferences';
 import { useProjectsStore } from '../../stores/projects';
@@ -125,7 +125,7 @@ const projectsStore = useProjectsStore();
 const projects = computed(() => projectsStore.getLocalizedProjects);
 const skills = computed(() => projectsStore.getLocalizedSkills);
 
-const { selectedProject } = storeToRefs(projectsStore);
+const { canOpenProject, openProject: openProjectPage } = useOpenProject();
 
 type Project = (typeof projects.value)[number];
 
@@ -204,15 +204,11 @@ function fileLine(project: Project): TerminalLine {
 }
 
 function openProject(file: string) {
-  if (preferencesStore.isAnyFullScreen) {
+  if (!canOpenProject.value) {
     printError(t('Quittez le plein écran pour ouvrir la fiche.', 'Exit full screen to open the project.'));
     return;
   }
-  const project = projects.value.find((item) => item.localizedFile === file);
-  if (!project) return;
-
-  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-  selectedProject.value = project;
+  openProjectPage(file);
 }
 
 function handleLinkClick(link: string) {
