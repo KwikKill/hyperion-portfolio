@@ -6,6 +6,8 @@ export const usePreferencesStore = defineStore('preferences', {
     language: null as 'en' | 'fr' | null,
     cyberpunkTheme: 'default' as 'default' | 'ghost' | 'matrix' | 'solarpunk',
     isAnyFullScreen: false,
+    // Shared so the terminal's `sudo rm -rf /` can open the self-destruct confirmation.
+    showSelfDestructAlarm: false,
   }),
 
   actions: {

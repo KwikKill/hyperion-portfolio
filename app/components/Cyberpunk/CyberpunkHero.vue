@@ -159,23 +159,30 @@
             </template>
           </CyberpunkTerminalWindow>
 
-          <div class="flex flex-row gap-4">
-            <div class="mt-8 flex space-x-4">
-              <a
-                href="#projects"
-                class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-hover"
-              >
-                {{ isEnglish ? 'View Projects' : 'Voir les Projets' }}
-              </a>
-            </div>
-            <div class="mt-8 flex space-x-4">
-              <a
-                href="#experience"
-                class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-hover"
-              >
-                {{ isEnglish ? 'View past experiences' : 'Voir les expériences passées' }}
-              </a>
-            </div>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="#projects"
+              class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-hover"
+            >
+              {{ isEnglish ? 'View Projects' : 'Voir les Projets' }}
+            </a>
+            <a
+              href="#experience"
+              class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-hover"
+            >
+              {{ isEnglish ? 'View past experiences' : 'Voir les expériences passées' }}
+            </a>
+            <a
+              :href="CV_URL"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cyberpunk-button inline-flex items-center gap-2 rounded-none border-2 border-primary px-6 py-3 font-medium uppercase tracking-wider text-primary transition-colors hover:bg-primary/10"
+            >
+              CV PDF
+              <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
           </div>
         </div>
 
@@ -192,6 +199,7 @@
 import { computed, ref } from 'vue';
 
 import { usePreferencesStore } from '../../stores/preferences';
+import { CV_URL } from '../../utils/links';
 import CyberpunkTerminal from './CyberpunkTerminal.vue';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 

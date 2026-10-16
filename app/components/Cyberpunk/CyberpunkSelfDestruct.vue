@@ -278,6 +278,7 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
 import {
   computed, nextTick, onMounted, ref,
 } from 'vue';
@@ -290,7 +291,8 @@ const isEnglish = computed(() => preferencesStore.isEnglish);
 
 // Animation state
 const isDestructing = ref(false);
-const showAlarm = ref(false);
+// In the store so the terminal can open the alarm too (`sudo rm -rf /`).
+const { showSelfDestructAlarm: showAlarm } = storeToRefs(preferencesStore);
 const showDestruction = ref(false);
 const isComplete = ref(false);
 const countdown = ref(5);
