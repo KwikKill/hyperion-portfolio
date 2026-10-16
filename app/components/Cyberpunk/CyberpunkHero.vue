@@ -1,5 +1,5 @@
 <template>
-  <section id="home" class="relative mt-0 flex min-h-screen items-center overflow-hidden py-20 md:mt-10 lg:mt-0">
+  <section id="home" class="relative flex min-h-screen items-center overflow-hidden py-20">
     <!-- Cyberpunk background with grid and glow effects -->
     <div class="absolute inset-0 z-0 bg-bg">
       <div class="cyberpunk-grid"/>
@@ -180,7 +180,8 @@
         </div>
 
         <div class="h-full">
-          <CyberpunkTerminal/>
+          <!-- The terminal writes its lines once, on mount: remount it when the language changes -->
+          <CyberpunkTerminal :key="isEnglish ? 'en' : 'fr'"/>
         </div>
       </div>
     </div>

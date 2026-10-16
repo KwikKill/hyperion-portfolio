@@ -1,5 +1,32 @@
 <template>
-  <div class="relative">
+  <!-- Swatches: every theme visible at once, sized for touch (mobile menu) -->
+  <div
+    v-if="variant === 'swatches'"
+    class="flex items-center gap-1"
+    role="group"
+    :aria-label="isEnglish ? 'Theme' : 'Thème'"
+  >
+    <button
+      v-for="theme in themes"
+      :key="theme.value"
+      type="button"
+      class="flex size-11 items-center justify-center rounded border transition-colors"
+      :class="preferencesStore.cyberpunkTheme === theme.value
+        ? 'border-primary'
+        : 'border-transparent hover:border-primary/40'"
+      :title="isEnglish ? theme.nameEn : theme.nameFr"
+      :aria-label="isEnglish ? theme.nameEn : theme.nameFr"
+      :aria-pressed="preferencesStore.cyberpunkTheme === theme.value"
+      @click="selectTheme(theme.value)"
+    >
+      <span
+        class="inline-block size-5 rounded-full ring-1 ring-gray-500/50"
+        :style="theme.colorStyle"
+      />
+    </button>
+  </div>
+
+  <div v-else class="relative">
     <button
       class="flex items-center space-x-1 rounded border border-primary/30 bg-bg/50 px-2 py-1 text-sm transition-colors hover:border-primary/60"
       type="button"
@@ -55,6 +82,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { usePreferencesStore } from '@/stores/preferences';
+
+withDefaults(defineProps<{
+  variant?: 'dropdown' | 'swatches';
+}>(), {
+  variant: 'dropdown',
+});
 
 const preferencesStore = usePreferencesStore();
 const isOpen = ref(false);

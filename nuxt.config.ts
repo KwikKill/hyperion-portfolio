@@ -4,9 +4,9 @@ export default defineNuxtConfig({
   css: ['~/assets/css/tailwind.css'],
   nitro: {
     prerender: {
-      // The home page navigates with navigateTo(), so the `nuxt generate` crawler
-      // never discovers these routes: list them explicitly.
-      routes: ['/cyberpunk', '/classic'],
+      // These pages are reached through navigateTo(), so the `nuxt generate`
+      // crawler never discovers them: list them explicitly.
+      routes: ['/cyberpunk', '/classic', '/version'],
     },
   },
   app: {

@@ -380,11 +380,12 @@
 import { computed, onMounted, ref } from 'vue';
 
 import { usePreferencesStore } from '../stores/preferences';
+import { detectBrowserLanguage } from '../utils/language';
 import { navigateTo } from 'nuxt/app';
 
 const preferencesStore = usePreferencesStore();
 const language = ref<'en' | 'fr' | null>(null);
-const version = ref<'classic' | 'cyberpunk' | null>(null);
+const version = ref<'classic' | 'cyberpunk' | null>('cyberpunk');
 const isModalReady = ref(false);
 
 const isEnglish = computed(() => language.value === 'en');
@@ -418,6 +419,11 @@ function confirmSelection() {
 }
 
 onMounted(() => {
+  // Preselect the current language (or the browser's) so that switching version
+  // only takes the version click and the confirmation. Done once mounted: the
+  // page is prerendered, so the browser language is unknown during rendering.
+  language.value = preferencesStore.language ?? detectBrowserLanguage();
+
   // Add a small delay for entrance animation
   setTimeout(() => {
     isModalReady.value = true;
