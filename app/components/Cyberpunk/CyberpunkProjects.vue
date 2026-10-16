@@ -177,7 +177,7 @@
             <!-- Project items remain the same -->
             <button
               v-for="project in completedFilteredProjects"
-              :id="'project-' + project.file[language ?? 'en']"
+              :id="'project-' + project.file[language]"
               :key="project.localizedName"
               type="button"
               class="group flex cursor-pointer flex-col items-center"
@@ -241,7 +241,7 @@
             <!-- Project items remain the same -->
             <button
               v-for="project in uncompletedFilteredProjects"
-              :id="'project-' + project.file[language ?? 'en']"
+              :id="'project-' + project.file[language]"
               :key="project.localizedName"
               type="button"
               class="group flex cursor-pointer flex-col items-center"
@@ -542,7 +542,7 @@ const preferencesStore = usePreferencesStore();
 const projectsStore = useProjectsStore();
 
 const isEnglish = computed(() => preferencesStore.isEnglish);
-const language = computed(() => preferencesStore.language);
+const language = computed(() => preferencesStore.lang);
 const projects = computed(() => projectsStore.getLocalizedProjects);
 
 const { selectedProject } = storeToRefs(projectsStore);

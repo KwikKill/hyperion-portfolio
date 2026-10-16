@@ -1379,46 +1379,46 @@ export const useProjectsStore = defineStore('projects', {
   getters: {
     getLocalizedProjects: (state) => {
       const preferencesStore = usePreferencesStore();
-      const lang = preferencesStore.language;
+      const lang = preferencesStore.lang;
 
       return state.projects.map((project) => ({
         ...project,
-        localizedName: project.name[lang ?? 'en'],
-        localizedDescription: project.description[lang ?? 'en'],
-        localizedNote: project.note ? project.note[lang ?? 'en'] : undefined,
-        localizedFile: project.file[lang ?? 'en'],
+        localizedName: project.name[lang],
+        localizedDescription: project.description[lang],
+        localizedNote: project.note ? project.note[lang] : undefined,
+        localizedFile: project.file[lang],
       }));
     },
     getLocalizedExperiences: (state) => {
       const preferencesStore = usePreferencesStore();
-      const lang = preferencesStore.language;
+      const lang = preferencesStore.lang;
 
       return state.experiences.map((experience) => ({
         ...experience,
-        localizedTitle: experience.title[lang ?? 'en'],
-        localizedLocation: experience.location[lang ?? 'en'],
-        localizedPeriod: experience.period[lang ?? 'en'],
-        localizedDescription: experience.description[lang ?? 'en'],
-        localizedAchievements: experience.achievements[lang ?? 'en'],
+        localizedTitle: experience.title[lang],
+        localizedLocation: experience.location[lang],
+        localizedPeriod: experience.period[lang],
+        localizedDescription: experience.description[lang],
+        localizedAchievements: experience.achievements[lang],
       }));
     },
     getLocalizedSkills: (state) => {
       const preferencesStore = usePreferencesStore();
-      const lang = preferencesStore.language;
+      const lang = preferencesStore.lang;
 
-      return state.skills[lang ?? 'en'];
+      return state.skills[lang];
     },
     getLocalizedMovies: (state) => {
       const preferencesStore = usePreferencesStore();
-      const lang = preferencesStore.language;
+      const lang = preferencesStore.lang;
 
-      return state.movies[lang ?? 'en'];
+      return state.movies[lang];
     },
     getLocalizedGames: (state) => {
       const preferencesStore = usePreferencesStore();
-      const lang = preferencesStore.language;
+      const lang = preferencesStore.lang;
 
-      return state.games[lang ?? 'en'];
+      return state.games[lang];
     },
   },
 });

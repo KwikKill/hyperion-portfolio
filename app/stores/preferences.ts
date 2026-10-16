@@ -86,7 +86,14 @@ export const usePreferencesStore = defineStore('preferences', {
   getters: {
     getLanguage: (state) => state.language,
     getCyberpunkTheme: (state) => state.cyberpunkTheme,
-    isEnglish: (state) => state.language === 'en',
-    isFrench: (state) => state.language === 'fr',
+    // Language to render in. The single fallback for when none is set yet (e.g. a
+    // page opened without ?lang=): interface and content must agree on it.
+    lang: (state): 'en' | 'fr' => state.language ?? 'fr',
+    isEnglish(): boolean {
+      return this.lang === 'en';
+    },
+    isFrench(): boolean {
+      return this.lang === 'fr';
+    },
   },
 });

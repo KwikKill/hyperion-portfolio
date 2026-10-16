@@ -8,7 +8,7 @@
       <div class="container mx-auto grid grid-cols-1 gap-8 px-4 md:grid-cols-2 lg:grid-cols-3">
         <div
           v-for="project in completedFilteredProjects"
-          :key="project.name[language ?? 'en']"
+          :key="project.name[language]"
           class="relative flex flex-col overflow-hidden rounded-lg bg-white shadow-lg transition-transform hover:scale-105 dark:bg-gray-800"
         >
           <img :src="project.images[0]" :alt="project.localizedName" class="h-48 w-full object-cover"/>
@@ -82,7 +82,7 @@
       <div class="container mx-auto grid grid-cols-1 gap-8 px-4 md:grid-cols-2 lg:grid-cols-3">
         <div
           v-for="project in uncompletedFilteredProjects"
-          :key="project.name[language ?? 'en']"
+          :key="project.name[language]"
           class="relative flex flex-col overflow-hidden rounded-lg bg-white shadow-lg transition-transform hover:scale-105 dark:bg-gray-800"
         >
           <img :src="project.images[0]" :alt="project.localizedName" class="h-48 w-full object-cover"/>
@@ -163,7 +163,7 @@ const projectsStore = useProjectsStore();
 
 const isEnglish = computed(() => preferencesStore.isEnglish);
 const projects = computed(() => projectsStore.getLocalizedProjects);
-const language = computed(() => preferencesStore.language);
+const language = computed(() => preferencesStore.lang);
 
 const completedFilteredProjects = computed(() => projects.value.filter((project) => project.completed));
 const uncompletedFilteredProjects = computed(() => projects.value.filter((project) => !project.completed));

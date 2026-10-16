@@ -38,8 +38,7 @@ const languages = ['fr', 'en'] as const;
 
 const preferencesStore = usePreferencesStore();
 const isEnglish = computed(() => preferencesStore.isEnglish);
-// The interface falls back to French while no language is set.
-const currentLanguage = computed(() => preferencesStore.language ?? 'fr');
+const currentLanguage = computed(() => preferencesStore.lang);
 
 function setLanguage(lang: 'en' | 'fr') {
   if (lang === preferencesStore.language) return;

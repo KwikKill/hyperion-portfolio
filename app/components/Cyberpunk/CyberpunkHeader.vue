@@ -120,7 +120,7 @@ const navLinks = computed(() => [
   { id: 'interests', name: isEnglish.value ? 'Interests' : 'Intérêts', slug: isEnglish.value ? 'interests' : 'interets' },
 ]);
 
-const classicLink = computed(() => `/classic?lang=${preferencesStore.language ?? 'fr'}`);
+const classicLink = computed(() => `/classic?lang=${preferencesStore.lang}`);
 
 const menuButtonLabel = computed(() => {
   if (isEnglish.value) return isMenuOpen.value ? 'Close menu' : 'Open menu';
