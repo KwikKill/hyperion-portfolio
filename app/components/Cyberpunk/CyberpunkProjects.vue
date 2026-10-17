@@ -177,12 +177,12 @@
             <!-- Project items remain the same -->
             <button
               v-for="project in completedFilteredProjects"
-              :id="'project-' + project.file[language]"
-              :key="project.localizedName"
+              :id="anchorOf(project)"
+              :key="project.file.en"
               type="button"
               class="group flex cursor-pointer flex-col items-center"
               :class="{ 'search-match': isSearchMatch(project) }"
-              :data-umami-event="project.localizedName"
+              :data-umami-event="project.localizedTitle"
               @click="openProject(project)"
               @keydown.enter="openProject(project)"
             >
@@ -214,7 +214,7 @@
               <!-- Project name -->
               <div class="text-center">
                 <div class="font-mono cyberpunk-text-glow px-2 py-1 text-sm text-primary">
-                  {{ project.localizedName }}
+                  {{ project.localizedTitle }}
                 </div>
                 <div class="font-mono mt-1 text-xs text-secondary">
                   {{ project.date }}
@@ -241,12 +241,12 @@
             <!-- Project items remain the same -->
             <button
               v-for="project in uncompletedFilteredProjects"
-              :id="'project-' + project.file[language]"
-              :key="project.localizedName"
+              :id="anchorOf(project)"
+              :key="project.file.en"
               type="button"
               class="group flex cursor-pointer flex-col items-center"
               :class="{ 'search-match': isSearchMatch(project) }"
-              :data-umami-event="project.localizedName"
+              :data-umami-event="project.localizedTitle"
               @click="openProject(project)"
               @keydown.enter="openProject(project)"
             >
@@ -278,7 +278,7 @@
               <!-- Project name -->
               <div class="text-center">
                 <div class="font-mono cyberpunk-text-glow px-2 py-1 text-sm text-primary">
-                  {{ project.localizedName }}
+                  {{ project.localizedTitle }}
                 </div>
                 <div class="font-mono mt-1 text-xs text-secondary">
                   {{ project.date }}
@@ -290,284 +290,46 @@
       </CyberpunkTerminalWindow>
     </div>
 
-    <!-- Project Modal -->
-    <div
-      v-if="selectedProject"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-bg/80 p-4 backdrop-blur-sm"
-      @click.self="closeProject"
-      @keydown.esc="closeProject"
-    >
-      <CyberpunkTerminalWindow body-class="max-w-3xl w-full max-h-[80vh] overflow-y-auto p-4">
-        <template #title>
-          <div
-            class="font-mono cyberpunk-text-glow flex flex-col items-start justify-center text-lg text-primary md:flex-row md:items-center"
-          >
-            {{ selectedProject.localizedName }}
-            <span v-if="selectedProject.starred" class="star-badge-modal text-primary md:ml-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20" fill="currentColor">
-                <path
-                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                />
-              </svg>
-              <span class="ml-1 text-xs">{{ isEnglish ? 'FEATURED PROJECT' : 'PROJET MIS EN AVANT' }}</span>
-            </span>
-          </div>
-        </template>
-
-        <template #buttons>
-          <div class="flex justify-end">
-            <button
-              class="text-primary hover:text-hover"
-              type="button"
-              @click="closeProject"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="size-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
-            </button>
-          </div>
-        </template>
-
-        <template #body>
-          <div class="flex flex-col gap-6 md:flex-col">
-            <!-- Image Gallery -->
-            <div class="relative">
-              <!-- Project Note Badge (if exists) -->
-              <div v-if="selectedProject.localizedNote" class="absolute right-4 top-4 z-10">
-                <div class="project-note-badge font-mono flex items-center rounded-l-md border-l-4 border-primary bg-bg/80 px-3 py-1 text-sm uppercase text-primary">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="mr-1.5 size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                  {{ selectedProject.localizedNote }}
-                </div>
-              </div>
-
-              <!-- Main Image with transition -->
-              <div class="relative flex aspect-video items-center justify-center overflow-hidden rounded-md border-2 border-primary/70">
-                <transition name="fade" mode="out-in">
-                  <img
-                    :key="currentImageIndex"
-                    :src="selectedProject.images[currentImageIndex]"
-                    :alt="`${selectedProject.localizedName} - Image ${currentImageIndex + 1}`"
-                    class="h-full w-auto object-cover object-center"
-                  />
-                </transition>
-
-                <!-- Navigation Arrows -->
-                <div class="absolute inset-0 flex items-center justify-between px-2">
-                  <!-- Previous Button -->
-                  <button
-                    v-if="selectedProject.images.length > 1"
-                    type="button"
-                    class="flex size-10 items-center justify-center rounded-full bg-bg/50 text-primary transition-colors hover:bg-primary/20"
-                    aria-label="Previous image"
-                    @click.stop="prevImage"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                    </svg>
-                  </button>
-
-                  <!-- Spacer for single image -->
-                  <div v-else class="w-10"/>
-
-                  <!-- Next Button -->
-                  <button
-                    v-if="selectedProject.images.length > 1"
-                    type="button"
-                    class="flex size-10 items-center justify-center rounded-full bg-bg/50 text-primary transition-colors hover:bg-primary/20"
-                    aria-label="Next image"
-                    @click.stop="nextImage"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                  </button>
-
-                  <!-- Spacer for single image -->
-                  <div v-else class="w-10"/>
-                </div>
-              </div>
-
-              <!-- Image Indicators -->
-              <div
-                v-if="selectedProject.images.length > 1"
-                class="mt-2 flex justify-center gap-2"
-              >
-                <button
-                  v-for="(_, index) in selectedProject.images"
-                  :key="index"
-                  type="button"
-                  class="h-2 w-8 rounded-full transition-colors"
-                  :class="index === currentImageIndex ? 'bg-primary' : 'bg-gray-600 hover:bg-gray-500'"
-                  :aria-label="`Go to image ${index + 1}`"
-                  :aria-current="index === currentImageIndex ? 'true' : 'false'"
-                  @click.stop="setCurrentImage(index)"
-                />
-              </div>
-
-              <!-- Image Counter -->
-              <div
-                v-if="selectedProject.images.length > 1"
-                class="absolute bottom-7 right-3 rounded bg-bg/70 px-2 py-1 text-xs text-primary"
-              >
-                {{ currentImageIndex + 1 }} / {{ selectedProject.images.length }}
-              </div>
-            </div>
-
-            <div class="">
-              <h4 class="font-mono mb-2 flex items-center text-sm uppercase text-secondary">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="mr-2 size-5 text-secondary"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-                  />
-                </svg>
-                DESCRIPTION
-              </h4>
-              <!-- Running text in sans-serif, left-aligned and kept to a readable line length -->
-              <div class="mb-4 rounded-md border border-primary/30 bg-bg/50 p-4">
-                <div class="font-sans">
-                  <p v-if="description.lead" class="text-lg leading-relaxed text-text">
-                    {{ description.lead }}
-                  </p>
-                  <template v-for="(block, blockIndex) in description.blocks" :key="blockIndex">
-                    <ul v-if="block.type === 'list'" class="mt-3 space-y-1">
-                      <li v-for="item in block.lines" :key="item" class="flex gap-2 leading-relaxed text-text/85">
-                        <span class="shrink-0 text-primary" aria-hidden="true">&gt;</span>
-                        <span>{{ item }}</span>
-                      </li>
-                    </ul>
-                    <p v-else class="mt-3 leading-relaxed text-text/85">
-                      {{ block.lines[0] }}
-                    </p>
-                  </template>
-                </div>
-              </div>
-
-              <div class="mb-4">
-                <h4 class="font-mono mb-2 flex items-center text-sm uppercase text-secondary">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="mr-1 size-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                    />
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                  {{ isEnglish ? 'TECHNOLOGIES' : 'TECHNOLOGIES' }}
-                </h4>
-                <div class="flex flex-wrap gap-2">
-                  <span
-                    v-for="(tech, index) in selectedProject.technologies"
-                    :key="index"
-                    class="font-mono cursor-pointer border border-primary bg-bg px-2 py-1 text-xs uppercase text-primary hover:bg-primary/10"
-                    @click.stop="filterByTechFromModal(tech)"
-                    @keydown.enter.stop="filterByTechFromModal(tech)"
-                  >
-                    {{ tech }}
-                  </span>
-                </div>
-              </div>
-
-              <div class="flex justify-center space-x-4">
-                <a
-                  v-if="selectedProject.link"
-                  :href="selectedProject.link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-mono flex items-center bg-primary px-4 py-2 text-sm uppercase text-black transition-colors hover:bg-hover"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="mr-2 size-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                  {{ isEnglish ? 'VIEW PROJECT' : 'VOIR LE PROJET' }}
-                </a>
-                <a
-                  v-if="selectedProject.github"
-                  :href="selectedProject.github"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-mono flex items-center bg-primary px-4 py-2 text-sm uppercase text-black transition-colors hover:bg-hover"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 size-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                      d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                    />
-                  </svg>
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-        </template>
-      </CyberpunkTerminalWindow>
-    </div>
+    <!-- Project page: shareable through the URL hash, keyboard friendly -->
+    <CyberpunkProjectModal
+      v-if="currentProject"
+      :project="currentProject"
+      :previous="neighbours.previous"
+      :next="neighbours.next"
+      @close="closeProject"
+      @navigate="openProject"
+      @filter="filterByTechFromModal"
+    />
   </section>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { computed, ref, watch } from 'vue';
+import {
+  computed, onMounted, ref, watch,
+} from 'vue';
 
 import type { localizedProject } from '../../models/project';
 import { usePreferencesStore } from '../../stores/preferences';
 import { useProjectsStore } from '../../stores/projects';
-import { parseDescription } from '../../utils/description';
+import CyberpunkProjectModal from './CyberpunkProjectModal.vue';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
 const preferencesStore = usePreferencesStore();
 const projectsStore = useProjectsStore();
 
 const isEnglish = computed(() => preferencesStore.isEnglish);
-const language = computed(() => preferencesStore.lang);
 const projects = computed(() => projectsStore.getLocalizedProjects);
 
 const { selectedProject } = storeToRefs(projectsStore);
-const description = computed(() => parseDescription(selectedProject.value?.localizedDescription ?? ''));
 
 const searchQuery = ref('');
 const isSearchFocused = ref(false);
 const lastSearchTime = ref(Date.now());
 const selectedTechnology = ref('');
-const currentImageIndex = ref(0);
+
+// Same in both languages: built from the English file name ("polis.html" -> "project-polis").
+const anchorOf = (project: localizedProject) => `project-${project.file.en.replace(/\.[^.]+$/, '')}`;
 
 // Get all unique technologies from all projects
 const availableTechnologies = computed(() => {
@@ -592,7 +354,7 @@ const filteredProjects = computed(() => {
   // Apply search query filter if present
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase();
-    result = result.filter((project) => project.localizedName.toLowerCase().includes(query)
+    result = result.filter((project) => project.localizedTitle.toLowerCase().includes(query)
         || project.localizedDescription.toLowerCase().includes(query)
         || project.technologies.some((tech) => tech.toLowerCase().includes(query)));
   }
@@ -612,7 +374,7 @@ function isSearchMatch(project: localizedProject) {
 
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase();
-    isMatch = project.localizedName.toLowerCase().includes(query)
+    isMatch = project.localizedTitle.toLowerCase().includes(query)
       || project.localizedDescription.toLowerCase().includes(query)
       || project.technologies.some((tech) => tech.toLowerCase().includes(query));
   }
@@ -624,21 +386,28 @@ function isSearchMatch(project: localizedProject) {
   return isMatch;
 }
 
-// Image navigation functions
-function nextImage() {
-  if (!selectedProject.value) return;
-  currentImageIndex.value = (currentImageIndex.value + 1) % selectedProject.value.images.length;
-}
+// The selection can come from the terminal or the skills htop: resolve it again in the
+// current language, so the page follows a language switch.
+const currentProject = computed(() => {
+  const file = selectedProject.value?.file.en;
+  return file ? projects.value.find((project) => project.file.en === file) ?? null : null;
+});
 
-function prevImage() {
-  if (!selectedProject.value) return;
-  currentImageIndex.value = (currentImageIndex.value - 1 + selectedProject.value.images.length)
-  % selectedProject.value.images.length;
-}
+// Previous / next project, in the explorer's order (or the full list when the
+// project was opened from elsewhere and is hidden by the current filters).
+const neighbours = computed(() => {
+  const current = currentProject.value;
+  const shown = [...completedFilteredProjects.value, ...uncompletedFilteredProjects.value];
+  const all = [...projects.value.filter((project) => project.completed), ...projects.value.filter((project) => !project.completed)];
+  const list = current && shown.some((project) => project.file.en === current.file.en) ? shown : all;
+  if (!current || list.length < 2) return { previous: null, next: null };
 
-function setCurrentImage(index: number) {
-  currentImageIndex.value = index;
-}
+  const index = list.findIndex((project) => project.file.en === current.file.en);
+  return {
+    previous: list[(index - 1 + list.length) % list.length],
+    next: list[(index + 1) % list.length],
+  };
+});
 
 // Clear search
 function clearSearch() {
@@ -652,8 +421,6 @@ function clearTechnologyFilter() {
 
 function closeProject() {
   selectedProject.value = null;
-  // Reset image index when closing the modal
-  currentImageIndex.value = 0;
 }
 
 // Filter by technology from modal
@@ -669,13 +436,21 @@ watch(searchQuery, () => {
 
 function openProject(project: localizedProject) {
   selectedProject.value = project;
-  // Reset image index when opening a new project
-  currentImageIndex.value = 0;
 }
 
-// Reset current image index when selected project changes
-watch(selectedProject, () => {
-  currentImageIndex.value = 0;
+// Shareable link: the open project lives in the URL hash (#project-polis). replaceState
+// keeps the router out of it, so nothing scrolls and the history does not grow.
+watch(() => currentProject.value?.file.en, () => {
+  const url = new URL(window.location.href);
+  url.hash = currentProject.value ? anchorOf(currentProject.value) : '';
+  window.history.replaceState(window.history.state, '', url);
+});
+
+// Opening a shared link: the browser has already scrolled to the project's folder.
+onMounted(() => {
+  const anchor = window.location.hash.slice(1);
+  const project = anchor && projects.value.find((item) => anchorOf(item) === anchor);
+  if (project) selectedProject.value = project;
 });
 </script>
 
@@ -764,17 +539,6 @@ watch(selectedProject, () => {
 
 .star-glow {
   filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.5));
-}
-
-/* Image transition effects */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 
 @keyframes star-pulse {

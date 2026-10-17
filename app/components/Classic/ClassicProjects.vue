@@ -11,7 +11,7 @@
           :key="project.name[language]"
           class="relative flex flex-col overflow-hidden rounded-lg bg-white shadow-lg transition-transform hover:scale-105 dark:bg-gray-800"
         >
-          <img :src="project.images[0]" :alt="project.localizedName" class="h-48 w-full object-cover"/>
+          <img :src="project.images[0]" :alt="project.localizedTitle" class="h-48 w-full object-cover"/>
           <div
             v-if="project.starred"
             class="absolute left-0 top-0 rounded-br-lg bg-yellow-500 px-2 py-1 text-sm font-bold text-black"
@@ -31,7 +31,7 @@
           <div class="flex flex-1 flex-col justify-between p-6">
             <div>
               <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
-                {{ project.localizedName }}
+                {{ project.localizedTitle }}
               </h3>
 
               <div class="mb-4 text-gray-700 dark:text-gray-300">
@@ -97,7 +97,7 @@
           :key="project.name[language]"
           class="relative flex flex-col overflow-hidden rounded-lg bg-white shadow-lg transition-transform hover:scale-105 dark:bg-gray-800"
         >
-          <img :src="project.images[0]" :alt="project.localizedName" class="h-48 w-full object-cover"/>
+          <img :src="project.images[0]" :alt="project.localizedTitle" class="h-48 w-full object-cover"/>
           <div
             v-if="project.starred"
             class="absolute left-0 top-0 rounded-br-lg bg-yellow-500 px-2 py-1 text-sm font-bold text-black"
@@ -117,7 +117,7 @@
           <div class="flex flex-1 flex-col justify-between p-6">
             <div>
               <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
-                {{ project.localizedName }}
+                {{ project.localizedTitle }}
               </h3>
 
               <div class="mb-4 text-gray-700 dark:text-gray-300">

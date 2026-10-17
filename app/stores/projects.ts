@@ -79,6 +79,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2019-2026',
         starred: true,
+        category: 'personal',
+        status: 'online',
         technologies: ['JavaScript', 'Discord.js', 'Docker', 'PostgreSQL', 'Git'],
         images: [rankupImage],
         note: {
@@ -91,8 +93,12 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         name: {
-          en: 'Polis - Generative GitHub City',
-          fr: 'Polis - Ville Générative GitHub',
+          en: 'Polis',
+          fr: 'Polis',
+        },
+        subtitle: {
+          en: 'Generative GitHub City',
+          fr: 'Ville Générative GitHub',
         },
         description: {
           en: 'Polis turns a GitHub account into a generative night city.\n- Every repository becomes a building: height maps to commit count, color to primary language, glow to stars\n- Cities can be published to a shared, persistent 3D planet, linked to each other by roads\n- Next.js, React Three Fiber, Prisma/PostgreSQL and GitHub OAuth via Auth.js',
@@ -104,6 +110,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2026',
         starred: true,
+        category: 'personal',
+        status: 'online',
         technologies: ['Next.js', 'React', 'Three.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Prisma', 'PostgreSQL', 'Docker', 'Caddy', 'Git'],
         images: [
           polis1,
@@ -115,8 +123,12 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         name: {
-          en: 'Mnemosyne - Neural Diagnostic Terminal',
-          fr: 'Mnemosyne - Terminal de Diagnostic Neuronal',
+          en: 'Mnemosyne',
+          fr: 'Mnemosyne',
+        },
+        subtitle: {
+          en: 'Neural Diagnostic Terminal',
+          fr: 'Terminal de Diagnostic Neuronal',
         },
         description: {
           en: 'A hand-written multilayer perceptron, trained live in the browser and inspected through a Signalis-inspired terminal interface.\n- No ML library: forward pass, backpropagation and gradient descent written from scratch\n- Training runs in a Web Worker while a network diagram, decision-boundary heatmap and loss chart render live on canvas\n- Custom-painted datasets, learning-rate scheduling, synaptic pruning, classification metrics and scrubbable training replay',
@@ -128,6 +140,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2026',
         starred: true,
+        category: 'personal',
+        status: 'online',
         technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Web Workers', 'Canvas API', 'Docker', 'Caddy', 'Git'],
         images: [
           mnemosyne1,
@@ -152,6 +166,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2026',
         starred: true,
+        category: 'personal',
+        status: 'online',
         technologies: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Docker', 'GitHub Actions', 'Git'],
         images: [umamiImage],
         note: {
@@ -176,6 +192,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025-2026',
         starred: true,
+        category: 'client',
+        status: 'online',
         technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'PostgreSQL', 'Docker', 'Caddy', 'Git'],
         images: [
           esport1,
@@ -192,8 +210,12 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         name: {
-          en: 'Amphion - Music Sequencer',
-          fr: 'Amphion - Séquenceur Musical',
+          en: 'Amphion',
+          fr: 'Amphion',
+        },
+        subtitle: {
+          en: 'Music Sequencer',
+          fr: 'Séquenceur Musical',
         },
         description: {
           en: 'A music sequencer to create your own music by arranging sounds on a timeline.\n- Designed around animations and a smooth user experience\n- Built with Next.js',
@@ -205,6 +227,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2026',
         starred: true,
+        category: 'personal',
+        status: 'online',
         technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Caddy', 'Git'],
         images: [
           amphionImage,
@@ -215,8 +239,12 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         name: {
-          en: 'Athena - Dashboard Builder',
-          fr: 'Athena - Constructeur de Dashboard',
+          en: 'Athena',
+          fr: 'Athena',
+        },
+        subtitle: {
+          en: 'Dashboard Builder',
+          fr: 'Constructeur de Dashboard',
         },
         description: {
           en: 'A dashboard builder to create your own custom dashboards from REST API data sources.\n- Inspired by Grafana, and by jQuery for data transformations\n- Data storage and authentication handled by Supabase\n- Built with Next.js',
@@ -228,6 +256,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
+        category: 'personal',
+        status: 'online',
         technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Supabase', 'Docker', 'Caddy', 'Git'],
         images: [
           athena1,
@@ -251,6 +281,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
+        category: 'personal',
+        status: 'online',
         technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Caddy', 'Git'],
         images: [
           freelance1,
@@ -267,8 +299,12 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         name: {
-          en: 'Metis - Job search Dashboard',
-          fr: 'Metis - Dashboard de recherche d\'emploi',
+          en: 'Metis',
+          fr: 'Metis',
+        },
+        subtitle: {
+          en: 'Job search Dashboard',
+          fr: 'Dashboard de recherche d\'emploi',
         },
         description: {
           en: 'A job search dashboard to keep track of your applications.\n- Add, edit and delete applications\n- Filter them by status: applied, interview, etc.\n- Built with React, with data saved in the browser\'s local storage',
@@ -280,6 +316,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
+        category: 'personal',
+        status: 'online',
         technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Git'],
         images: [metisImage],
         link: 'https://metis.somi.blaisot.org/',
@@ -288,8 +326,12 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         name: {
-          en: 'Talos - Virtual OS',
-          fr: 'Talos - OS Virtuel',
+          en: 'Talos',
+          fr: 'Talos',
+        },
+        subtitle: {
+          en: 'Virtual OS',
+          fr: 'OS Virtuel',
         },
         description: {
           en: 'A website simulating a virtual operating system, with a Windows 95 and Linux inspired interface.\n- Browse files and run applications\n- A purely demonstrative project, with no real functionality\n- Built with React',
@@ -301,6 +343,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
+        category: 'personal',
+        status: 'online',
         technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Git'],
         images: [talosImage],
         link: 'https://talos.somi.blaisot.org/',
@@ -309,8 +353,12 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         name: {
-          en: 'Hephaistos - Website Builder',
-          fr: 'Hephaistos - Constructeur de site web',
+          en: 'Hephaistos',
+          fr: 'Hephaistos',
+        },
+        subtitle: {
+          en: 'Website Builder',
+          fr: 'Constructeur de site web',
         },
         description: {
           en: 'A website builder to easily create your own simple websites.\n- User-friendly interface to create and customize web pages\n- Built with React',
@@ -322,6 +370,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
+        category: 'personal',
+        status: 'online',
         technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Git'],
         images: [hephaistosImage],
         link: 'https://hephaistos.somi.blaisot.org/',
@@ -343,6 +393,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2021-2024',
         starred: true,
+        category: 'competition',
+        status: 'finished',
         technologies: ['Python', 'JavaScript'],
         images: [btcImage],
         note: {
@@ -354,8 +406,12 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         name: {
-          en: 'Atlas - 3D World Map',
-          fr: 'Atlas - Carte du Monde 3D',
+          en: 'Atlas',
+          fr: 'Atlas',
+        },
+        subtitle: {
+          en: '3D World Map',
+          fr: 'Carte du Monde 3D',
         },
         description: {
           en: 'An interactive 3D world map.\n- Globe rendered with Three.js: zoom in and out, click a country to see information about it\n- Data retrieved from the RestCountries and geojson.xyz REST APIs',
@@ -367,6 +423,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
+        category: 'personal',
+        status: 'online',
         technologies: ['Next.js', 'React', 'Three.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Git'],
         images: [atlasImage],
         link: 'https://atlas.somi.blaisot.org/',
@@ -375,8 +433,12 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         name: {
-          en: 'Ceos - Todo App',
-          fr: 'Ceos - Todo App',
+          en: 'Ceos',
+          fr: 'Ceos',
+        },
+        subtitle: {
+          en: 'Todo App',
+          fr: 'Todo App',
         },
         description: {
           en: 'A todo app, built as a personal project to learn React.\n- Create, edit and delete tasks\n- Filter tasks by status: completed or not\n- Built with React and Tailwind CSS',
@@ -388,6 +450,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
+        category: 'personal',
+        status: 'online',
         technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Git'],
         images: [ceosImage],
         link: 'https://ceos.somi.blaisot.org/',
@@ -409,6 +473,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
+        category: 'personal',
+        status: 'online',
         technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Pinia', 'Docker', 'Git'],
         images: [portfolioImage],
         link: '#',
@@ -430,6 +496,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023-2025',
         starred: true,
+        category: 'association',
+        status: 'online',
         technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Pinia', 'JavaScript', 'TypeScript', 'Django', 'DjangoREST', 'Docker', 'Nginx', 'PostgreSQL', 'Git'],
         images: [insalanImage],
         note: {
@@ -455,6 +523,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: true,
+        category: 'association',
+        status: 'finished',
         technologies: ['Go', 'GoFiber', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'Docker', 'Traefik', 'PostgreSQL', 'Kafka', 'Protobuf', 'Git'],
         images: [
           insaplace1,
@@ -480,6 +550,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2025',
         starred: false,
+        category: 'association',
+        status: 'finished',
         technologies: ['Grafana', 'Telegraf', 'InfluxDB', 'Nginx', 'Docker', 'Git'],
         images: [monitImage],
         github: 'https://github.com/InsaLan/infra-insalan.fr/blob/main/docker-compose-analytics.yml',
@@ -500,6 +572,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2024',
         starred: false,
+        category: 'school',
+        status: 'finished',
         technologies: ['C++', 'SFML', 'Blender', 'Git'],
         images: [infographiqueImage],
         note: {
@@ -525,6 +599,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2024',
         starred: false,
+        category: 'school',
+        status: 'finished',
         technologies: ['C++', 'SFML', 'Git'],
         images: [bombermanImage],
         note: {
@@ -549,6 +625,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023-2024',
         starred: false,
+        category: 'personal',
+        status: 'unfinished',
         technologies: ['Python', 'JavaScript', 'TypeScript', 'Git'],
         images: [codepilotImage],
         github: 'https://github.com/KwikKill/advent-of-codpilote',
@@ -569,6 +647,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2024',
         starred: false,
+        category: 'personal',
+        status: 'finished',
         technologies: ['Python', 'JavaScript', 'Docker', 'Redis', 'PostgreSQL', 'Git'],
         images: [lightshieldImage],
         note: {
@@ -593,6 +673,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2024',
         starred: false,
+        category: 'school',
+        status: 'finished',
         technologies: ['Python', 'Git'],
         images: [indexerImage],
         note: {
@@ -617,6 +699,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023-2024',
         starred: false,
+        category: 'school',
+        status: 'finished',
         technologies: ['Python', 'LaTeX'],
         images: [revuesImage],
         note: {
@@ -641,6 +725,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023',
         starred: false,
+        category: 'school',
+        status: 'online',
         technologies: ['Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker', 'Git'],
         images: [pshImage],
         note: {
@@ -665,6 +751,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023',
         starred: false,
+        category: 'personal',
+        status: 'online',
         technologies: ['Nuxt', 'Vite', 'Vue.js', 'HTML', 'CSS', 'Tailwind CSS', 'Docker', 'Git'],
         images: [rankupwebImage],
         note: {
@@ -689,6 +777,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2023',
         starred: false,
+        category: 'personal',
+        status: 'online',
         technologies: ['Docker', 'Caddy', 'Shell Script', 'Git'],
         images: [stackImage],
         note: {
@@ -712,6 +802,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2020',
         starred: false,
+        category: 'school',
+        status: 'finished',
         technologies: ['Python', 'Git'],
         images: [vfsImage],
         note: {
@@ -736,6 +828,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2018-2020',
         starred: false,
+        category: 'personal',
+        status: 'finished',
         technologies: ['Java', 'HTML', 'CSS'],
         images: [minecraftImage],
         completed: false,
@@ -755,6 +849,8 @@ export const useProjectsStore = defineStore('projects', {
         },
         date: '2018',
         starred: false,
+        category: 'personal',
+        status: 'finished',
         technologies: ['Java', 'Git'],
         images: [mindustryImage],
         note: {
@@ -1444,6 +1540,8 @@ export const useProjectsStore = defineStore('projects', {
       return state.projects.map((project) => ({
         ...project,
         localizedName: project.name[lang],
+        localizedSubtitle: project.subtitle?.[lang],
+        localizedTitle: project.subtitle ? `${project.name[lang]} - ${project.subtitle[lang]}` : project.name[lang],
         localizedDescription: project.description[lang],
         localizedNote: project.note ? project.note[lang] : undefined,
         localizedFile: project.file[lang],
