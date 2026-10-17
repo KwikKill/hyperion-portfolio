@@ -34,9 +34,21 @@
                 {{ project.localizedName }}
               </h3>
 
-              <p class="mb-4 whitespace-pre-line leading-relaxed text-gray-700 dark:text-gray-300">
-                {{ project.localizedDescription }}
-              </p>
+              <div class="mb-4 text-gray-700 dark:text-gray-300">
+                <p class="leading-relaxed text-gray-800 dark:text-gray-200">
+                  {{ descriptions[project.localizedFile].lead }}
+                </p>
+                <template v-for="(block, blockIndex) in descriptions[project.localizedFile].blocks" :key="blockIndex">
+                  <ul v-if="block.type === 'list'" class="mt-2 list-disc space-y-1 pl-5">
+                    <li v-for="item in block.lines" :key="item">
+                      {{ item }}
+                    </li>
+                  </ul>
+                  <p v-else class="mt-2 leading-relaxed">
+                    {{ block.lines[0] }}
+                  </p>
+                </template>
+              </div>
             </div>
 
             <div>
@@ -108,9 +120,21 @@
                 {{ project.localizedName }}
               </h3>
 
-              <p class="mb-4 text-gray-700 dark:text-gray-300">
-                {{ project.localizedDescription }}
-              </p>
+              <div class="mb-4 text-gray-700 dark:text-gray-300">
+                <p class="leading-relaxed text-gray-800 dark:text-gray-200">
+                  {{ descriptions[project.localizedFile].lead }}
+                </p>
+                <template v-for="(block, blockIndex) in descriptions[project.localizedFile].blocks" :key="blockIndex">
+                  <ul v-if="block.type === 'list'" class="mt-2 list-disc space-y-1 pl-5">
+                    <li v-for="item in block.lines" :key="item">
+                      {{ item }}
+                    </li>
+                  </ul>
+                  <p v-else class="mt-2 leading-relaxed">
+                    {{ block.lines[0] }}
+                  </p>
+                </template>
+              </div>
             </div>
 
             <div>
@@ -157,6 +181,7 @@ import { computed } from 'vue';
 
 import { usePreferencesStore } from '../../stores/preferences';
 import { useProjectsStore } from '../../stores/projects';
+import { parseDescription } from '../../utils/description';
 
 const preferencesStore = usePreferencesStore();
 const projectsStore = useProjectsStore();
@@ -164,6 +189,10 @@ const projectsStore = useProjectsStore();
 const isEnglish = computed(() => preferencesStore.isEnglish);
 const projects = computed(() => projectsStore.getLocalizedProjects);
 const language = computed(() => preferencesStore.lang);
+// Lead sentence and bullet points of each description, by project file.
+const descriptions = computed(() => Object.fromEntries(
+  projects.value.map((project) => [project.localizedFile, parseDescription(project.localizedDescription)]),
+));
 
 const completedFilteredProjects = computed(() => projects.value.filter((project) => project.completed));
 const uncompletedFilteredProjects = computed(() => projects.value.filter((project) => !project.completed));

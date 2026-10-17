@@ -439,9 +439,23 @@
                 </svg>
                 DESCRIPTION
               </h4>
+              <!-- Running text in sans-serif, left-aligned and kept to a readable line length -->
               <div class="mb-4 rounded-md border border-primary/30 bg-bg/50 p-4">
-                <div class="font-mono whitespace-pre-line text-justify leading-relaxed">
-                  {{ selectedProject.localizedDescription }}
+                <div class="font-sans">
+                  <p v-if="description.lead" class="text-lg leading-relaxed text-text">
+                    {{ description.lead }}
+                  </p>
+                  <template v-for="(block, blockIndex) in description.blocks" :key="blockIndex">
+                    <ul v-if="block.type === 'list'" class="mt-3 space-y-1">
+                      <li v-for="item in block.lines" :key="item" class="flex gap-2 leading-relaxed text-text/85">
+                        <span class="shrink-0 text-primary" aria-hidden="true">&gt;</span>
+                        <span>{{ item }}</span>
+                      </li>
+                    </ul>
+                    <p v-else class="mt-3 leading-relaxed text-text/85">
+                      {{ block.lines[0] }}
+                    </p>
+                  </template>
                 </div>
               </div>
 
@@ -536,6 +550,7 @@ import { computed, ref, watch } from 'vue';
 import type { localizedProject } from '../../models/project';
 import { usePreferencesStore } from '../../stores/preferences';
 import { useProjectsStore } from '../../stores/projects';
+import { parseDescription } from '../../utils/description';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
 const preferencesStore = usePreferencesStore();
@@ -546,6 +561,7 @@ const language = computed(() => preferencesStore.lang);
 const projects = computed(() => projectsStore.getLocalizedProjects);
 
 const { selectedProject } = storeToRefs(projectsStore);
+const description = computed(() => parseDescription(selectedProject.value?.localizedDescription ?? ''));
 
 const searchQuery = ref('');
 const isSearchFocused = ref(false);

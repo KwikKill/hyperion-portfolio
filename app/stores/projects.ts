@@ -70,8 +70,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Bot Discord RankUp LoL',
         },
         description: {
-          en: 'A Discord bot providing detailed League of Legends stats, rank tracking, and server leaderboards. This bot uses the RiotGames API to fetch League of Legends match data and display it on Discord using Discord.js.',
-          fr: 'Un bot Discord qui offre des statistiques détaillées sur League of Legends, assure le suivi des rangs et des classements du serveur. Il utilise l’API de Riot Games pour récupérer les données de match et les affiche sur Discord via la bibliothèque Discord.js.',
+          en: 'A Discord bot providing detailed League of Legends stats.\n- Rank tracking and server leaderboards\n- Match data fetched from the Riot Games API\n- Displayed in Discord with the Discord.js library',
+          fr: 'Un bot Discord qui donne des statistiques détaillées sur League of Legends.\n- Suivi des rangs et classements des joueurs du serveur\n- Données de match récupérées via l\'API de Riot Games\n- Affichage dans Discord avec la bibliothèque Discord.js',
         },
         file: {
           en: 'rankup.js',
@@ -95,8 +95,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Polis - Ville Générative GitHub',
         },
         description: {
-          en: 'Polis turns a GitHub account into a generative night city: every repository becomes a building, height maps to commit count, color maps to primary language, and glow maps to stars. Cities can then be published to a shared, persistent 3D planet where every connected user\'s city sits on the same sphere, linked by roads. Built with Next.js, React Three Fiber, Prisma/PostgreSQL, and GitHub OAuth via Auth.js.',
-          fr: 'Polis transforme un compte GitHub en une ville générative nocturne : chaque dépôt devient un bâtiment, la hauteur correspond au nombre de commits, la couleur au langage principal et la luminosité au nombre d\'étoiles. Les villes peuvent ensuite être publiées sur une planète 3D partagée et persistante où la ville de chaque utilisateur connecté se place sur la même sphère, reliée par des routes. Construit avec Next.js, React Three Fiber, Prisma/PostgreSQL et l\'authentification GitHub via Auth.js.',
+          en: 'Polis turns a GitHub account into a generative night city.\n- Every repository becomes a building: height maps to commit count, color to primary language, glow to stars\n- Cities can be published to a shared, persistent 3D planet, linked to each other by roads\n- Next.js, React Three Fiber, Prisma/PostgreSQL and GitHub OAuth via Auth.js',
+          fr: 'Polis transforme un compte GitHub en ville générative nocturne.\n- Chaque dépôt devient un bâtiment : la hauteur suit le nombre de commits, la couleur le langage principal, la luminosité le nombre d\'étoiles\n- Les villes se publient sur une planète 3D partagée et persistante, reliées entre elles par des routes\n- Next.js, React Three Fiber, Prisma/PostgreSQL et authentification GitHub via Auth.js',
         },
         file: {
           en: 'polis.html',
@@ -119,8 +119,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Mnemosyne - Terminal de Diagnostic Neuronal',
         },
         description: {
-          en: 'A hand-written multilayer perceptron, trained live in the browser and inspected through a Signalis-inspired terminal interface. No ML library: forward pass, backpropagation, and gradient descent are all written from scratch, running in a Web Worker while a live network diagram, decision-boundary heatmap, and loss chart render on canvas. Supports custom-painted datasets, learning-rate scheduling, synaptic pruning, classification metrics, and scrubbable training replay.',
-          fr: 'Un perceptron multicouche codé à la main, entraîné en direct dans le navigateur et inspecté via une interface terminal inspirée de Signalis. Aucune bibliothèque de ML : la propagation avant, la rétropropagation et la descente de gradient sont entièrement écrites à la main, exécutées dans un Web Worker pendant qu\'un diagramme de réseau, une carte de frontière de décision et une courbe de perte s\'affichent en direct sur canvas. Prend en charge les jeux de données peints à la main, la planification du taux d\'apprentissage, l\'élagage synaptique, les métriques de classification et la relecture de l\'entraînement.',
+          en: 'A hand-written multilayer perceptron, trained live in the browser and inspected through a Signalis-inspired terminal interface.\n- No ML library: forward pass, backpropagation and gradient descent written from scratch\n- Training runs in a Web Worker while a network diagram, decision-boundary heatmap and loss chart render live on canvas\n- Custom-painted datasets, learning-rate scheduling, synaptic pruning, classification metrics and scrubbable training replay',
+          fr: 'Un perceptron multicouche codé à la main, entraîné en direct dans le navigateur et inspecté via une interface terminal inspirée de Signalis.\n- Aucune bibliothèque de ML : propagation avant, rétropropagation et descente de gradient écrites à la main\n- Entraînement dans un Web Worker, avec diagramme du réseau, carte de frontière de décision et courbe de perte en direct sur canvas\n- Jeux de données peints à la main, planification du taux d\'apprentissage, élagage synaptique, métriques de classification et relecture de l\'entraînement',
         },
         file: {
           en: 'mnemosyne.html',
@@ -143,8 +143,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Umami (fork personnel)',
         },
         description: {
-          en: 'Personal fork of the open-source Umami analytics platform, maintained to run a self-hosted, privacy-first analytics instance across my personal websites. On top of upstream Umami, it adds a cross-site dashboard aggregating stats across every registered site, accurate SPA bounce/duration tracking via a heartbeat ping, chart annotations, scoped API keys, and an MCP server exposing stats to LLM agents. Every push to master is tested, built, and published automatically to GHCR.',
-          fr: "Fork personnel de la plateforme d'analytics open-source Umami, maintenu pour faire tourner une instance auto-hébergée et respectueuse de la vie privée sur mes différents sites personnels. En plus d'Umami officiel, il ajoute un dashboard multi-sites agrégeant les statistiques de tous les sites enregistrés, un suivi précis des rebonds/durées de session sur SPA via un ping de heartbeat, des annotations sur les graphiques, des clés API à portée limitée, et un serveur MCP exposant les statistiques aux agents LLM. Chaque push sur master est testé, buildé et publié automatiquement sur GHCR.",
+          en: 'A personal fork of the open-source Umami analytics platform, running a self-hosted, privacy-first instance for all my websites.\n- Cross-site dashboard aggregating stats from every registered site\n- Accurate SPA bounce and session-duration tracking through a heartbeat ping\n- Chart annotations, scoped API keys and an MCP server exposing stats to LLM agents\n- Every push to master is tested, built and published automatically to GHCR',
+          fr: 'Fork personnel d\'Umami, la plateforme d\'analytics open source, qui fait tourner une instance auto-hébergée et respectueuse de la vie privée pour tous mes sites.\n- Dashboard multi-sites qui agrège les statistiques de tous les sites enregistrés\n- Suivi précis des rebonds et durées de session sur les SPA grâce à un ping de heartbeat\n- Annotations sur les graphiques, clés API à portée limitée et serveur MCP qui expose les statistiques aux agents LLM\n- Chaque push sur master est testé, buildé et publié automatiquement sur GHCR',
         },
         file: {
           en: 'umami.html',
@@ -167,8 +167,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'EsportRecrutement.fr',
         },
         description: {
-          en: 'EsportRecrutement.fr is a website dedicated to esports player recruitment. It allows players to:\n- create profiles in the directory\n- search for teams\n- apply for positions in various esports teams.\nThe site includes a system of announcements, a blog, user chat, payment, and a complete admin panel.\nIt is built with Next.js and uses a PostgreSQL database to store data. This full stack project was done as freelance work for a client.',
-          fr: 'EsportRecrutement.fr est un site dédié au recrutement de joueurs esports. Il permet aux joueurs de :\n- créer des profils dans l\'annuaire\n- rechercher des équipes\n- de postuler à des postes dans diverses équipes esports.\nLe site inclus un système d\'annonces, de blog, de chat entre utilisteurs, de paiement et un panel admin complet.\n Il est construit avec Next.js et utilise une base de données PostgreSQL pour stocker les données. Ce projet full stack a été réalisé en freelance pour un client.',
+          en: 'An esports recruitment platform built full stack, as freelance work for a client.\n- Players create a profile in the directory, search for teams and apply for open positions\n- Announcements, blog, user chat and payment\n- Complete admin panel\n- Next.js with a PostgreSQL database',
+          fr: 'Plateforme de recrutement e-sport développée en full stack, en freelance pour un client.\n- Les joueurs créent leur profil dans l\'annuaire, cherchent des équipes et postulent aux postes proposés\n- Système d\'annonces, blog, chat entre utilisateurs et paiement\n- Panel d\'administration complet\n- Next.js et base de données PostgreSQL',
         },
         file: {
           en: 'esportrecrutement.html',
@@ -196,8 +196,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Amphion - Séquenceur Musical',
         },
         description: {
-          en: 'Amphion is a music sequencer that allows users to create their own music by arranging sounds on a timeline. The site is built with Next.js is focused around animations and a smooth user experience.',
-          fr: 'Amphion est un séquenceur musical qui permet aux utilisateurs de créer leur propre musique en disposant des sons sur une timeline. Le site est construit avec Next.js et est axé sur les animations et une expérience utilisateur fluide.',
+          en: 'A music sequencer to create your own music by arranging sounds on a timeline.\n- Designed around animations and a smooth user experience\n- Built with Next.js',
+          fr: 'Un séquenceur musical pour composer sa propre musique en disposant des sons sur une timeline.\n- Pensé autour des animations et d\'une expérience utilisateur fluide\n- Construit avec Next.js',
         },
         file: {
           en: 'amphion.html',
@@ -219,8 +219,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Athena - Constructeur de Dashboard',
         },
         description: {
-          en: 'Athena is a dashboard builder that allows users to easily create their own custom dashboards from REST API data sources. Athena is inspired by Grafana and Jquery for data transformations. The site is built with Next.js and uses Supabase to store data and authentication.',
-          fr: 'Athena est un constructeur de dashboard qui permet aux utilisateurs de créer facilement leurs propres tableaux de bord personnalisés à partir de source de données d\'API REST. Athena est inspiré de Grafana et Jquery pour les transformations de données. Le site est construit avec Next.js et utilise Supabase pour stocker les données et l\'authentification.',
+          en: 'A dashboard builder to create your own custom dashboards from REST API data sources.\n- Inspired by Grafana, and by jQuery for data transformations\n- Data storage and authentication handled by Supabase\n- Built with Next.js',
+          fr: 'Un constructeur de dashboards pour créer ses propres tableaux de bord à partir de sources de données d\'API REST.\n- Inspiré de Grafana, et de jQuery pour les transformations de données\n- Données et authentification gérées par Supabase\n- Construit avec Next.js',
         },
         file: {
           en: 'athena.html',
@@ -242,8 +242,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Site freelancing',
         },
         description: {
-          en: 'Creation of my freelance showcase website. This site aims to present my services, skills, and achievements as a freelance web developer. The site is built with Vue.js and uses a PostgreSQL database to store data.',
-          fr: 'Création de mon site vitrine de freelance. Ce site a pour but de présenter mes services, mes compétences et mes réalisations en tant que développeur web freelance. Le site est construit avec Vue.js et utilise une base de données PostgreSQL pour stocker les données.',
+          en: 'My freelance web developer showcase website.\n- Presents my services, skills and achievements\n- Built with Vue.js, with a PostgreSQL database',
+          fr: 'Mon site vitrine de développeur web freelance.\n- Présente mes services, mes compétences et mes réalisations\n- Construit avec Vue.js, avec une base de données PostgreSQL',
         },
         file: {
           en: 'freelance.html',
@@ -271,8 +271,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Metis - Dashboard de recherche d\'emploi',
         },
         description: {
-          en: 'Metis is a job search dashboard that allows you to manage your job applications. It is built with React and uses a PostgreSQL database to store data. The site allows you to add, edit, and delete job applications, as well as filter them by status (applied, interview, etc.).',
-          fr: 'Metis est un tableau de bord de recherche d\'emploi qui vous permet de gérer vos candidatures. Il est construit avec React et enregistre les données dans le stockage locale du navigateur. Le site vous permet d\'ajouter, de modifier et de supprimer des candidatures, ainsi que de les filtrer par statut (candidature envoyée, entretien, etc.).',
+          en: 'A job search dashboard to keep track of your applications.\n- Add, edit and delete applications\n- Filter them by status: applied, interview, etc.\n- Built with React, with data saved in the browser\'s local storage',
+          fr: 'Un tableau de bord de recherche d\'emploi pour suivre ses candidatures.\n- Ajout, modification et suppression de candidatures\n- Filtre par statut : candidature envoyée, entretien, etc.\n- Construit avec React, données enregistrées dans le stockage local du navigateur',
         },
         file: {
           en: 'metis.html',
@@ -292,8 +292,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Talos - OS Virtuel',
         },
         description: {
-          en: 'Talos is a website simulating a virtual operating system. It is built with React and uses a Windows 95 and linux inspired UI. The site allows users to interact with the virtual operating system, navigate files, and run applications. This application is purely demonstrative and has no real functionality.',
-          fr: 'Talos est un site web simulant un système d\'exploitation virtuel. Il est construit avec React et utilise une interface utilisateur inspirée de Windows 95 et de linux. Le site permet aux utilisateurs d\'interagir avec le système d\'exploitation virtuel, de naviguer dans les fichiers et d\'exécuter des applications. Cette application est un projet purement démonstratif et n\'a pas de fonctionnalité réelle.',
+          en: 'A website simulating a virtual operating system, with a Windows 95 and Linux inspired interface.\n- Browse files and run applications\n- A purely demonstrative project, with no real functionality\n- Built with React',
+          fr: 'Un site qui simule un système d\'exploitation virtuel, avec une interface inspirée de Windows 95 et de Linux.\n- Navigation dans les fichiers et lancement d\'applications\n- Projet purement démonstratif, sans fonctionnalité réelle\n- Construit avec React',
         },
         file: {
           en: 'talos.html',
@@ -313,8 +313,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Hephaistos - Constructeur de site web',
         },
         description: {
-          en: 'Hephaistos is a website builder that allows users to create their own simple websites with ease. It is built using React and provides a user-friendly interface for creating and customizing web pages.',
-          fr: 'Hephaistos est un constructeur de site web qui permet aux utilisateurs de créer facilement leurs propres sites web simples. Il est construit avec React et fournit une interface conviviale pour créer et personnaliser des pages web.',
+          en: 'A website builder to easily create your own simple websites.\n- User-friendly interface to create and customize web pages\n- Built with React',
+          fr: 'Un constructeur de sites web pour créer facilement ses propres sites simples.\n- Interface conviviale pour créer et personnaliser des pages web\n- Construit avec React',
         },
         file: {
           en: 'hephaistos.html',
@@ -334,8 +334,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Break the code',
         },
         description: {
-          en: 'Participation in the algorithmic competition "Break the code" organized by Sopra Steria. By improving each year, my teammates and I managed to reach 6th place out of 64 participants in the second year, maintain this position out of 69 participants in the third year, reach 4th place out of 42 participants in the fourth year, and 8th place in the fifth and final year. The competition is open to all computer science students in Rennes schools.',
-          fr: "Participation au concours d'algorithmique \"Break the code\" organisé par Sopra Steria. En m'améliorant chaque année, nous avons réussi avec mes coéquipiers à nous hisser à la 6ième place sur 64 participants dès la deuxième année, à maintenir cette place sur 69 participants la troisième année, à atteindre la 4ième place sur 42 participants la quatrième année et la 8ième place la cinquième et dernière année. Le concours est ouvert à tous les étudiants des écoles d'informatique de Rennes.",
+          en: 'Team participation in Sopra Steria\'s "Break the Code" algorithmic competition, open to computer science students from Rennes schools.\n- 6th out of 64 participants in the second year\n- 6th out of 69 in the third year\n- 4th out of 42 in the fourth year\n- 8th in the fifth and final year',
+          fr: 'Participation en équipe au concours d\'algorithmique « Break the Code » de Sopra Steria, ouvert aux étudiants des écoles d\'informatique de Rennes.\n- 6e sur 64 participants dès la deuxième année\n- 6e sur 69 la troisième année\n- 4e sur 42 la quatrième année\n- 8e la cinquième et dernière année',
         },
         file: {
           en: 'breakthecode.html',
@@ -358,8 +358,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Atlas - Carte du Monde 3D',
         },
         description: {
-          en: 'A web application that allows you to visualize the world in 3D. This application uses Three.js to display the globe and allows you to interact with countries around the world. You can zoom in, zoom out, and click on countries to display information about them. The information is retrieved via the RestCountries and geojson.xyz REST APIs.',
-          fr: 'Une application de carte du monde en 3D interactive. Cette application utilise Three.js pour afficher le globe et permet d\'interagir avec les pays du monde entier. Il est possible de zoomer, dézoomer et cliquer sur les pays pour afficher des informations à leur sujet. Les informations sont récupérées via l\'API REST de RestCountries et de geojson.xyz.',
+          en: 'An interactive 3D world map.\n- Globe rendered with Three.js: zoom in and out, click a country to see information about it\n- Data retrieved from the RestCountries and geojson.xyz REST APIs',
+          fr: 'Une carte du monde interactive en 3D.\n- Globe affiché avec Three.js : zoom, dézoom et clic sur un pays pour afficher ses informations\n- Données récupérées via les API REST RestCountries et geojson.xyz',
         },
         file: {
           en: 'atlas.html',
@@ -379,8 +379,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Ceos - Todo App',
         },
         description: {
-          en: 'A todo app built with React and Tailwind CSS. This app allows you to create, edit, and delete tasks. It also allows you to filter tasks by status (completed or not completed). This app was built as a personal project to learn React.',
-          fr: 'Une application de todo construite avec React et Tailwind CSS. Cette application vous permet de créer, modifier et supprimer des tâches. Elle vous permet également de filtrer les tâches par statut (terminées ou non terminées). Cette application a été construite comme un projet personnel pour apprendre React.',
+          en: 'A todo app, built as a personal project to learn React.\n- Create, edit and delete tasks\n- Filter tasks by status: completed or not\n- Built with React and Tailwind CSS',
+          fr: 'Une application de gestion de tâches, réalisée comme projet personnel pour apprendre React.\n- Création, modification et suppression de tâches\n- Filtre par statut : terminées ou non terminées\n- Construite avec React et Tailwind CSS',
         },
         file: {
           en: 'ceos.html',
@@ -400,8 +400,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Site Portfolio',
         },
         description: {
-          en: 'A responsive portfolio website built with Vue.js and Tailwind CSS. This site was developed in two versions: a classic version and a version that aligns more with my graphic style and tastes.',
-          fr: 'Un site portfolio responsive construit avec Vue.js et Tailwind CSS. Ce site a été développé en deux versions : une version classique et une version collant plus à mon style graphique et à mes goûts.',
+          en: 'A responsive portfolio website built with Vue.js and Tailwind CSS, in two versions.\n- A classic version\n- A version closer to my graphic style and tastes',
+          fr: 'Un site portfolio responsive, construit avec Vue.js et Tailwind CSS, en deux versions.\n- Une version classique\n- Une version plus proche de mon style graphique et de mes goûts',
         },
         file: {
           en: 'portfolio.html',
@@ -421,8 +421,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Site Insalan.fr',
         },
         description: {
-          en: "Improvement of the INSALAN association's website as development manager. Under my leadership, the association's website was rewritten in Django and DjangoREST for the backend, and Vue.js and tailwind for the frontend. The site is hosted on a VPS at INSA Rennes and uses Nginx as a reverse proxy.",
-          fr: "Amélioration du site de l'association INSALAN en tant que responsable développement. Sous mon mandat de responsable, le site de l'association a été réécrit en Django et DjangoREST pour le backend, et Vue.js et tailwind pour le frontend. Le site est hébergé sur un VPS de l'INSA Rennes et utilise Nginx comme reverse proxy.",
+          en: 'Rewrite of the INSALAN association\'s website, led as development manager.\n- Backend rewritten in Django and DjangoREST\n- Frontend rewritten in Vue.js and Tailwind\n- Hosted on an INSA Rennes VPS, with Nginx as a reverse proxy',
+          fr: 'Refonte du site de l\'association INSALAN, menée en tant que responsable développement.\n- Backend réécrit en Django et DjangoREST\n- Frontend réécrit en Vue.js et Tailwind\n- Hébergement sur un VPS de l\'INSA Rennes, avec Nginx en reverse proxy',
         },
         file: {
           en: 'insalan.html',
@@ -446,8 +446,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Insaplace',
         },
         description: {
-          en: 'Insaplace is a web application for "pixel war" (inspired by Reddit\'s r/place project) made for INSA students. The principle is simple: each user can color a pixel every X minutes on a large shared canvas. The goal is to collaborate with other users to create drawings, messages, or simply have fun coloring pixels randomly. The event brought together over 1000 users in one week. My role in this collaborative project was to implement a system of achievements, visual events, and to supervise the site during the event period.',
-          fr: "Insaplace est une application web de \"guerre de pixel\" (inspirée du projet r/place de Reddit) réalisée pour les étudiants INSA. Le principe est simple : chaque utilisateur peut colorier un pixel toutes les X minutes sur une grande toile partagée. Le but est de collaborer avec les autres utilisateurs pour créer des dessins, des messages, ou simplement s'amuser à colorier des pixels au hasard. L'événement a regroupé plus de 1000 utilisateurs sur une semaine. Mon rôle dans ce projet collaboratif a été d'implémenter un systeme de succès, d'événements visuels et de supperviser le site pendant la période de l'événement.",
+          en: 'A "pixel war" inspired by Reddit\'s r/place, made for INSA students, which brought together over 1,000 users in one week.\n- Each user colors one pixel every X minutes on a large shared canvas, to draw or write together\n- My role in this collaborative project: an achievements system and visual events\n- Supervising the site throughout the event',
+          fr: 'Une « guerre de pixels » inspirée de r/place de Reddit, réalisée pour les étudiants de l\'INSA, qui a réuni plus de 1 000 utilisateurs en une semaine.\n- Chaque utilisateur colorie un pixel toutes les X minutes sur une grande toile partagée, pour dessiner ou écrire à plusieurs\n- Mon rôle dans ce projet collaboratif : système de succès et événements visuels\n- Supervision du site pendant toute la durée de l\'événement',
         },
         file: {
           en: 'insaplace.html',
@@ -471,8 +471,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Métrologie Insalan.fr',
         },
         description: {
-          en: 'Setting up a metrology ecosystem for the insalan.fr site. The system is based on Telegraf, InfluxDB, and Grafana and allows monitoring of site traffic, response times, and other metrics from NGINX logs.',
-          fr: "Mise en place d'un écosystème de métrologie pour le site insalan.fr. Le système est basé sur Telegraf, InfluxDB et Grafana et permet de surveiller le trafic du site, les temps de réponse et d'autres métriques à partir des logs NGINX",
+          en: 'A monitoring setup for the insalan.fr website.\n- Telegraf, InfluxDB and Grafana stack\n- Tracks traffic, response times and other metrics from Nginx logs',
+          fr: 'Mise en place de la métrologie du site insalan.fr.\n- Stack Telegraf, InfluxDB et Grafana\n- Suivi du trafic, des temps de réponse et d\'autres métriques à partir des logs Nginx',
         },
         file: {
           en: 'insalan-monitoring.html',
@@ -491,8 +491,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Infographique',
         },
         description: {
-          en: 'Infographique is a project from the graphic computing module at INSA Rennes. The project consisted of creating video from a 3D modeling using SFML. For this project, we used C++ and SFML.',
-          fr: "Infographique est un projet du module informatique graphique de l'INSA Rennes. Le projet consistait à créer une vidéo à partir d'une modélisation 3D en utilisant SFML. Pour ce projet, nous avons utilisé C++ et SFML.",
+          en: 'A project for the computer graphics module at INSA Rennes, made in C++ with SFML.\n- Creating a video from a 3D model',
+          fr: 'Projet du module d\'informatique graphique de l\'INSA Rennes, réalisé en C++ avec SFML.\n- Création d\'une vidéo à partir d\'une modélisation 3D',
         },
         file: {
           en: 'infographique.html',
@@ -516,8 +516,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'IA Bomberman',
         },
         description: {
-          en: 'Replication of a Bomberman game in C++ using SFML and creation of an AI to play the game. This project is part of the "AI for games" module at INSA Rennes. The AI is based on the MCTS (Monte Carlo Tree Search) algorithm and uses UCB1 pruning to choose the best move at each turn.',
-          fr: "Réplication d'un jeu de bomberman en C++ avec SFML et création d'une IA pour jouer au jeu. Ce projet s'inscrit dans le cadre du module \"IA pour les jeux\" de l'INSA Rennes. L'IA est basée sur l'algorithme de MCTS (Monte Carlo Tree Search) et utilise l'élagage UCB1 pour choisir le meilleur coup à chaque tour.",
+          en: 'A Bomberman replica in C++ with SFML, and an AI that plays it, for the "AI for games" module at INSA Rennes.\n- AI based on the MCTS (Monte Carlo Tree Search) algorithm\n- UCB1 pruning to pick the best move each turn',
+          fr: 'Une réplique de Bomberman en C++ avec SFML, et une IA qui y joue, pour le module « IA pour les jeux » de l\'INSA Rennes.\n- IA basée sur l\'algorithme MCTS (Monte Carlo Tree Search)\n- Élagage UCB1 pour choisir le meilleur coup à chaque tour',
         },
         file: {
           en: 'bomberman.py',
@@ -540,8 +540,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Advent of Codpilote',
         },
         description: {
-          en: 'This project is not finished. The aim was to solve the algorithmic problems of the advent of code only with Github copilot. The main rule was: no code written by yourself.',
-          fr: "Ce projet n'est pas terminé. L'objectif était de résoudre les problèmes algorithmiques de l'advent of code uniquement avec Github copilot. La règle principale était : interdiction d'écrire du code soi-même.",
+          en: 'Solving Advent of Code puzzles with GitHub Copilot only.\n- Main rule: no code written by hand\n- Unfinished project',
+          fr: 'Résoudre les problèmes de l\'Advent of Code uniquement avec GitHub Copilot.\n- Règle principale : interdiction d\'écrire du code soi-même\n- Projet non terminé',
         },
         file: {
           en: 'adventofcode.html',
@@ -560,8 +560,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Amélioration de Lightshield',
         },
         description: {
-          en: "Lightshield is a Self-Contained Pipeline to keep a local mirror of the RiotGames API. I've cloned the project, fixed some bugs, and improved it.",
-          fr: "Lightshield est un pipeline autonome pour garder un miroir local de l'API RiotGames. J'ai cloné le projet, résolu quelques bugs et l'ai amélioré.",
+          en: 'Lightshield is a self-contained pipeline keeping a local mirror of the Riot Games API.\n- I cloned the project, fixed some bugs and improved it',
+          fr: 'Lightshield est un pipeline autonome qui maintient un miroir local de l\'API Riot Games.\n- J\'ai cloné le projet, corrigé quelques bugs et l\'ai amélioré',
         },
         file: {
           en: 'lightshield.py',
@@ -584,8 +584,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Indexeur de documents',
         },
         description: {
-          en: 'This project was carried out as part of the TALEO (automatic processing of written and oral language) module of my studies at INSA Rennes. The objective was to create a document indexer in Python and a documents search tool. The indexer creates an inverted index from a set of documents. It is then possible to search for words in the documents and display the results as a list. Several algorithms have been implemented (tf.id, bm25, dirichlet,...).',
-          fr: "Ce projet a été réalisé dans le cadre du module TALEO (Traitement Automatique du Langage Ecrit et Oral) de mon cursus à l'INSA Rennes. L'objectif était de créer un indexeur de documents en python ainsi qu'un outil de recherche de documents. L'indexeur permet de créer un index inversé à partir d'un ensemble de documents. Il est ensuite possible de rechercher des mots dans les documents et d'afficher les résultats sous forme de liste. Plusieurs algorithmes ont été implémentés (tf.id, bm25, dirichlet,...).",
+          en: 'A document indexer and search tool in Python, made for the TALEO (automatic processing of written and spoken language) module at INSA Rennes.\n- Builds an inverted index from a set of documents\n- Word search with results displayed as a list\n- Several algorithms implemented: tf-idf, BM25, Dirichlet…',
+          fr: 'Un indexeur et un outil de recherche de documents en Python, réalisé pour le module TALEO (Traitement Automatique du Langage Écrit et Oral) de l\'INSA Rennes.\n- Création d\'un index inversé à partir d\'un ensemble de documents\n- Recherche de mots et affichage des résultats sous forme de liste\n- Plusieurs algorithmes implémentés : tf-idf, BM25, Dirichlet…',
         },
         file: {
           en: 'indexer.py',
@@ -608,8 +608,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Génération de revues',
         },
         description: {
-          en: 'This research project was carried out as part of my studies at INSA Rennes. The objective was to improve a python pipeline for generating historical reviews on soldiers from the old regime.',
-          fr: "Ce projet inscrit dans la recherche a été réalisé dans le cadre de mon cursus à l'INSA Rennes. L'objectif était l'amélioration d'un pipeline python de génération de revues historiques sur les soldats de l'ancien régime.",
+          en: 'A research project carried out during my studies at INSA Rennes.\n- Improving a Python pipeline that generates historical reviews of Ancien Régime soldiers',
+          fr: 'Projet de recherche mené pendant mon cursus à l\'INSA Rennes.\n- Amélioration d\'un pipeline Python qui génère des revues historiques sur les soldats de l\'Ancien Régime',
         },
         file: {
           en: 'journals.py',
@@ -632,8 +632,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Site PSH',
         },
         description: {
-          en: 'Creation of a website for a humanities project related to INSA Rennes. This static site was created to illustrate our topic "What is the impact of digital technology on access to culture?" The support was between a website and a PDF document, the choice was quickly made.',
-          fr: "Création d'un site internet pour un projet de sciences humaines lié à l'INSA Rennes. Ce site statique a été créé pour illustrer notre sujet \" Quel est l'impact du numérique sur l'accès à la culture ? \". Le support était entre un site internet et un document PDF, le choix a été vite fait.",
+          en: 'A static website for a humanities project at INSA Rennes, on the topic "What is the impact of digital technology on access to culture?".\n- The format was either a website or a PDF document: the choice was quickly made',
+          fr: 'Un site statique pour un projet de sciences humaines à l\'INSA Rennes, sur le thème « Quel est l\'impact du numérique sur l\'accès à la culture ? ».\n- Le format était au choix entre un site internet et un document PDF : le choix a été vite fait',
         },
         file: {
           en: 'psh.html',
@@ -656,8 +656,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Site RankUp',
         },
         description: {
-          en: 'Creation of a website for my discord bot RankUp. This showcase site allows to present the bot and give information about its use. (Anecdote: the site was entirely made in 3h)',
-          fr: "Création d'un site internet pour mon bot Discord RankUp. Ce site vitrine permet de présenter le bot et de donner des informations sur son utilisation. (Anecdote: le site a entièrement été fait en 3h)",
+          en: 'The showcase website for my Discord bot RankUp.\n- Presents the bot and explains how to use it\n- Significant work on SEO and indexing',
+          fr: 'Le site vitrine de mon bot Discord RankUp.\n- Présente le bot et explique comment l\'utiliser\n- travail important sur le SEO et le référencement',
         },
         file: {
           en: 'rankup-website.html',
@@ -680,8 +680,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Stack Web',
         },
         description: {
-          en: 'Setting up a deployment stack for dockerized sites. This environment contains a Caddy server (automatic HTTPS, one dynamically-discovered config fragment per site), docker containers and their associated configurations, enabling me to easily host my sites (like this one).',
-          fr: "Mise en place d'une stack de déploiement pour sites dockerisés. Cet environnement contient un serveur Caddy (HTTPS automatique, un fragment de configuration découvert dynamiquement par site), des containers dockers et leurs configurations associées et me permet de facilement héberger mes sites (comme celui là).",
+          en: 'The deployment stack hosting my dockerized websites, including this one.\n- Caddy server with automatic HTTPS and one dynamically discovered config fragment per site\n- Docker containers and their associated configurations',
+          fr: 'La stack de déploiement qui héberge mes sites dockerisés, dont celui-ci.\n- Serveur Caddy avec HTTPS automatique et un fragment de configuration découvert dynamiquement par site\n- Conteneurs Docker et leurs configurations associées',
         },
         file: {
           en: 'stack.html',
@@ -703,8 +703,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Système de fichiers virtuel',
         },
         description: {
-          en: 'A virtual file system that allows creating, deleting, and moving virtual files and directories. It is implemented in Python and uses a file as disk to store data. The file system includes a partition table, and it is possible to choose the type of RAID to use.',
-          fr: 'Un système de fichiers virtuel qui permet de créer, supprimer et déplacer des fichiers et des répertoires virtuels. Il est implémenté en Python et utilise un fichier comme disque pour stocker les données. Le système de fichiers inclut une table de partitionnement et il est possible de choisir le type de RAID à utiliser.',
+          en: 'A virtual file system in Python, using a file as its disk.\n- Create, delete and move files and directories\n- Partition table\n- Choice of RAID type',
+          fr: 'Un système de fichiers virtuel en Python, qui utilise un fichier comme disque.\n- Création, suppression et déplacement de fichiers et de répertoires\n- Table de partitionnement\n- Choix du type de RAID',
         },
         file: {
           en: 'virtualfs.py',
@@ -727,8 +727,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: "Gestion d'un serveur Minecraft",
         },
         description: {
-          en: 'Development of a Minecraft plugin and a website for a Minecraft server. The plugin allows generating random buildings in the server world and interacting with several APIs. The website was a static showcase site.',
-          fr: "Développement d'un plugin Minecraft ainsi qu'un site internet pour un serveur Minecraft. Le plugin permet de générer des bâtiments aléatoires dans le monde du serveur ainsi qu'interragir avec plusieurs API. Le site internet était un site statique vitrine.",
+          en: 'A plugin and a website for a Minecraft server.\n- The plugin generates random buildings in the server world and interacts with several APIs\n- The website was a static showcase',
+          fr: 'Un plugin et un site internet pour un serveur Minecraft.\n- Le plugin génère des bâtiments aléatoires dans le monde du serveur et interagit avec plusieurs API\n- Le site était une vitrine statique',
         },
         file: {
           en: 'minecraft-plugin.java',
@@ -746,8 +746,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Modding Mindustry',
         },
         description: {
-          en: 'Creation of a modded version of Mindustry, a real-time strategy game. This mod added new blocks and new resources. This mod is a modified version of the game because modding support was not yet implemented in the game at this time. The mod was developed in Java.',
-          fr: "Création d'une version moddée de Mindustry, un jeu de stratégie en temps réel. Ce mod rajoutait de nouveau blocs et de nouvelles ressources. Ce mod est une version modifiée du jeu car le support du modding n'était pas encore implémenté dans le jeu à ce moment là. Le mod a été développé en Java.",
+          en: 'A modded version of Mindustry, a real-time strategy game, developed in Java.\n- Added new blocks and new resources\n- The game did not support modding yet, so the mod is a modified version of the game itself',
+          fr: 'Une version moddée de Mindustry, un jeu de stratégie en temps réel, développée en Java.\n- Ajout de nouveaux blocs et de nouvelles ressources\n- Le jeu ne gérait pas encore les mods à l\'époque : il a fallu modifier le jeu lui-même',
         },
         file: {
           en: 'mindustry-mod.java',
