@@ -247,8 +247,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Constructeur de Dashboard',
         },
         description: {
-          en: 'A dashboard builder to create your own custom dashboards from REST API data sources.\n- Inspired by Grafana, and by jQuery for data transformations\n- Data storage and authentication handled by Supabase\n- Built with Next.js',
-          fr: 'Un constructeur de dashboards pour créer ses propres tableaux de bord à partir de sources de données d\'API REST.\n- Inspiré de Grafana, et de jQuery pour les transformations de données\n- Données et authentification gérées par Supabase\n- Construit avec Next.js',
+          en: 'A dashboard builder to create your own custom dashboards from REST API data sources.\n- Inspired by Grafana, and by JQ for data transformations\n- Data storage and authentication handled by Supabase\n- Built with Next.js',
+          fr: 'Un constructeur de dashboards pour créer ses propres tableaux de bord à partir de sources de données d\'API REST.\n- Inspiré de Grafana, et de JQ pour les transformations de données\n- Données et authentification gérées par Supabase\n- Construit avec Next.js',
         },
         file: {
           en: 'athena.html',
@@ -391,7 +391,7 @@ export const useProjectsStore = defineStore('projects', {
           en: 'breakthecode.html',
           fr: 'breakthecode.html',
         },
-        date: '2021-2024',
+        date: '2021-2025',
         starred: true,
         category: 'competition',
         status: 'finished',
@@ -906,8 +906,8 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Rennes, France',
         },
         period: {
-          en: 'June 2025 - September 2025',
-          fr: 'Juin 2025 - Septembre 2025',
+          en: 'June 2025 - Present',
+          fr: 'Depuis Juin 2025',
         },
         description: {
           fr: 'Développement de site internet en tant que développeur freelance en micro entreprise. Cette activité m\'a permis de gérer plusieurs facette de l\'entreprise : la recherche et la relation client, la gestion de projet et le développement web.',

@@ -1,15 +1,15 @@
 <template>
   <!-- The backdrop scrolls, like a page, only when the dialog is taller than the screen:
        no inner scroll area, so no stray scrollbar when everything fits. -->
-  <div class="fixed inset-0 z-50 overflow-y-auto bg-bg/80 backdrop-blur-sm">
-    <div class="flex min-h-full items-center justify-center p-2 sm:p-4" @click.self="emit('close')">
+  <div ref="backdrop" class="fixed inset-0 z-50 overflow-y-auto bg-bg/80 backdrop-blur-sm">
+    <div class="flex min-h-full items-center justify-center p-2 sm:p-4" @click.self="requestClose">
       <div
         ref="dialog"
         role="dialog"
         aria-modal="true"
         :aria-labelledby="titleId"
         tabindex="-1"
-        class="w-full max-w-5xl outline-none"
+        class="w-full max-w-5xl origin-top-left outline-none"
       >
         <CyberpunkTerminalWindow>
           <template #title>
@@ -35,7 +35,7 @@
                 type="button"
                 class="text-primary transition-colors hover:text-hover"
                 :aria-label="isEnglish ? 'Close' : 'Fermer'"
-                @click="emit('close')"
+                @click="requestClose"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -256,7 +256,9 @@ import {
 
 import type { localizedProject, ProjectCategory, ProjectStatus } from '../../models/project';
 import { usePreferencesStore } from '../../stores/preferences';
+import { projectAnchor } from '../../utils/anchors';
 import { parseDescription } from '../../utils/description';
+import { prefersReducedMotion } from '../../utils/motion';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
 const props = defineProps<{
@@ -289,7 +291,10 @@ const preferencesStore = usePreferencesStore();
 const isEnglish = computed(() => preferencesStore.isEnglish);
 const titleId = useId();
 
+const backdrop = ref<HTMLElement | null>(null);
 const dialog = ref<HTMLElement | null>(null);
+// Set while the closing animation plays, so a second Esc or click does not restart it.
+let closing = false;
 const currentImageIndex = ref(0);
 const copyState = ref<'idle' | 'done' | 'failed'>('idle');
 let copyTimer: ReturnType<typeof setTimeout> | undefined;
@@ -337,6 +342,51 @@ async function copyLink() {
   }, 2000);
 }
 
+// Where the dialog starts when opening and ends when closing: over the project's folder
+// icon when it is on screen (the window grows out of it), else slightly lower and faded.
+function folderKeyframe(): Keyframe {
+  const folder = document.getElementById(projectAnchor(props.project))?.querySelector('.desktop-folder');
+  const from = folder?.getBoundingClientRect();
+  const to = dialog.value?.getBoundingClientRect();
+  if (!from || !to || !from.width || from.bottom < 0 || from.top > window.innerHeight) {
+    return { transform: 'translateY(16px)', opacity: 0 };
+  }
+  return {
+    transform: `translate(${from.left - to.left}px, ${from.top - to.top}px) scale(${from.width / to.width}, ${from.height / to.height})`,
+    opacity: 0.3,
+  };
+}
+
+function playOpen() {
+  if (prefersReducedMotion() || !dialog.value) return;
+  dialog.value.animate([folderKeyframe(), { transform: 'none', opacity: 1 }], {
+    duration: 420,
+    easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+  });
+  backdrop.value?.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 250, easing: 'ease-out' });
+}
+
+// Shrinks the window back into its folder, then lets the parent remove it.
+async function requestClose() {
+  if (closing) return;
+  closing = true;
+  if (prefersReducedMotion() || !dialog.value) {
+    emit('close');
+    return;
+  }
+  // Closed while still opening: measure the window at its real place, not mid-animation.
+  dialog.value.getAnimations().forEach((animation) => animation.cancel());
+  backdrop.value?.getAnimations().forEach((animation) => animation.cancel());
+
+  const options: KeyframeAnimationOptions = { duration: 320, easing: 'cubic-bezier(0.4, 0, 1, 1)', fill: 'forwards' };
+  const animations = [
+    dialog.value.animate([{ transform: 'none', opacity: 1 }, folderKeyframe()], options),
+    backdrop.value?.animate([{ opacity: 1 }, { opacity: 0 }], options),
+  ];
+  await Promise.all(animations.map((animation) => animation?.finished.catch(() => undefined)));
+  emit('close');
+}
+
 // Keeps Tab and Shift+Tab inside the dialog.
 function trapFocus(event: KeyboardEvent) {
   const focusable = dialog.value?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])');
@@ -353,12 +403,12 @@ function trapFocus(event: KeyboardEvent) {
 }
 
 function onKeydown(event: KeyboardEvent) {
-  if (event.altKey || event.ctrlKey || event.metaKey) return;
+  if (closing || event.altKey || event.ctrlKey || event.metaKey) return;
   const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
 
   if (key === 'Escape') {
     event.preventDefault();
-    emit('close');
+    requestClose().catch(() => undefined);
   } else if (key === 'Tab') {
     trapFocus(event);
   } else if ((key === 'ArrowLeft' || key === 'ArrowRight') && imageCount.value > 1) {
@@ -376,6 +426,7 @@ onMounted(() => {
   // Keep the page behind the dialog from scrolling.
   document.body.style.overflow = 'hidden';
   window.addEventListener('keydown', onKeydown);
+  playOpen();
   nextTick(() => dialog.value?.focus({ preventScroll: true })).catch(() => undefined);
 });
 

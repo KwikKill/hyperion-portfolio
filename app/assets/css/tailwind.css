@@ -309,3 +309,26 @@ html {
     transform: translate(0);
   }
 }
+
+/* v-reveal (app/directives/reveal.ts): blocks rising into place the first time they
+   scroll into view, after their own --reveal-delay. */
+.reveal-pending {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.reveal-in {
+  animation: reveal-rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) var(--reveal-delay, 0ms) both;
+}
+
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

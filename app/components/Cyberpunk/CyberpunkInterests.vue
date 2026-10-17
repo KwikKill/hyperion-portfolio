@@ -12,18 +12,12 @@
 
     <div class="container relative z-10 mx-auto flex flex-col gap-4">
       <!-- Section header -->
-      <CyberpunkTerminalWindow no-body :show-icon="false">
-        <template #title>
-          {{
-            isEnglish
-              ? 'HYPERION v1.0 - USER INTERESTS'
-              : 'HYPERION v1.0 - INTÉRÊTS UTILISATEUR'
-          }}
-        </template>
-      </CyberpunkTerminalWindow>
+      <CyberpunkSectionHeader
+        :title="isEnglish ? 'HYPERION v1.0 - USER INTERESTS' : 'HYPERION v1.0 - INTÉRÊTS UTILISATEUR'"
+      />
 
       <!-- Content container -->
-      <CyberpunkTerminalWindow :show-icon="false">
+      <CyberpunkTerminalWindow v-reveal="150" :show-icon="false">
         <!-- Terminal header -->
         <template #title>
           {{ isEnglish ? 'PERSONAL DATABASE // CLASSIFIED' : 'BASE DE DONNÉES PERSONNELLE // CLASSIFIÉ' }}
@@ -65,9 +59,12 @@
                 v-for="(movie, index) in movies"
                 :key="index"
                 class="media-card group"
-                :class="activeCard === index ? 'active' : ''"
-                @click="activeCard = activeCard === index ? null : index"
-                @keydown.enter="activeCard = activeCard === index ? null : index"
+                :class="{ active: activeCard === `movies-${index}` }"
+                role="button"
+                tabindex="0"
+                @click="toggleCard(`movies-${index}`)"
+                @keydown.enter.prevent="toggleCard(`movies-${index}`)"
+                @keydown.space.prevent="toggleCard(`movies-${index}`)"
               >
                 <div class="media-card-inner">
                   <div class="media-card-front">
@@ -98,7 +95,17 @@
 
             <!-- Games content -->
             <div v-if="activeCategory === 'games'" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <div v-for="(game, index) in games" :key="index" class="media-card group">
+              <div
+                v-for="(game, index) in games"
+                :key="index"
+                class="media-card group"
+                :class="{ active: activeCard === `games-${index}` }"
+                role="button"
+                tabindex="0"
+                @click="toggleCard(`games-${index}`)"
+                @keydown.enter.prevent="toggleCard(`games-${index}`)"
+                @keydown.space.prevent="toggleCard(`games-${index}`)"
+              >
                 <div class="media-card-inner">
                   <div class="media-card-front">
                     <img :src="game.image" :alt="game.title" class="h-48 w-full rounded-t-md object-cover"/>
@@ -153,8 +160,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 
+import { vReveal } from '../../directives/reveal';
 import { usePreferencesStore } from '../../stores/preferences';
 import { useProjectsStore } from '../../stores/projects';
+import CyberpunkSectionHeader from './CyberpunkSectionHeader.vue';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
 const preferencesStore = usePreferencesStore();
@@ -165,7 +174,12 @@ const games = computed(() => projectsStore.getLocalizedGames);
 
 const activeCategory = ref('movies');
 
-const activeCard = ref<number | null>(null);
+// Flipped card ("movies-2"), by tap, click or keyboard: hover does not exist on touch screens.
+const activeCard = ref<string | null>(null);
+
+function toggleCard(key: string) {
+  activeCard.value = activeCard.value === key ? null : key;
+}
 
 </script>
 
@@ -218,8 +232,12 @@ const activeCard = ref<number | null>(null);
   transform: rotateY(180deg);
 }
 
-.media-card:hover .media-card-inner {
-  transform: rotateY(180deg);
+/* Only with a real pointer: on touch screens the hover state sticks after a tap,
+   and a second tap could not flip the card back. */
+@media (hover: hover) {
+  .media-card:hover .media-card-inner {
+    transform: rotateY(180deg);
+  }
 }
 
 .media-card-front,

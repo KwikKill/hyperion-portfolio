@@ -1,13 +1,12 @@
 <template>
   <header class="bg-white py-4 shadow-md dark:bg-gray-800">
     <div class="container mx-auto flex items-center justify-between px-4">
-      <div
+      <NuxtLink
+        to="/version"
         class="cursor-pointer text-2xl font-bold text-gray-900 transition-colors hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
-        @click="navigateTo('/version')"
-        @keydown.enter="navigateTo('/version')"
       >
         KwikKill - Portfolio
-      </div>
+      </NuxtLink>
 
       <nav>
         <ul class="hidden space-x-6 md:flex">
@@ -29,7 +28,6 @@
 import { computed } from 'vue';
 
 import { usePreferencesStore } from '../../stores/preferences';
-import { navigateTo } from 'nuxt/app';
 
 const preferencesStore = usePreferencesStore();
 

@@ -5,3 +5,15 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useHead } from 'nuxt/app';
+import { computed } from 'vue';
+
+import { usePreferencesStore } from './stores/preferences';
+
+const preferencesStore = usePreferencesStore();
+
+// Screen readers pick their voice from <html lang>: follow the language of the content.
+useHead({ htmlAttrs: { lang: computed(() => preferencesStore.lang) } });
+</script>

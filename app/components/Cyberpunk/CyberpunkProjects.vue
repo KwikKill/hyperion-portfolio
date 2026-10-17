@@ -12,14 +12,13 @@
 
     <div class="container relative z-10 mx-auto px-4">
       <!-- Desktop header bar -->
-      <CyberpunkTerminalWindow class="mb-8" :show-icon="false" no-body>
-        <template #title>
-          {{ isEnglish ? 'HYPERION v1.0 - PROJECTS DIRECTORY' : 'HYPERION v1.0 - RÉPERTOIRE DES PROJETS' }}
-        </template>
-      </CyberpunkTerminalWindow>
+      <CyberpunkSectionHeader
+        class="mb-8"
+        :title="isEnglish ? 'HYPERION v1.0 - PROJECTS DIRECTORY' : 'HYPERION v1.0 - RÉPERTOIRE DES PROJETS'"
+      />
 
       <!-- Search and filter bar -->
-      <CyberpunkTerminalWindow class="mb-2" :no-title="true">
+      <CyberpunkTerminalWindow v-reveal="150" class="mb-2" :no-title="true">
         <template #body>
           <div class="flex flex-col gap-4 md:flex-row">
             <!-- Search input -->
@@ -38,20 +37,21 @@
                   @focus="isSearchFocused = true"
                   @blur="isSearchFocused = false"
                 />
-                <div
+                <button
                   v-if="searchQuery"
+                  type="button"
                   class="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer hover:text-primary"
+                  :aria-label="isEnglish ? 'Clear search' : 'Effacer la recherche'"
                   @click="clearSearch"
-                  @keydown.enter="clearSearch"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path
                       fill-rule="evenodd"
                       d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
                       clip-rule="evenodd"
                     />
                   </svg>
-                </div>
+                </button>
               </div>
             </div>
 
@@ -101,20 +101,21 @@
                   </svg>
                 </div>
               </div>
-              <div
+              <button
                 v-if="selectedTechnology"
+                type="button"
                 class="ml-2 cursor-pointer hover:text-primary"
+                :aria-label="isEnglish ? 'Clear technology filter' : 'Retirer le filtre de technologie'"
                 @click="clearTechnologyFilter"
-                @keydown.enter="clearTechnologyFilter"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path
                     fill-rule="evenodd"
                     d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
                     clip-rule="evenodd"
                   />
                 </svg>
-              </div>
+              </button>
             </div>
 
             <!-- Results counter -->
@@ -128,7 +129,7 @@
       </CyberpunkTerminalWindow>
 
       <!-- Desktop icons grid -->
-      <CyberpunkTerminalWindow>
+      <CyberpunkTerminalWindow v-reveal="250">
         <template #title>
           <div class="flex w-full items-center justify-between gap-2">
             <div>
@@ -177,14 +178,13 @@
             <!-- Project items remain the same -->
             <button
               v-for="project in completedFilteredProjects"
-              :id="anchorOf(project)"
+              :id="projectAnchor(project)"
               :key="project.file.en"
               type="button"
               class="group flex cursor-pointer flex-col items-center"
               :class="{ 'search-match': isSearchMatch(project) }"
               :data-umami-event="project.localizedTitle"
               @click="openProject(project)"
-              @keydown.enter="openProject(project)"
             >
               <div class="desktop-folder relative mb-2 transition-transform group-hover:scale-110">
                 <svg
@@ -241,14 +241,13 @@
             <!-- Project items remain the same -->
             <button
               v-for="project in uncompletedFilteredProjects"
-              :id="anchorOf(project)"
+              :id="projectAnchor(project)"
               :key="project.file.en"
               type="button"
               class="group flex cursor-pointer flex-col items-center"
               :class="{ 'search-match': isSearchMatch(project) }"
               :data-umami-event="project.localizedTitle"
               @click="openProject(project)"
-              @keydown.enter="openProject(project)"
             >
               <div class="desktop-folder relative mb-2 transition-transform group-hover:scale-110">
                 <svg
@@ -309,10 +308,13 @@ import {
   computed, onMounted, ref, watch,
 } from 'vue';
 
+import { vReveal } from '../../directives/reveal';
 import type { localizedProject } from '../../models/project';
 import { usePreferencesStore } from '../../stores/preferences';
 import { useProjectsStore } from '../../stores/projects';
+import { projectAnchor } from '../../utils/anchors';
 import CyberpunkProjectModal from './CyberpunkProjectModal.vue';
+import CyberpunkSectionHeader from './CyberpunkSectionHeader.vue';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
 const preferencesStore = usePreferencesStore();
@@ -327,9 +329,6 @@ const searchQuery = ref('');
 const isSearchFocused = ref(false);
 const lastSearchTime = ref(Date.now());
 const selectedTechnology = ref('');
-
-// Same in both languages: built from the English file name ("polis.html" -> "project-polis").
-const anchorOf = (project: localizedProject) => `project-${project.file.en.replace(/\.[^.]+$/, '')}`;
 
 // Get all unique technologies from all projects
 const availableTechnologies = computed(() => {
@@ -442,14 +441,14 @@ function openProject(project: localizedProject) {
 // keeps the router out of it, so nothing scrolls and the history does not grow.
 watch(() => currentProject.value?.file.en, () => {
   const url = new URL(window.location.href);
-  url.hash = currentProject.value ? anchorOf(currentProject.value) : '';
+  url.hash = currentProject.value ? projectAnchor(currentProject.value) : '';
   window.history.replaceState(window.history.state, '', url);
 });
 
 // Opening a shared link: the browser has already scrolled to the project's folder.
 onMounted(() => {
   const anchor = window.location.hash.slice(1);
-  const project = anchor && projects.value.find((item) => anchorOf(item) === anchor);
+  const project = anchor && projects.value.find((item) => projectAnchor(item) === anchor);
   if (project) selectedProject.value = project;
 });
 </script>

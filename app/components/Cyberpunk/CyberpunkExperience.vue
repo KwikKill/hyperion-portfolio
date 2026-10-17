@@ -15,11 +15,9 @@
 
     <div class="container relative z-10 mx-auto flex flex-col gap-8 px-4">
       <!-- Section header -->
-      <CyberpunkTerminalWindow :no-body="true" :show-icon="false">
-        <template #title>
-          {{ isEnglish ? 'HYPERION v1.0 - CAREER PATH' : 'HYPERION v1.0 - PARCOURS PROFESSIONNEL' }}
-        </template>
-      </CyberpunkTerminalWindow>
+      <CyberpunkSectionHeader
+        :title="isEnglish ? 'HYPERION v1.0 - CAREER PATH' : 'HYPERION v1.0 - PARCOURS PROFESSIONNEL'"
+      />
 
       <!-- Experience timeline -->
       <div class="relative">
@@ -32,11 +30,12 @@
           <CyberpunkExperienceCard
             v-for="(experience, index) in mainExperiences"
             :key="'main-' + index"
+            v-reveal="150"
             :experience="experience"
             :index="index"
           />
 
-          <div v-if="internshipExperiences.length" class="relative">
+          <div v-if="internshipExperiences.length" v-reveal="150" class="relative">
             <!-- Timeline node -->
             <div
               class="absolute left-1/2 z-20 size-6 -translate-x-1/2 rounded-full border-2 border-secondary bg-bg"
@@ -88,8 +87,9 @@ import { computed, ref } from 'vue';
 
 import { usePreferencesStore } from '../../stores/preferences';
 import { useProjectsStore } from '../../stores/projects';
+import { vReveal } from '../../directives/reveal';
 import CyberpunkExperienceCard from './CyberpunkExperienceCard.vue';
-import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
+import CyberpunkSectionHeader from './CyberpunkSectionHeader.vue';
 
 const preferencesStore = usePreferencesStore();
 const projectsStore = useProjectsStore();

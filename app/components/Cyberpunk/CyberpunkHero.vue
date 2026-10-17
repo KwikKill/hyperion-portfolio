@@ -144,7 +144,6 @@
                   type="button"
                   data-umami-event="contact clicked"
                   @click="contact_reveal = true"
-                  @keydown.enter="contact_reveal = true"
                 >
                   <div class="glitch-text" :data-text="isEnglish ? 'CLICK TO REVEAL' : 'CLIQUER POUR RÉVÉLER'">
                     {{ isEnglish ? 'CLICK TO REVEAL' : 'CLIQUER POUR RÉVÉLER' }}

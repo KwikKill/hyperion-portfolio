@@ -44,12 +44,12 @@
                 class="flex size-3 cursor-not-allowed items-center justify-center rounded-full bg-gray-500 transition-all"
                 title="Disabled"
               />
-              <div
+              <button
                 v-else
+                type="button"
                 class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-green-500 transition-all hover:ring-1 hover:ring-white/50"
-                title="Fullscreen"
-                @click.prevent="toggleFullscreen"
-                @keydown.enter.prevent="toggleFullscreen"
+                :title="isEnglish ? 'Fullscreen' : 'Plein écran'"
+                @click="toggleFullscreen"
               />
 
               <!-- Minimize button -->
@@ -58,20 +58,20 @@
                 class="flex size-3 cursor-not-allowed items-center justify-center rounded-full bg-gray-500 transition-all"
                 title="Disabled"
               />
-              <div
+              <button
                 v-else
+                type="button"
                 class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-yellow-500 transition-all hover:ring-1 hover:ring-white/50"
-                title="Minimize"
-                @click.prevent="toggleMinimize"
-                @keydown.enter.prevent="toggleMinimize"
+                :title="isEnglish ? 'Minimize' : 'Réduire'"
+                @click="toggleMinimize"
               />
 
               <!-- Close button -->
-              <div
+              <button
+                type="button"
                 class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-red-500 transition-all hover:ring-1 hover:ring-white/50"
-                title="Close"
-                @click.prevent="closeTerminal"
-                @keydown.enter.prevent="closeTerminal"
+                :title="isEnglish ? 'Close' : 'Fermer'"
+                @click="closeTerminal"
               />
             </div>
           </slot>
@@ -105,11 +105,11 @@
         }}
       </div>
 
-      <div
+      <button
         v-if="isClosed"
+        type="button"
         class="z-5 absolute left-0 top-0 flex size-full items-center justify-center rounded-md bg-black"
         @click="reopenTerminal"
-        @keydown.enter="reopenTerminal"
       >
         <span
           class="font-mono glitch-text text-primary"
@@ -123,7 +123,7 @@
               : '[ CLIQUEZ POUR RESTAURER LE TERMINAL ]'
           }}
         </span>
-      </div>
+      </button>
     </div>
   </div>
 </template>

@@ -12,18 +12,17 @@
 
     <div class="container relative mx-auto px-4">
       <!-- Terminal header -->
-      <CyberpunkTerminalWindow class="mb-8" :show-icon="false" :no-body="true">
-        <template #title>
-          {{ isEnglish ? 'HYPERION v1.0 - USER PROFILE' : 'HYPERION v1.0 - PROFIL UTILISATEUR' }}
-        </template>
-      </CyberpunkTerminalWindow>
+      <CyberpunkSectionHeader
+        class="mb-8"
+        :title="isEnglish ? 'HYPERION v1.0 - USER PROFILE' : 'HYPERION v1.0 - PROFIL UTILISATEUR'"
+      />
 
       <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
         <!-- Profile: facts, role and short bio -->
-        <CyberpunkNeofetch/>
+        <CyberpunkNeofetch v-reveal="150"/>
 
         <!-- About Me Terminal -->
-        <CyberpunkTerminalWindow>
+        <CyberpunkTerminalWindow v-reveal="250">
           <template #title>
             {{ isEnglish ? 'ABOUT_ME.EXE' : 'A_PROPOS_DE_MOI.EXE' }}
           </template>
@@ -132,10 +131,10 @@
       </div>
 
       <!-- Skills: htop and the ps panel of the selected one -->
-      <CyberpunkSkills class="mb-8"/>
+      <CyberpunkSkills v-reveal="100" class="mb-8"/>
 
       <!-- Call to Action Terminal -->
-      <CyberpunkTerminalWindow>
+      <CyberpunkTerminalWindow v-reveal="100">
         <template #title>
           FREELANCE.EXE
         </template>
@@ -200,8 +199,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
+import { vReveal } from '../../directives/reveal';
 import { usePreferencesStore } from '../../stores/preferences';
 import CyberpunkNeofetch from './CyberpunkNeofetch.vue';
+import CyberpunkSectionHeader from './CyberpunkSectionHeader.vue';
 import CyberpunkSkills from './CyberpunkSkills.vue';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 

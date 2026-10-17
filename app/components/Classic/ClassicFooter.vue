@@ -7,7 +7,7 @@
             KwikKill
           </div>
           <div class="mt-1 text-gray-400">
-            {{ isEnglish ? '© 2025 All rights reserved' : '© 2025 Tous droits réservés' }}
+            {{ isEnglish ? '© ' + new Date().getFullYear() + ' All rights reserved' : '© ' + new Date().getFullYear() + ' Tous droits réservés' }}
           </div>
         </div>
 
