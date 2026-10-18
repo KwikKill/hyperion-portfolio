@@ -6,23 +6,23 @@ export default defineNuxtConfig({
     prerender: {
       // These pages are reached through navigateTo(), so the `nuxt generate`
       // crawler never discovers them: list them explicitly. One copy per language;
-      // /cyberpunk and /classic are the former addresses, which redirect.
-      routes: ['/fr', '/en', '/fr/classic', '/en/classic', '/version', '/cyberpunk', '/classic'],
+      // /cyberpunk and /classic are the former addresses, which redirect. The sitemap is
+      // built from server/routes/sitemap.xml.ts, so its dates follow each build.
+      routes: ['/fr', '/en', '/fr/classic', '/en/classic', '/version', '/cyberpunk', '/classic', '/sitemap.xml'],
     },
   },
   app: {
     head: {
-      title: 'Gabriel Blaisot | Portfolio Développeur',
+      // Title, description and link preview: composables/useShareMeta.ts, in each language.
       htmlAttrs: { lang: 'fr' },
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-        { name: 'description', content: 'Portfolio de Gabriel Blaisot, ingénieur informatique et développeur web freelance, spécialisé en data science et développement d\'applications web.' },
         { name: 'keywords', content: 'Gabriel Blaisot, Portfolio, Développeur, Ingénieur Informatique, Sopra Steria, Freelance, Informatique, Data Science, Web, Applications Web' },
         { name: 'google-site-verification', content: '0N3KiBJueVNiIVXQ5JOPdmZ9-83xFFU8vGkdaLqvyL8' },
       ],
       link: [
-        { rel: 'icon', type: 'image/svg+xml', href: '/logo.png' }
+        { rel: 'icon', type: 'image/png', href: '/logo.png' }
       ],
       script: [
         {
