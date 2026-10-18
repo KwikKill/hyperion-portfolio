@@ -140,13 +140,13 @@
                   v-if="isEnglish"
                 >
                   Beyond coding, I have a variety of interests that inspire my creativity and approach
-                  to problem - solving. Here are some of my favorite movies and games.
+                  to problem-solving. Here are some of my favorite movies and games.
                 </template>
                 <template
                   v-else
                 >
                   Au-delà du code, j'ai une variété d'intérêts qui inspirent ma créativité et mon approche de
-                  la résolution de problèmes. Voici quelques - uns de mes films et jeux préférés.
+                  la résolution de problèmes. Voici quelques-uns de mes films et jeux préférés.
                 </template>
               </p>
             </div>

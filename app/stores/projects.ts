@@ -925,7 +925,7 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         title: {
-          en: 'Development Intern web(6 months)',
+          en: 'Web Development Intern (6 months)',
           fr: 'Stage de développement web (6 mois)',
         },
         company: 'Sopra Steria',
@@ -981,7 +981,7 @@ export const useProjectsStore = defineStore('projects', {
             'Quantification of regressions on new versions',
           ],
           fr: [
-            'Ajout de critères de performance au tests existants',
+            'Ajout de critères de performance aux tests existants',
             'Quantification des régressions lors de nouvelles versions',
           ],
         },
@@ -1003,7 +1003,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'Maintaining and improving a Web application (Flask) for park management for support teams.',
-          fr: 'Maintient et amélioration d\'une application Web (Flask) de gestion de parc à destination des équipes support.',
+          fr: 'Maintien et amélioration d\'une application Web (Flask) de gestion de parc à destination des équipes support.',
         },
         technologies: ['Python', 'Flask', 'HTML', 'CSS', 'JavaScript', 'Git'],
         achievements: {
