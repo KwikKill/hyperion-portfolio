@@ -3,6 +3,7 @@ import { computed } from 'vue';
 
 import { usePreferencesStore } from '../stores/preferences';
 import { useProjectsStore } from '../stores/projects';
+import { scrollToSection } from '../utils/scroll';
 
 // Opens a project's page the way the terminal's `open` command does:
 // scroll to the projects section and show the project modal.
@@ -19,7 +20,7 @@ export function useOpenProject() {
     const project = projectsStore.getLocalizedProjects.find((item) => item.localizedFile === file);
     if (!project) return false;
 
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+    scrollToSection('projects');
     selectedProject.value = project;
     return true;
   }

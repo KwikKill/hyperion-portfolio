@@ -99,6 +99,8 @@ import {
 } from 'vue';
 
 import { usePreferencesStore } from '../../stores/preferences';
+import { portfolioPath } from '../../utils/routes';
+import { scrollToSection } from '../../utils/scroll';
 import CyberpunkLanguageSwitch from './CyberpunkLanguageSwitch.vue';
 import CyberpunkThemeSelector from './CyberpunkThemeSelector.vue';
 
@@ -120,7 +122,7 @@ const navLinks = computed(() => [
   { id: 'interests', name: isEnglish.value ? 'Interests' : 'Intérêts', slug: isEnglish.value ? 'interests' : 'interets' },
 ]);
 
-const classicLink = computed(() => `/classic?lang=${preferencesStore.lang}`);
+const classicLink = computed(() => portfolioPath(preferencesStore.lang, 'classic'));
 
 const menuButtonLabel = computed(() => {
   if (isEnglish.value) return isMenuOpen.value ? 'Close menu' : 'Open menu';
@@ -169,11 +171,9 @@ function setMenuOpen(open: boolean) {
   document.body.style.overflow = open ? 'hidden' : '';
 }
 
-// Scrolls without writing the section to the URL hash: with a hash, the next
-// language or theme switch (which rewrites the query) would jump back to the top.
 function goToSection(id: string) {
   if (isMenuOpen.value) setMenuOpen(false);
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  scrollToSection(id);
 }
 
 function onKeydown(event: KeyboardEvent) {

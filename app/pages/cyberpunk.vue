@@ -1,20 +1,18 @@
 <template>
-  <div
-    id="cyberpunkroot"
-    class="cyberpunk"
-  >
-    <CyberpunkPortfolio />
-  </div>
+  <div/>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { usePreferencesStore } from '@/stores/preferences';
+import { navigateTo } from 'nuxt/app';
 
-const preferencesStore = usePreferencesStore();
+import { legacyLocation } from '../utils/routes';
 
-onMounted(() => {
-  // Check for URL parameters on mount
-  preferencesStore.checkUrlParameters();
+// Former address, still in shared links and favourites: /cyberpunk?lang=en → /en.
+definePageMeta({
+  middleware: (to) => {
+    // Redirect on the client only: the browser language is unknown while prerendering.
+    if (import.meta.server) return;
+    return navigateTo(legacyLocation(to, 'cyberpunk'), { replace: true });
+  },
 });
 </script>

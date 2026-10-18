@@ -283,6 +283,7 @@ import {
   computed, nextTick, onMounted, ref,
 } from 'vue';
 import { usePreferencesStore } from '@/stores/preferences';
+import { prefersReducedMotion } from '@/utils/motion';
 
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
@@ -623,7 +624,7 @@ const resetSystem = () => {
   }
 
   // Scroll to top
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
 };
 
 // Setup canvas on mount

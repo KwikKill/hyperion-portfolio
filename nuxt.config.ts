@@ -5,8 +5,9 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       // These pages are reached through navigateTo(), so the `nuxt generate`
-      // crawler never discovers them: list them explicitly.
-      routes: ['/cyberpunk', '/classic', '/version'],
+      // crawler never discovers them: list them explicitly. One copy per language;
+      // /cyberpunk and /classic are the former addresses, which redirect.
+      routes: ['/fr', '/en', '/fr/classic', '/en/classic', '/version', '/cyberpunk', '/classic'],
     },
   },
   app: {
@@ -24,6 +25,15 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/svg+xml', href: '/logo.png' }
       ],
       script: [
+        {
+          // Applies the theme before the first paint (?theme=, else the last one picked,
+          // see stores/preferences.ts): the prerendered page never shows the default one first.
+          tagPriority: 'critical',
+          innerHTML: `try {
+  var theme = new URLSearchParams(location.search).get('theme') || localStorage.getItem('theme');
+  if (theme === 'ghost' || theme === 'matrix' || theme === 'solarpunk') document.documentElement.classList.add('theme-' + theme);
+} catch (e) {}`,
+        },
         {
           src: 'https://um.somi.blaisot.org/script.js',
           defer: true,

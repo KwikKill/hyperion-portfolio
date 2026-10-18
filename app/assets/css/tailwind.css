@@ -44,8 +44,11 @@
   color: rgb(var(--color-text));
 }
 
+/* Theme classes sit on <html> (inline script of nuxt.config.ts, stores/preferences.ts) and
+   apply to the portfolio only. More specific than .cyberpunk, which sets the defaults. */
+
 /* Ghost in the Shell theme - neon pink and violet */
-.theme-ghost {
+html.theme-ghost #cyberpunkroot {
   --color-primary: 255 0 255; /* Magenta */
   --color-secondary: 138 43 226; /* Violet */
   --color-accent: 255 105 180; /* Hot pink */
@@ -57,7 +60,7 @@
 }
 
 /* Matrix theme - green and black */
-.theme-matrix {
+html.theme-matrix #cyberpunkroot {
   --color-primary: 0 255 0; /* Bright green */
   --color-secondary: 144 238 144; /* Light green */
   --color-accent: 50 205 50; /* Lime green */
@@ -68,7 +71,7 @@
   --color-terminal-hover: 0 128 0; /* Dark green */
 }
 
-.theme-solarpunk {
+html.theme-solarpunk #cyberpunkroot {
   --color-primary: 112 191 100;     /* Leaf Green */
   --color-secondary: 255 204 92;    /* Sunflower Yellow */
   --color-accent: 255 127 80;       /* Coral Orange */
@@ -178,6 +181,23 @@ html {
   color: rgb(var(--color-text));
   background-color: rgb(var(--color-background));
   scroll-behavior: smooth;
+}
+
+/* Visitors who asked their system to reduce motion: looping animations stop on their
+   resting frame, transitions and scrolling become instant. Nothing changes for others.
+   The JavaScript animations check the same setting (utils/motion.ts). */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .cyberpunk {
@@ -331,4 +351,36 @@ html {
     opacity: 1;
     transform: none;
   }
+}
+
+/* Theme switch (utils/themeSweep.ts): a scan band crossing the screen, like a TV changing
+   channel. Above everything, full-screen terminal windows included. */
+.theme-sweep {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 30vh;
+  z-index: 1100;
+  pointer-events: none;
+  transform: translateY(-100%);
+  background:
+    linear-gradient(transparent, rgb(var(--color-primary) / 0.14) 38%, rgb(255 255 255 / 0.5) 50%, rgb(var(--color-primary) / 0.14) 62%, transparent),
+    repeating-linear-gradient(0deg, rgb(0 0 0 / 0.22) 0 1px, transparent 1px 3px);
+}
+
+/* Experience timeline (CyberpunkExperience.vue): nodes the line has not reached yet are
+   empty, and their dot grows in when it gets there. */
+.timeline-node {
+  transition: border-color 0.3s ease;
+}
+
+.timeline-node > * {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.timeline-node[data-lit='false'] {
+  border-color: rgb(var(--color-secondary) / 0.3);
+}
+
+.timeline-node[data-lit='false'] > * {
+  transform: scale(0);
 }

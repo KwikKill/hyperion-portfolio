@@ -381,6 +381,7 @@ import { computed, onMounted, ref } from 'vue';
 
 import { usePreferencesStore } from '../stores/preferences';
 import { detectBrowserLanguage } from '../utils/language';
+import { portfolioPath } from '../utils/routes';
 import { navigateTo } from 'nuxt/app';
 
 const preferencesStore = usePreferencesStore();
@@ -410,11 +411,7 @@ function confirmSelection() {
     handleSetPreferences(language.value);
 
     // redirect to the appropriate portfolio page
-    if (version.value === 'classic') {
-      navigateTo('/classic?lang=' + language.value);
-    } else if (version.value === 'cyberpunk') {
-      navigateTo('/cyberpunk?lang=' + language.value);
-    }
+    navigateTo(portfolioPath(language.value, version.value));
   }
 }
 

@@ -1,10 +1,21 @@
 import { navigateTo, useRoute } from 'nuxt/app';
 import { defineStore } from 'pinia';
 
+import type { Language } from '../utils/language';
+import { sweepTheme } from '../utils/themeSweep';
+
+type Theme = 'default' | 'ghost' | 'matrix' | 'solarpunk';
+
+const THEMES: Theme[] = ['default', 'ghost', 'matrix', 'solarpunk'];
+const isTheme = (value: unknown): value is Theme => THEMES.includes(value as Theme);
+
+// Last theme picked. The inline script of nuxt.config.ts reads it before the first paint.
+const THEME_KEY = 'theme';
+
 export const usePreferencesStore = defineStore('preferences', {
   state: () => ({
-    language: null as 'en' | 'fr' | null,
-    cyberpunkTheme: 'default' as 'default' | 'ghost' | 'matrix' | 'solarpunk',
+    language: null as Language | null,
+    cyberpunkTheme: 'default' as Theme,
     isAnyFullScreen: false,
     // Shared so the terminal's `sudo rm -rf /` can open the self-destruct confirmation.
     showSelfDestructAlarm: false,
@@ -12,7 +23,7 @@ export const usePreferencesStore = defineStore('preferences', {
 
   actions: {
     setPreferences(
-      language: 'en' | 'fr',
+      language: Language,
     ) {
       this.language = language;
     },
@@ -21,67 +32,51 @@ export const usePreferencesStore = defineStore('preferences', {
       document.documentElement.classList.remove('cyberpunk');
       document.documentElement.classList.remove('dark');
     },
-    checkUrlParameters() {
-      // Get URL parameters
-      const urlParams = useRoute().query;
-      const langParam = urlParams.lang as string | null;
-      const themeParam = urlParams.theme as string | null;
-
-      // Check if both parameters are valid
-      const validLang = langParam !== null && ['en', 'fr'].includes(langParam);
-
-      // If both parameters are valid, set preferences
-      if (validLang) {
-        this.setPreferences(langParam as 'en' | 'fr');
-
-        // Check if theme parameter is valid and set it
-        if (themeParam && ['default', 'ghost', 'matrix', 'solarpunk'].includes(themeParam)) {
-          this.setCyberpunkTheme(themeParam as 'default' | 'ghost' | 'matrix' | 'solarpunk');
-        }
-
-        return true;
+    // Puts the store in line with the theme the inline script of nuxt.config.ts applied
+    // before the first paint: the URL's ?theme=, else the last one picked. Browser-only.
+    restoreTheme() {
+      let saved: string | null = null;
+      try {
+        saved = localStorage.getItem(THEME_KEY);
+      } catch {
+        // Storage unavailable (private window, blocked site data): the URL alone decides.
       }
-
-      return false;
-    },
-    updateUrlParameters() {
-      // Only update URL if preferences are set
-      if (this.language) {
-        const url = useRoute().fullPath
-          .replace(/([?&])lang=[^&]*/g, '') // Remove existing lang param
-          .replace(/([?&])theme=[^&]*/g, ''); // Remove existing theme param
-
-        const separator = url.includes('?') ? '&' : '?';
-        const newUrl = `${url}${separator}lang=${this.language}&theme=${this.cyberpunkTheme}`;
-
-        navigateTo(newUrl, { replace: true });
-      }
-    },
-    setCyberpunkTheme(theme: 'default' | 'ghost' | 'matrix' | 'solarpunk') {
+      const theme = [useRoute().query.theme, saved].find(isTheme) ?? 'default';
       this.cyberpunkTheme = theme;
       this.applyCyberpunkTheme(theme);
+    },
+    // The language lives in the path (/fr, /en/classic), the theme in the query. No hash:
+    // with one, the router would scroll back to it.
+    updateUrlParameters() {
+      const route = useRoute();
+      const query = { ...route.query, theme: this.cyberpunkTheme === 'default' ? undefined : this.cyberpunkTheme };
+      delete query.lang;
+
+      navigateTo({ path: route.path.replace(/^\/(fr|en)(?=\/|$)/, `/${this.lang}`), query }, { replace: true });
+    },
+    setCyberpunkTheme(theme: Theme) {
+      const changed = theme !== this.cyberpunkTheme;
+      this.cyberpunkTheme = theme;
+      const apply = () => this.applyCyberpunkTheme(theme);
+      if (changed) sweepTheme(apply);
+      else apply();
+      try {
+        localStorage.setItem(THEME_KEY, theme);
+      } catch {
+        // Storage unavailable: the theme still lives in the URL.
+      }
 
       // Update URL parameters
       this.updateUrlParameters();
     },
 
-    // Helper method to apply the cyberpunk theme
-    applyCyberpunkTheme(theme: 'default' | 'ghost' | 'matrix' | 'solarpunk') {
-      // Remove all theme classes first
-      const cyberpunkRoot = document.getElementById('cyberpunkroot') as HTMLElement | null;
-      if (!cyberpunkRoot) return;
-
-      cyberpunkRoot.classList.remove('theme-ghost', 'theme-matrix', 'theme-solarpunk');
-
-      // Apply the selected theme class
-      if (theme === 'ghost') {
-        cyberpunkRoot.classList.add('theme-ghost');
-      } else if (theme === 'matrix') {
-        cyberpunkRoot.classList.add('theme-matrix');
-      } else if (theme === 'solarpunk') {
-        cyberpunkRoot.classList.add('theme-solarpunk');
-      }
+    // The theme class goes on <html>, where the inline script of nuxt.config.ts puts it
+    // on load; tailwind.css scopes the theme variables to #cyberpunkroot.
+    applyCyberpunkTheme(theme: Theme) {
+      const root = document.documentElement;
+      root.classList.remove('theme-ghost', 'theme-matrix', 'theme-solarpunk');
       // Default theme doesn't need an additional class as it's the base cyberpunk
+      if (theme !== 'default') root.classList.add(`theme-${theme}`);
     },
   },
 
@@ -89,8 +84,8 @@ export const usePreferencesStore = defineStore('preferences', {
     getLanguage: (state) => state.language,
     getCyberpunkTheme: (state) => state.cyberpunkTheme,
     // Language to render in. The single fallback for when none is set yet (e.g. a
-    // page opened without ?lang=): interface and content must agree on it.
-    lang: (state): 'en' | 'fr' => state.language ?? 'fr',
+    // page outside /fr and /en): interface and content must agree on it.
+    lang: (state): Language => state.language ?? 'fr',
     isEnglish(): boolean {
       return this.lang === 'en';
     },

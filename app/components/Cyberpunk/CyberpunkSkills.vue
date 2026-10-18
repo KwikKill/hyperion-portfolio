@@ -12,10 +12,10 @@
           <span class="ml-2 text-primary">htop --tree=categories</span>
         </div>
 
-        <!-- Category meters, which also filter the list -->
-        <div class="mb-3 grid gap-x-5 gap-y-1 sm:grid-cols-2">
+        <!-- Category meters, which also filter the list. They fill in when first seen. -->
+        <div ref="meterGrid" class="mb-3 grid gap-x-5 gap-y-1 sm:grid-cols-2">
           <button
-            v-for="meter in meters"
+            v-for="(meter, index) in meters"
             :key="meter.key"
             type="button"
             class="grid grid-cols-[6.5em_minmax(0,1fr)_3em] items-center gap-1.5 px-1 py-0.5 text-left text-sm transition-colors"
@@ -26,10 +26,10 @@
             <span class="text-secondary">{{ meter.label }}</span>
             <span class="flex items-center gap-0.5 text-gray-500">
               [<span class="relative h-2 flex-1 bg-terminal/10">
-                <span class="absolute inset-y-0 left-0 bg-terminal" :style="{ width: `${meter.ratio * 100}%` }"/>
+                <span class="absolute inset-y-0 left-0 bg-terminal" :style="{ width: `${meter.ratio * meterFill(index) * 100}%` }"/>
               </span>]
             </span>
-            <span class="text-right tabular-nums text-terminal">{{ meter.linked }}/{{ meter.total }}</span>
+            <span class="text-right tabular-nums text-terminal">{{ Math.round(meter.linked * meterFill(index)) }}/{{ meter.total }}</span>
           </button>
         </div>
 
@@ -202,11 +202,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import {
+  computed, onBeforeUnmount, onMounted, ref,
+} from 'vue';
 
 import { useOpenProject } from '../../composables/useOpenProject';
 import { usePreferencesStore } from '../../stores/preferences';
 import { useProjectsStore } from '../../stores/projects';
+import { prefersReducedMotion } from '../../utils/motion';
 import { firstYear } from '../../utils/years';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
@@ -367,6 +370,57 @@ function open(file: string) {
   openedFile.value = file;
   openFailed.value = !openProject(file);
 }
+
+// The category meters fill one after the other the first time they scroll into view, and
+// their counters roll up with them. null: filled (server render, reduced motion, done).
+const METER_DURATION = 600;
+const METER_STAGGER = 90;
+const meterGrid = ref<HTMLElement | null>(null);
+const meterClock = ref<number | null>(null);
+let meterObserver: IntersectionObserver | null = null;
+let meterFrame = 0;
+
+// Share of the meter drawn, 0 to 1, eased out.
+function meterFill(index: number) {
+  if (meterClock.value === null) return 1;
+  const progress = Math.min(1, Math.max(0, (meterClock.value - index * METER_STAGGER) / METER_DURATION));
+  return 1 - (1 - progress) ** 3;
+}
+
+function playMeters() {
+  // A short wait: the htop window is still rising into place (v-reveal).
+  const start = performance.now() + 250;
+  const end = METER_DURATION + METER_STAGGER * (meters.value.length - 1);
+  const tick = (now: number) => {
+    meterClock.value = now - start;
+    if (meterClock.value < end) {
+      meterFrame = requestAnimationFrame(tick);
+    } else {
+      meterClock.value = null;
+    }
+  };
+  meterFrame = requestAnimationFrame(tick);
+}
+
+onMounted(() => {
+  const grid = meterGrid.value;
+  if (!grid || !('IntersectionObserver' in window) || prefersReducedMotion()) return;
+  // Already on screen: leave the meters as they are.
+  if (grid.getBoundingClientRect().top < window.innerHeight) return;
+
+  meterClock.value = 0;
+  meterObserver = new IntersectionObserver((entries) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    meterObserver?.disconnect();
+    playMeters();
+  }, { threshold: 0.6 });
+  meterObserver.observe(grid);
+});
+
+onBeforeUnmount(() => {
+  meterObserver?.disconnect();
+  cancelAnimationFrame(meterFrame);
+});
 </script>
 
 <style scoped>

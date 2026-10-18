@@ -159,15 +159,18 @@
           </CyberpunkTerminalWindow>
 
           <div class="mt-8 flex flex-wrap gap-4">
+            <!-- Scroll without writing the hash to the URL (see utils/scroll.ts) -->
             <a
               href="#projects"
               class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-hover"
+              @click.prevent="scrollToSection('projects')"
             >
               {{ isEnglish ? 'View Projects' : 'Voir les Projets' }}
             </a>
             <a
               href="#experience"
               class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-hover"
+              @click.prevent="scrollToSection('experience')"
             >
               {{ isEnglish ? 'View past experiences' : 'Voir les expériences passées' }}
             </a>
@@ -199,6 +202,7 @@ import { computed, ref } from 'vue';
 
 import { usePreferencesStore } from '../../stores/preferences';
 import { CV_URL } from '../../utils/links';
+import { scrollToSection } from '../../utils/scroll';
 import CyberpunkTerminal from './CyberpunkTerminal.vue';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 

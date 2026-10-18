@@ -2,7 +2,7 @@
   <div class="relative">
     <!-- Timeline node -->
     <div
-      class="absolute left-1/2 z-20 size-6 -translate-x-1/2 rounded-full border-2 border-secondary bg-bg"
+      class="timeline-node absolute left-1/2 z-20 size-6 -translate-x-1/2 rounded-full border-2 border-secondary bg-bg"
       style="top: -12px;"
     >
       <div class="absolute inset-1 animate-pulse rounded-full bg-secondary"/>
