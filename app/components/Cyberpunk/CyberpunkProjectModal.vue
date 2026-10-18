@@ -71,7 +71,7 @@
                     :href="project.link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="font-mono flex items-center bg-primary px-4 py-2 text-sm uppercase text-black transition-colors hover:bg-hover"
+                    class="font-mono flex items-center bg-primary px-4 py-2 text-sm uppercase text-on-primary transition-colors hover:bg-hover"
                   >
                     {{ isEnglish ? 'View project' : 'Voir le projet' }}
                     <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

@@ -120,7 +120,7 @@
 
             <!-- Results counter -->
             <div class="font-mono hidden items-center text-sm text-secondary md:flex">
-              <span class="rounded border border-primary/30 bg-black/50 px-2 py-1">
+              <span class="rounded border border-primary/30 bg-bg/50 px-2 py-1">
                 {{ filteredProjects.length }} {{ isEnglish ? 'FILES' : 'FICHIERS' }}
               </span>
             </div>
@@ -148,7 +148,7 @@
             v-if="(searchQuery || selectedTechnology) && filteredProjects.length === 0"
             class="rounded border border-red-500/50 bg-bg/50 p-4 text-center"
           >
-            <div class="font-mono cyberpunk-text-glow flex items-center justify-center uppercase text-red-400">
+            <div class="font-mono cyberpunk-text-glow flex items-center justify-center uppercase text-error">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="mr-2 size-5"

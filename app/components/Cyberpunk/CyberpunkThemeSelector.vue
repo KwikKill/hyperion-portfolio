@@ -104,7 +104,7 @@ const themes: { value: 'default' | 'ghost' | 'matrix' | 'solarpunk'; nameEn: str
     value: 'ghost',
     nameEn: 'Ghost in the Shell',
     nameFr: 'Ghost in the Shell',
-    colorStyle: 'background: linear-gradient(135deg, #ff00ff 0%, #8a2be2 100%)',
+    colorStyle: 'background: linear-gradient(135deg, #ff00ff 0%, #ba82ff 100%)',
   },
   {
     value: 'matrix',
@@ -116,14 +116,15 @@ const themes: { value: 'default' | 'ghost' | 'matrix' | 'solarpunk'; nameEn: str
     value: 'solarpunk',
     nameEn: 'Solarpunk',
     nameFr: 'Solarpunk',
-    colorStyle: 'background: #ffffff',
+    // Its own colours: a white swatch disappears on the light menu.
+    colorStyle: 'background: linear-gradient(135deg, #2e7d32 0%, #965a00 100%)',
   },
 ];
 
 const getThemeColorClass = computed(() => {
   switch (preferencesStore.cyberpunkTheme) {
     case 'solarpunk':
-      return 'bg-white';
+      return 'bg-green-700';
     case 'ghost':
       return 'bg-fuchsia-500';
     case 'matrix':
@@ -159,7 +160,7 @@ const selectTheme = (theme: 'default' | 'ghost' | 'matrix' | 'solarpunk') => {
   right: -4px;
   bottom: -4px;
   border-radius: 50%;
-  background: rgba(var(--color-primary), 0.2);
+  background: rgb(var(--color-primary) / 0.2);
   animation: pulse 2s infinite;
 }
 

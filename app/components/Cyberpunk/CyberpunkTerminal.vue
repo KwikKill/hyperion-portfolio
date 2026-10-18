@@ -51,7 +51,7 @@
               {{ line.displayText ?? line.text }}
             </span>
           </template>
-          <span v-else-if="line.type === 'error'" class="text-red-400">
+          <span v-else-if="line.type === 'error'" class="text-error">
             {{ line.displayText ?? line.text }}
           </span>
         </div>

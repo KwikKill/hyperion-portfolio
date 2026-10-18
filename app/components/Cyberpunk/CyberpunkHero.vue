@@ -9,7 +9,7 @@
     <div class="container relative z-10 mx-auto px-4">
       <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
         <div>
-          <div class="mb-4 inline-block rounded-md border-2 border-primary/70 bg-black/70 px-3 py-1">
+          <div class="mb-4 inline-block rounded-md border-2 border-primary/70 bg-bg/70 px-3 py-1">
             <span class="text-sm font-medium uppercase tracking-widest text-primary">
               hyperion: {{ isEnglish ? 'System Online' : 'Système en Ligne' }}
             </span>
@@ -162,14 +162,14 @@
             <!-- Scroll without writing the hash to the URL (see utils/scroll.ts) -->
             <a
               href="#projects"
-              class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-hover"
+              class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-on-primary transition-colors hover:bg-hover"
               @click.prevent="scrollToSection('projects')"
             >
               {{ isEnglish ? 'View Projects' : 'Voir les Projets' }}
             </a>
             <a
               href="#experience"
-              class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-black transition-colors hover:bg-hover"
+              class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-on-primary transition-colors hover:bg-hover"
               @click.prevent="scrollToSection('experience')"
             >
               {{ isEnglish ? 'View past experiences' : 'Voir les expériences passées' }}
@@ -297,14 +297,14 @@ const contact_reveal = ref(false);
 
 .glitch-text::before {
   left: 2px;
-  text-shadow: -1px 0 #00ffff;
+  text-shadow: -1px 0 rgb(var(--color-secondary));
   clip: rect(44px, 450px, 56px, 0);
   animation: glitch-text-before 2s infinite linear alternate-reverse;
 }
 
 .glitch-text::after {
   left: -2px;
-  text-shadow: -1px 0 #ff00ff;
+  text-shadow: -1px 0 rgb(var(--color-accent));
   clip: rect(44px, 450px, 56px, 0);
   animation: glitch-text-after 3s infinite linear alternate-reverse;
 }

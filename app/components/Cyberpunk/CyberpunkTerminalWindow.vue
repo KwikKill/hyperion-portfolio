@@ -108,7 +108,7 @@
       <button
         v-if="isClosed"
         type="button"
-        class="z-5 absolute left-0 top-0 flex size-full items-center justify-center rounded-md bg-black"
+        class="z-5 absolute left-0 top-0 flex size-full items-center justify-center rounded-md bg-bg"
         @click="reopenTerminal"
       >
         <span

@@ -182,7 +182,7 @@
               href="https://freelance.somi.blaisot.org"
               target="_blank"
               rel="noopener noreferrer"
-              class="cyberpunk-button inline-flex items-center rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-black transition-all duration-300 hover:scale-105 hover:bg-hover"
+              class="cyberpunk-button inline-flex items-center rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-on-primary transition-all duration-300 hover:scale-105 hover:bg-hover"
             >
               {{ isEnglish ? 'VIEW SERVICES & PRICING' : 'VOIR SERVICES & TARIFS' }}
               <svg class="ml-2 size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -212,7 +212,8 @@ const isEnglish = computed(() => preferencesStore.isEnglish);
 
 <style scoped>
 .circuit-board-bg {
-  background-color: #111;
+  /* The background with a touch of the text colour: #111 on black, a darker mint on Solarpunk */
+  background-color: color-mix(in srgb, rgb(var(--color-background)) 93.3%, rgb(var(--color-text)));
   background-image:
     radial-gradient(circle at 25px 25px, rgba(var(--color-primary) / 0.2) 2px, transparent 0),
     linear-gradient(to right, rgb(var(--color-primary) / 0.2) 1px, transparent 1px),

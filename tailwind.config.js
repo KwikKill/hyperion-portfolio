@@ -20,6 +20,17 @@ export default {
         hover: 'rgb(var(--color-hover))',
         terminal: 'rgb(var(--color-terminal))',
         'terminal-hover': 'rgb(var(--color-terminal-hover))',
+        // Text on a primary (or terminal) background: black on the dark themes, white on Solarpunk.
+        'on-primary': 'rgb(var(--color-on-primary))',
+        error: 'rgb(var(--color-error))',
+        // The greys used by the portfolio follow the cyberpunk theme, so labels stay readable
+        // on Solarpunk's light background. Tailwind's own values elsewhere (tailwind.css).
+        gray: {
+          300: 'rgb(var(--color-gray-300))',
+          400: 'rgb(var(--color-gray-400))',
+          500: 'rgb(var(--color-gray-500))',
+          600: 'rgb(var(--color-gray-600))',
+        },
       },
       screens: {
         custom1: '1900px',

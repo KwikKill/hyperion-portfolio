@@ -11,7 +11,7 @@
       class="font-mono text-xs font-semibold uppercase tracking-wider transition-colors"
       :class="[
         large ? 'h-11 w-12' : 'px-2.5 py-1',
-        currentLanguage === lang ? 'bg-primary text-black' : 'text-gray-400 hover:text-primary',
+        currentLanguage === lang ? 'bg-primary text-on-primary' : 'text-gray-400 hover:text-primary',
       ]"
       :aria-label="lang === 'fr' ? 'Français' : 'English'"
       :aria-pressed="currentLanguage === lang"

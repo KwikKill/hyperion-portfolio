@@ -44,7 +44,7 @@
 
         <div class="overflow-x-auto">
           <div class="min-w-[500px] text-sm">
-            <div class="htop-row bg-terminal font-bold text-black">
+            <div class="htop-row bg-terminal font-bold text-on-primary">
               <span>PID</span>
               <span>{{ isEnglish ? 'COMMAND' : 'COMMANDE' }}</span>
               <span>{{ isEnglish ? 'USES' : 'USAGES' }}</span>
@@ -191,7 +191,7 @@
               <span class="text-secondary">kwikkill@hyperion:~$</span>
               <span class="ml-2 text-primary">open {{ fileStem(openedFile) }}</span>
             </div>
-            <p :class="openFailed ? 'text-red-400' : 'text-terminal'">
+            <p :class="openFailed ? 'text-error' : 'text-terminal'">
               {{ openMessage }}
             </p>
           </div>

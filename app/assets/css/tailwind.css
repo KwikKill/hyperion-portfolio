@@ -21,6 +21,11 @@
   --color-accent: 139 92 246;
   --color-background: 255 255 255;
   --color-text: 15 23 42;
+  /* Tailwind's greys (tailwind.config.js), which the cyberpunk themes adjust */
+  --color-gray-300: 209 213 219;
+  --color-gray-400: 156 163 175;
+  --color-gray-500: 107 114 128;
+  --color-gray-600: 75 85 99;
 }
 
 .dark {
@@ -41,22 +46,27 @@
   --color-terminal: 74 222 128; /* Green */
   --color-terminal-hover: 22 163 74; /* Dark Green */
   --color-text: 255 255 255; /* White */
+  --color-on-primary: 0 0 0; /* Black, on the yellow buttons */
+  --color-error: 248 113 113; /* Red */
+  --color-gray-500: 111 118 132; /* Tailwind's gray-500 a shade lighter: 4.5:1 on black */
   color: rgb(var(--color-text));
 }
 
 /* Theme classes sit on <html> (inline script of nuxt.config.ts, stores/preferences.ts) and
-   apply to the portfolio only. More specific than .cyberpunk, which sets the defaults. */
+   apply to the portfolio only. More specific than .cyberpunk, which sets the defaults.
+   Every colour used for text reaches 4.5:1 on its theme's background (WCAG AA). */
 
 /* Ghost in the Shell theme - neon pink and violet */
 html.theme-ghost #cyberpunkroot {
   --color-primary: 255 0 255; /* Magenta */
-  --color-secondary: 138 43 226; /* Violet */
+  --color-secondary: 186 130 255; /* Violet */
   --color-accent: 255 105 180; /* Hot pink */
   --color-background: 25 25 35; /* Dark purple-ish */
   --color-text: 255 255 255; /* White */
-  --color-hover: 138 43 226; /* Deep pink */
+  --color-hover: 186 130 255; /* Violet */
   --color-terminal: 255 20 147; /* Deep pink */
   --color-terminal-hover: 255 105 180; /* Hot pink */
+  --color-gray-500: 136 143 156;
 }
 
 /* Matrix theme - green and black */
@@ -66,20 +76,28 @@ html.theme-matrix #cyberpunkroot {
   --color-accent: 50 205 50; /* Lime green */
   --color-background: 0 10 0; /* Near black */
   --color-text: 0 255 0; /* Bright green */
-  --color-hover: 0 128 0; /* Dark green */
+  --color-hover: 0 170 0; /* Dark green */
   --color-terminal: 0 255 0; /* Bright green */
-  --color-terminal-hover: 0 128 0; /* Dark green */
+  --color-terminal-hover: 150 255 150; /* Pale green */
+  --color-gray-500: 114 121 135;
 }
 
+/* Solarpunk theme - the only light one: deep greens and amber on mint */
 html.theme-solarpunk #cyberpunkroot {
-  --color-primary: 112 191 100;     /* Leaf Green */
-  --color-secondary: 255 204 92;    /* Sunflower Yellow */
-  --color-accent: 255 127 80;       /* Coral Orange */
+  --color-primary: 46 125 50;       /* Leaf Green */
+  --color-secondary: 150 90 0;      /* Amber */
+  --color-accent: 196 72 30;        /* Coral Orange */
   --color-background: 240 255 244;  /* Soft Mint (eco-paper vibe) */
   --color-text: 34 45 34;           /* Forest Green (for contrast) */
-  --color-hover: 72 160 120;        /* Emerald Green */
-  --color-terminal: 85 170 85;    /* Bright Green Terminal */
-  --color-terminal-hover: 255 204 92; /* Sunflower Yellow */
+  --color-hover: 30 100 70;         /* Emerald Green */
+  --color-terminal: 33 110 52;      /* Terminal Green */
+  --color-terminal-hover: 20 83 45; /* Dark Green */
+  --color-on-primary: 255 255 255;  /* White, on the green buttons */
+  --color-error: 185 28 28;         /* Dark Red */
+  /* Greys mirrored: on a light background, the lighter text of the dark themes becomes darker */
+  --color-gray-300: 55 65 81;
+  --color-gray-400: 75 85 99;
+  --color-gray-600: 156 163 175;
 }
 
 
