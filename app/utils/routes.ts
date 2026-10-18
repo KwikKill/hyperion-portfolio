@@ -1,3 +1,4 @@
+import { navigateTo } from 'nuxt/app';
 import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router';
 
 import { detectBrowserLanguage, isLanguage, type Language } from './language';
@@ -12,7 +13,7 @@ export function portfolioPath(lang: Language, version: Version = 'cyberpunk'): s
 
 // Former addresses carried the language in the query (/cyberpunk?lang=en&theme=matrix#project-polis):
 // same page under its new path, keeping the other parameters and the hash. Browser-only.
-export function legacyLocation(to: RouteLocationNormalized, version: Version): RouteLocationRaw {
+function legacyLocation(to: RouteLocationNormalized, version: Version): RouteLocationRaw {
   const query = { ...to.query };
   delete query.lang;
   delete query.version;
@@ -21,4 +22,12 @@ export function legacyLocation(to: RouteLocationNormalized, version: Version): R
     query,
     hash: to.hash,
   };
+}
+
+// Sends a former address (or the root) to its page with a full page load, not an in-app
+// navigation. These pages are prerendered as an empty <div>; redirecting while the app
+// hydrates would reuse that <div> as the portfolio's root, and hydration does not add
+// its id and classes: no #cyberpunkroot, no .cyberpunk, no theme. Browser-only.
+export function redirectToPortfolio(to: RouteLocationNormalized, version: Version) {
+  return navigateTo(legacyLocation(to, version), { replace: true, external: true });
 }
