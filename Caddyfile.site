@@ -7,12 +7,17 @@ gabriel.{$WEBSITE_HOST} {
 	# back to /index.html would serve the prerendered home page instead.
 	try_files {path} {path}/index.html /200.html
 
-	handle /assets/* {
+	# Nuxt's build files carry a hash in their name: a new build means new names.
+	handle /_nuxt/* {
 		header Cache-Control "public, immutable, max-age=31536000"
 		file_server
 	}
 
+	# Pages and the rest: checked again on every visit (a cheap 304 thanks to the ETag).
+	# Without it, browsers keep an old page for days after a deploy, with the old
+	# JavaScript it points to already gone.
 	handle {
+		header Cache-Control "no-cache"
 		file_server
 	}
 }
