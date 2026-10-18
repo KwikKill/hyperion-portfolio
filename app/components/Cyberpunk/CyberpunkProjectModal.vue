@@ -150,7 +150,7 @@
                       :aria-current="index === currentImageIndex ? 'true' : undefined"
                       @click="showImage(index)"
                     >
-                      <img :src="image" alt="" class="size-full object-cover"/>
+                      <img :src="image" alt="" loading="lazy" decoding="async" class="size-full object-cover"/>
                     </button>
                   </div>
 

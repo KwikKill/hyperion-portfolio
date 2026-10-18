@@ -11,7 +11,7 @@
       </div>
 
       <div class="mb-4 grid gap-4 lg:grid-cols-[110px_minmax(0,1fr)]">
-        <img src="@/assets/logo.png" alt="" class="neofetch-logo size-24"/>
+        <img src="@/assets/logo.png" alt="" loading="lazy" decoding="async" class="neofetch-logo size-24"/>
 
         <div>
           <div class="font-bold">

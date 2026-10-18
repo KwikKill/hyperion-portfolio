@@ -2,6 +2,11 @@
 export default defineNuxtConfig({
   modules: ["@pinia/nuxt", "@nuxtjs/tailwindcss"],
   css: ['~/assets/css/tailwind.css'],
+  features: {
+    // The page's CSS is already linked as a file: inlining it too sent it twice, in every
+    // HTML page, where the browser cannot cache it.
+    inlineStyles: false,
+  },
   nitro: {
     prerender: {
       // These pages are reached through navigateTo(), so the `nuxt generate`

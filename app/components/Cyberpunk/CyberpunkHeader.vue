@@ -14,7 +14,7 @@
         <span class="hidden sm:inline">
           Gabriel Blaisot - Portfolio
         </span>
-        <span class="hidden sm:inline">
+        <span class="inline sm:hidden">
           Gabriel Blaisot
         </span>
         <span class="text-gray-500">&gt;</span>

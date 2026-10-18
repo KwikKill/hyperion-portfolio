@@ -51,7 +51,7 @@
           :key="index"
           class="overflow-hidden rounded-lg bg-gray-50 shadow-lg transition-shadow duration-300 hover:shadow-xl dark:bg-gray-900"
         >
-          <img :src="movie.image" :alt="movie.title" class="h-48 w-full object-cover"/>
+          <img :src="movie.image" loading="lazy" decoding="async" :alt="movie.title" class="h-48 w-full object-cover"/>
           <div class="p-6">
             <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
               {{ movie.title }}
@@ -76,7 +76,7 @@
           :key="index"
           class="overflow-hidden rounded-lg bg-gray-50 shadow-lg transition-shadow duration-300 hover:shadow-xl dark:bg-gray-900"
         >
-          <img :src="game.image" :alt="game.title" class="h-48 w-full object-cover"/>
+          <img :src="game.image" loading="lazy" decoding="async" :alt="game.title" class="h-48 w-full object-cover"/>
           <div class="p-6">
             <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">
               {{ game.title }}

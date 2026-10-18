@@ -7,6 +7,10 @@ gabriel.{$WEBSITE_HOST} {
 	# back to /index.html would serve the prerendered home page instead.
 	try_files {path} {path}/index.html /200.html
 
+	# Compress text responses (HTML, CSS, JavaScript, JSON, SVG): about 4 times lighter.
+	# Images are already compressed and left as they are.
+	encode zstd gzip
+
 	# Nuxt's build files carry a hash in their name: a new build means new names.
 	handle /_nuxt/* {
 		header Cache-Control "public, immutable, max-age=31536000"

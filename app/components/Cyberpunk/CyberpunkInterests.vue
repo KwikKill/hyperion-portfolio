@@ -68,7 +68,7 @@
               >
                 <div class="media-card-inner">
                   <div class="media-card-front">
-                    <img :src="movie.image" :alt="movie.title" class="h-48 w-full rounded-t-md object-cover"/>
+                    <img :src="movie.image" loading="lazy" decoding="async" :alt="movie.title" class="h-48 w-full rounded-t-md object-cover"/>
                     <div class="rounded-b-md border-t border-hover/50 bg-bg/80 p-4">
                       <h3 class="text-lg font-bold text-primary">
                         {{ movie.title }}
@@ -109,7 +109,7 @@
               >
                 <div class="media-card-inner">
                   <div class="media-card-front">
-                    <img :src="game.image" :alt="game.title" class="h-48 w-full rounded-t-md object-cover"/>
+                    <img :src="game.image" loading="lazy" decoding="async" :alt="game.title" class="h-48 w-full rounded-t-md object-cover"/>
                     <div class="rounded-b-md border-t border-hover/50 bg-bg/80 p-4">
                       <h3 class="text-lg font-bold text-primary">
                         {{ game.title }}
