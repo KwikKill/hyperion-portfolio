@@ -44,7 +44,9 @@ export default defineNuxtConfig({
         },
         {
           type: 'application/ld+json',
-          children: JSON.stringify({
+          // innerHTML, not children: Unhead 2 (Nuxt 4) writes `children` out as an HTML
+          // attribute and leaves the script empty.
+          innerHTML: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Person",
             "name": "Gabriel Blaisot",
