@@ -74,9 +74,9 @@
         </div>
 
         <!-- Warning Text -->
-        <h1 class="glitch-text font-mono mb-4 text-4xl font-bold uppercase tracking-wider text-red-500 md:text-6xl" :data-text="isEnglish ? 'WARNING' : 'ATTENTION'">
+        <h2 class="glitch-text font-mono mb-4 text-4xl font-bold uppercase tracking-wider text-red-500 md:text-6xl" :data-text="isEnglish ? 'WARNING' : 'ATTENTION'">
           {{ isEnglish ? 'WARNING' : 'ATTENTION' }}
-        </h1>
+        </h2>
 
         <p
           v-if="isDestructing"
@@ -233,9 +233,9 @@
                 </svg>
               </div>
 
-              <h1 class="glitch-text font-mono mb-4 text-4xl font-bold uppercase tracking-wider text-primary" :data-text="isEnglish ? 'SYSTEM DESTROYED' : 'SYSTÈME DÉTRUIT'">
+              <h2 class="glitch-text font-mono mb-4 text-4xl font-bold uppercase tracking-wider text-primary" :data-text="isEnglish ? 'SYSTEM DESTROYED' : 'SYSTÈME DÉTRUIT'">
                 {{ isEnglish ? 'SYSTEM DESTROYED' : 'SYSTÈME DÉTRUIT' }}
-              </h1>
+              </h2>
               <p class="font-mono text-lg text-secondary">
                 {{ isEnglish ? 'All data has been purged from memory' : 'Toutes les données ont été purgées de la mémoire' }}
               </p>

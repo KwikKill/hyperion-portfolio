@@ -8,9 +8,13 @@
     @animationend.self="state = 'idle'"
   >
     <CyberpunkTerminalWindow :show-icon="false" no-body>
+      <!-- The section's heading (h2, under the hero's h1). Tailwind's base styles make it
+           inherit the bar's font, so it looks the same as before. -->
       <template #title>
-        <span class="sr-only">{{ title }}</span>
-        <span aria-hidden="true">{{ displayed }}</span>
+        <h2>
+          <span class="sr-only">{{ title }}</span>
+          <span aria-hidden="true">{{ displayed }}</span>
+        </h2>
       </template>
     </CyberpunkTerminalWindow>
     <span class="section-scanline" aria-hidden="true"/>

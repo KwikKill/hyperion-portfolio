@@ -896,8 +896,8 @@ export const useProjectsStore = defineStore('projects', {
       },
       {
         title: {
-          fr: 'Développeur Freelance (4 mois)',
-          en: 'Freelance Developer (4 months)',
+          fr: 'Développeur Freelance',
+          en: 'Freelance Developer',
         },
         company: 'Gabriel Blaisot',
         freelance: true,

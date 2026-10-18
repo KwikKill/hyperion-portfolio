@@ -11,8 +11,11 @@
       >
         <span class="text-gray-500">&lt;</span>
         <img src="@/assets/logo.png" alt="" class="size-8"/>
-        <span>
+        <span class="hidden sm:inline">
           Gabriel Blaisot - Portfolio
+        </span>
+        <span class="hidden sm:inline">
+          Gabriel Blaisot
         </span>
         <span class="text-gray-500">&gt;</span>
       </NuxtLink>

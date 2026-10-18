@@ -20,7 +20,8 @@
             <span class="text-gray-500">Blaisot</span>
           </h1>
 
-          <h2 class="mb-6 text-2xl font-semibold md:text-3xl ">
+          <!-- The role under the name: a paragraph, the h2 level belongs to the sections -->
+          <p class="mb-6 text-2xl font-semibold md:text-3xl ">
             {{
               isEnglish
                 ? 'Software Engineer - Web Developer'
@@ -28,7 +29,7 @@
             }}
             <br/>
             Sopra Steria & Freelance
-          </h2>
+          </p>
 
           <CyberpunkTerminalWindow class="md:max-w-lg">
             <template #title>

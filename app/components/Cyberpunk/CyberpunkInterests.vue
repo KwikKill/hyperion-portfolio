@@ -79,9 +79,10 @@
                     </div>
                   </div>
                   <div class="media-card-back bg-bg/90 p-4">
-                    <h3 class="mb-2 text-lg font-bold text-primary">
+                    <!-- Same title as the front: not a second heading -->
+                    <p class="mb-2 text-lg font-bold text-primary">
                       {{ movie.title }}
-                    </h3>
+                    </p>
                     <p class="text-sm">
                       {{ movie.description }}
                     </p>
@@ -119,9 +120,10 @@
                     </div>
                   </div>
                   <div class="media-card-back bg-bg/90 p-4">
-                    <h3 class="mb-2 text-lg font-bold text-primary">
+                    <!-- Same title as the front: not a second heading -->
+                    <p class="mb-2 text-lg font-bold text-primary">
                       {{ game.title }}
-                    </h3>
+                    </p>
                     <p class="text-sm">
                       {{ game.description }}
                     </p>
