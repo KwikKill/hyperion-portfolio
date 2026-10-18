@@ -7,6 +7,16 @@ export default defineNuxtConfig({
     // HTML page, where the browser cannot cache it.
     inlineStyles: false,
   },
+  hooks: {
+    // Every image the stores import (project screenshots, posters: 53 files) would get a
+    // <link rel="prefetch"> in every page, about 2.5 MB fetched at load even with lazy
+    // loading. They now load when shown; scripts and styles keep their prefetch.
+    'build:manifest': (manifest) => {
+      for (const resource of Object.values(manifest)) {
+        if (resource.resourceType === 'image') resource.prefetch = false;
+      }
+    },
+  },
   nitro: {
     prerender: {
       // These pages are reached through navigateTo(), so the `nuxt generate`
