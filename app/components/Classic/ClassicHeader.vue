@@ -2,7 +2,7 @@
   <header class="bg-white py-4 shadow-md dark:bg-gray-800">
     <div class="container mx-auto flex items-center justify-between px-4">
       <NuxtLink
-        to="/version"
+        to="/"
         class="cursor-pointer text-2xl font-bold text-gray-900 transition-colors hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
       >
         KwikKill - Portfolio

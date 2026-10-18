@@ -5,10 +5,11 @@
 <script setup lang="ts">
 import { redirectToPortfolio } from '../utils/routes';
 
-// Former address, still in shared links and favourites: /classic?lang=en → /en/classic.
+// Former address, still in shared links and favourites: /classic → /fr/classic
+// (/classic?lang=en → /en/classic).
 definePageMeta({
   middleware: (to) => {
-    // Redirect on the client only: the browser language is unknown while prerendering.
+    // Redirect in the browser only: the page is prerendered, the query is unknown there.
     if (import.meta.server) return;
     return redirectToPortfolio(to, 'classic');
   },

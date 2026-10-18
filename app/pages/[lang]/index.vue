@@ -1,29 +1,17 @@
 <template>
-  <div
-    id="cyberpunkroot"
-    class="cyberpunk"
-  >
-    <CyberpunkPortfolio />
-  </div>
+  <div/>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
-
-import { usePreferencesStore } from '../../stores/preferences';
 import { isLanguage } from '../../utils/language';
+import { redirectToPortfolio } from '../../utils/routes';
 
+// /fr and /en, briefly the portfolio's address: sent on to /fr/cyberpunk and /en/cyberpunk.
 definePageMeta({
   validate: (route) => isLanguage(route.params.lang),
-  middleware: 'language',
-  // One page for /fr and /en: switching language keeps the page and its scroll position.
-  key: 'cyberpunk',
-  scrollToTop: false,
-});
-
-const preferencesStore = usePreferencesStore();
-
-onMounted(() => {
-  preferencesStore.restoreTheme();
+  middleware: (to) => {
+    if (import.meta.server || !isLanguage(to.params.lang)) return;
+    return redirectToPortfolio(to, 'cyberpunk', to.params.lang);
+  },
 });
 </script>

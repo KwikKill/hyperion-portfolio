@@ -5,10 +5,13 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       // These pages are reached through navigateTo(), so the `nuxt generate`
-      // crawler never discovers them: list them explicitly. One copy per language;
-      // /cyberpunk and /classic are the former addresses, which redirect. The sitemap is
+      // crawler never discovers them: list them explicitly. One copy per language; /cyberpunk,
+      // /classic, /fr, /en and /version are former addresses, which redirect. The sitemap is
       // built from server/routes/sitemap.xml.ts, so its dates follow each build.
-      routes: ['/fr', '/en', '/fr/classic', '/en/classic', '/version', '/cyberpunk', '/classic', '/sitemap.xml'],
+      routes: [
+        '/fr/cyberpunk', '/en/cyberpunk', '/fr/classic', '/en/classic',
+        '/cyberpunk', '/classic', '/fr', '/en', '/version', '/sitemap.xml',
+      ],
     },
   },
   app: {

@@ -31,8 +31,8 @@ export function useShareMeta() {
   const text = computed(() => TEXT[lang.value]);
   const description = computed(() => text.value.description(projectsStore.projects.length));
   const path = computed(() => route.path.replace(/\/+$/, '') || '/');
-  // /fr, /en/classic…: the pages that exist in both languages.
-  const isLocalized = computed(() => isLanguage(route.params.lang));
+  // /fr/cyberpunk, /en/classic…: the pages that exist in both languages.
+  const isLocalized = computed(() => isLanguage(route.params.lang) && /^\/(fr|en)\/(cyberpunk|classic)$/.test(path.value));
   const inLanguage = (target: Language) => `${SITE_URL}${path.value.replace(/^\/(fr|en)/, `/${target}`)}`;
 
   useSeoMeta({
@@ -58,8 +58,8 @@ export function useShareMeta() {
     twitterImageAlt: () => text.value.imageAlt,
   });
 
-  // The same page in the other language, for search engines. x-default is the root, which
-  // redirects to the visitor's language.
+  // The same page in the other language, for search engines. x-default is the root, where
+  // visitors pick their language.
   useHead({
     link: () => (isLocalized.value
       ? [

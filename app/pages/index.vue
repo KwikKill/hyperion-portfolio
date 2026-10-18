@@ -1,18 +1,20 @@
 <template>
-  <div/>
+  <div>
+    <LanguageVersionModal/>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { redirectToPortfolio } from '../utils/routes';
 
-// Visitors land straight on the cyberpunk portfolio in their browser's language (or the
-// ?lang= of an older link); the language/version picker lives on /version.
+// The language and version picker. Links from the former site, which named both in the
+// query (/?lang=fr&version=cyberpunk, still on the freelance site), go to that page.
 definePageMeta({
   middleware: (to) => {
-    // Prerendering runs on the server, where the browser language is unknown:
-    // redirect on the client only (Nuxt reruns the middleware there on first load).
+    // The query is only known in the browser: the page is prerendered.
     if (import.meta.server) return;
-    return redirectToPortfolio(to, to.query.version === 'classic' ? 'classic' : 'cyberpunk');
+    const { version } = to.query;
+    if (version === 'cyberpunk' || version === 'classic') return redirectToPortfolio(to, version);
   },
 });
 </script>

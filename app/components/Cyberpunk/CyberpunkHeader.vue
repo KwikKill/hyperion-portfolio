@@ -5,7 +5,7 @@
   >
     <div class="container mx-auto flex h-16 items-center gap-6 px-4">
       <NuxtLink
-        to="/version"
+        to="/"
         class="flex shrink-0 items-center gap-2 cyberpunk-text-glow whitespace-nowrap text-lg font-bold uppercase tracking-wide text-primary sm:text-xl"
         :title="isEnglish ? 'Change language or version' : 'Changer de langue ou de version'"
       >

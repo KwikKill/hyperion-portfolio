@@ -1,33 +1,34 @@
 import { navigateTo } from 'nuxt/app';
 import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router';
 
-import { detectBrowserLanguage, isLanguage, type Language } from './language';
+import { isLanguage, type Language } from './language';
 
 export type Version = 'cyberpunk' | 'classic';
 
-// The language is the first segment of every portfolio page (/fr, /en/classic). Each page
-// is prerendered in its own language, so nothing switches language once loaded.
+// Every portfolio page lives under its language: /fr/cyberpunk, /en/classic… Each one is
+// prerendered in that language, so nothing switches language once loaded. The root (/)
+// is the language and version picker.
 export function portfolioPath(lang: Language, version: Version = 'cyberpunk'): string {
-  return version === 'classic' ? `/${lang}/classic` : `/${lang}`;
+  return `/${lang}/${version}`;
 }
 
-// Former addresses carried the language in the query (/cyberpunk?lang=en&theme=matrix#project-polis):
-// same page under its new path, keeping the other parameters and the hash. Browser-only.
-function legacyLocation(to: RouteLocationNormalized, version: Version): RouteLocationRaw {
+// Where a former or shortened address goes: the given language, else the ?lang= of older
+// links, else French. Other parameters and the hash are kept (#project-polis opens it).
+function portfolioLocation(to: RouteLocationNormalized, version: Version, lang?: Language): RouteLocationRaw {
   const query = { ...to.query };
   delete query.lang;
   delete query.version;
   return {
-    path: portfolioPath(isLanguage(to.query.lang) ? to.query.lang : detectBrowserLanguage(), version),
+    path: portfolioPath(lang ?? (isLanguage(to.query.lang) ? to.query.lang : 'fr'), version),
     query,
     hash: to.hash,
   };
 }
 
-// Sends a former address (or the root) to its page with a full page load, not an in-app
-// navigation. These pages are prerendered as an empty <div>; redirecting while the app
+// Sends the visitor to a portfolio page with a full page load, not an in-app navigation.
+// The redirecting pages are prerendered as an empty <div>; redirecting while the app
 // hydrates would reuse that <div> as the portfolio's root, and hydration does not add
 // its id and classes: no #cyberpunkroot, no .cyberpunk, no theme. Browser-only.
-export function redirectToPortfolio(to: RouteLocationNormalized, version: Version) {
-  return navigateTo(legacyLocation(to, version), { replace: true, external: true });
+export function redirectToPortfolio(to: RouteLocationNormalized, version: Version, lang?: Language) {
+  return navigateTo(portfolioLocation(to, version, lang), { replace: true, external: true });
 }

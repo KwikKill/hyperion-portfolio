@@ -5,7 +5,7 @@ const SITE_URL = 'https://gabriel.blaisot.org';
 // Each portfolio page in both languages, with its translation (hreflang) and the build date.
 // Prerendered by `nuxt generate` (nuxt.config.ts), so the static site gets a fresh sitemap.
 const PAGES = [
-  { path: '', priority: '1.0' },
+  { path: '/cyberpunk', priority: '1.0' },
   { path: '/classic', priority: '0.5' },
 ];
 
