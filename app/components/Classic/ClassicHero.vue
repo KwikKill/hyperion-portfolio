@@ -23,7 +23,18 @@
               </template>
             </p>
             <ClassicContact class="rounded-lg shadow-lg"/>
-            <div class="flex items-center justify-center gap-4 md:justify-start">
+            <div class="flex flex-wrap items-center justify-center gap-4 md:justify-start">
+              <a
+                :href="CV_URL"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 rounded-md bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
+              >
+                {{ isEnglish ? 'View my CV' : 'Voir mon CV' }}
+                <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </a>
               <a
                 href="#projects"
                 class="rounded-md bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
@@ -55,6 +66,7 @@
 import { computed } from 'vue';
 
 import { usePreferencesStore } from '../../stores/preferences';
+import { CV_URL } from '../../utils/links';
 import ClassicContact from './ClassicContact.vue';
 import ClassicTerminal from './ClassicTerminal.vue';
 
