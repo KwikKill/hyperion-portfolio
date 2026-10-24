@@ -1,14 +1,7 @@
 <template>
   <section id="projects" class="relative min-h-screen rounded-md bg-bg py-20">
-    <!-- Enhanced cyberpunk background with depth -->
-    <div class="absolute inset-0 z-0 overflow-hidden">
-      <!-- Digital circuit lines -->
-      <div class="circuit-lines"/>
-      <!-- Scan lines effect -->
-      <div class="scan-lines"/>
-      <!-- Radial glow overlay -->
-      <div class="radial-overlay"/>
-    </div>
+    <!-- Printed circuit board that routes itself -->
+    <CyberpunkBackground scene="pcbRoute"/>
 
     <div class="container relative z-10 mx-auto px-4">
       <!-- Desktop header bar -->
@@ -313,6 +306,7 @@ import type { localizedProject } from '../../models/project';
 import { usePreferencesStore } from '../../stores/preferences';
 import { useProjectsStore } from '../../stores/projects';
 import { projectAnchor } from '../../utils/anchors';
+import CyberpunkBackground from './CyberpunkBackground.vue';
 import CyberpunkProjectModal from './CyberpunkProjectModal.vue';
 import CyberpunkSectionHeader from './CyberpunkSectionHeader.vue';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
@@ -471,49 +465,6 @@ onMounted(() => {
   right: 0;
   bottom: -50%;
   animation: grid-pulse 15s infinite linear;
-}
-
-/* Digital circuit lines */
-.circuit-lines {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image:
-    radial-gradient(circle at 30% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 10%),
-    radial-gradient(circle at 70% 60%, rgba(254, 238, 59, 0.1) 0%, transparent 15%),
-    radial-gradient(circle at 40% 80%, rgba(255, 0, 128, 0.1) 0%, transparent 12%);
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-/* Scan lines effect */
-.scan-lines {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom,
-      transparent 50%,
-      rgb(var(--color-background) / 0.5));
-  background-size: 100% 4px;
-  opacity: 0.3;
-  pointer-events: none;
-}
-
-/* Radial overlay */
-.radial-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at center,
-      transparent 0%,
-      rgb(var(--color-background)));
-  pointer-events: none;
 }
 
 .desktop-folder::after {

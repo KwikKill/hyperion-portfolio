@@ -1,23 +1,18 @@
 <template>
   <section id="about" class="relative min-h-screen bg-bg py-20">
-    <!-- Cyberpunk background with grid -->
-    <div class="absolute inset-0 z-0">
-      <!-- Circuit board pattern background -->
-      <div class="circuit-board-bg h-full"/>
-      <!-- Overlay with radial gradient -->
-      <div class="absolute inset-0 bg-gradient-to-br from-bg/80 via-bg/60 to-bg/90"/>
-      <!-- Animated scan lines -->
-      <div class="scanlines absolute inset-0 opacity-20"/>
-    </div>
+    <!-- Planetary hologram, in the free right-hand side of the section from 1024 px -->
+    <CyberpunkBackground scene="hologram" :wide-focus="HOLOGRAM_FOCUS"/>
 
+    <!-- From 1024 px, every panel stacks in a column on the left (58 %) and the right-hand side
+         stays free for the hologram; below that, free bands between the blocks show it. -->
     <div class="container relative mx-auto px-4">
       <!-- Terminal header -->
       <CyberpunkSectionHeader
-        class="mb-8"
+        class="mb-8 lg:w-[58%]"
         :title="isEnglish ? 'HYPERION v1.0 - USER PROFILE' : 'HYPERION v1.0 - PROFIL UTILISATEUR'"
       />
 
-      <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div class="mb-8 grid grid-cols-1 gap-8 max-lg:mt-[32vh] md:grid-cols-2 lg:w-[58%] lg:grid-cols-1">
         <!-- Profile: facts, role and short bio -->
         <CyberpunkNeofetch v-reveal="150"/>
 
@@ -130,11 +125,11 @@
 
       </div>
 
-      <!-- Skills: htop and the ps panel of the selected one -->
-      <CyberpunkSkills v-reveal="100" class="mb-8"/>
+      <!-- Skills: htop -->
+      <CyberpunkSkills v-reveal="100" class="mb-8 lg:w-[58%]"/>
 
       <!-- Call to Action Terminal -->
-      <CyberpunkTerminalWindow v-reveal="100">
+      <CyberpunkTerminalWindow v-reveal="100" class="lg:w-[58%]">
         <template #title>
           FREELANCE.EXE
         </template>
@@ -201,6 +196,8 @@ import { computed } from 'vue';
 
 import { vReveal } from '../../directives/reveal';
 import { usePreferencesStore } from '../../stores/preferences';
+import type { Focus } from '../../utils/backgrounds/core';
+import CyberpunkBackground from './CyberpunkBackground.vue';
 import CyberpunkNeofetch from './CyberpunkNeofetch.vue';
 import CyberpunkSectionHeader from './CyberpunkSectionHeader.vue';
 import CyberpunkSkills from './CyberpunkSkills.vue';
@@ -208,56 +205,7 @@ import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
 const preferencesStore = usePreferencesStore();
 const isEnglish = computed(() => preferencesStore.isEnglish);
+
+// Centre of the free 42 % on the right of the panel column
+const HOLOGRAM_FOCUS: Focus = { fx: 0.79, fy: 0.5, fw: 0.38 };
 </script>
-
-<style scoped>
-.circuit-board-bg {
-  /* The background with a touch of the text colour: #111 on black, a darker mint on Solarpunk */
-  background-color: color-mix(in srgb, rgb(var(--color-background)) 93.3%, rgb(var(--color-text)));
-  background-image:
-    radial-gradient(circle at 25px 25px, rgba(var(--color-primary) / 0.2) 2px, transparent 0),
-    linear-gradient(to right, rgb(var(--color-primary) / 0.2) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(var(--color-primary) / 0.2) 1px, transparent 1px);
-  background-size: 50px 50px, 25px 25px, 25px 25px;
-  background-position: 0 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.circuit-board-bg::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image:
-    linear-gradient(to right, transparent 24px, rgba(var(--color-primary) / 0.15) 25px, transparent 26px),
-    linear-gradient(to bottom, transparent 24px, rgba(var(--color-primary) / 0.15) 25px, transparent 26px);
-  background-size: 50px 50px;
-  background-position: 0 0;
-}
-
-.circuit-board-bg::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image:
-    radial-gradient(circle at 25px 0, rgba(var(--color-secondary) / 0.2) 5px, transparent 6px),
-    radial-gradient(circle at 0 25px, rgba(var(--color-secondary) / 0.2) 5px, transparent 6px),
-    radial-gradient(circle at 50px 25px, rgba(var(--color-secondary) / 0.2) 5px, transparent 6px),
-    radial-gradient(circle at 25px 50px, rgba(var(--color-secondary) / 0.2) 5px, transparent 6px);
-  background-size: 50px 50px;
-}
-
-.scanlines {
-  background: linear-gradient(to bottom,
-      transparent 50%,
-      rgb(var(--color-background) / 0.5) 50%);
-  background-size: 100% 4px;
-  pointer-events: none;
-}
-</style>

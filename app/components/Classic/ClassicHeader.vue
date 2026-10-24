@@ -5,7 +5,7 @@
         to="/"
         class="cursor-pointer text-2xl font-bold text-gray-900 transition-colors hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
       >
-        KwikKill - Portfolio
+        Gabriel Blaisot - Portfolio
       </NuxtLink>
 
       <nav>

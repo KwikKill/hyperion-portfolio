@@ -1,10 +1,7 @@
 <template>
-  <section id="home" class="relative flex min-h-screen items-center overflow-hidden py-20">
-    <!-- Cyberpunk background with grid and glow effects -->
-    <div class="absolute inset-0 z-0 bg-bg">
-      <div class="cyberpunk-grid"/>
-      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-bg/50 to-bg"/>
-    </div>
+  <section id="home" class="relative flex min-h-screen items-center overflow-clip py-20">
+    <!-- Wireframe relief scrolling towards the viewer -->
+    <CyberpunkBackground scene="gridTerrain"/>
 
     <div class="container relative z-10 mx-auto px-4">
       <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
@@ -204,6 +201,7 @@ import { computed, ref } from 'vue';
 import { usePreferencesStore } from '../../stores/preferences';
 import { CV_URL } from '../../utils/links';
 import { scrollToSection } from '../../utils/scroll';
+import CyberpunkBackground from './CyberpunkBackground.vue';
 import CyberpunkTerminal from './CyberpunkTerminal.vue';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
@@ -213,40 +211,6 @@ const contact_reveal = ref(false);
 </script>
 
 <style scoped>
-.cyberpunk-grid {
-  background-size: 40px 40px;
-  background-image:
-    linear-gradient(to right, rgb(var(--color-primary) / 0.1) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(var(--color-primary) / 0.1) 1px, transparent 1px);
-  width: 100%;
-  height: 100%;
-  transform: perspective(500px) rotateX(60deg);
-  transform-origin: center top;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: -50%;
-  animation: pulse-wave 5s infinite linear;
-}
-
-@keyframes pulse-wave {
-  0% {
-    background-size: 40px 40px;
-    transform: perspective(500px) rotateX(60deg) translateZ(0);
-  }
-
-  50% {
-    background-size: 40px 40px;
-    transform: perspective(500px) rotateX(60deg) translateZ(5px);
-  }
-
-  100% {
-    background-size: 40px 40px;
-    transform: perspective(500px) rotateX(60deg) translateZ(0);
-  }
-}
-
 .cyberpunk-button {
   position: relative;
   overflow: hidden;

@@ -1,14 +1,7 @@
 <template>
   <section id="interests" class="relative min-h-screen py-20">
-    <!-- Unique background for this section -->
-    <div class="absolute inset-0 z-0">
-      <!-- Holographic grid background -->
-      <div class="holographic-bg h-full"/>
-      <!-- Overlay with gradient -->
-      <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-bg/60 to-primary/10"/>
-      <!-- Animated scan lines -->
-      <div class="scanlines absolute inset-0 opacity-20"/>
-    </div>
+    <!-- Holographic grid with moving sources and interference fringes -->
+    <CyberpunkBackground scene="holoGrid"/>
 
     <div class="container relative z-10 mx-auto flex flex-col gap-4">
       <!-- Section header -->
@@ -165,6 +158,7 @@ import { computed, ref } from 'vue';
 import { vReveal } from '../../directives/reveal';
 import { usePreferencesStore } from '../../stores/preferences';
 import { useProjectsStore } from '../../stores/projects';
+import CyberpunkBackground from './CyberpunkBackground.vue';
 import CyberpunkSectionHeader from './CyberpunkSectionHeader.vue';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
@@ -186,37 +180,6 @@ function toggleCard(key: string) {
 </script>
 
 <style scoped>
-.holographic-bg {
-  background-color: rgb(var(--color-background));
-  background-image:
-    linear-gradient(0deg, rgb(var(--color-primary) / 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--color-primary) / 0.1) 1px, transparent 1px);
-  background-size: 30px 30px;
-  position: relative;
-  overflow: hidden;
-}
-
-.holographic-bg::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(circle at 30% 40%, rgb(var(--color-primary) / 0.4) 0%, transparent 40%),
-    radial-gradient(circle at 70% 60%, rgb(var(--color-primary) / 0.4) 0%, transparent 40%);
-  pointer-events: none;
-}
-
-.scanlines {
-  background: linear-gradient(to bottom,
-      transparent 50%,
-      rgb(var(--color-primary) / 0.1) 50%);
-  background-size: 100% 4px;
-  pointer-events: none;
-}
-
 .media-card {
   perspective: 1000px;
   height: 280px;
