@@ -57,35 +57,26 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
+import { useProfile } from '../../composables/useProfile';
 import { usePreferencesStore } from '../../stores/preferences';
 import { useProjectsStore } from '../../stores/projects';
-import { firstYear } from '../../utils/years';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
 const preferencesStore = usePreferencesStore();
 const projectsStore = useProjectsStore();
+const {
+  projects, skills, job, internshipCount, sinceYear, formation, dailyTools,
+} = useProfile();
 
 const isEnglish = computed(() => preferencesStore.isEnglish);
-const projects = computed(() => projectsStore.getLocalizedProjects);
-const experiences = computed(() => projectsStore.getLocalizedExperiences);
 const skillCategories = computed(() => projectsStore.getLocalizedSkills);
-const school = computed(() => projectsStore.formation.school);
+const school = computed(() => formation.value.school);
 
 const colors = ['bg-primary', 'bg-secondary', 'bg-accent', 'bg-terminal', 'bg-hover', 'bg-text'];
-// Part of any web work, so not worth listing among the daily tools.
-const BASICS = ['HTML', 'CSS', 'JavaScript'];
-
-const job = computed(() => experiences.value.find((experience) => !experience.internship && !experience.freelance));
-const sinceYear = computed(() => Math.min(...projects.value.map((project) => firstYear(project.date) ?? Infinity)));
-const internshipCount = computed(() => experiences.value.filter((experience) => experience.internship).length);
 
 const rows = computed(() => {
   const en = isEnglish.value;
   const company = job.value?.company ?? '';
-  const skills = skillCategories.value.flatMap((category) => category.skills);
-  const daily = (job.value?.technologies ?? [])
-    .filter((tech) => skills.includes(tech) && !BASICS.includes(tech))
-    .slice(0, 4);
   const years = new Date().getFullYear() - sinceYear.value;
   const featured = projects.value.filter((project) => project.starred).length;
 
@@ -98,12 +89,12 @@ const rows = computed(() => {
       label: en ? 'Projects' : 'Projets',
       value: en ? `${projects.value.length} published · ${featured} featured` : `${projects.value.length} publiés · ${featured} mis en avant`,
     },
-    { label: en ? 'Daily' : 'Au quotidien', value: daily.join(' · ') },
+    { label: en ? 'Daily' : 'Au quotidien', value: dailyTools.value.join(' · ') },
     {
       label: en ? 'Packages' : 'Paquets',
       value: en
-        ? `${skills.length} skills · ${skillCategories.value.length} categories`
-        : `${skills.length} compétences · ${skillCategories.value.length} catégories`,
+        ? `${skills.value.length} skills · ${skillCategories.value.length} categories`
+        : `${skills.value.length} compétences · ${skillCategories.value.length} catégories`,
     },
     { label: en ? 'Users' : 'Utilisateurs', value: en ? '600+ RankUp · 1,000+ Insaplace' : '600+ RankUp · 1 000+ Insaplace' },
     { label: en ? 'Ranking' : 'Classement', value: en ? '4th / 42 · Break the Code' : '4e / 42 · Break the Code' },

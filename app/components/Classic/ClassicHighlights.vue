@@ -53,23 +53,17 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
+import { useProfile } from '../../composables/useProfile';
 import { usePreferencesStore } from '../../stores/preferences';
-import { useProjectsStore } from '../../stores/projects';
 import { parseDescription } from '../../utils/description';
-import { firstYear } from '../../utils/years';
 
 const preferencesStore = usePreferencesStore();
-const projectsStore = useProjectsStore();
+const { projects, sinceYear, internshipCount } = useProfile();
 
 const isEnglish = computed(() => preferencesStore.isEnglish);
-const projects = computed(() => projectsStore.getLocalizedProjects);
-const experiences = computed(() => projectsStore.getLocalizedExperiences);
 
 // The three most important projects, in this order.
 const FEATURED_FILES = ['esportrecrutement.html', 'polis.html', 'rankup.js'];
-
-const sinceYear = computed(() => Math.min(...projects.value.map((project) => firstYear(project.date) ?? Infinity)));
-const internshipCount = computed(() => experiences.value.filter((experience) => experience.internship).length);
 
 const stats = computed(() => {
   const en = isEnglish.value;

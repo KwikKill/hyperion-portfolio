@@ -1050,6 +1050,11 @@ export const useProjectsStore = defineStore('projects', {
     ] as Experience[],
     formation: {
       school: 'INSA Rennes',
+      degree: {
+        en: 'Computer science engineering degree, AI option',
+        fr: 'Diplôme d\'ingénieur informatique, option IA',
+      },
+      graduationYear: 2026,
       technologies: [
         'Docker',
         'JavaScript',
