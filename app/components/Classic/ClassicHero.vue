@@ -7,7 +7,7 @@
             {{ isEnglish ? 'Hi, I\'m Gabriel Blaisot' : 'Bonjour, je suis Gabriel Blaisot' }}
           </h1>
           <h2 class="mb-6 text-2xl font-semibold text-blue-600 md:text-3xl dark:text-blue-400">
-            {{ isEnglish ? 'Software Engineer - Web Developer' : 'Ingénieur Informatique - Développeur Web' }}
+            {{ isEnglish ? 'Software Engineer - Web Developer' : 'Ingénieur logiciel - Développeur Web' }}
             <br/>
             Sopra Steria & Freelance
           </h2>

@@ -865,7 +865,7 @@ export const useProjectsStore = defineStore('projects', {
       {
         title: {
           en: 'Software Engineer - Web Developer (Permanent Contract)',
-          fr: 'Ingénieur Informatique - Développeur Web (CDI)',
+          fr: 'Ingénieur logiciel - Développeur Web (CDI)',
         },
         company: 'Sopra Steria',
         location: {

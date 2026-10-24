@@ -22,7 +22,7 @@
             {{
               isEnglish
                 ? 'Software Engineer - Web Developer'
-                : 'Ingénieur Informatique - Développeur Web'
+                : 'Ingénieur logiciel - Développeur Web'
             }}
             <br/>
             Sopra Steria & Freelance
