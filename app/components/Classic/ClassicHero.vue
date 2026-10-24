@@ -50,12 +50,8 @@
             </div>
           </div>
         </div>
-        <div class="h-full">
-          <div class="flex h-full flex-col items-center">
-            <div class="size-full md:w-3/4">
-              <ClassicTerminal/>
-            </div>
-          </div>
+        <div class="flex items-center justify-end">
+          <ClassicHighlights class="w-full max-w-lg"/>
         </div>
       </div>
     </div>
@@ -68,7 +64,7 @@ import { computed } from 'vue';
 import { usePreferencesStore } from '../../stores/preferences';
 import { CV_URL } from '../../utils/links';
 import ClassicContact from './ClassicContact.vue';
-import ClassicTerminal from './ClassicTerminal.vue';
+import ClassicHighlights from './ClassicHighlights.vue';
 
 const preferencesStore = usePreferencesStore();
 const isEnglish = computed(() => preferencesStore.isEnglish);
