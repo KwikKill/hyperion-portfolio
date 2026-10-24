@@ -4,8 +4,11 @@ import {
   makeBoard, drawBoard, drawNets, drawPad, pathSlice, pcbProbe, pcbPulses, type Board, type Net,
 } from './board';
 import {
+  buildCity, flickerWindows, type Building, type City, type CitySpec,
+} from './city';
+import {
   clamp, DEG, glitchSlices, gridPath, makeLayer, mix, MONO, pick, polyline, rand, rgba, scanlines, smooth, TAU, tr,
-  type Point, type Scene,
+  type Layer, type Point, type Scene,
 } from './core';
 import { CITIES, isLand, unit } from './globe';
 
@@ -156,11 +159,12 @@ const hologram: Scene = {
     });
     const narrow = w < 600;
     const { fx, fy, fw } = s.focus;
-    const gx = w * fx + (s.mx - 0.5) * 20;
+    // Steady rotation and tilt: the globe does not follow the pointer
+    const gx = w * fx;
     const R = Math.min(w * (narrow ? 0.32 : 0.24), h * (narrow ? 0.2 : 0.32), fw ? w * fw * 0.42 : Infinity);
     const gy = h * fy;
-    const rot = t * 0.2 + (s.mx - 0.5) * 1.2;
-    const tilt = 0.38 + (s.my - 0.5) * 0.4;
+    const rot = t * 0.2;
+    const tilt = 0.38;
     const ct = Math.cos(tilt);
     const stl = Math.sin(tilt);
     const project = (x: number, y: number, z: number): [number, number, number] => {
@@ -311,6 +315,196 @@ const hologram: Scene = {
       st.glitch -= dt;
       glitchSlices(s, 0.7, { x: Math.max(0, gx - R * 1.6), y: Math.max(0, gy - R * 1.4), w: Math.min(R * 3.2, w - (gx - R * 1.6)), h: Math.min(R * 3.2, h) });
     }
+  },
+};
+
+// Experience · Urban canyon: the two skylines of the original background (the top one mirrored,
+// and the bottom one) become a canyon of towers on three depths scrolling at their own pace.
+// Windows switch on and off, antenna beacons blink, flying vehicles cross the central corridor and
+// data pulses climb the façades.
+interface CanyonLayer {
+  depth: number;
+  speed: number;
+  rate: number;
+  scale: number;
+  L: Layer;
+  spec: CitySpec;
+  cityB: City;
+  cityT: City;
+  x0: number;
+}
+interface Car {
+  lane: number;
+  dir: number;
+  x: number;
+  y: number;
+  v: number;
+  len: number;
+}
+interface FacadePulse {
+  lane: number;
+  b: Building;
+  side: number;
+  k: number;
+  v: number;
+}
+const cityCanyon: Scene = {
+  init() {
+    return { scroll: rand(0, 400), key: '', cars: [], nextCar: 0, pulses: [], nextPulse: 0.3, glitch: 0, nextGlitch: rand(6, 10) };
+  },
+  frame(s, dt) {
+    const { ctx, w, h, c, t, st } = s;
+    const BANDS: [number, number][] = [[0.46, 0.54], [0.42, 0.58], [0.37, 0.63]];
+    const spawnCar = (x?: number) => {
+      const lane = pick([0, 0, 1, 1, 1, 2, 2]);
+      const { depth } = st.layers[lane] as CanyonLayer;
+      const dir = Math.random() < 0.5 ? 1 : -1;
+      const car: Car = {
+        lane, dir, y: h * rand(...BANDS[lane]), v: dir * rand(70, 150) * (0.35 + depth),
+        x: x ?? (dir > 0 ? -120 : w + 120), len: rand(30, 90) * (0.4 + depth),
+      };
+      st.cars.push(car);
+    };
+    const key = [w, h, s.dpr, c.b, c.s, c.p, c.fg].join('|');
+    if (st.key !== key) {
+      const W = Math.max(w + 240, 900);
+      const tone = (k: number) => (c.light ? mix(c.b, c.fg, k) : mix(c.b, c.s, k));
+      st.W = W;
+      st.layers = [
+        { depth: 0.35, speed: 7, fill: tone(c.light ? 0.07 : 0.1), bottom: [0.56, 0.68], top: [0.3, 0.44], cell: [2, 3, 5, 7], wMin: 18, wMax: 46, lit: 0.45, winA: 0.45, scale: 0.6, antenna: 0.25, rate: 14 },
+        { depth: 0.65, speed: 15, fill: tone(c.light ? 0.11 : 0.06), bottom: [0.62, 0.78], top: [0.2, 0.36], cell: [3, 5, 7, 10], wMin: 28, wMax: 70, lit: 0.42, winA: 0.65, scale: 0.85, antenna: 0.35, rate: 10 },
+        { depth: 1, speed: 28, fill: tone(c.light ? 0.16 : 0.035), bottom: [0.68, 0.86], top: [0.1, 0.28], cell: [5, 8, 10, 14], wMin: 40, wMax: 110, lit: 0.4, winA: 0.85, scale: 1.1, antenna: 0.45, rate: 7 },
+      ].map((ly): CanyonLayer => {
+        const L = makeLayer(s, W, h);
+        const spec: CitySpec = {
+          W, H: h, dir: 1, t0: ly.bottom[0], t1: ly.bottom[1], fill: ly.fill, capCol: c.s, capA: 0.35 * (0.5 + ly.depth / 2),
+          winCol: c.s, warmCol: c.p, winA: ly.winA, lit: ly.lit, cell: ly.cell as CitySpec['cell'], wMin: ly.wMin, wMax: ly.wMax,
+          scale: ly.scale, antenna: ly.antenna, gap: [2, 10],
+        };
+        const cityB = buildCity(L, spec);
+        const cityT = buildCity(L, { ...spec, dir: -1, t0: ly.top[0], t1: ly.top[1] });
+        return { depth: ly.depth, speed: ly.speed, rate: ly.rate, scale: ly.scale, L, spec, cityB, cityT, x0: 0 };
+      });
+      st.cars = [];
+      st.pulses = [];
+      for (let i = 0; i < 16; i += 1) spawnCar(rand(0, w));
+      st.key = key;
+    }
+    const layers = st.layers as CanyonLayer[];
+    const W: number = st.W;
+    st.scroll += dt;
+    ctx.fillStyle = rgba(c.b);
+    ctx.fillRect(0, 0, w, h);
+
+    // Vehicles and pulses, moved once per frame
+    st.nextCar -= dt;
+    if (st.nextCar <= 0 && st.cars.length < 34) { st.nextCar = rand(0.08, 0.28); spawnCar(); }
+    st.cars = (st.cars as Car[]).filter((car) => { car.x += car.v * dt; return car.x > -200 && car.x < w + 200; });
+    st.nextPulse -= dt;
+    if (st.nextPulse <= 0) {
+      st.nextPulse = rand(0.12, 0.35);
+      const lane = Math.random() < 0.6 ? 2 : 1;
+      const city = Math.random() < 0.6 ? layers[lane].cityB : layers[lane].cityT;
+      if (city.buildings.length) {
+        const b = pick(city.buildings);
+        const pulse: FacadePulse = { lane, b, side: Math.random() < 0.5 ? b.x : b.x + b.w, k: 0, v: rand(0.5, 1.1) };
+        st.pulses.push(pulse);
+      }
+    }
+    st.pulses = (st.pulses as FacadePulse[]).filter((p) => (p.k += p.v * dt) < 1.2);
+    const screenX = (ly: CanyonLayer, x: number) => {
+      const sx = x + ly.x0;
+      return sx < -30 ? sx + W : sx;
+    };
+
+    layers.forEach((ly, i) => {
+      const off = st.scroll * ly.speed;
+      ly.x0 = -(((off % W) + W) % W);
+      ctx.drawImage(ly.L.cv, ly.x0, 0, W, h);
+      ctx.drawImage(ly.L.cv, ly.x0 + W, 0, W, h);
+      flickerWindows(ly.L, ly.spec, ly.cityB, ly.rate * 0.6, dt);
+      flickerWindows(ly.L, ly.spec, ly.cityT, ly.rate * 0.4, dt);
+      if (i === 0) {
+        // Haze over the distance, glow of the corridor and the data lines of the original background
+        ctx.fillStyle = rgba(c.b, 0.32);
+        ctx.fillRect(0, 0, w, h);
+        const glow = ctx.createLinearGradient(0, h * 0.3, 0, h * 0.7);
+        glow.addColorStop(0, rgba(c.s, 0));
+        glow.addColorStop(0.5, rgba(c.s, c.light ? 0.08 : 0.11));
+        glow.addColorStop(1, rgba(c.s, 0));
+        ctx.fillStyle = glow;
+        ctx.fillRect(0, h * 0.3, w, h * 0.4);
+        ctx.strokeStyle = rgba(c.p, c.light ? 0.07 : 0.05);
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (let x = (t * 7.5) % 150; x < w; x += 150) { ctx.moveTo(Math.round(x) + 0.5, 0); ctx.lineTo(Math.round(x) + 0.5, h); }
+        for (let y = (t * 10) % 200; y < h; y += 200) { ctx.moveTo(0, Math.round(y) + 0.5); ctx.lineTo(w, Math.round(y) + 0.5); }
+        ctx.stroke();
+      } else if (i === 1) {
+        ctx.fillStyle = rgba(c.b, 0.12);
+        ctx.fillRect(0, 0, w, h);
+      }
+      // Antenna beacons
+      if (i > 0) {
+        [ly.cityB, ly.cityT].forEach((city) => city.beacons.forEach((bc) => {
+          const a = Math.pow(Math.max(0, Math.sin(t * bc.v + bc.ph)), 6);
+          if (a < 0.05) return;
+          const sx = screenX(ly, bc.x);
+          if (sx > w + 10) return;
+          ctx.fillStyle = rgba(c.a, 0.25 * a);
+          ctx.beginPath(); ctx.arc(sx, bc.y, 5 * ly.scale, 0, TAU); ctx.fill();
+          ctx.fillStyle = rgba(c.a, a);
+          ctx.beginPath(); ctx.arc(sx, bc.y, 1.8 * ly.scale, 0, TAU); ctx.fill();
+        }));
+      }
+      // Data pulses climbing the façades of this depth
+      (st.pulses as FacadePulse[]).forEach((p) => {
+        if (p.lane !== i) return;
+        const sx = screenX(ly, p.side);
+        if (sx > w + 10) return;
+        const { b } = p;
+        const k = Math.min(1, p.k);
+        const fade = p.k > 1 ? 1 - (p.k - 1) / 0.2 : 1;
+        const from = b.dir > 0 ? b.y1 : b.y0;
+        const to = b.dir > 0 ? b.y0 : b.y1;
+        const y = from + (to - from) * k;
+        const yy = y - Math.sign(to - from) * 46 * ly.depth;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = rgba(c.p, 0.2 * fade);
+        ctx.lineWidth = 5;
+        ctx.beginPath(); ctx.moveTo(sx, yy); ctx.lineTo(sx, y); ctx.stroke();
+        ctx.strokeStyle = rgba(mix(c.p, c.fg, 0.3), 0.9 * fade);
+        ctx.lineWidth = 1.6;
+        ctx.beginPath(); ctx.moveTo(sx, yy); ctx.lineTo(sx, y); ctx.stroke();
+        ctx.lineCap = 'butt';
+      });
+      // Flying vehicles of this depth: headlights in the primary colour, tail lights in the accent
+      (st.cars as Car[]).forEach((car) => {
+        if (car.lane !== i) return;
+        const col = car.dir > 0 ? c.p : c.a;
+        const tail = car.x - car.dir * car.len;
+        const g = ctx.createLinearGradient(car.x, 0, tail, 0);
+        g.addColorStop(0, rgba(col, 0.85));
+        g.addColorStop(1, rgba(col, 0));
+        ctx.strokeStyle = g;
+        ctx.lineWidth = 0.8 + ly.depth * 1.6;
+        ctx.beginPath(); ctx.moveTo(car.x, car.y); ctx.lineTo(tail, car.y); ctx.stroke();
+        ctx.fillStyle = rgba(mix(col, c.fg, 0.5), 0.95);
+        ctx.fillRect(car.x - 1.5 * ly.depth, car.y - ly.depth, 3 * ly.depth + 1, 2 * ly.depth + 0.5);
+      });
+    });
+    ctx.lineWidth = 1;
+    st.nextGlitch -= dt;
+    if (st.nextGlitch <= 0) { st.glitch = 0.22; st.nextGlitch = rand(6, 11); }
+    if (st.glitch > 0) { st.glitch -= dt; glitchSlices(s, 0.4); }
+    const d = new Date();
+    const clock = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+    const cars = st.cars.length;
+    ctx.font = `600 10px ${MONO}`;
+    ctx.fillStyle = rgba(c.mu, 0.95);
+    ctx.textAlign = 'right';
+    ctx.fillText(tr(s, `CANYON · SECTEUR 07 · ${cars} VÉHICULES · ${clock}`, `CANYON · SECTOR 07 · ${cars} VEHICLES · ${clock}`), w - 16, h - 14);
+    ctx.textAlign = 'start';
   },
 };
 
@@ -545,5 +739,5 @@ const holoGrid: Scene = {
   },
 };
 
-export const SCENES = { gridTerrain, hologram, pcbRoute, holoGrid };
+export const SCENES = { gridTerrain, hologram, cityCanyon, pcbRoute, holoGrid };
 export type SceneName = keyof typeof SCENES;
