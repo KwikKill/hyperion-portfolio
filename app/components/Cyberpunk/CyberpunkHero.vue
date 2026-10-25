@@ -5,7 +5,7 @@
 
     <div class="container relative z-10 mx-auto px-4">
       <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
-        <div>
+        <div class="hero-copy">
           <div class="mb-4 inline-block rounded-md border-2 border-primary/70 bg-bg/70 px-3 py-1">
             <span class="text-sm font-medium uppercase tracking-widest text-primary">
               hyperion: {{ isEnglish ? 'System Online' : 'Système en Ligne' }}
@@ -28,43 +28,28 @@
             Sopra Steria & Freelance
           </p>
 
-          <CyberpunkTerminalWindow class="md:max-w-lg">
-            <template #title>
-              {{ isEnglish ? 'welcome to my portfolio' : 'bienvenue sur mon portfolio' }}
-            </template>
+          <!-- Bio and contact sit on the relief, without a window: a dark halo behind them keeps them readable -->
+          <div class="md:max-w-lg">
+            <p class="mb-6 text-lg leading-relaxed text-text">
+              <template v-if="isEnglish">
+                Software engineer at <span class="font-semibold text-primary">{{ company }}</span> in Rennes, I build web
+                applications end to end. Trained at {{ school }}: {{ internshipCount }}&nbsp;internships, a freelance activity and
+                <span class="font-semibold text-primary">{{ projects.length }}&nbsp;projects</span> published since {{ sinceYear }}.
+              </template>
+              <template v-else>
+                Ingénieur logiciel chez <span class="font-semibold text-primary">{{ company }}</span> à Rennes, je conçois des
+                applications web de bout en bout. Formé à l'{{ school }}&nbsp;: {{ internshipCount }}&nbsp;stages, une activité freelance et
+                <span class="font-semibold text-primary">{{ projects.length }}&nbsp;projets</span> publiés depuis {{ sinceYear }}.
+              </template>
+            </p>
 
-            <template #body>
-              <!-- Description section -->
-              <div class="mb-4 text-justify">
-                <p class="">
-                  <template
-                    v-if="isEnglish"
-                  >
-                    Software engineer at Sopra Steria and freelance web developer, passionate about Web development and software engineering.
-                    I love video games, technology, and learning new things. Also passionate about Greek mythology.
-                  </template>
-                  <template
-                    v-else
-                  >
-                    Ingénieur informatique chez Sopra Steria et développeur web freelance, passionné par le développement web et l'ingénierie logicielle.
-                    J'adore les jeux vidéo, la technologie et apprendre de nouvelles choses.
-                    Également passionné par la mythologie grecque.
-                  </template>
-                </p>
-              </div>
+            <!-- Contact, in a small terminal window titled like the section -->
+            <CyberpunkTerminalWindow>
+              <template #title>
+                {{ isEnglish ? 'contact information' : 'informations de contact' }}
+              </template>
 
-              <!-- Contact section -->
-              <div>
-                <div class="mb-2 flex items-center border-b border-primary/30">
-                  <span class="font-mono text-sm uppercase text-primary">
-                    {{
-                      isEnglish
-                        ? 'CONTACT INFORMATION'
-                        : 'INFORMATIONS DE CONTACT'
-                    }}
-                  </span>
-                </div>
-
+              <template #body>
                 <div v-if="contact_reveal" class="font-mono space-y-2 border-l border-cyan-800 pl-4">
                   <div class="flex items-center">
                     <span class="mr-2 text-secondary">
@@ -177,9 +162,9 @@
                     <div class="glitch-block"/>
                   </div>
                 </button>
-              </div>
-            </template>
-          </CyberpunkTerminalWindow>
+              </template>
+            </CyberpunkTerminalWindow>
+          </div>
 
           <!-- Same buttons as the classic version: CV and projects first, experience as the secondary one -->
           <div class="mt-8 flex flex-wrap gap-4">
@@ -224,6 +209,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 
+import { useProfile } from '../../composables/useProfile';
 import { usePreferencesStore } from '../../stores/preferences';
 import { CV_URL } from '../../utils/links';
 import { scrollToSection } from '../../utils/scroll';
@@ -232,11 +218,33 @@ import CyberpunkTerminal from './CyberpunkTerminal.vue';
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
 const preferencesStore = usePreferencesStore();
+// The bio's facts, from the store, like the neofetch's
+const {
+  projects, job, formation, internshipCount, sinceYear,
+} = useProfile();
 const isEnglish = computed(() => preferencesStore.isEnglish);
+const company = computed(() => job.value?.company ?? '');
+const school = computed(() => formation.value.school);
 const contact_reveal = ref(false);
 </script>
 
 <style scoped>
+/* Dark halo behind the name, the bio and the contact: they sit directly on the relief. No stacking
+   context here (no isolation, no z-index): the contact window, once full screen, must cover the
+   terminal on the right. The halo stays behind the text in the container's stacking context. */
+.hero-copy {
+  position: relative;
+}
+
+.hero-copy::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -60px -80px -60px -120px;
+  background: radial-gradient(closest-side, rgb(var(--color-background) / 0.75), rgb(var(--color-background) / 0.4) 70%, transparent);
+  pointer-events: none;
+}
+
 .cyberpunk-button {
   position: relative;
   overflow: hidden;
