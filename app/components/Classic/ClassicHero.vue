@@ -4,7 +4,7 @@
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div class="mb-10 md:mb-0">
           <h1 class="mb-4 text-4xl font-bold text-gray-900 md:text-5xl dark:text-white">
-            {{ isEnglish ? 'Hi, I\'m Gabriel Blaisot' : 'Bonjour, je suis Gabriel Blaisot' }}
+            Gabriel Blaisot
           </h1>
           <h2 class="mb-6 text-2xl font-semibold text-blue-600 md:text-3xl dark:text-blue-400">
             {{ isEnglish ? 'Software Engineer - Web Developer' : 'Ingénieur logiciel - Développeur Web' }}
@@ -70,13 +70,13 @@
                 href="#projects"
                 class="rounded-md bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
               >
-                {{ isEnglish ? 'View Projects' : 'Voir les Projets' }}
+                {{ isEnglish ? 'View my projects' : 'Voir mes projets' }}
               </a>
               <a
-                href="#interests"
+                href="#experience"
                 class="rounded-md border border-blue-600 px-6 py-3 text-blue-600 transition-colors hover:bg-blue-50 dark:hover:bg-blue-900/30"
               >
-                {{ isEnglish ? 'My Interests' : 'Mes Intérêts' }}
+                {{ isEnglish ? 'View my experience' : 'Voir mes expériences' }}
               </a>
             </div>
           </div>

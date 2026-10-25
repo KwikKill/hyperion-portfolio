@@ -181,32 +181,33 @@
             </template>
           </CyberpunkTerminalWindow>
 
+          <!-- Same buttons as the classic version: CV and projects first, experience as the secondary one -->
           <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              :href="CV_URL"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cyberpunk-button inline-flex items-center gap-2 rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-on-primary transition-colors hover:bg-hover"
+            >
+              {{ isEnglish ? 'View my CV' : 'Voir mon CV' }}
+              <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
             <!-- Scroll without writing the hash to the URL (see utils/scroll.ts) -->
             <a
               href="#projects"
               class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-on-primary transition-colors hover:bg-hover"
               @click.prevent="scrollToSection('projects')"
             >
-              {{ isEnglish ? 'View Projects' : 'Voir les Projets' }}
+              {{ isEnglish ? 'View my projects' : 'Voir mes projets' }}
             </a>
             <a
               href="#experience"
-              class="cyberpunk-button rounded-none bg-primary px-6 py-3 font-medium uppercase tracking-wider text-on-primary transition-colors hover:bg-hover"
+              class="cyberpunk-button rounded-none border-2 border-primary px-6 py-3 font-medium uppercase tracking-wider text-primary transition-colors hover:bg-primary/10"
               @click.prevent="scrollToSection('experience')"
             >
-              {{ isEnglish ? 'View past experiences' : 'Voir les expériences passées' }}
-            </a>
-            <a
-              :href="CV_URL"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="cyberpunk-button inline-flex items-center gap-2 rounded-none border-2 border-primary px-6 py-3 font-medium uppercase tracking-wider text-primary transition-colors hover:bg-primary/10"
-            >
-              CV PDF
-              <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-              </svg>
+              {{ isEnglish ? 'View my experience' : 'Voir mes expériences' }}
             </a>
           </div>
         </div>

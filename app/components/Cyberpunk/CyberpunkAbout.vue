@@ -12,7 +12,7 @@
         :title="isEnglish ? 'HYPERION v1.0 - USER PROFILE' : 'HYPERION v1.0 - PROFIL UTILISATEUR'"
       />
 
-      <div class="mb-8 grid grid-cols-1 gap-8 max-lg:mt-[32vh] md:grid-cols-2 lg:w-[58%] lg:grid-cols-1">
+      <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:w-[58%] lg:grid-cols-1">
         <!-- Profile: facts, role and short bio -->
         <CyberpunkNeofetch v-reveal="150"/>
 
