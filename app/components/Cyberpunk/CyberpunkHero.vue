@@ -46,7 +46,7 @@
                   <template
                     v-else
                   >
-                    Ingénieur informatique chez Sopra Steria et développeur web freelance, passionné par le développement Web et l'ingénierie logicielle.
+                    Ingénieur informatique chez Sopra Steria et développeur web freelance, passionné par le développement web et l'ingénierie logicielle.
                     J'adore les jeux vidéo, la technologie et apprendre de nouvelles choses.
                     Également passionné par la mythologie grecque.
                   </template>

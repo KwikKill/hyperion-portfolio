@@ -101,7 +101,7 @@
                       {{ movie.description }}
                     </p>
                     <div class="mt-2 text-xs text-primary">
-                      {{ isEnglish ? 'Why I love it:' : 'Pourquoi je l\'aime:' }} {{ movie.whyILoveIt }}
+                      {{ isEnglish ? 'Why I love it:' : 'Pourquoi je l\'aime :' }} {{ movie.whyILoveIt }}
                     </div>
                   </div>
                 </div>
@@ -148,7 +148,7 @@
                       {{ game.description }}
                     </p>
                     <div class="mt-2 text-xs text-primary">
-                      {{ isEnglish ? 'Why I love it:' : 'Pourquoi je l\'aime:' }} {{ game.whyILoveIt }}
+                      {{ isEnglish ? 'Why I love it:' : 'Pourquoi je l\'aime :' }} {{ game.whyILoveIt }}
                     </div>
                   </div>
                 </div>

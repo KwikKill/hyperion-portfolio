@@ -743,7 +743,7 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'The showcase website for my Discord bot RankUp.\n- Presents the bot and explains how to use it\n- Significant work on SEO and indexing',
-          fr: 'Le site vitrine de mon bot Discord RankUp.\n- Présente le bot et explique comment l\'utiliser\n- travail important sur le SEO et le référencement',
+          fr: 'Le site vitrine de mon bot Discord RankUp.\n- Présente le bot et explique comment l\'utiliser\n- Travail important sur le référencement',
         },
         file: {
           en: 'rankup-website.html',
@@ -910,7 +910,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Depuis Juin 2025',
         },
         description: {
-          fr: 'Développement de site internet en tant que développeur freelance en micro entreprise. Cette activité m\'a permis de gérer plusieurs facette de l\'entreprise : la recherche et la relation client, la gestion de projet et le développement web.',
+          fr: 'Développement de sites web en tant que développeur freelance en micro-entreprise. Cette activité m\'a permis de gérer plusieurs facettes de l\'entreprise : la recherche et la relation client, la gestion de projet et le développement web.',
           en: 'Development of websites as a freelance developer in a micro-enterprise. This activity allowed me to manage several aspects of the business: client research and relations, project management, and web development.',
         },
         technologies: ['Next.js', 'React', 'HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'TypeScript', 'PostgreSQL', 'Docker'],
@@ -972,12 +972,12 @@ export const useProjectsStore = defineStore('projects', {
         },
         description: {
           en: 'Integration of an auto benchmark step using a company tool in a Jenkins pipeline and development of a plugin to allow visualization and interpretation of results.',
-          fr: "Intégration d'une étape de benchmark auto en utilisant un outil de l'entreprise dans un pipeline Jenkins et développement d'un plugin pour permettre la visualisation et d'interprétation des résultats.",
+          fr: "Intégration d'une étape de benchmark auto en utilisant un outil de l'entreprise dans un pipeline Jenkins et développement d'un plugin pour permettre la visualisation et l'interprétation des résultats.",
         },
         technologies: ['Jenkins', 'Java', 'Apache Groovy', 'HTML', 'CSS', 'JavaScript', 'Chart.js', 'Ansible', 'ESXI', 'Git'],
         achievements: {
           en: [
-            'Add performance criteria for tests',
+            'Added performance criteria to existing tests',
             'Quantification of regressions on new versions',
           ],
           fr: [
@@ -1002,7 +1002,7 @@ export const useProjectsStore = defineStore('projects', {
           fr: 'Juin 2023 - Juillet 2023',
         },
         description: {
-          en: 'Maintaining and improving a Web application (Flask) for park management for support teams.',
+          en: 'Maintaining and improving a Web application (Flask) for IT asset management for support teams.',
           fr: 'Maintien et amélioration d\'une application Web (Flask) de gestion de parc à destination des équipes support.',
         },
         technologies: ['Python', 'Flask', 'HTML', 'CSS', 'JavaScript', 'Git'],
@@ -1037,12 +1037,12 @@ export const useProjectsStore = defineStore('projects', {
           en: [
             'Disk encryption for data security',
             'Integration of company API for backup optimization',
-            'Translation of Jenkins jobs into JenkinsFiles',
+            'Translation of Jenkins jobs into Jenkinsfiles',
           ],
           fr: [
             'Chiffrement de disques pour la sécurité des données',
             "Intégration de l'API de l'entreprise pour l'optimisation des sauvegardes",
-            'Traduction de job Jenkins en JenkinsFiles',
+            'Traduction des jobs Jenkins en Jenkinsfiles',
           ],
         },
         internship: true,
@@ -1474,7 +1474,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'Clair Obscur: Expedition 33',
           year: '2025',
           image: clairobscureImage,
-          description: 'a turn-based RPG set in a dark Belle Époque atmosphere, blending tactics and real-time reactions in an emotional narrative against the mysterious Peintresse.',
+          description: 'A turn-based RPG set in a dark Belle Époque atmosphere, blending tactics and real-time reactions in an emotional narrative against the mysterious Peintresse.',
           whyILoveIt: 'Visually striking universe, playing on the contrast of light and darkness as well as emotions.',
         },
         {
@@ -1522,7 +1522,7 @@ export const useProjectsStore = defineStore('projects', {
           title: 'Clair Obscur: Expedition 33',
           year: '2025',
           image: clairobscureImage,
-          description: 'un RPG tour par tour à l’ambiance Belle Époque sombre, mêlant tactique et reactions temps réel dans un récit émouvant contre la mystérieuse Peintresse.',
+          description: 'Un RPG au tour par tour à l’ambiance Belle Époque sombre, mêlant tactique et réactions en temps réel dans un récit émouvant contre la mystérieuse Peintresse.',
           whyILoveIt: 'Univers visuellement frappant, jouant sur le contraste lumière / obscurité autant que sur les émotions.',
         },
         {

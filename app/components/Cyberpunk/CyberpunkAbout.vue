@@ -42,8 +42,8 @@
                 Quand je ne code pas, vous pouvez me trouver en train d'explorer de nouvelles technologies, ou d'élargir
                 mes connaissances dans divers domaines de l'informatique.
                 <br/>
-                En dehors de ces sujets, j'apprécie les jeux vidéos, les films et les livres (principalement la science
-                fiction), les jeux de société, les jeux de rôles et la mythologie grecque.
+                En dehors de ces sujets, j'apprécie les jeux vidéo, les films et les livres (principalement la
+                science-fiction), les jeux de société, les jeux de rôles et la mythologie grecque.
                 <br/>
                 J'ai également fait 5 ans de tennis de table en club.
               </template>

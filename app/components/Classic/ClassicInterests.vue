@@ -85,7 +85,7 @@
               {{ movie.description }}
             </p>
             <div class="text-sm font-medium text-blue-600 dark:text-blue-400">
-              {{ isEnglish ? 'Why I love it:' : 'Pourquoi je l\'aime:' }} {{ movie.whyILoveIt }}
+              {{ isEnglish ? 'Why I love it:' : 'Pourquoi je l\'aime :' }} {{ movie.whyILoveIt }}
             </div>
           </div>
         </div>
@@ -117,7 +117,7 @@
               {{ game.description }}
             </p>
             <div class="text-sm font-medium text-blue-600 dark:text-blue-400">
-              {{ isEnglish ? 'Why I love it:' : 'Pourquoi je l\'aime:' }} {{ game.whyILoveIt }}
+              {{ isEnglish ? 'Why I love it:' : 'Pourquoi je l\'aime :' }} {{ game.whyILoveIt }}
             </div>
           </div>
         </div>

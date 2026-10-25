@@ -34,8 +34,8 @@
               Quand je ne code pas, vous pouvez me trouver en train d'explorer de nouvelles technologies, ou d'élargir
               mes connaissances dans divers domaines de l'informatique.
               <br/>
-              En dehors de ces sujets, j'apprécie les jeux vidéos, les films et les livres (principalement la science
-              fiction), les jeux de société, les jeux de rôles et la mythologie Grecque.
+              En dehors de ces sujets, j'apprécie les jeux vidéo, les films et les livres (principalement la
+              science-fiction), les jeux de société, les jeux de rôles et la mythologie grecque.
               <br/>
               J'ai également fait 5 ans de tennis de table en club.
             </template>
@@ -77,12 +77,12 @@
         <p class="mx-auto mb-6 max-w-3xl text-gray-700 dark:text-gray-300">
           <template v-if="isEnglish">
             Being actively involved in associations has been a significant part of my life. I have been an active member
-            of several student and technology - focused organizations.These experiences have allowed me to develop
+            of several student and technology-focused organizations. These experiences have allowed me to develop
             skills in project management, teamwork, and event organization.
           </template>
           <template v-else>
-            Lassociatif étant une part importante de ma vie, j'ai été membre actif de plusieurs associations étudiantes
-            et technologiques.Ces expériences m'ont permis de développer des compétences en gestion de projet, en
+            L'associatif étant une part importante de ma vie, j'ai été membre actif de plusieurs associations étudiantes
+            et technologiques. Ces expériences m'ont permis de développer des compétences en gestion de projet, en
             travail d'équipe et en organisation d'événements.
           </template>
         </p>

@@ -71,7 +71,7 @@
         <!-- Technologies used -->
         <div class="mb-4">
           <h4 class="mb-2 text-sm font-semibold text-gray-900 dark:text-white">
-            {{ isEnglish ? 'Technologies Used:' : 'Technologies Utilisées:' }}
+            {{ isEnglish ? 'Technologies Used:' : 'Technologies utilisées :' }}
           </h4>
           <div class="flex flex-wrap gap-2">
             <span
@@ -87,7 +87,7 @@
         <!-- Key achievements -->
         <div v-if="experience.localizedAchievements.length > 0">
           <h4 class="mb-2 text-sm font-semibold text-gray-900 dark:text-white">
-            {{ isEnglish ? 'Key Achievements:' : 'Réalisations Principales:' }}
+            {{ isEnglish ? 'Key Achievements:' : 'Réalisations principales :' }}
           </h4>
           <ul class="list-inside list-disc text-sm text-gray-700 dark:text-gray-300">
             <li
