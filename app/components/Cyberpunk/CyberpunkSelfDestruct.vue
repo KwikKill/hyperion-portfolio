@@ -1,41 +1,152 @@
 <template>
   <div>
-    <!-- Self Destruct Button -->
-    <div
+    <!-- Self-destruct panel: pick a sequence, then launch it (from the md breakpoint, as before) -->
+    <section
       v-if="!isDestructing && !isComplete"
-      class="my-8 hidden w-full flex-col items-center justify-center md:flex"
+      class="my-8 hidden w-full justify-center px-4 md:flex"
+      aria-labelledby="self-destruct-title"
     >
-      <button
-        type="button"
-        class="font-mono group relative overflow-hidden rounded-none border-2 border-red-500 bg-black px-6 py-3 text-red-500 transition-all duration-300 hover:bg-red-500/10 hover:text-red-400"
-        @click="showAlarm = true"
-      >
-        <div class="absolute inset-0 bg-red-500/20 opacity-0 transition-opacity group-hover:opacity-100"/>
-        <div class="relative flex items-center space-x-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="size-5 animate-pulse"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+      <div class="self-destruct-panel relative w-full max-w-5xl border border-error/50 bg-bg px-6 pb-6 pt-7">
+        <div class="mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <h2 id="self-destruct-title" class="font-mono flex items-center gap-2 text-sm uppercase tracking-[0.16em] text-error">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="size-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
               stroke-width="2"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
-          <span class="uppercase tracking-wider">
-            {{ isEnglish ? 'SELF DESTRUCT' : 'AUTO-DESTRUCTION' }}
-          </span>
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" :d="WARNING_ICON"/>
+            </svg>
+            {{ isEnglish ? 'Self-destruct protocol' : 'Protocole d\'auto-destruction' }}
+          </h2>
+          <p class="text-xs text-gray-400">
+            {{ availability }}
+          </p>
         </div>
-      </button>
-    </div>
 
-    <!-- Alarm Overlay -->
+        <!-- Radio group: one card per sequence -->
+        <div
+          role="radiogroup"
+          :aria-label="isEnglish ? 'Self-destruct sequence' : 'Séquence d\'auto-destruction'"
+          class="mx-auto flex flex-wrap justify-center gap-2"
+          :style="{ maxWidth: `calc(${CARDS_PER_ROW} * 9.5rem + ${CARDS_PER_ROW - 1} * 0.5rem)` }"
+        >
+          <button
+            v-for="(item, index) in SELF_DESTRUCT_SEQUENCES"
+            :id="`self-destruct-sequence-${item.id}`"
+            :key="item.id"
+            type="button"
+            role="radio"
+            class="sequence-card relative grid w-[9.5rem] content-start gap-1 rounded border bg-bg p-2 text-left transition-colors"
+            :class="item.id === selectedSequence
+              ? 'border-primary shadow-[0_0_18px_rgb(var(--color-primary)/0.35)]'
+              : 'border-primary/25 hover:border-primary/60'"
+            :aria-checked="item.id === selectedSequence"
+            :tabindex="item.id === selectedSequence ? 0 : -1"
+            @click="selectedSequence = item.id"
+            @keydown="onSequenceKeydown($event, index)"
+          >
+            <span class="sequence-preview" aria-hidden="true">
+              <span v-if="item.id === 'grid'" class="preview-grid">
+                <i v-for="delay in GRID_PREVIEW_DELAYS" :key="delay" :style="{ animationDelay: `${delay}s` }"/>
+              </span>
+              <span v-else-if="item.id === 'collapse'" class="preview-fall">
+                <i
+                  v-for="bar in FALL_PREVIEW_BARS"
+                  :key="bar.x"
+                  :style="{ left: `${bar.x}px`, width: `${bar.w}px`, animationDelay: `${bar.delay}s`, '--fall-y': `${bar.y}px`, '--fall-r': `${bar.r}deg` }"
+                />
+              </span>
+              <span v-else-if="item.id === 'corruption'" class="preview-glitch">
+                <span class="glitch-clean">HYPERION</span>
+                <span class="glitch-bad">HY▓ER╳ON</span>
+              </span>
+              <span v-else-if="item.id === 'fracture'" class="preview-crack">
+                <span class="crack-pane"/>
+                <svg viewBox="0 0 120 58" preserveAspectRatio="none">
+                  <path v-for="path in CRACK_PREVIEW_PATHS" :key="path" :d="path"/>
+                </svg>
+              </span>
+              <span v-else-if="item.id === 'singularity'" class="preview-hole">
+                <!-- Flattened, like a tilted disk -->
+                <span class="hole-disk">
+                  <i
+                    v-for="dot in HOLE_PREVIEW_DOTS"
+                    :key="dot.a"
+                    :style="{ '--hole-a': `${dot.a}deg`, '--hole-r': `${dot.r}px`, animationDelay: `${dot.delay}s` }"
+                  />
+                </span>
+                <b/>
+              </span>
+              <span v-else-if="item.id === 'overheat'" class="preview-melt">
+                <i
+                  v-for="(column, i) in MELT_PREVIEW_COLUMNS"
+                  :key="i"
+                  :style="{ left: `${i * 12.5}%`, animationDelay: `${column.delay}s`, '--melt-y': `${column.y}%` }"
+                />
+              </span>
+              <span v-else-if="item.id === 'megapolis'" class="preview-city">
+                <i
+                  v-for="tower in CITY_PREVIEW_TOWERS"
+                  :key="tower.x"
+                  :style="{ left: `${tower.x}%`, width: `${tower.w}%`, height: `${tower.h}%`, animationDelay: `${tower.delay}s` }"
+                />
+              </span>
+            </span>
+            <span
+              v-if="item.id === selectedSequence"
+              class="font-mono absolute right-1.5 top-1.5 rounded-sm bg-primary px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-on-primary"
+              aria-hidden="true"
+            >
+              {{ isEnglish ? 'CHOSEN' : 'CHOISIE' }}
+            </span>
+            <span class="text-sm font-bold uppercase tracking-wider text-primary">{{ item.name[lang] }}</span>
+            <span class="text-xs text-gray-400">{{ item.duration }} s</span>
+          </button>
+        </div>
+
+        <div class="mt-6 flex flex-col items-center gap-3">
+          <button
+            type="button"
+            class="font-mono group relative overflow-hidden rounded-none border-2 border-red-500 bg-black px-6 py-3 text-red-500 transition-all duration-300 hover:bg-red-500/10 hover:text-red-400"
+            aria-describedby="self-destruct-note"
+            @click="showAlarm = true"
+          >
+            <div class="absolute inset-0 bg-red-500/20 opacity-0 transition-opacity group-hover:opacity-100"/>
+            <div class="relative flex items-center space-x-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="size-5 animate-pulse"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="WARNING_ICON"/>
+              </svg>
+              <span class="uppercase tracking-wider">
+                {{ isEnglish ? 'SELF DESTRUCT' : 'AUTO-DESTRUCTION' }} · <b>{{ sequence.name[lang] }}</b>
+              </span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- These sequences run on their own, from their confirmation to their rebuild -->
+    <CyberpunkCollapse v-if="showAlarm && sequence.id === 'collapse'" @close="showAlarm = false"/>
+    <CyberpunkCorruption v-if="showAlarm && sequence.id === 'corruption'" @close="showAlarm = false"/>
+    <CyberpunkFracture v-if="showAlarm && sequence.id === 'fracture'" @close="showAlarm = false"/>
+    <CyberpunkSingularity v-if="showAlarm && sequence.id === 'singularity'" @close="showAlarm = false"/>
+    <CyberpunkOverheat v-if="showAlarm && sequence.id === 'overheat'" @close="showAlarm = false"/>
+    <CyberpunkMegapolis v-if="showAlarm && sequence.id === 'megapolis'" @close="showAlarm = false"/>
+
+    <!-- Alarm Overlay (grid sequence) -->
     <div
-      v-if="showAlarm"
+      v-if="showAlarm && sequence.id === 'grid'"
       class="alarm-overlay fixed inset-0 z-50 flex items-center justify-center"
     >
       <div class="absolute inset-0 bg-black/80"/>
@@ -280,15 +391,140 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import {
-  computed, nextTick, onMounted, ref,
+  computed, defineAsyncComponent, nextTick, onMounted, ref,
 } from 'vue';
 import { usePreferencesStore } from '@/stores/preferences';
 import { prefersReducedMotion } from '@/utils/motion';
+import { SELF_DESTRUCT_SEQUENCES } from '@/utils/selfDestructSequences';
 
 import CyberpunkTerminalWindow from './CyberpunkTerminalWindow.vue';
 
 const preferencesStore = usePreferencesStore();
 const isEnglish = computed(() => preferencesStore.isEnglish);
+const lang = computed(() => preferencesStore.lang);
+
+const WARNING_ICON = 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z';
+// Up to 6 cards on one row; beyond, two balanced rows rather than one card left alone
+const CARDS_PER_ROW = SELF_DESTRUCT_SEQUENCES.length <= 6 ? SELF_DESTRUCT_SEQUENCES.length : Math.ceil(SELF_DESTRUCT_SEQUENCES.length / 2);
+// Start of each square of the grid preview, so they fill in a scattered order
+const GRID_PREVIEW_DELAYS = [0, 1.1, 0.4, 1.6, 0.2, 0.9, 1.3, 0.6, 1.9, 0.3, 1.5, 0.8, 0.5, 1.7, 0.1, 1.2, 0.7, 1.4];
+// Bars of the collapse preview: position, width, how far they fall and how much they tilt
+const FALL_PREVIEW_BARS = [
+  {
+    x: 8, w: 34, y: 38, r: 4, delay: 0,
+  },
+  {
+    x: 50, w: 22, y: 38, r: -8, delay: 0.35,
+  },
+  {
+    x: 24, w: 40, y: 31, r: -3, delay: 0.7,
+  },
+  {
+    x: 78, w: 26, y: 38, r: 10, delay: 1,
+  },
+];
+
+// Rays of the fracture preview, from the impact point in the middle
+const CRACK_PREVIEW_PATHS = [
+  'M60 29 L40 18 L22 14 L4 6',
+  'M60 29 L78 14 L92 9 L116 2',
+  'M60 29 L84 34 L102 44 L118 50',
+  'M60 29 L44 40 L30 50 L12 56',
+  'M60 29 L58 12 L62 1',
+  'M60 29 L64 46 L60 57',
+];
+
+// Pieces of the singularity preview: starting angle, starting distance from the hole, and a
+// negative delay so the still frame shows them at different points of their spiral
+const HOLE_PREVIEW_DOTS = [
+  { a: 0, r: 60, delay: 0 },
+  { a: 35, r: 40, delay: -1.7 },
+  { a: 70, r: 50, delay: -0.3 },
+  { a: 110, r: 58, delay: -0.9 },
+  { a: 145, r: 34, delay: -2.1 },
+  { a: 180, r: 46, delay: -1.5 },
+  { a: 215, r: 62, delay: -0.6 },
+  { a: 250, r: 38, delay: -1.1 },
+  { a: 290, r: 52, delay: -1.9 },
+  { a: 325, r: 56, delay: -1.2 },
+];
+
+// Columns of the overheat preview: a negative delay so the still frame shows a ragged melt, and
+// how far each has slid for the still frame without motion
+const MELT_PREVIEW_COLUMNS = [
+  { delay: -0.95, y: 18 },
+  { delay: -1.05, y: 26 },
+  { delay: -0.9, y: 14 },
+  { delay: -1.15, y: 34 },
+  { delay: -1.3, y: 48 },
+  { delay: -1.1, y: 30 },
+  { delay: -0.85, y: 10 },
+  { delay: -1, y: 22 },
+];
+
+// Towers of the megapolis preview: position, width, height (all in % of the box) and a negative
+// delay, so the still frame shows the skyline already built
+const CITY_PREVIEW_TOWERS = [
+  {
+    x: 4, w: 9, h: 40, delay: -1.3,
+  },
+  {
+    x: 15, w: 7, h: 70, delay: -1.2,
+  },
+  {
+    x: 24, w: 11, h: 52, delay: -1.4,
+  },
+  {
+    x: 38, w: 8, h: 88, delay: -1.1,
+  },
+  {
+    x: 48, w: 12, h: 62, delay: -1.25,
+  },
+  {
+    x: 63, w: 7, h: 78, delay: -1.35,
+  },
+  {
+    x: 73, w: 10, h: 46, delay: -1.15,
+  },
+  {
+    x: 86, w: 9, h: 66, delay: -1.3,
+  },
+];
+
+// Sequences other than the grid are loaded only when launched
+const CyberpunkCollapse = defineAsyncComponent(() => import('./CyberpunkCollapse.vue'));
+const CyberpunkCorruption = defineAsyncComponent(() => import('./CyberpunkCorruption.vue'));
+const CyberpunkFracture = defineAsyncComponent(() => import('./CyberpunkFracture.vue'));
+const CyberpunkSingularity = defineAsyncComponent(() => import('./CyberpunkSingularity.vue'));
+const CyberpunkOverheat = defineAsyncComponent(() => import('./CyberpunkOverheat.vue'));
+const CyberpunkMegapolis = defineAsyncComponent(() => import('./CyberpunkMegapolis.vue'));
+
+// Sequence picker. In the store so the terminal's `sudo rm -rf /` uses the same choice.
+const { selfDestructSequence: selectedSequence } = storeToRefs(preferencesStore);
+const sequence = computed(() => SELF_DESTRUCT_SEQUENCES.find((item) => item.id === selectedSequence.value) ?? SELF_DESTRUCT_SEQUENCES[0]);
+const availability = computed(() => {
+  const count = SELF_DESTRUCT_SEQUENCES.length;
+  if (isEnglish.value) return `${count} sequence${count > 1 ? 's' : ''} available`;
+  return `${count} séquence${count > 1 ? 's' : ''} disponible${count > 1 ? 's' : ''}`;
+});
+
+// Radio group: the arrows move both the choice and the focus
+function onSequenceKeydown(event: KeyboardEvent, index: number) {
+  const count = SELF_DESTRUCT_SEQUENCES.length;
+  const moves: Record<string, number> = {
+    ArrowRight: (index + 1) % count,
+    ArrowDown: (index + 1) % count,
+    ArrowLeft: (index - 1 + count) % count,
+    ArrowUp: (index - 1 + count) % count,
+    Home: 0,
+    End: count - 1,
+  };
+  const target = moves[event.key];
+  if (target === undefined) return;
+  event.preventDefault();
+  selectedSequence.value = SELF_DESTRUCT_SEQUENCES[target]?.id ?? selectedSequence.value;
+  document.getElementById(`self-destruct-sequence-${selectedSequence.value}`)?.focus();
+}
 
 // Animation state
 const isDestructing = ref(false);
@@ -647,6 +883,384 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* Hazard stripes along the top of the panel */
+.self-destruct-panel::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  height: 5px;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgb(var(--color-primary)) 0 8px,
+    rgb(var(--color-background)) 8px 16px
+  );
+}
+
+.sequence-preview {
+  position: relative;
+  display: block;
+  height: 3.5rem;
+  overflow: hidden;
+  border: 1px solid rgb(var(--color-primary) / 0.15);
+  border-radius: 2px;
+}
+
+/* Grid preview: the squares fill in like the real sequence. Still by default, playing on hover,
+   focus or on the chosen card, so the bottom of the page stays calm. */
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2px;
+  height: 100%;
+  padding: 5px;
+}
+
+.preview-grid i {
+  border: 1px solid rgb(var(--color-primary) / 0.2);
+  animation: preview-cell 2.6s steps(1) infinite paused;
+}
+
+.sequence-card:is(:hover, :focus-visible, [aria-checked="true"]) .preview-grid i {
+  animation-play-state: running;
+}
+
+@keyframes preview-cell {
+  0% {
+    background: transparent;
+  }
+  30% {
+    background: repeating-linear-gradient(45deg, rgb(var(--color-primary)) 0 2px, #000 2px 4px);
+  }
+  42%, 100% {
+    background: #000;
+    border-color: rgb(var(--color-primary) / 0.7);
+  }
+}
+
+/* Collapse preview: bars drop to the bottom of the box and tilt as they land */
+.preview-fall i {
+  position: absolute;
+  top: 6px;
+  height: 7px;
+  background: rgb(var(--color-primary));
+  animation: preview-fall 2.8s cubic-bezier(0.5, 0, 1, 0.5) infinite paused;
+}
+
+.sequence-card:is(:hover, :focus-visible, [aria-checked="true"]) .preview-fall i {
+  animation-play-state: running;
+}
+
+@keyframes preview-fall {
+  0%, 12% {
+    transform: none;
+    opacity: 1;
+  }
+  50%, 86% {
+    transform: translateY(var(--fall-y)) rotate(var(--fall-r));
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(var(--fall-y)) rotate(var(--fall-r));
+    opacity: 0;
+  }
+}
+
+/* Corruption preview: the name flickers into glyphs with a colour split */
+.preview-glitch {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgb(var(--color-primary));
+}
+
+.preview-glitch span {
+  grid-area: 1 / 1;
+}
+
+.glitch-clean {
+  animation: preview-glitch-clean 1.6s steps(1) infinite paused;
+}
+
+.glitch-bad {
+  opacity: 0;
+  color: rgb(var(--color-text));
+  text-shadow: -2px 0 rgb(255 0 128), 2px 0 rgb(0 255 255);
+  animation: preview-glitch-bad 1.6s steps(1) infinite paused;
+}
+
+.sequence-card:is(:hover, :focus-visible, [aria-checked="true"]) :is(.glitch-clean, .glitch-bad) {
+  animation-play-state: running;
+}
+
+@keyframes preview-glitch-clean {
+  0%, 40% {
+    opacity: 1;
+    transform: none;
+  }
+  45% {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+  50%, 70% {
+    opacity: 0;
+  }
+  75%, 100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes preview-glitch-bad {
+  0%, 48% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-3px) skewX(-12deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+  72%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Fracture preview: cracks run out from the middle, then the pane drops. The negative delay makes
+   the still frame show the cracks already drawn. */
+.preview-crack svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.preview-crack path {
+  fill: none;
+  stroke: rgb(var(--color-text));
+  stroke-width: 1.2;
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  animation: preview-crack 2.8s ease-out -1.5s infinite paused;
+}
+
+.crack-pane {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgb(var(--color-primary) / 0.15), transparent 60%);
+  animation: preview-pane 2.8s ease-in -1.5s infinite paused;
+}
+
+.sequence-card:is(:hover, :focus-visible, [aria-checked="true"]) :is(.preview-crack path, .crack-pane) {
+  animation-play-state: running;
+}
+
+@keyframes preview-crack {
+  0% {
+    stroke-dashoffset: 80;
+    opacity: 1;
+  }
+  45%, 70% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes preview-pane {
+  0%, 68% {
+    transform: none;
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(40px) rotate(6deg);
+    opacity: 0;
+  }
+}
+
+/* Singularity preview: pieces spiral into a black hole with its ring of light */
+.preview-hole b {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px;
+  border-radius: 50%;
+  background: #000;
+  box-shadow: 0 0 0 1.5px rgb(255 240 200 / 0.9), 0 0 10px 3px rgb(var(--color-primary) / 0.5);
+}
+
+.hole-disk {
+  position: absolute;
+  inset: 0;
+  transform: scaleY(0.38);
+}
+
+/* The rim of the disk */
+.hole-disk::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 104px;
+  height: 104px;
+  margin: -52px;
+  border: 1px solid rgb(var(--color-primary) / 0.25);
+  border-radius: 50%;
+}
+
+/* The same functions on both ends, so the turn of more than 360° is kept. The pieces turn back and
+   stretch back up, so the flattening of the disk moves them without squashing them. */
+.hole-disk i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  margin: -2px;
+  background: rgb(var(--color-primary));
+  animation: preview-spiral 2.4s cubic-bezier(0.5, 0, 0.9, 0.6) infinite paused;
+}
+
+.hole-disk i:nth-child(even) {
+  background: rgb(var(--color-secondary));
+}
+
+.sequence-card:is(:hover, :focus-visible, [aria-checked="true"]) .hole-disk i {
+  animation-play-state: running;
+}
+
+@keyframes preview-spiral {
+  from {
+    transform: rotate(var(--hole-a)) translateX(var(--hole-r)) rotate(calc(-1 * var(--hole-a))) scale(1, 2.6);
+    opacity: 1;
+  }
+  to {
+    transform: rotate(calc(var(--hole-a) + 540deg)) translateX(0) rotate(calc(-1 * var(--hole-a) - 540deg)) scale(0.2, 0.52);
+    opacity: 0;
+  }
+}
+
+/* Overheat preview: strips of a screen slide down at their own pace over molten metal */
+.preview-melt {
+  display: block;
+  height: 100%;
+  background: radial-gradient(ellipse 80% 70% at 50% 120%, #ff7a1a, #c2300c 35%, #2a0502 75%);
+}
+
+/* The lines line up from one strip to the next, like the text of one screen */
+.preview-melt i {
+  position: absolute;
+  top: 0;
+  width: 12.5%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 7px, rgb(var(--color-primary) / 0.55) 7px 9px),
+    rgb(var(--color-background));
+  transform-origin: 50% 0;
+  animation: preview-melt 2.8s cubic-bezier(0.5, 0, 0.9, 0.5) infinite paused;
+}
+
+.sequence-card:is(:hover, :focus-visible, [aria-checked="true"]) .preview-melt i {
+  animation-play-state: running;
+}
+
+@keyframes preview-melt {
+  0%, 25% {
+    transform: none;
+  }
+  75%, 100% {
+    transform: translateY(110%) scaleY(1.2);
+  }
+}
+
+/* Megapolis preview: a neon skyline grows out of a glowing street, then powers down */
+.preview-city {
+  display: block;
+  height: 100%;
+  background: linear-gradient(rgb(45 10 55), #000 85%);
+  border-bottom: 1px solid rgb(var(--color-secondary) / 0.7);
+}
+
+/* Lit floors: the windows of the towers */
+.preview-city i {
+  position: absolute;
+  bottom: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 3px, rgb(var(--color-primary) / 0.7) 3px 4px),
+    #0b0b12;
+  border-top: 1px solid rgb(var(--color-primary));
+  transform-origin: 50% 100%;
+  animation: preview-rise 3s cubic-bezier(0.2, 0.9, 0.3, 1.15) infinite paused;
+}
+
+.preview-city i:nth-child(even) {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 3px, rgb(var(--color-secondary) / 0.7) 3px 4px),
+    #0b0b12;
+  border-top-color: rgb(var(--color-secondary));
+}
+
+.sequence-card:is(:hover, :focus-visible, [aria-checked="true"]) .preview-city i {
+  animation-play-state: running;
+}
+
+@keyframes preview-rise {
+  0% {
+    transform: scaleY(0);
+    opacity: 1;
+  }
+  35%, 80% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview-grid i,
+  .preview-fall i,
+  .glitch-clean,
+  .glitch-bad,
+  .preview-crack path,
+  .crack-pane,
+  .hole-disk i,
+  .preview-melt i,
+  .preview-city i {
+    animation: none;
+  }
+
+  /* Still frame of the overheat preview: a ragged melt */
+  .preview-melt i {
+    transform: translateY(var(--melt-y));
+  }
+
+  /* Still frame of the fracture preview: the cracks drawn */
+  .preview-crack path {
+    stroke-dashoffset: 0;
+  }
+
+  /* Still frame of the singularity preview: the pieces around the hole */
+  .hole-disk i {
+    transform: rotate(var(--hole-a)) translateX(var(--hole-r)) rotate(calc(-1 * var(--hole-a))) scale(1, 2.6);
+  }
+}
+
 @keyframes alarm-flash {
   0%, 100% {
     background-color: rgba(239, 68, 68, 0.1);

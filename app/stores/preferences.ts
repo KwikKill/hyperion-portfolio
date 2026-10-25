@@ -2,6 +2,7 @@ import { navigateTo, useRoute } from 'nuxt/app';
 import { defineStore } from 'pinia';
 
 import type { Language } from '../utils/language';
+import type { SelfDestructSequenceId } from '../utils/selfDestructSequences';
 import { sweepTheme } from '../utils/themeSweep';
 
 type Theme = 'default' | 'ghost' | 'matrix' | 'solarpunk';
@@ -19,6 +20,8 @@ export const usePreferencesStore = defineStore('preferences', {
     isAnyFullScreen: false,
     // Shared so the terminal's `sudo rm -rf /` can open the self-destruct confirmation.
     showSelfDestructAlarm: false,
+    // Sequence picked in the self-destruct panel, shared for the same reason.
+    selfDestructSequence: 'grid' as SelfDestructSequenceId,
   }),
 
   actions: {
