@@ -100,7 +100,7 @@ import ClassicHighlights from './ClassicHighlights.vue';
 
 const preferencesStore = usePreferencesStore();
 const {
-  job, freelance, formation, degree, toolsOf, dailyTools,
+  job, freelance, formation, degree, currentStack,
 } = useProfile();
 const isEnglish = computed(() => preferencesStore.isEnglish);
 
@@ -123,6 +123,6 @@ const facts = computed(() => {
   ];
 });
 
-// The job's daily tools, then the freelance ones: six at most
-const tools = computed(() => [...new Set([...dailyTools.value, ...toolsOf(freelance.value)])].slice(0, 6));
+// The current stack, six at most
+const tools = computed(() => currentStack.value.slice(0, 6));
 </script>

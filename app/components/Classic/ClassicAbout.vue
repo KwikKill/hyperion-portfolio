@@ -47,24 +47,79 @@
             {{ isEnglish ? 'Skills & Technologies' : 'Compétences & Technologies' }}
           </h3>
 
-          <div class="space-y-6">
-            <div v-for="(category, index) in skills" :key="index">
-              <h4
-                class="mb-3 border-b border-gray-200 pb-1 text-lg font-medium text-blue-600 dark:border-gray-600 dark:text-blue-300"
-              >
+          <!-- Current stack: the tools of the job and of the freelance activity, and where they are used -->
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-600 dark:text-gray-300">
+            {{ isEnglish ? 'Current stack' : 'Stack actuelle' }}
+          </h4>
+          <ul class="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
+            <li v-for="tool in stack" :key="tool.name" class="rounded-md bg-white p-3 shadow-sm dark:bg-gray-800">
+              <span class="block font-semibold text-gray-900 dark:text-white">{{ tool.name }}</span>
+              <span class="mt-0.5 block text-sm text-gray-600 dark:text-gray-400">{{ tool.where }}</span>
+            </li>
+          </ul>
+
+          <!-- Skills used at least twice, by category, the most used first -->
+          <h4 class="mt-8 text-sm font-semibold uppercase tracking-wider text-gray-600 dark:text-gray-300">
+            {{ isEnglish ? 'Used in projects' : 'Utilisées en projet' }}
+          </h4>
+          <dl class="mt-3 space-y-3">
+            <div v-for="category in usedCategories" :key="category.name" class="sm:grid sm:grid-cols-[13rem_minmax(0,1fr)] sm:gap-4">
+              <dt class="mb-1 text-sm font-medium text-blue-600 sm:mb-0 sm:pt-1 dark:text-blue-300">
                 {{ category.name }}
-              </h4>
-              <div class="mb-4 flex flex-wrap gap-2">
+              </dt>
+              <dd class="flex flex-wrap items-start gap-2">
                 <span
-                  v-for="(skill, skillIndex) in category.skills"
-                  :key="skillIndex"
+                  v-for="skill in category.used"
+                  :key="skill"
                   class="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800 dark:bg-blue-900 dark:text-blue-200"
                 >
                   {{ skill }}
                 </span>
-              </div>
+              </dd>
             </div>
-          </div>
+          </dl>
+
+          <!-- The rest, folded, in the same layout as above -->
+          <details class="group mt-8" @toggle="onOthersToggle">
+            <!-- A centred button; blue-300 on this card's grey, where blue-400 lacks contrast -->
+            <summary
+              class="mx-auto flex w-fit cursor-pointer list-none items-center gap-2 rounded-md border border-blue-600 px-5 py-2.5 text-sm font-semibold text-blue-600 transition-colors hover:bg-blue-50 dark:border-blue-300 dark:text-blue-300 dark:hover:bg-blue-900/30 [&::-webkit-details-marker]:hidden"
+            >
+              <template v-if="othersOpen">
+                {{ isEnglish ? 'Hide the other skills' : 'Masquer les autres compétences' }}
+              </template>
+              <template v-else>
+                {{ isEnglish ? `Show the ${otherCount} other skills` : `Voir les ${otherCount} autres compétences` }}
+              </template>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="size-4 transition-transform group-open:rotate-180"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </summary>
+            <dl class="mt-4 space-y-3">
+              <div v-for="category in otherCategories" :key="category.name" class="sm:grid sm:grid-cols-[13rem_minmax(0,1fr)] sm:gap-4">
+                <dt class="mb-1 text-sm font-medium text-blue-600 sm:mb-0 sm:pt-1 dark:text-blue-300">
+                  {{ category.name }}
+                </dt>
+                <dd class="flex flex-wrap items-start gap-2">
+                  <span
+                    v-for="skill in category.others"
+                    :key="skill"
+                    class="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+                  >
+                    {{ skill }}
+                  </span>
+                </dd>
+              </div>
+            </dl>
+          </details>
         </div>
       </div>
 
@@ -150,16 +205,60 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
+import { useProfile } from '../../composables/useProfile';
 import { usePreferencesStore } from '../../stores/preferences';
 import { useProjectsStore } from '../../stores/projects';
 
 const preferencesStore = usePreferencesStore();
 const projectsStore = useProjectsStore();
+const {
+  projects, job, freelance, currentStack, usesOf,
+} = useProfile();
 
 const isEnglish = computed(() => preferencesStore.isEnglish);
 const skills = computed(() => projectsStore.getLocalizedSkills);
+
+// Used at least this often (projects, jobs, education): listed one by one, else folded
+const LISTED_FROM = 2;
+
+// Each tool of the current stack, with where it is used
+const stack = computed(() => currentStack.value.map((name) => {
+  const en = isEnglish.value;
+  const count = projects.value.filter((project) => project.technologies.includes(name)).length;
+  const where = [
+    job.value?.technologies.includes(name) ? (en ? 'Permanent job' : 'CDI') : '',
+    freelance.value?.technologies.includes(name) ? 'Freelance' : '',
+    count ? `${count} ${en ? 'project' : 'projet'}${count > 1 ? 's' : ''}` : '',
+  ].filter(Boolean).join(' · ');
+  return { name, where };
+}));
+
+// The other skills of each category: used often enough to be listed, or only mentioned
+const categories = computed(() => {
+  const inStack = new Set(currentStack.value);
+  return skills.value.map((category) => {
+    const rest = category.skills.filter((skill) => !inStack.has(skill));
+    const uses = new Map(rest.map((skill) => [skill, usesOf(skill)]));
+    const usesOfSkill = (skill: string) => uses.get(skill) ?? 0;
+    return {
+      name: category.name,
+      used: rest.filter((skill) => usesOfSkill(skill) >= LISTED_FROM)
+        .sort((a, b) => usesOfSkill(b) - usesOfSkill(a) || a.localeCompare(b)),
+      others: rest.filter((skill) => usesOfSkill(skill) < LISTED_FROM).sort((a, b) => a.localeCompare(b)),
+    };
+  });
+});
+const usedCategories = computed(() => categories.value.filter((category) => category.used.length));
+const otherCategories = computed(() => categories.value.filter((category) => category.others.length));
+const otherCount = computed(() => otherCategories.value.reduce((count, category) => count + category.others.length, 0));
+
+// The folded list's button says whether it shows or hides them
+const othersOpen = ref(false);
+function onOthersToggle(event: Event) {
+  othersOpen.value = (event.target as HTMLDetailsElement).open;
+}
 
 const associationRoles = computed(() => {
   if (isEnglish.value) {

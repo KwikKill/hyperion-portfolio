@@ -1152,9 +1152,6 @@ export const useProjectsStore = defineStore('projects', {
             'MariaDB',
             'ApacheCassandra',
             'InfluxDB',
-            'YAML',
-            'JSON',
-            'XML',
           ],
         },
         {
@@ -1207,7 +1204,7 @@ export const useProjectsStore = defineStore('projects', {
         {
           name: 'Other',
           short: 'Other',
-          skills: ['Markdown', 'LaTeX', 'Typst'],
+          skills: ['Markdown', 'LaTeX', 'Typst', 'YAML', 'JSON', 'XML'],
         },
       ],
       fr: [
@@ -1268,9 +1265,6 @@ export const useProjectsStore = defineStore('projects', {
             'MariaDB',
             'ApacheCassandra',
             'InfluxDB',
-            'YAML',
-            'JSON',
-            'XML',
           ],
         },
         {
@@ -1323,7 +1317,7 @@ export const useProjectsStore = defineStore('projects', {
         {
           name: 'Autres',
           short: 'Autres',
-          skills: ['Markdown', 'LaTeX', 'Typst'],
+          skills: ['Markdown', 'LaTeX', 'Typst', 'YAML', 'JSON', 'XML'],
         },
       ],
     } as Skills,

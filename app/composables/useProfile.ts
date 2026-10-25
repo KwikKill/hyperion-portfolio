@@ -33,8 +33,30 @@ export function useProfile() {
   }
 
   const dailyTools = computed(() => toolsOf(job.value).slice(0, 4));
+  // The job's daily tools, then the freelance ones
+  const currentStack = computed(() => [...new Set([...dailyTools.value, ...toolsOf(freelance.value)])]);
+
+  // Times a skill is used: projects, jobs (permanent, internships, freelance) and the INSA
+  // education, which counts once. The same count as the cyberpunk htop.
+  function usesOf(skill: string) {
+    return projects.value.filter((project) => project.technologies.includes(skill)).length
+      + experiences.value.filter((experience) => experience.technologies.includes(skill)).length
+      + (formation.value.technologies.includes(skill) ? 1 : 0);
+  }
 
   return {
-    projects, experiences, skills, job, freelance, internshipCount, sinceYear, formation, degree, toolsOf, dailyTools,
+    projects,
+    experiences,
+    skills,
+    job,
+    freelance,
+    internshipCount,
+    sinceYear,
+    formation,
+    degree,
+    toolsOf,
+    dailyTools,
+    currentStack,
+    usesOf,
   };
 }
