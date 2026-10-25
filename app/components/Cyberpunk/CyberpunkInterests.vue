@@ -19,11 +19,21 @@
         <template #body>
           <div class="p-6">
             <!-- Categories tabs -->
-            <div class="mb-8 flex border-b border-hover/30">
+            <div
+              class="mb-8 flex border-b border-hover/30"
+              role="tablist"
+              :aria-label="isEnglish ? 'My interests' : 'Mes centres d\'intérêts'"
+              @keydown="onTabKeydown"
+            >
               <button
+                id="interests-tab-movies"
                 class="font-mono relative px-4 py-2 text-sm uppercase transition-colors duration-200"
                 :class="activeCategory === 'movies' ? 'text-primary' : 'text-gray-500 hover:text-primary'"
                 type="button"
+                role="tab"
+                :aria-selected="activeCategory === 'movies'"
+                aria-controls="interests-panel-movies"
+                :tabindex="activeCategory === 'movies' ? 0 : -1"
                 @click="activeCategory = 'movies'"
               >
                 <span>{{ isEnglish ? 'Movies' : 'Films' }}</span>
@@ -33,9 +43,14 @@
                 />
               </button>
               <button
+                id="interests-tab-games"
                 class="font-mono relative px-4 py-2 text-sm uppercase transition-colors duration-200"
                 :class="activeCategory === 'games' ? 'text-primary' : 'text-gray-500 hover:text-primary'"
                 type="button"
+                role="tab"
+                :aria-selected="activeCategory === 'games'"
+                aria-controls="interests-panel-games"
+                :tabindex="activeCategory === 'games' ? 0 : -1"
                 @click="activeCategory = 'games'"
               >
                 <span>{{ isEnglish ? 'Video Games' : 'Jeux Vidéo' }}</span>
@@ -47,7 +62,13 @@
             </div>
 
             <!-- Movies content -->
-            <div v-if="activeCategory === 'movies'" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div
+              v-if="activeCategory === 'movies'"
+              id="interests-panel-movies"
+              class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+              role="tabpanel"
+              aria-labelledby="interests-tab-movies"
+            >
               <div
                 v-for="(movie, index) in movies"
                 :key="index"
@@ -88,7 +109,13 @@
             </div>
 
             <!-- Games content -->
-            <div v-if="activeCategory === 'games'" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div
+              v-if="activeCategory === 'games'"
+              id="interests-panel-games"
+              class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+              role="tabpanel"
+              aria-labelledby="interests-tab-games"
+            >
               <div
                 v-for="(game, index) in games"
                 :key="index"
@@ -168,7 +195,24 @@ const projectsStore = useProjectsStore();
 const movies = computed(() => projectsStore.getLocalizedMovies);
 const games = computed(() => projectsStore.getLocalizedGames);
 
-const activeCategory = ref('movies');
+const TABS = ['movies', 'games'] as const;
+const activeCategory = ref<typeof TABS[number]>('movies');
+
+// Arrow keys, Home and End move between the tabs, as in any tab list
+function onTabKeydown(event: KeyboardEvent) {
+  const index = TABS.indexOf(activeCategory.value);
+  const moves: Record<string, number> = {
+    ArrowRight: (index + 1) % TABS.length,
+    ArrowLeft: (index - 1 + TABS.length) % TABS.length,
+    Home: 0,
+    End: TABS.length - 1,
+  };
+  const target = moves[event.key];
+  if (target === undefined) return;
+  event.preventDefault();
+  activeCategory.value = TABS[target] ?? 'movies';
+  document.getElementById(`interests-tab-${activeCategory.value}`)?.focus();
+}
 
 // Flipped card ("movies-2"), by tap, click or keyboard: hover does not exist on touch screens.
 const activeCard = ref<string | null>(null);

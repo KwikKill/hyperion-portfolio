@@ -50,7 +50,7 @@
           <div class="space-y-6">
             <div v-for="(category, index) in skills" :key="index">
               <h4
-                class="mb-3 border-b border-gray-200 pb-1 text-lg font-medium text-blue-600 dark:border-gray-700 dark:text-blue-400"
+                class="mb-3 border-b border-gray-200 pb-1 text-lg font-medium text-blue-600 dark:border-gray-600 dark:text-blue-300"
               >
                 {{ category.name }}
               </h4>
@@ -139,7 +139,7 @@
         <div class="text-center">
           <a
             href="https://freelance.somi.blaisot.org"
-            class="inline-block rounded bg-blue-600 px-6 py-3 text-white hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600"
+            class="inline-block rounded bg-blue-600 px-6 py-3 text-white hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
           >
             {{ isEnglish ? 'View My Freelance Work' : 'Voir Mon Travail en Freelance' }}
           </a>

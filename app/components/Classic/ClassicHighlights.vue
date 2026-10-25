@@ -1,5 +1,5 @@
 <template>
-  <aside class="rounded-lg border border-gray-700 bg-gray-800 p-6 shadow-lg">
+  <div class="rounded-lg border border-gray-700 bg-gray-800 p-6 shadow-lg">
     <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-400">
       {{ isEnglish ? 'In numbers' : 'En chiffres' }}
     </h3>
@@ -47,7 +47,7 @@
     <a href="#projects" class="mt-5 inline-block text-sm font-medium text-blue-400 transition-colors hover:text-blue-300">
       {{ isEnglish ? 'See all projects →' : 'Voir tous les projets →' }}
     </a>
-  </aside>
+  </div>
 </template>
 
 <script setup lang="ts">

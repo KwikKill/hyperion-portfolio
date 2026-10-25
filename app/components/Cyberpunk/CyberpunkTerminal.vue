@@ -18,7 +18,7 @@
               {{ line.displayText ?? line.text }}
             </span>
           </template>
-          <!-- Plain `ls`: file names in columns as wide as the longest one -->
+          <!-- Plain `ls`: file names in columns as wide as the longest one, on 24 px lines (touch targets) -->
           <div
             v-else-if="line.files"
             class="grid gap-x-[2ch]"
@@ -28,7 +28,7 @@
               v-for="(file, fileIndex) in line.files"
               :key="file"
               type="button"
-              class="truncate text-left text-terminal transition-colors hover:text-terminal-hover"
+              class="truncate text-left leading-6 text-terminal transition-colors hover:text-terminal-hover"
               :title="file"
               @click="openProject(file)"
             >

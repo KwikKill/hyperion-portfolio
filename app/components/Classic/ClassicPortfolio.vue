@@ -1,11 +1,13 @@
 <template>
   <div>
     <ClassicHeader/>
-    <ClassicHero/>
-    <ClassicAbout/>
-    <ClassicExperience/>
-    <ClassicProjects/>
-    <ClassicInterests/>
+    <main>
+      <ClassicHero/>
+      <ClassicAbout/>
+      <ClassicExperience/>
+      <ClassicProjects/>
+      <ClassicInterests/>
+    </main>
     <ClassicFooter/>
   </div>
 </template>

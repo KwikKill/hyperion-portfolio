@@ -1,12 +1,14 @@
 <template>
   <div>
     <CyberpunkHeader/>
-    <CyberpunkHero/>
-    <CyberpunkAbout/>
-    <CyberpunkExperience/>
-    <CyberpunkProjects/>
-    <CyberpunkInterests/>
-    <CyberpunkSelfDestruct/>
+    <main>
+      <CyberpunkHero/>
+      <CyberpunkAbout/>
+      <CyberpunkExperience/>
+      <CyberpunkProjects/>
+      <CyberpunkInterests/>
+      <CyberpunkSelfDestruct/>
+    </main>
     <CyberpunkFooter/>
   </div>
 </template>

@@ -37,42 +37,53 @@
             </div>
           </div>
           <slot v-if="!noButtons" name="buttons">
-            <div class="flex space-x-2">
+            <!-- 12 px dots in 24 px buttons: the minimum touch target -->
+            <div class="flex">
               <!-- Fullscreen button -->
               <div
                 v-if="noBody"
-                class="flex size-3 cursor-not-allowed items-center justify-center rounded-full bg-gray-500 transition-all"
+                class="flex size-6 cursor-not-allowed items-center justify-center"
                 title="Disabled"
-              />
+              >
+                <span class="size-3 rounded-full bg-gray-500"/>
+              </div>
               <button
                 v-else
                 type="button"
-                class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-green-500 transition-all hover:ring-1 hover:ring-white/50"
+                class="group flex size-6 cursor-pointer items-center justify-center"
                 :title="isEnglish ? 'Fullscreen' : 'Plein écran'"
                 @click="toggleFullscreen"
-              />
+              >
+                <span class="size-3 rounded-full bg-green-500 transition-all group-hover:ring-1 group-hover:ring-white/50"/>
+              </button>
 
               <!-- Minimize button -->
               <div
                 v-if="noBody"
-                class="flex size-3 cursor-not-allowed items-center justify-center rounded-full bg-gray-500 transition-all"
+                class="flex size-6 cursor-not-allowed items-center justify-center"
                 title="Disabled"
-              />
+              >
+                <span class="size-3 rounded-full bg-gray-500"/>
+              </div>
               <button
                 v-else
                 type="button"
-                class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-yellow-500 transition-all hover:ring-1 hover:ring-white/50"
+                class="group flex size-6 cursor-pointer items-center justify-center"
                 :title="isEnglish ? 'Minimize' : 'Réduire'"
                 @click="toggleMinimize"
-              />
+              >
+                <span class="size-3 rounded-full bg-yellow-500 transition-all group-hover:ring-1 group-hover:ring-white/50"/>
+              </button>
 
               <!-- Close button -->
               <button
                 type="button"
-                class="flex size-3 cursor-pointer items-center justify-center rounded-full bg-red-500 transition-all hover:ring-1 hover:ring-white/50"
+                class="group flex size-6 cursor-pointer items-center justify-center"
                 :title="isEnglish ? 'Close' : 'Fermer'"
                 @click="closeTerminal"
-              />
+              >
+                <span class="size-3 rounded-full bg-red-500 transition-all group-hover:ring-1 group-hover:ring-white/50"/>
+              </button>
             </div>
           </slot>
         </div>

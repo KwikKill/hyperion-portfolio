@@ -13,7 +13,7 @@
         large ? 'h-11 w-12' : 'px-2.5 py-1',
         currentLanguage === lang ? 'bg-primary text-on-primary' : 'text-gray-400 hover:text-primary',
       ]"
-      :aria-label="lang === 'fr' ? 'Français' : 'English'"
+      :aria-label="lang === 'fr' ? 'FR, français' : 'EN, English'"
       :aria-pressed="currentLanguage === lang"
       @click="setLanguage(lang)"
     >

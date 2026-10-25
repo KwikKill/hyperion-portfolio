@@ -74,7 +74,7 @@
               </a>
               <a
                 href="#experience"
-                class="rounded-md border border-blue-600 px-6 py-3 text-blue-600 transition-colors hover:bg-blue-50 dark:hover:bg-blue-900/30"
+                class="rounded-md border border-blue-600 px-6 py-3 text-blue-600 transition-colors hover:bg-blue-50 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-900/30"
               >
                 {{ isEnglish ? 'View my experience' : 'Voir mes expériences' }}
               </a>

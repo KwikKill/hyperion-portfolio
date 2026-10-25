@@ -41,7 +41,13 @@
         {{ isEnglish ? 'for personal use' : 'en utilisation personnelle' }}
       </p>
 
-      <div class="overflow-x-auto">
+      <!-- Scroll areas are focusable, so they can be scrolled with the keyboard -->
+      <div
+        class="overflow-x-auto"
+        tabindex="0"
+        role="region"
+        :aria-label="isEnglish ? 'Skills table' : 'Tableau des compétences'"
+      >
         <div class="min-w-[500px] text-sm">
           <div class="htop-row bg-terminal font-bold text-on-primary">
             <span>PID</span>
@@ -51,7 +57,12 @@
             <span>{{ isEnglish ? 'SINCE' : 'DEPUIS' }}</span>
             <span>CAT</span>
           </div>
-          <div class="max-h-[300px] overflow-y-auto">
+          <div
+            class="max-h-[300px] overflow-y-auto"
+            tabindex="0"
+            role="region"
+            :aria-label="isEnglish ? 'Skills list' : 'Liste des compétences'"
+          >
             <div
               v-for="(skill, index) in visibleLinked"
               :key="skill.name"
