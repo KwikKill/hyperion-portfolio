@@ -1,18 +1,12 @@
 <template>
   <div class="relative mb-12">
-    <!-- Timeline dot -->
+    <!-- Timeline dot, on the line at the left -->
     <div
-      class="absolute left-0 size-4 -translate-x-1/2 rounded-full bg-blue-500 md:left-1/2 dark:bg-blue-400"
+      class="absolute left-0 size-4 -translate-x-1/2 rounded-full bg-blue-500 dark:bg-blue-400"
     />
 
-    <!-- Content container with alternating layout -->
-    <div
-      class="ml-8 md:ml-0 md:w-5/12"
-      :class="{
-        'md:ml-auto': index % 2 === 0,
-        'md:mr-auto': index % 2 === 1,
-      }"
-    >
+    <!-- Content container, the full width right of the line -->
+    <div class="ml-8">
       <div class="rounded-lg bg-white p-6 shadow-md transition-shadow hover:shadow-lg dark:bg-gray-800">
         <!-- Experience header -->
         <div class="mb-4">
@@ -111,7 +105,6 @@ import { usePreferencesStore } from '../../stores/preferences';
 
 defineProps<{
   experience: LocalizedExperience;
-  index: number;
 }>();
 
 const preferencesStore = usePreferencesStore();

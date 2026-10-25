@@ -8,23 +8,22 @@
       <div class="mx-auto max-w-4xl">
         <!-- Timeline layout for experiences -->
         <div class="relative">
-          <!-- Vertical line -->
-          <div class="absolute left-0 h-full w-0.5 -translate-x-1/2 bg-blue-500 md:left-1/2 dark:bg-blue-400"/>
+          <!-- Vertical line, at the left: the cards take the rest of the width -->
+          <div class="absolute left-0 h-full w-0.5 -translate-x-1/2 bg-blue-500 dark:bg-blue-400"/>
 
           <!-- Experience items -->
           <ClassicExperienceCard
             v-for="(experience, index) in mainExperiences"
             :key="'main-' + index"
             :experience="experience"
-            :index="index"
           />
 
           <!-- Group toggle -->
           <div v-if="internshipExperiences.length" class="relative mb-12">
             <div
-              class="absolute left-0 size-4 -translate-x-1/2 rounded-full bg-blue-500 md:left-1/2 dark:bg-blue-400"
+              class="absolute left-0 top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500 dark:bg-blue-400"
             />
-            <div class="flex justify-center">
+            <div class="ml-8 flex">
               <button
                 type="button"
                 class="flex items-center gap-2 rounded-full bg-white px-6 py-3 font-medium text-blue-600 shadow-md transition-shadow hover:shadow-lg dark:bg-gray-800 dark:text-blue-400"
@@ -47,7 +46,6 @@
               v-for="(experience, index) in internshipExperiences"
               :key="'intern-' + index"
               :experience="experience"
-              :index="mainExperiences.length + index"
             />
           </template>
         </div>
