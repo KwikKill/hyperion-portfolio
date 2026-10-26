@@ -124,6 +124,7 @@
             type="button"
             class="corruption-confirm border-2 border-red-500 bg-black px-5 py-3 font-semibold uppercase tracking-wider text-red-500 transition-colors hover:bg-red-500/15"
             :disabled="phase !== 'confirm'"
+            data-umami-event="corruption-animation"
             @click="confirm"
           >
             {{ isEnglish ? 'Start' : 'Lancer' }}

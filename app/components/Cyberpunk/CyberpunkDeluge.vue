@@ -80,6 +80,7 @@
             type="button"
             class="border-2 border-red-500 bg-black px-5 py-3 font-semibold uppercase tracking-wider text-red-500 transition-colors hover:bg-red-500/15"
             :disabled="phase !== 'confirm'"
+            data-umami-event="deluge-animation"
             @click="confirm"
           >
             {{ isEnglish ? 'Open' : 'Ouvrir' }}
@@ -362,8 +363,6 @@ function run(time: SequenceClock, fx: Sfx, drawing: Flood, site: HTMLElement, de
     if (reduced) debris.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 2000, fill: 'forwards' });
   });
   time.at(20.5, () => {
-    // The drain takes everything, even what the liquid has not lifted yet
-    if (!reduced) bodies.forEach(release);
     fx.muffle(20000, 1.8);
     flow.filter(1600, 1);
     flow.gain(0.3, 0.5);
