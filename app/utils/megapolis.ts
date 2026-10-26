@@ -1,9 +1,11 @@
 // The "megapolis" self-destruct sequence: the page tilts into the ground of a neon city, each element
-// of the screen grows into a building carrying its real pixels on its roof, a generated city spreads
-// to the horizon around it, then it dematerialises and powers down. Plain WebGL. Browser-only.
+// of the whole page grows into a building carrying its real pixels on its roof, a generated city
+// spreads around it, the camera flies over the page from top to bottom, then the city dematerialises
+// and powers down. Plain WebGL. Browser-only.
 //
 // World units: the screen is always 800 units high, so the camera path and the city keep the same
-// proportions on every screen; x runs to the right, y up, z out of the ground.
+// proportions on every screen; x runs to the right, y up (the first screen from 400 to -400, the rest
+// of the page below), z out of the ground.
 
 import { scanScreen } from './collapse';
 import { pageBackdrop } from './selfDestructScreen';
@@ -19,9 +21,8 @@ const FOV = (50 * Math.PI) / 180;
 // Camera distance at which the screen exactly fills the 50° vertical field of view
 export const DIST = 400 / Math.tan(FOV / 2);
 export const DISTRICTS = 5;
-const CARS = 600;
 
-/* ---------- An image of the screen, redrawn from the computed styles ---------- */
+/* ---------- An image of the page, redrawn from the computed styles ---------- */
 
 const SKIP = 'script, style, template, noscript, .sr-only';
 
@@ -47,16 +48,15 @@ function inkOf(cs: CSSStyleDeclaration): string {
   return transparent(cs.color) || transparent(cs.getPropertyValue('-webkit-text-fill-color')) ? 'rgb(var(--color-primary))' : cs.color;
 }
 
-// What is on screen, drawn into a canvas: backgrounds, borders, glows, canvases, images and text.
-// Gradients and inline icons are left out. Used as the ground of the city and the roofs of the
-// site's buildings.
-export function paintScreen(page: HTMLElement): HTMLCanvasElement {
+// The page from its top down to the given height (the screen by default, the whole page for the
+// megapolis), drawn into a canvas: backgrounds, borders, glows, canvases, images and text. Gradients
+// and inline icons are left out. Blocks still waiting to rise into view are drawn as they will be.
+// The page must be scrolled to the top.
+export function paintPage(page: HTMLElement, H: number, scale: number): HTMLCanvasElement {
   const W = window.innerWidth;
-  const H = window.innerHeight;
-  const scale = Math.min(window.devicePixelRatio || 1, 2, 4096 / W);
   const canvas = document.createElement('canvas');
-  canvas.width = Math.round(W * scale);
-  canvas.height = Math.round(H * scale);
+  canvas.width = Math.max(1, Math.round(W * scale));
+  canvas.height = Math.max(1, Math.round(H * scale));
   const p = canvas.getContext('2d');
   if (!p) return canvas;
   p.setTransform(scale, 0, 0, scale, 0, 0);
@@ -180,7 +180,7 @@ export function paintScreen(page: HTMLElement): HTMLCanvasElement {
       above.push([el, alpha]);
       return;
     }
-    const a = alpha * (parseFloat(cs.opacity) || 0);
+    const a = alpha * (el.classList.contains('reveal-pending') ? 1 : parseFloat(cs.opacity) || 0);
     if (a < 0.02) return;
     const r = el.getBoundingClientRect();
     const contents = cs.display === 'contents';
@@ -222,6 +222,11 @@ export function paintScreen(page: HTMLElement): HTMLCanvasElement {
   return canvas;
 }
 
+// What is on screen, at the device's resolution
+export function paintScreen(page: HTMLElement): HTMLCanvasElement {
+  return paintPage(page, window.innerHeight, Math.min(window.devicePixelRatio || 1, 2, 4096 / window.innerWidth));
+}
+
 /* ---------- Footprints of the site's buildings ---------- */
 
 export interface Footprint {
@@ -243,11 +248,11 @@ function rgbOf(color: string): RGB | null {
 
 const MEDIA = 'img, canvas, svg, video, input, select, textarea';
 
-// One footprint per element on screen: boxes, buttons and media whole, text line by line, large
-// titles letter by letter. Each has the colour of its element, so the city takes the theme's.
-export function footprints(page: HTMLElement): Footprint[] {
+// One footprint per element of the page, from its top down to the given height: boxes, buttons and
+// media whole, text line by line, large titles letter by letter. Each has the colour of its element,
+// so the city takes the theme's. The page must be scrolled to the top.
+export function footprints(page: HTMLElement, H: number): Footprint[] {
   const W = window.innerWidth;
-  const H = window.innerHeight;
   const theme = document.getElementById('cyberpunkroot');
   const primary = rgbOf(theme ? `rgb(${getComputedStyle(theme).getPropertyValue('--color-primary').trim().split(/\s+/).join(', ')})` : '') ?? [1, 0.93, 0.23];
   const list: Footprint[] = [];
@@ -263,7 +268,7 @@ export function footprints(page: HTMLElement): Footprint[] {
       });
     }
   };
-  for (const el of scanScreen(page).leaves) {
+  for (const el of scanScreen(page, { bottom: H, pending: true }).leaves) {
     const cs = getComputedStyle(el);
     const fill = rgbOf(cs.backgroundColor);
     const border = parseFloat(cs.borderTopWidth) > 0 && cs.borderTopStyle !== 'none' ? rgbOf(cs.borderTopColor) : null;
@@ -305,10 +310,23 @@ export function footprints(page: HTMLElement): Footprint[] {
 
 const HASH = 'float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }';
 // Night haze: far things sink into a dark violet fog
-const FOG = 'uniform vec3 uFog; vec3 fogged(vec3 c, float depth) { return mix(c, uFog, 1.0 - exp(-max(depth - 700.0, 0.0) / 2600.0)); }';
-// Where a point of the ground falls on the image of the screen (uPageSize: width and height of the
-// screen in world units)
-const PAGE_UV = 'uniform vec2 uPageSize; vec2 pageUV(vec2 w) { return vec2(w.x / uPageSize.x + 0.5, 0.5 - w.y / uPageSize.y); }';
+const FOG = 'uniform vec3 uFog; vec3 fogged(vec3 c, float depth) { return mix(c, uFog, 1.0 - exp(-max(depth - 700.0, 0.0) / 3600.0)); }';
+// The page lies on the ground, its first screen on y from 400 down to -400, the rest below. uPageSize:
+// width and height of the whole page in world units. The first screen comes from its own image, as
+// sharp as the screen, so the switch to the 3D scene does not show.
+const PAGE = `
+uniform sampler2D uScreen; uniform sampler2D uPage; uniform vec2 uPageSize;
+vec3 pageAt(vec2 w) {
+  float down = 400.0 - w.y;
+  float x = w.x / uPageSize.x + 0.5;
+  if (x < 0.0 || x > 1.0 || down < 0.0 || down > uPageSize.y) return vec3(0.0);
+  if (down < 800.0) return texture2D(uScreen, vec2(x, down / 800.0)).rgb;
+  return texture2D(uPage, vec2(x, down / uPageSize.y)).rgb;
+}
+// Distance from a point of the ground to the page, 0 on it
+float offPage(vec2 w) {
+  return length(max(abs(w - vec2(0.0, 400.0 - uPageSize.y * 0.5)) - uPageSize * 0.5, 0.0));
+}`;
 
 const SKY_VS = 'attribute vec2 aP; varying float vY; void main() { vY = aP.y; gl_Position = vec4(aP, 0.999, 1.0); }';
 const SKY_FS = `
@@ -320,23 +338,22 @@ attribute vec2 aPos; uniform mat4 uMVP; varying vec2 vW; varying float vDepth;
 void main() { vW = aPos; vec4 c = uMVP * vec4(aPos, 0.0, 1.0); vDepth = c.w; gl_Position = c; }`;
 const GROUND_FS = `
 precision highp float;
-uniform sampler2D uPage; uniform float uPageA; uniform float uGridA; uniform float uScan; uniform float uScanA;
+uniform float uPageA; uniform float uGridA; uniform float uScan; uniform float uScanA;
 uniform vec3 uGridCol; uniform vec3 uStreetCol; uniform vec3 uWireCol;
 varying vec2 vW; varying float vDepth;
 ${FOG}
-${PAGE_UV}
+${PAGE}
 void main() {
-  vec2 pc = pageUV(vW);
-  vec3 col = vec3(0.0);
-  if (pc.x >= 0.0 && pc.x <= 1.0 && pc.y >= 0.0 && pc.y <= 1.0) col = texture2D(uPage, pc).rgb * uPageA;
-  float fade = 1.0 - smoothstep(1800.0, 3600.0, length(vW));
+  vec3 col = pageAt(vW) * uPageA;
+  float off = offPage(vW);
+  float fade = 1.0 - smoothstep(1500.0, 3300.0, off);
   // The grid of the floor, stretched to the horizon
   vec2 g = abs(mod(vW + 32.0, 64.0) - 32.0);
   col += uGridCol * max(smoothstep(1.4, 0.0, g.x), smoothstep(1.4, 0.0, g.y)) * 0.16 * fade * uGridA;
-  // A line down the middle of every street around the screen
+  // A line down the middle of every street around the page
   vec2 s = mod(vW, 150.0);
   float street = max(smoothstep(2.0, 0.0, min(s.x, 150.0 - s.x)), smoothstep(2.0, 0.0, min(s.y, 150.0 - s.y)));
-  col += uStreetCol * street * 0.4 * fade * uGridA * step(1.0, max(abs(vW.x) - uPageSize.x * 0.5 - 60.0, abs(vW.y) - uPageSize.y * 0.5 - 60.0));
+  col += uStreetCol * street * 0.4 * fade * uGridA * step(60.0, off);
   // The dematerialising scan: a bright band on the ground
   col += uWireCol * smoothstep(50.0, 0.0, abs(vW.x - uScan)) * uScanA;
   gl_FragColor = vec4(fogged(col, vDepth), 1.0);
@@ -350,7 +367,7 @@ float backOut(float x) { float c = 1.6; return 1.0 + (c + 1.0) * pow(x - 1.0, 3.
 void main() {
   float g, wire, off;
   // Rings power down from the horizon inwards; the site itself (ring 4) goes last
-  float os = 21.0 + aB.z * 0.8 + aB.w * 0.35;
+  float os = 25.0 + aB.z * 0.8 + aB.w * 0.35;
   if (uMode < 0.5) {
     g = backOut(clamp((uT - 4.0 - aB.y) / 1.6, 0.0, 1.0));
     wire = 1.0 - smoothstep(uScan - 70.0, uScan, aPos.x);
@@ -360,7 +377,7 @@ void main() {
     // Relight: lights on, faces back, then the towers sink into the ground
     off = 1.0 - smoothstep(0.0, 0.7, uT - aB.w * 0.5);
     wire = 1.0 - smoothstep(0.7, 1.3, uT);
-    g = 1.0 - smoothstep(0.0, 1.0, clamp((uT - 1.3 - aB.y * 0.15) / 0.9, 0.0, 1.0));
+    g = 1.0 - smoothstep(0.0, 1.0, clamp((uT - 1.3 - aB.y * 0.1) / 0.9, 0.0, 1.0));
   }
   g = max(g, 0.0);
   vGrow = g;
@@ -379,11 +396,11 @@ void main() {
 }`;
 const CITY_FS = `
 precision highp float;
-uniform sampler2D uPage; uniform float uT; uniform vec3 uWireCol;
+uniform float uT; uniform vec3 uWireCol;
 varying vec3 vW; varying vec2 vUV; varying vec2 vSize; varying vec3 vNorm; varying vec3 vCol; varying float vRoof; varying float vWire; varying float vOff; varying float vSeed; varying float vTall; varying float vFill; varying float vDepth; varying float vGrow;
 ${HASH}
 ${FOG}
-${PAGE_UV}
+${PAGE}
 void main() {
   // Not grown yet (or sunk back): the ground shows the page untouched
   if (vOff > 0.995 || vGrow < 0.002) discard;
@@ -394,8 +411,8 @@ void main() {
       // Generated buildings: a dark roof with a few lights
       col = vec3(0.03, 0.03, 0.05) + vCol * 0.05 + vCol * step(0.93, hash(floor(vUV / 7.0) + vSeed * 7.0)) * 0.6;
     } else {
-      // The site's buildings carry the real pixels of the screen
-      col = texture2D(uPage, pageUV(vW.xy)).rgb * 1.1 + vCol * 0.06;
+      // The site's buildings carry the real pixels of the page
+      col = pageAt(vW.xy) * 1.1 + vCol * 0.06;
     }
     float d = length(vUV - vSize * 0.5);
     col = mix(col, vec3(1.0, 0.15, 0.1), vTall * smoothstep(3.5, 1.5, d) * step(0.5, fract(uT * 0.8 + vSeed)));
@@ -422,16 +439,18 @@ void main() {
 
 const CAR_VS = `
 attribute vec4 aLane; attribute vec4 aC;
-uniform mat4 uMVP; uniform float uT; uniform float uOn; uniform float uDist;
+uniform mat4 uMVP; uniform float uT; uniform float uOn; uniform float uDist; uniform vec3 uSpan;
 varying vec3 vCol;
 void main() {
-  // aC.a: 0 for a lane along x, 1 for a lane along y
-  float s = mod(aLane.w + uT * aLane.z, 5200.0) - 2600.0;
-  vec3 p = aC.a < 0.5 ? vec3(s, aLane.x, aLane.y) : vec3(aLane.x, s, aLane.y);
+  // aLane: position across the lane, altitude, speed, phase (0 → 1). aC.a: 0 for a lane along x, 1
+  // along y. uSpan: length of the lanes along x, along y, and the middle of the city along y.
+  float len = aC.a < 0.5 ? uSpan.x : uSpan.y;
+  float s = mod(aLane.w * len + uT * aLane.z, len) - len * 0.5;
+  vec3 p = aC.a < 0.5 ? vec3(s, aLane.x, aLane.y) : vec3(aLane.x, s + uSpan.z, aLane.y);
   vec4 clip = uMVP * vec4(p, 1.0);
   gl_Position = clip;
   gl_PointSize = min(5.0 * uDist / max(clip.w, 1.0), 10.0) * uOn;
-  vCol = aC.rgb * uOn * exp(-max(clip.w - 700.0, 0.0) / 3000.0);
+  vCol = aC.rgb * uOn * exp(-max(clip.w - 700.0, 0.0) / 3600.0);
 }`;
 const CAR_FS = `
 precision mediump float; varying vec3 vCol;
@@ -458,27 +477,40 @@ export interface CityLook {
   cars: number;
 }
 
-// Tilt the page into a ground, pull back while the city spreads to the horizon, fly low over the
-// site, rise high to watch the scan cross the whole city, then drift while it powers down
-export function cameraAt(t: number): Camera {
-  const fly = span(t, 9, 17);
+// The camera orbits a point of the ground (tx, ty) at a distance, tilted by rx, turned by rz. It
+// tilts the page into a ground, swings round to look down the page while the city grows, flies
+// over the page from the first screen to the last, then rises and turns back to watch the whole
+// city dematerialise and power down. length: the height of the page in world units.
+export function cameraAt(t: number, length: number): Camera {
+  const swing = span(t, 4, 9);
+  const dive = span(t, 9.5, 11.5);
+  const fly = span(t, 9.5, 20.5);
+  const rise = span(t, 20.5, 24.5);
+  const weave = span(t, 10, 12) * (1 - span(t, 18.5, 20.5));
+  // While it swings round, the camera looks further down the page, so it ends up above the first
+  // screen rather than above the towers beyond it. The flight ends above the last screen; the last
+  // view looks over the lower half of the page.
+  const ahead = -Math.min(1400, Math.max(0, length - 800));
+  const end = Math.min(ahead, 850 - length);
+  const overview = 400 - length * 0.62;
   return {
-    rx: -0.95 * span(t, 1.2, 4) - 0.1 * span(t, 4, 9) - 0.1 * span(t, 9, 13) + 0.4 * span(t, 17, 21),
-    rz: 0.25 * span(t, 1.2, 4) + 0.35 * span(t, 4, 9) + 1.35 * fly + 0.45 * span(t, 17, 21) + 0.3 * span(t, 21, 26),
-    dist: DIST * (1 + 0.35 * span(t, 1.2, 4) + 0.15 * span(t, 4, 9) - 0.72 * span(t, 9, 13) + 1.8 * span(t, 17, 21) + 0.3 * span(t, 21, 26)),
-    tx: -220 * span(t, 9, 11) + 440 * fly - 220 * span(t, 17, 20),
-    ty: 120 * span(t, 9, 11) - 240 * fly + 120 * span(t, 17, 20),
+    rx: -0.95 * span(t, 1.2, 4) + 0.05 * swing - 0.25 * dive + 0.4 * rise,
+    rz: 0.25 * span(t, 1.2, 4) + (Math.PI - 0.25) * swing + 0.2 * Math.sin((t - 10) * 0.45) * weave + Math.PI * rise + 0.15 * span(t, 25, 30),
+    dist: DIST * (1 + 0.35 * span(t, 1.2, 4) + 0.75 * swing - 0.95 * dive + 2.3 * rise + 0.2 * span(t, 25, 30)),
+    tx: 260 * Math.sin((t - 10) * 0.55) * weave,
+    ty: ahead * swing + (end - ahead) * fly + (overview - end) * rise,
   };
 }
 
-export function lookAt(t: number): CityLook {
+// extent: half the width of the city, for the scan that crosses it
+export function lookAt(t: number, extent: number): CityLook {
   return {
-    pageA: 1 - 0.85 * span(t, 17, 20.5) - 0.15 * span(t, 23, 25),
+    pageA: 1 - 0.85 * span(t, 21.5, 24.5) - 0.15 * span(t, 27, 29),
     // The grid of the ground appears as the page tilts, so the switch to the 3D scene shows nothing
-    gridA: span(t, 1.2, 3) + 0.6 * span(t, 17, 18) - 1.6 * span(t, 23.5, 25.5),
-    scan: -2700 + 5400 * clamp((t - 17) / 3.5, 0, 1),
-    scanA: span(t, 16.8, 17.3) * (1 - span(t, 20.2, 20.8)),
-    cars: span(t, 8.5, 10) * (1 - span(t, 16.5, 17.5)),
+    gridA: span(t, 1.2, 3) + 0.6 * span(t, 21.5, 22.5) - 1.6 * span(t, 27.5, 29.5),
+    scan: -(extent + 150) + 2 * (extent + 150) * clamp((t - 21.8) / 3, 0, 1),
+    scanA: span(t, 21.6, 22.1) * (1 - span(t, 24.6, 25.2)),
+    cars: span(t, 9, 10.5) * (1 - span(t, 21, 22)),
   };
 }
 
@@ -513,6 +545,9 @@ export interface City {
   tallest: number;
   // Sorted start of growth of every building, from 4 s
   growDelays: number[];
+  // Height of the page and half the width of the city, in world units
+  length: number;
+  extent: number;
   draw: (t: number, mode: 0 | 1, cam: Camera, look: CityLook) => void;
   dispose: () => void;
 }
@@ -523,15 +558,23 @@ interface Program {
   u: Record<string, WebGLUniformLocation | null>;
 }
 
-// palette: neon tints of the generated city, from the theme; grid, street and wire colours too.
-// Null when WebGL is missing or fails.
-export function createCity(canvas: HTMLCanvasElement, screen: HTMLCanvasElement, sites: Footprint[], colors: { palette: RGB[]; grid: RGB; street: RGB; wire: RGB }): City | null {
+// Floats per vertex: position 3, uv 2, size 2, normal 3, B 4 (height, delay, ring, seed), colour 3,
+// E 2 (height it stands on, generated or not)
+const STRIDE = 19;
+
+// The whole page becomes the ground of the city, each of its elements a building, with a generated
+// city around it. palette: neon tints of the generated city, from the theme; grid, street and wire
+// colours too. The page must be scrolled to the top. Null when WebGL is missing or fails.
+export function createCity(canvas: HTMLCanvasElement, page: HTMLElement, colors: { palette: RGB[]; grid: RGB; street: RGB; wire: RGB }): City | null {
   const W = window.innerWidth;
   const H = window.innerHeight;
   const u = 800 / H;
   const PW = W * u;
+  const pageHeight = Math.max(H, Math.ceil(page.scrollHeight));
+  const PH = pageHeight * u;
   const gl = canvas.getContext('webgl', { antialias: true, alpha: false });
   if (!gl) return null;
+  const maxTexture = Number(gl.getParameter(gl.MAX_TEXTURE_SIZE)) || 4096;
 
   function compile(type: number, source: string): WebGLShader {
     const shader = gl?.createShader(type);
@@ -558,32 +601,55 @@ export function createCity(canvas: HTMLCanvasElement, screen: HTMLCanvasElement,
   try {
     P = {
       sky: program(SKY_VS, SKY_FS, ['aP'], []),
-      ground: program(GROUND_VS, GROUND_FS, ['aPos'], ['uMVP', 'uPage', 'uPageA', 'uGridA', 'uScan', 'uScanA', 'uFog', 'uPageSize', 'uGridCol', 'uStreetCol', 'uWireCol']),
-      city: program(CITY_VS, CITY_FS, ['aPos', 'aUV', 'aSize', 'aNorm', 'aB', 'aC', 'aE'], ['uMVP', 'uT', 'uMode', 'uScan', 'uPage', 'uFog', 'uPageSize', 'uWireCol']),
-      car: program(CAR_VS, CAR_FS, ['aLane', 'aC'], ['uMVP', 'uT', 'uOn', 'uDist']),
+      ground: program(GROUND_VS, GROUND_FS, ['aPos'], ['uMVP', 'uScreen', 'uPage', 'uPageA', 'uGridA', 'uScan', 'uScanA', 'uFog', 'uPageSize', 'uGridCol', 'uStreetCol', 'uWireCol']),
+      city: program(CITY_VS, CITY_FS, ['aPos', 'aUV', 'aSize', 'aNorm', 'aB', 'aC', 'aE'], ['uMVP', 'uT', 'uMode', 'uScan', 'uScreen', 'uPage', 'uFog', 'uPageSize', 'uWireCol']),
+      car: program(CAR_VS, CAR_FS, ['aLane', 'aC'], ['uMVP', 'uT', 'uOn', 'uDist', 'uSpan']),
     };
   } catch {
     return null;
   }
 
-  const texture = gl.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, texture);
+  // Two images of the page: the first screen as sharp as the screen, and the whole page, as sharp as
+  // the GPU and the memory allow
+  function texture(image: HTMLCanvasElement): WebGLTexture | null {
+    if (!gl) return null;
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    return tex;
+  }
+  let screenTexture: WebGLTexture | null;
+  let pageTexture: WebGLTexture | null;
   try {
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, screen);
+    screenTexture = texture(paintPage(page, H, Math.min(window.devicePixelRatio || 1, 2, maxTexture / W)));
+    pageTexture = texture(paintPage(page, pageHeight, Math.min(1, maxTexture / W, maxTexture / pageHeight, Math.sqrt(16e6 / (W * pageHeight)))));
   } catch {
     return null;
   }
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
-  // 19 floats per vertex: position 3, uv 2, size 2, normal 3, B 4 (height, delay, ring, seed),
-  // colour 3, E 2 (height it stands on, generated or not)
-  const v: number[] = [];
-  const push = (...values: number[]) => { for (const value of values) v.push(value); };
+  let v = new Float32Array(STRIDE * 30 * 8192);
+  let n = 0;
+  function vertex(p: number[], uv: number[], size: number[], norm: number[], B: number[], col: RGB, E: number[]) {
+    if (n + STRIDE > v.length) {
+      const bigger = new Float32Array(v.length * 2);
+      bigger.set(v);
+      v = bigger;
+    }
+    v[n] = p[0] ?? 0; v[n + 1] = p[1] ?? 0; v[n + 2] = p[2] ?? 0;
+    v[n + 3] = uv[0] ?? 0; v[n + 4] = uv[1] ?? 0;
+    v[n + 5] = size[0] ?? 0; v[n + 6] = size[1] ?? 0;
+    v[n + 7] = norm[0] ?? 0; v[n + 8] = norm[1] ?? 0; v[n + 9] = norm[2] ?? 0;
+    v[n + 10] = B[0] ?? 0; v[n + 11] = B[1] ?? 0; v[n + 12] = B[2] ?? 0; v[n + 13] = B[3] ?? 0;
+    v[n + 14] = col[0]; v[n + 15] = col[1]; v[n + 16] = col[2];
+    v[n + 17] = E[0] ?? 0; v[n + 18] = E[1] ?? 0;
+    n += STRIDE;
+  }
   const quad = (pts: number[][], uvs: number[][], size: number[], norm: number[], B: number[], col: RGB, E: number[]) => {
-    [0, 1, 2, 0, 2, 3].forEach((i) => push(...(pts[i] ?? []), ...(uvs[i] ?? []), ...size, ...norm, ...B, ...col, ...E));
+    [0, 1, 2, 0, 2, 3].forEach((i) => vertex(pts[i] ?? [], uvs[i] ?? [], size, norm, B, col, E));
   };
   // A box: roof and four walls, standing on height z0
   function addBox(x0: number, y0: number, x1: number, y1: number, z0: number, B: number[], col: RGB, filler: boolean) {
@@ -601,11 +667,14 @@ export function createCity(canvas: HTMLCanvasElement, screen: HTMLCanvasElement,
     const k = rand(0.45, 0.85);
     return [c[0] * k, c[1] * k, c[2] * k];
   };
+  // The city grows down the page, from the first screen to the last, in about 4.5 s
+  const wave = (down: number) => clamp(down / PH, 0, 1) * 4.5;
   let tallest = 0;
   let buildings = 0;
   const growDelays: number[] = [];
 
   // 1. The site: one building per footprint, in page units (ring 4: the last to power down)
+  const sites = footprints(page, pageHeight);
   const taken = sites.map((f) => ({
     x: f.x * u, y: f.y * u, w: f.w * u, h: f.h * u,
   }));
@@ -618,46 +687,64 @@ export function createCity(canvas: HTMLCanvasElement, screen: HTMLCanvasElement,
     let height = clamp(14 + Math.sqrt(b.w * b.h) * rand(0.7, 1.6), 24, 240);
     if (f.letter) height = Math.min(340, height * 1.9);
     tallest = Math.max(tallest, height);
-    const delay = (Math.hypot(b.x + b.w / 2 - PW / 2, b.y + b.h / 2 - 400) / 900) * 2.4 + rand(0, 0.5);
+    const delay = wave(b.y + b.h / 2) + (Math.abs(b.x + b.w / 2 - PW / 2) / PW) * 0.8 + rand(0, 0.4);
     addBox(x0, y1 - b.h, x0 + b.w, y1, 0, [height, delay, 4, Math.random()], f.color, false);
     buildings += 1;
     growDelays.push(delay);
   });
 
-  // 2. Low-rise fill in the empty parts of the screen, never over an element
-  const free = (x: number, y: number, w: number, h: number) => !taken.some((b) => x < b.x + b.w + 8 && x + w > b.x - 8 && y < b.y + b.h + 8 && y + h > b.y - 8);
-  for (let y = 70; y < 800 - 34; y += 34) {
+  // 2. Low-rise fill in the empty parts of the page, never over an element: a grid of 8-unit cells
+  // records where the elements are
+  const CELL = 8;
+  const cols = Math.ceil(PW / CELL) + 1;
+  const rows = Math.ceil(PH / CELL) + 1;
+  const used = new Uint8Array(cols * rows);
+  const cells = (x: number, y: number, w: number, h: number, fn: (index: number) => boolean) => {
+    for (let cy = Math.max(0, Math.floor(y / CELL)); cy <= Math.min(rows - 1, Math.floor((y + h) / CELL)); cy += 1) {
+      for (let cx = Math.max(0, Math.floor(x / CELL)); cx <= Math.min(cols - 1, Math.floor((x + w) / CELL)); cx += 1) {
+        if (!fn(cy * cols + cx)) return false;
+      }
+    }
+    return true;
+  };
+  taken.forEach((b) => cells(b.x - 8, b.y - 8, b.w + 16, b.h + 16, (index) => {
+    used[index] = 1;
+    return true;
+  }));
+  for (let y = 70; y < PH - 34; y += 34) {
     for (let x = 22; x < PW - 34; x += 34) {
       if (Math.random() < 0.3) continue;
       const w = rand(16, 28);
       const h = rand(16, 28);
       const px = x + rand(0, 6);
       const py = y + rand(0, 6);
-      if (!free(px, py, w, h)) continue;
+      if (!cells(px, py, w, h, (index) => !used[index])) continue;
       const x0 = px - PW / 2;
       const y1 = 400 - py;
-      const delay = 0.6 + (Math.hypot(px - PW / 2, py - 400) / 900) * 2.4 + rand(0, 0.6);
+      const delay = 0.4 + wave(py) + (Math.abs(px - PW / 2) / PW) * 0.8 + rand(0, 0.6);
       addBox(x0, y1 - h, x0 + w, y1, 0, [rand(8, 44), delay, 3, Math.random()], dimColor(), true);
       buildings += 1;
       growDelays.push(delay);
     }
   }
 
-  // 3. The city around the screen, block by block: low next to the site, skyscrapers further out,
+  // 3. The city around the page, block by block: low next to the site, skyscrapers further out,
   // lower again toward the horizon
   const PITCH = 150;
-  const extX = PW / 2 + 1910;
-  const extY = 1800;
-  for (let gx = -Math.ceil(extX / PITCH) * PITCH; gx < extX; gx += PITCH) {
-    for (let gy = -Math.ceil(extY / PITCH) * PITCH; gy < extY; gy += PITCH) {
+  const extent = PW / 2 + 1750;
+  const top = 400 + 1600;
+  const bottom = 400 - PH - 1600;
+  for (let gx = -Math.ceil(extent / PITCH) * PITCH; gx < extent; gx += PITCH) {
+    for (let gy = Math.floor(bottom / PITCH) * PITCH; gy < top; gy += PITCH) {
       const bx0 = gx + 15;
       const by0 = gy + 15;
       const bx1 = gx + PITCH - 15;
       const by1 = gy + PITCH - 15;
-      if (bx1 > -PW / 2 - 60 && bx0 < PW / 2 + 60 && by1 > -460 && by0 < 460) continue;
+      if (bx1 > -PW / 2 - 60 && bx0 < PW / 2 + 60 && by1 > 400 - PH - 60 && by0 < 460) continue;
       const cx = (bx0 + bx1) / 2;
       const cy = (by0 + by1) / 2;
-      const de = Math.hypot(Math.max(0, Math.abs(cx) - PW / 2), Math.max(0, Math.abs(cy) - 400));
+      // Distance to the page
+      const de = Math.hypot(Math.max(0, Math.abs(cx) - PW / 2), Math.max(0, cy - 400, 400 - PH - cy));
       const ring = de > 1500 ? 0 : de > 900 ? 1 : de > 400 ? 2 : 3;
       const r = Math.random();
       let lots: number[][];
@@ -675,7 +762,7 @@ export function createCity(canvas: HTMLCanvasElement, screen: HTMLCanvasElement,
         if (de < 260) height = rand(26, 100);
         else if (de < 1150) height = rand(60, 250) * (Math.random() < 0.14 ? 2.1 : 1);
         else height = rand(30, 170) * (1 - Math.min(0.65, (de - 1150) / 2600));
-        const delay = 0.8 + (Math.hypot(cx, cy) / 2600) * 4.2 + rand(0, 0.6);
+        const delay = 0.6 + wave(400 - cy) + (de / 1900) * 1.4 + rand(0, 0.6);
         const col = dimColor();
         const seed = Math.random();
         addBox(x0, y0, x1, y1, 0, [height, delay, ring, seed], col, true);
@@ -706,7 +793,7 @@ export function createCity(canvas: HTMLCanvasElement, screen: HTMLCanvasElement,
     }
   }
   growDelays.sort((a, b) => a - b);
-  const cityCount = v.length / 19;
+  const cityCount = n / STRIDE;
 
   const buffers = {
     sky: gl.createBuffer(), ground: gl.createBuffer(), city: gl.createBuffer(), car: gl.createBuffer(),
@@ -714,19 +801,24 @@ export function createCity(canvas: HTMLCanvasElement, screen: HTMLCanvasElement,
   gl.bindBuffer(gl.ARRAY_BUFFER, buffers.sky);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
   gl.bindBuffer(gl.ARRAY_BUFFER, buffers.city);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(v), gl.STATIC_DRAW);
-  const s = 4200;
+  gl.bufferData(gl.ARRAY_BUFFER, v.subarray(0, n), gl.STATIC_DRAW);
+  // The ground reaches well past the city, into the fog
+  const gx0 = -extent - 1700;
+  const gx1 = extent + 1700;
+  const gy0 = bottom - 1700;
+  const gy1 = top + 1700;
   gl.bindBuffer(gl.ARRAY_BUFFER, buffers.ground);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-s, -s, s, -s, s, s, -s, -s, s, s, -s, s]), gl.STATIC_DRAW);
-  // Flying cars on lanes in both directions, at several altitudes
-  const cars: number[] = [];
-  for (let i = 0; i < CARS; i += 1) {
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([gx0, gy0, gx1, gy0, gx1, gy1, gx0, gy0, gx1, gy1, gx0, gy1]), gl.STATIC_DRAW);
+  // Flying cars on lanes in both directions, at several altitudes, over the whole city
+  const carCount = Math.round(clamp(((2 * extent * (top - bottom)) / 1.8e7) * 600, 600, 1500));
+  const cars = new Float32Array(carCount * 8);
+  for (let i = 0; i < carCount; i += 1) {
     const axis = Math.random() < 0.5 ? 0 : 1;
     const light = CAR_LIGHTS[Math.floor(Math.random() * CAR_LIGHTS.length)] ?? [1, 1, 1];
-    cars.push(axis ? rand(-extX + 50, extX - 50) : rand(-1700, 1700), rand(60, 420), (Math.random() < 0.5 ? -1 : 1) * rand(120, 300), rand(0, 5200), ...light, axis);
+    cars.set([axis ? rand(-extent + 50, extent - 50) : rand(bottom + 50, top - 50), rand(60, 420), (Math.random() < 0.5 ? -1 : 1) * rand(120, 300), Math.random(), ...light, axis], i * 8);
   }
   gl.bindBuffer(gl.ARRAY_BUFFER, buffers.car);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(cars), gl.STATIC_DRAW);
+  gl.bufferData(gl.ARRAY_BUFFER, cars, gl.STATIC_DRAW);
 
   // Drawing buffer: the screen at the device's resolution, within what a GPU handles easily
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -742,11 +834,21 @@ export function createCity(canvas: HTMLCanvasElement, screen: HTMLCanvasElement,
   function detach(prog: Program) {
     Object.values(prog.a).forEach((location) => { if (location >= 0) gl?.disableVertexAttribArray(location); });
   }
+  function pageUniforms(prog: Program) {
+    if (!gl) return;
+    gl.uniform1i(prog.u.uScreen ?? null, 0);
+    gl.uniform1i(prog.u.uPage ?? null, 1);
+    gl.uniform2f(prog.u.uPageSize ?? null, PW, PH);
+    gl.uniform3fv(prog.u.uFog ?? null, FOG_COLOR);
+    gl.uniform3fv(prog.u.uWireCol ?? null, colors.wire);
+  }
 
   return {
     buildings,
     tallest,
     growDelays,
+    length: PH,
+    extent,
     draw(t, mode, cam, look) {
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.clearColor(0, 0, 0, 1);
@@ -766,19 +868,18 @@ export function createCity(canvas: HTMLCanvasElement, screen: HTMLCanvasElement,
       gl.enable(gl.DEPTH_TEST);
       gl.depthMask(true);
       gl.activeTexture(gl.TEXTURE0);
-      gl.bindTexture(gl.TEXTURE_2D, texture);
+      gl.bindTexture(gl.TEXTURE_2D, screenTexture);
+      gl.activeTexture(gl.TEXTURE1);
+      gl.bindTexture(gl.TEXTURE_2D, pageTexture);
       // Ground
       const G = P.ground;
       gl.useProgram(G.pr);
       gl.bindBuffer(gl.ARRAY_BUFFER, buffers.ground);
       attrib(G.a.aPos, 2, 8, 0);
       gl.uniformMatrix4fv(G.u.uMVP ?? null, false, M);
-      gl.uniform1i(G.u.uPage ?? null, 0);
-      gl.uniform3fv(G.u.uFog ?? null, FOG_COLOR);
-      gl.uniform2f(G.u.uPageSize ?? null, PW, 800);
+      pageUniforms(G);
       gl.uniform3fv(G.u.uGridCol ?? null, colors.grid);
       gl.uniform3fv(G.u.uStreetCol ?? null, colors.street);
-      gl.uniform3fv(G.u.uWireCol ?? null, colors.wire);
       gl.uniform1f(G.u.uPageA ?? null, look.pageA);
       gl.uniform1f(G.u.uGridA ?? null, look.gridA);
       gl.uniform1f(G.u.uScan ?? null, look.scan);
@@ -797,10 +898,7 @@ export function createCity(canvas: HTMLCanvasElement, screen: HTMLCanvasElement,
       attrib(C.a.aC, 3, 76, 56);
       attrib(C.a.aE, 2, 76, 68);
       gl.uniformMatrix4fv(C.u.uMVP ?? null, false, M);
-      gl.uniform1i(C.u.uPage ?? null, 0);
-      gl.uniform3fv(C.u.uFog ?? null, FOG_COLOR);
-      gl.uniform2f(C.u.uPageSize ?? null, PW, 800);
-      gl.uniform3fv(C.u.uWireCol ?? null, colors.wire);
+      pageUniforms(C);
       gl.uniform1f(C.u.uT ?? null, t);
       gl.uniform1f(C.u.uMode ?? null, mode);
       gl.uniform1f(C.u.uScan ?? null, look.scan);
@@ -820,14 +918,16 @@ export function createCity(canvas: HTMLCanvasElement, screen: HTMLCanvasElement,
         gl.uniform1f(K.u.uT ?? null, t);
         gl.uniform1f(K.u.uOn ?? null, look.cars);
         gl.uniform1f(K.u.uDist ?? null, DIST);
-        gl.drawArrays(gl.POINTS, 0, CARS);
+        gl.uniform3f(K.u.uSpan ?? null, 2 * extent, top - bottom, (top + bottom) / 2);
+        gl.drawArrays(gl.POINTS, 0, carCount);
         detach(K);
         gl.depthMask(true);
       }
     },
     dispose() {
       Object.values(buffers).forEach((buffer) => gl.deleteBuffer(buffer));
-      gl.deleteTexture(texture);
+      gl.deleteTexture(screenTexture);
+      gl.deleteTexture(pageTexture);
       Object.values(P).forEach((prog) => gl.deleteProgram(prog.pr));
       // Frees the GPU now rather than whenever the canvas is collected
       gl.getExtension('WEBGL_lose_context')?.loseContext();

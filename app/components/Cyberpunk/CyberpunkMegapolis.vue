@@ -129,7 +129,7 @@ import {
 
 import { usePreferencesStore } from '@/stores/preferences';
 import {
-  cameraAt, createCity, DIST, DISTRICTS, footprints, lookAt, paintScreen, span,
+  cameraAt, createCity, DIST, DISTRICTS, lookAt, span,
   type City,
 } from '@/utils/megapolis';
 import { prefersReducedMotion } from '@/utils/motion';
@@ -141,7 +141,7 @@ import {
 
 const emit = defineEmits<{ close: [] }>();
 
-const DURATION = 26;
+const DURATION = 30;
 // Without the city the sequence is a short power-down
 const SHORT_DURATION = 10;
 const rand = (a: number, b: number) => a + Math.random() * (b - a);
@@ -257,7 +257,7 @@ function run(time: SequenceClock, fx: Sfx, site: HTMLElement, glCanvas: HTMLCanv
         const primary = rgb('primary', '254, 238, 59');
         const secondary = rgb('secondary', '0, 255, 255');
         const accent = rgb('accent', '255, 0, 128');
-        city = createCity(glCanvas, paintScreen(site), footprints(site), {
+        city = createCity(glCanvas, site, {
           palette: [secondary, accent, primary, [0.85, 0.88, 1]],
           grid: [secondary[0] * 0.85, secondary[1] * 0.85, secondary[2] * 0.85],
           street: [accent[0] * 0.95, accent[1] * 0.95, accent[2] * 0.95],
@@ -268,7 +268,7 @@ function run(time: SequenceClock, fx: Sfx, site: HTMLElement, glCanvas: HTMLCanv
       }
     }
     if (city) {
-      city.draw(time.t, 0, cameraAt(time.t), lookAt(time.t));
+      city.draw(time.t, 0, cameraAt(time.t, city.length), lookAt(time.t, city.extent));
       cityShown.value = true;
       site.style.visibility = 'hidden';
       runCity(time, fx, city);
@@ -285,11 +285,13 @@ function runCity(time: SequenceClock, fx: Sfx, scene: City) {
   stats.tallest = Math.round(scene.tallest / 2);
   time.at(1, () => setMeter(['Mode ville', 'City mode'], ['en cours', 'starting']));
 
-  // Sound: the tilt, a tone per tower, the night pad, cars passing, the scan, a low cut per district
+  // Sound: the tilt, a tone per tower, the night pad, the wind of the flight and the cars passing,
+  // the scan, a low cut per district
   const pad = fx.drone({
     freqs: [110, 164.8, 220.5], type: 'sawtooth', filter: 'lowpass', f: 400,
   });
   const rumble = fx.drone({ filter: 'lowpass', f: 160 });
+  const flight = fx.drone({ filter: 'bandpass', f: 500, q: 0.8 });
   time.at(1.2, () => {
     fx.noise({
       type: 'bandpass', f: 200, f1: 900, q: 0.7, dur: 2.6, gain: 0.12, attack: 1,
@@ -301,22 +303,28 @@ function runCity(time: SequenceClock, fx: Sfx, scene: City) {
     pad.gain(0.03, 3);
     pad.filter(1200, 6);
   });
-  time.at(9, () => {
+  time.at(9.5, () => {
     rumble.gain(0.04, 2);
     pad.gain(0.045, 2);
+    flight.gain(0.05, 2);
+    flight.filter(900, 4);
   });
-  for (let t = 9.5; t < 16.5; t += rand(0.9, 1.8)) {
+  for (let t = 10; t < 20.5; t += rand(0.7, 1.4)) {
     time.at(t, () => fx.noise({
       type: 'bandpass', f: 900, f1: 300, q: 1.5, dur: 1.1, gain: 0.06, attack: 0.4, pan: rand(-1, 1),
     }));
   }
-  time.at(17, () => {
+  time.at(20.5, () => {
+    flight.filter(400, 3);
+    flight.gain(0.0001, 3);
+  });
+  time.at(21.8, () => {
     fx.tone({
-      f: 200, f1: 1800, dur: 3.4, gain: 0.04, attack: 1.5,
+      f: 200, f1: 1800, dur: 3.2, gain: 0.04, attack: 1.5,
     });
     pad.filter(500, 3);
   });
-  for (let t = 17.2; t < 20.4; t += 0.09) {
+  for (let t = 22; t < 24.8; t += 0.09) {
     time.at(t, () => {
       if (Math.random() < 0.5) {
         fx.noise({
@@ -326,7 +334,7 @@ function runCity(time: SequenceClock, fx: Sfx, scene: City) {
     });
   }
   for (let d = 0; d < DISTRICTS; d += 1) {
-    time.at(21.2 + d * 0.8, () => {
+    time.at(25.2 + d * 0.8, () => {
       fx.tone({
         f: 320, f1: 45, dur: 0.6, gain: 0.16, attack: 0.005,
       });
@@ -336,15 +344,15 @@ function runCity(time: SequenceClock, fx: Sfx, scene: City) {
       setMeter(['Quartiers éteints', 'Districts down'], `${d + 1} / ${DISTRICTS}`);
     });
   }
-  time.at(21, () => {
+  time.at(25, () => {
     pad.gain(0.0001, 4);
     rumble.gain(0.0001, 2);
   });
-  time.at(25, () => { meterFading.value = true; });
+  time.at(29, () => { meterFading.value = true; });
   time.at(DURATION, showFinal);
 
   time.tick((t) => {
-    if (t > 4 && t < 11) {
+    if (t > 4 && t < 14) {
       // Buildings that have started to grow, from their sorted start; a rising tone as they go
       let now = grown;
       while (now < scene.growDelays.length && (scene.growDelays[now] ?? 0) < t - 4) now += 1;
@@ -359,9 +367,9 @@ function runCity(time: SequenceClock, fx: Sfx, scene: City) {
         setMeter(['Immeubles', 'Buildings'], grown.toLocaleString(isEnglish.value ? 'en-GB' : 'fr-FR'));
       }
     }
-    if (t >= 11 && t < 17 && meter.value?.label[0] !== 'Ville') setMeter(['Ville', 'City'], ['en ligne', 'online']);
-    if (t > 17 && t < 20.5) setMeter(['Dématérialisation', 'Dematerialising'], `${Math.round(clamp((t - 17) / 3.5, 0, 1) * 100)} %`);
-    scene.draw(t, 0, cameraAt(t), lookAt(t));
+    if (t >= 14 && t < 21.8 && meter.value?.label[0] !== 'Ville') setMeter(['Ville', 'City'], ['en ligne', 'online']);
+    if (t > 21.8 && t < 24.8) setMeter(['Dématérialisation', 'Dematerialising'], `${Math.round(clamp((t - 21.8) / 3, 0, 1) * 100)} %`);
+    scene.draw(t, 0, cameraAt(t, scene.length), lookAt(t, scene.extent));
   });
 }
 
@@ -416,18 +424,20 @@ function relight() {
   time.at(1.3, () => fx.noise({
     type: 'lowpass', f: 900, f1: 120, dur: 1.4, gain: 0.12, attack: 0.2,
   }));
-  const from = cameraAt(DURATION);
+  const from = cameraAt(DURATION, scene.length);
+  // Back to face the page by the shortest turn
+  from.rz = ((((from.rz + Math.PI) % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI)) - Math.PI;
   time.tick((t) => {
-    const e = span(t, 0.8, 3.2);
+    const e = span(t, 0.8, 3.8);
     scene.draw(t, 1, {
       rx: from.rx * (1 - e), rz: from.rz * (1 - e), dist: from.dist + (DIST - from.dist) * e, tx: from.tx * (1 - e), ty: from.ty * (1 - e),
     }, {
       // The grid goes again as the camera faces the page, so the real page takes over seamlessly
-      pageA: span(t, 0.4, 1.6), gridA: span(t, 0, 1) * (1 - span(t, 2.4, 3.3)), scan: -5000, scanA: 0, cars: 0,
+      pageA: span(t, 0.4, 1.6), gridA: span(t, 0, 1) * (1 - span(t, 3, 3.9)), scan: -5000, scanA: 0, cars: 0,
     });
   });
   // Back to the real page once the towers are down and the camera faces it again
-  time.at(3.5, close);
+  time.at(4.1, close);
 }
 
 // Escape cancels the confirmation; Tab stays inside the open dialog
@@ -448,7 +458,8 @@ function onKeydown(event: KeyboardEvent) {
 
 onMounted(() => {
   opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-  planSize.value = `${window.innerWidth} × ${window.innerHeight}`;
+  // The plan of the city is the whole page
+  planSize.value = `${window.innerWidth} × ${Math.max(window.innerHeight, Math.ceil(findPage()?.scrollHeight ?? 0))}`;
   window.addEventListener('keydown', onKeydown);
   confirmButton.value?.focus();
 });

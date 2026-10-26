@@ -84,10 +84,20 @@ export interface Scan {
   frames: Element[];
 }
 
+export interface ScanOptions {
+  // Vertical range to scan, from the top of the window: the screen by default
+  top?: number;
+  bottom?: number;
+  // Blocks still waiting to rise into view (v-reveal) count as visible
+  pending?: boolean;
+}
+
 // Everything on screen that will fall, from the elements in view only
-export function scanScreen(page: HTMLElement): Scan {
+export function scanScreen(page: HTMLElement, options: ScanOptions = {}): Scan {
   const W = window.innerWidth;
   const H = window.innerHeight;
+  const top = options.top ?? 0;
+  const bottom = options.bottom ?? H;
   const screen = W * H;
   const header = page.querySelector('header');
   const leaves: Element[] = [];
@@ -96,13 +106,14 @@ export function scanScreen(page: HTMLElement): Scan {
   function walk(el: Element) {
     if (el.matches(SKIP)) return;
     const cs = getComputedStyle(el);
-    if (cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0') return;
+    const hiddenUntilSeen = options.pending && el.classList.contains('reveal-pending');
+    if (cs.display === 'none' || cs.visibility === 'hidden' || (cs.opacity === '0' && !hiddenUntilSeen)) return;
     if (cs.display === 'contents') {
       [...el.children].forEach(walk);
       return;
     }
     const r = el.getBoundingClientRect();
-    if (r.width <= 1 || r.height <= 1 || r.bottom <= 0 || r.top >= H || r.right <= 0 || r.left >= W) return;
+    if (r.width <= 1 || r.height <= 1 || r.bottom <= top || r.top >= bottom || r.right <= 0 || r.left >= W) return;
     const area = (r.width * r.height) / screen;
     const box = hasBox(cs);
     if (isMedia(el)

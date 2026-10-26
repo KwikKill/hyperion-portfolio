@@ -12,11 +12,11 @@ export interface SelfDestructSequence {
 // The self-destruct sequences offered at the bottom of the cyberpunk page. Each one covers the
 // whole run, from the confirmation to the reset screen. The first one is the default.
 export const SELF_DESTRUCT_SEQUENCES: [SelfDestructSequence, ...SelfDestructSequence[]] = [
-  {
+  /*{
     id: 'grid',
     name: { fr: 'Grille', en: 'Grid' },
     duration: 50,
-  },
+  },*/
   {
     id: 'collapse',
     name: { fr: 'Effondrement', en: 'Collapse' },
@@ -45,7 +45,7 @@ export const SELF_DESTRUCT_SEQUENCES: [SelfDestructSequence, ...SelfDestructSequ
   {
     id: 'megapolis',
     name: { fr: 'Mégapole', en: 'Megalopolis' },
-    duration: 26,
+    duration: 30,
   },
   {
     id: 'deluge',
