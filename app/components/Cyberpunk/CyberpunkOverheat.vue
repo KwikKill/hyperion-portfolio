@@ -1,30 +1,26 @@
 <template>
-  <!-- In #cyberpunkroot, next to the page, so the theme colours apply to the copies -->
+  <!-- In #cyberpunkroot, next to the page, so the theme colours apply -->
   <Teleport to="#cyberpunkroot">
-    <!-- Heat shimmer: a slow turbulence that pushes the picture around a little -->
-    <svg width="0" height="0" class="absolute" aria-hidden="true" focusable="false">
-      <filter id="overheat-shimmer" x="-5%" y="-5%" width="110%" height="110%">
-        <feTurbulence ref="shimmerNoise" type="turbulence" baseFrequency="0.012 0.045" numOctaves="2" seed="4" result="noise"/>
-        <feDisplacementMap ref="shimmerMap" in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-    </svg>
-
-    <!-- Glow of the heat rising from the bottom of the screen, blended with the page -->
+    <!-- Without WebGL, or with less motion: the glow of the heat over the page -->
     <div
       v-if="glowShown"
-      class="heat-glow pointer-events-none fixed inset-x-0 bottom-0 z-[61] mix-blend-screen"
+      class="heat-glow pointer-events-none fixed inset-x-0 bottom-0 z-[61] mix-blend-screen transition-opacity duration-[3000ms]"
+      :class="{ 'opacity-0': glowFading }"
       :style="{ height: `${glowHeight}%` }"
       aria-hidden="true"
     />
 
     <div class="pointer-events-none fixed inset-0 z-[60]" aria-hidden="true" inert>
+      <!-- The screen in the heat, then melting in strips over molten metal, drawn in WebGL -->
+      <canvas v-show="sceneShown" ref="sceneCanvas" class="absolute inset-0 size-full"/>
+      <!-- Without WebGL, or with less motion: molten metal, and the screen wiped away over it -->
       <div
         v-if="lavaShown"
         class="lava absolute inset-0 transition-opacity duration-[4500ms] ease-in"
         :class="{ 'opacity-0': lavaFading }"
       />
-      <!-- Strips of the screen melting down; the heat colours them -->
-      <div ref="columnsBox" class="absolute inset-0"/>
+      <div ref="wipeBox" class="absolute inset-0"/>
+      <!-- Drops, molten edges, embers, ash -->
       <canvas ref="canvas" class="absolute inset-0 size-full"/>
     </div>
 
@@ -160,13 +156,14 @@ import {
 } from 'vue';
 
 import { usePreferencesStore } from '@/stores/preferences';
-import { filterTargets, screenBlocks } from '@/utils/corruption';
+import { screenBlocks } from '@/utils/corruption';
 import { screenTemplate } from '@/utils/fracture';
 import { prefersReducedMotion } from '@/utils/motion';
 import {
-  COLD_FILTER, createColumns, createHeat, dropSources, PEAK, temperatureAt, wanderingDelays, warmFilter,
-  type Column, type DropSource, type Heat,
+  COLD_FILTER, COLD_GRADE, createHeat, cutStrips, dropSources, edgeAt, PEAK, slideStrip, temperatureAt, wanderingDelays, warmFilter, warmGrade,
+  type DropSource, type Heat, type Strip,
 } from '@/utils/overheat';
+import { createMeltScene, MAX_STRIPS, type MeltScene, type SceneLook } from '@/utils/overheatScene';
 import { findPage, lockScroll } from '@/utils/selfDestructScreen';
 import { startClock, type SequenceClock } from '@/utils/sequenceClock';
 import {
@@ -176,7 +173,6 @@ import {
 const emit = defineEmits<{ close: [] }>();
 
 const DURATION = 25;
-const SHIMMER = 'url(#overheat-shimmer)';
 const rand = (a: number, b: number) => a + Math.random() * (b - a);
 const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 
@@ -192,7 +188,9 @@ const thermoShown = ref(false);
 const thermoFading = ref(false);
 const temperature = ref(42);
 const sensorDead = ref(false);
+const sceneShown = ref(false);
 const glowShown = ref(false);
+const glowFading = ref(false);
 const glowHeight = ref(0);
 const lavaShown = ref(false);
 const lavaFading = ref(false);
@@ -200,9 +198,8 @@ const finalShown = ref(false);
 const meltedColumns = ref(0);
 const muted = ref(isMuted());
 
-const shimmerNoise = ref<SVGFETurbulenceElement | null>(null);
-const shimmerMap = ref<SVGFEDisplacementMapElement | null>(null);
-const columnsBox = ref<HTMLElement | null>(null);
+const sceneCanvas = ref<HTMLCanvasElement | null>(null);
+const wipeBox = ref<HTMLElement | null>(null);
 const canvas = ref<HTMLCanvasElement | null>(null);
 const backdrop = ref<HTMLElement | null>(null);
 const dialog = ref<HTMLElement | null>(null);
@@ -216,9 +213,10 @@ const coolButton = ref<HTMLButtonElement | null>(null);
 let clock: SequenceClock | null = null;
 let sfx: Sfx | null = null;
 let heatFx: Heat | null = null;
+let scene: MeltScene | null = null;
+let strips: Strip[] = [];
 let page: HTMLElement | null = null;
-let columns: Column[] = [];
-// Filters set on the page, with the value each element had before
+// Without the WebGL scene: filters set on the page, with the value each element had before
 let filtered = new Map<HTMLElement, string>();
 let animations: Animation[] = [];
 let pageVisibility = '';
@@ -239,21 +237,24 @@ function setFilter(el: HTMLElement, value: string) {
 function clearFilters() {
   filtered.forEach((value, el) => { el.style.filter = value; });
   filtered = new Map();
-  shimmerMap.value?.setAttribute('scale', '0');
 }
 
-// The page as it was, without any copy left. Safe to call twice.
+// The page as it was, with no scene and no copy left. Safe to call twice.
 function restorePage() {
   clearFilters();
   animations.forEach((animation) => animation.cancel());
   animations = [];
-  columns = [];
-  if (columnsBox.value) {
-    columnsBox.value.replaceChildren();
-    columnsBox.value.style.filter = '';
+  scene?.dispose();
+  scene = null;
+  strips = [];
+  sceneShown.value = false;
+  if (wipeBox.value) {
+    wipeBox.value.replaceChildren();
+    wipeBox.value.style.filter = '';
   }
   if (page) page.style.visibility = pageVisibility;
   glowShown.value = false;
+  glowFading.value = false;
   lavaShown.value = false;
   heatFx?.clear();
 }
@@ -282,7 +283,7 @@ function cancel() {
 }
 
 function confirm() {
-  if (phase.value !== 'confirm' || !canvas.value || !columnsBox.value) return;
+  if (phase.value !== 'confirm' || !canvas.value || !sceneCanvas.value || !wipeBox.value) return;
   page = findPage();
   if (!page) {
     close();
@@ -295,10 +296,10 @@ function confirm() {
   sfx = createSfx();
   heatFx = createHeat(canvas.value);
   clock = startClock();
-  run(clock, sfx, heatFx, page, columnsBox.value);
+  run(clock, sfx, heatFx, page, sceneCanvas.value, wipeBox.value);
 }
 
-function run(time: SequenceClock, fx: Sfx, drawing: Heat, site: HTMLElement, box: HTMLElement) {
+function run(time: SequenceClock, fx: Sfx, drawing: Heat, site: HTMLElement, glCanvas: HTMLCanvasElement, wipe: HTMLElement) {
   const W = window.innerWidth;
   const H = window.innerHeight;
   const k = Math.hypot(W, H) / 1509;
@@ -308,6 +309,27 @@ function run(time: SequenceClock, fx: Sfx, drawing: Heat, site: HTMLElement, box
   let melting = -1;
   let sources: DropSource[] = [];
   let delays: number[] = [];
+
+  // How the WebGL scene looks at a given time: the heat colours and shimmer from 1.6 s, rising with
+  // the temperature through the melt, dying down with the glow and the molten metal once the sensor
+  // has given up
+  const look = (t: number): SceneLook => {
+    const grade = warmGrade(heat);
+    const heating = t >= 1.6 ? 1 : 0;
+    const lava = clamp((t - 17) / 4.5, 0, 1);
+    const shimmer = heating * heat * 26 * k * (1 - clamp((t - 17) / 4, 0, 1));
+    return {
+      grade: grade.matrix,
+      bright: grade.bright,
+      // The content alone before the melt, the whole melt with its molten metal afterwards
+      shimmerContent: melting < 0 ? shimmer : 0,
+      shimmerAll: melting < 0 ? 0 : shimmer,
+      glow: heat * 0.7,
+      glowA: heating * (1 - clamp((t - 17) / 3, 0, 1)),
+      lava: melting < 0 ? 0 : 1 - lava * lava,
+      ragged: melting < 0 ? 0 : 1,
+    };
+  };
 
   // 0 → 0.9 s: the fans spin down in the dialog
   time.tween(0, 0.9, (p) => { fanSpeed.value = Math.round(2400 * (1 - p)); });
@@ -330,14 +352,34 @@ function run(time: SequenceClock, fx: Sfx, drawing: Heat, site: HTMLElement, box
   });
   time.at(1.75, () => { dialogShown.value = false; });
 
-  // 1.6 s: the heat starts to show. The shimmer goes on the content of the screen only, not on the
-  // animated backgrounds, or it would be redone at every frame of theirs.
+  // 0.15 s, behind the dialog: the screen becomes a WebGL scene, without anything visibly changing.
+  // What drips is read now, while the page still shows.
+  time.at(0.15, () => {
+    if (reduced) return;
+    sources = dropSources(site);
+    strips = cutStrips(Math.round(clamp(W / 40, 8, MAX_STRIPS)));
+    try {
+      scene = createMeltScene(glCanvas, site, strips);
+    } catch (error) {
+      // The sequence goes on without the scene: say why, or a silent fallback is never noticed
+      // eslint-disable-next-line no-console
+      console.warn('Overheat: WebGL scene unavailable, simple fallback used.', error);
+      scene = null;
+    }
+    if (!scene) {
+      strips = [];
+      return;
+    }
+    scene.draw(time.t, strips, look(time.t));
+    sceneShown.value = true;
+    site.style.visibility = 'hidden';
+  });
+
+  // 1.6 s: the heat starts to show (without the scene: warm colours on the page and the glow)
   const blocks = screenBlocks(site);
-  const shimmered = new Set(reduced ? [] : filterTargets(blocks));
   time.at(1.6, () => {
     thermoShown.value = true;
-    glowShown.value = true;
-    shimmered.forEach((el) => setFilter(el, SHIMMER));
+    if (!scene) glowShown.value = true;
   });
 
   // Sound bed: a hum that rises with the temperature, sizzling later, the clicks of the expanding
@@ -361,46 +403,34 @@ function run(time: SequenceClock, fx: Sfx, drawing: Heat, site: HTMLElement, box
     });
   }
 
-  // Temperature and colours: about 11 changes a second, plenty for a slow rise, and the shimmer
-  // turbulence is redrawn as rarely
+  // Temperature; without the scene, the warm colours as CSS filters, about 11 changes a second
   time.tick((t) => {
-    if (t < 1.2 || sensorDead.value) return;
-    temperature.value = temperatureAt(t);
-    heat = clamp((temperature.value - 42) / (PEAK - 42), 0, 1);
-    if (t < 1.6 || t - lastHeat < 0.09) return;
-    lastHeat = t;
-    const warm = warmFilter(heat);
-    if (melting >= 0) {
-      box.style.filter = warm;
-      return;
+    if (t < 1.2) return;
+    if (!sensorDead.value) {
+      temperature.value = temperatureAt(t);
+      heat = clamp((temperature.value - 42) / (PEAK - 42), 0, 1);
     }
-    blocks.forEach((block) => setFilter(block, shimmered.has(block) ? `${SHIMMER} ${warm}` : warm));
+    if (scene || t < 1.6 || t - lastHeat < 0.09) return;
+    lastHeat = t;
     glowHeight.value = heat * 70;
-    if (reduced) return;
-    shimmerMap.value?.setAttribute('scale', (heat * 26 * k).toFixed(1));
-    shimmerNoise.value?.setAttribute('seed', String(Math.floor(Math.random() * 100)));
+    const warm = warmFilter(heat);
+    if (melting < 0) blocks.forEach((block) => setFilter(block, warm));
+    else wipe.style.filter = warm;
   });
 
-  // 6 s: molten drops start running down from the elements
-  if (!reduced) time.at(5.9, () => { sources = dropSources(site); });
-
-  // 11 s: the screen melts in columns over molten metal. The page is copied without its filters;
-  // the copies take the heat colours from their container.
+  // 11 s: the screen melts in strips over molten metal, still in the heat. Without the scene, it is
+  // wiped away downward over the molten metal instead.
   time.at(11, () => {
     melting = time.t;
-    clearFilters();
-    box.style.filter = warmFilter(heat);
-    glowShown.value = false;
-    lavaShown.value = true;
-    const template = screenTemplate(site);
-    // Less motion: the screen is wiped away downward instead of melting
-    columns = createColumns(box, template, reduced ? 1 : Math.max(8, Math.round(W / 40)));
-    delays = wanderingDelays(columns.length, 1.4);
-    meltedColumns.value = columns.length;
-    site.style.visibility = 'hidden';
-    const [only] = columns;
-    if (reduced && only) {
-      animations.push(only.el.animate([{ clipPath: 'inset(0 0 0 0)' }, { clipPath: 'inset(100% 0 0 0)' }], { duration: 2400, easing: 'ease-in', fill: 'forwards' }));
+    delays = wanderingDelays(strips.length, 1.4);
+    meltedColumns.value = scene ? strips.length : 1;
+    if (!scene) {
+      clearFilters();
+      wipe.style.filter = warmFilter(heat);
+      lavaShown.value = true;
+      wipe.appendChild(screenTemplate(site));
+      site.style.visibility = 'hidden';
+      animations.push(wipe.animate([{ clipPath: 'inset(0 0 0 0)' }, { clipPath: 'inset(100% 0 0 0)' }], { duration: 2400, easing: 'ease-in', fill: 'forwards' }));
     }
     sizzle.gain(0.06, 1);
     fx.noise({
@@ -425,8 +455,11 @@ function run(time: SequenceClock, fx: Sfx, drawing: Heat, site: HTMLElement, box
     sizzle.gain(0.015, 2);
   });
 
-  // The lava cools down, embers die out, ash falls
-  time.at(17, () => { lavaFading.value = true; });
+  // The molten metal cools down with the glow above it, embers die out, ash falls
+  time.at(17, () => {
+    lavaFading.value = true;
+    glowFading.value = true;
+  });
   const wind = fx.drone({ filter: 'bandpass', f: 400, q: 0.8 });
   time.at(20.5, () => {
     wind.gain(0.04, 2);
@@ -440,11 +473,31 @@ function run(time: SequenceClock, fx: Sfx, drawing: Heat, site: HTMLElement, box
   time.at(23.5, () => { thermoFading.value = true; });
   time.at(DURATION, showFinal);
 
+  // A drop from an element of the screen, or, once the melt has begun, from the molten top edge of a
+  // sliding strip, running down its face
+  function drip() {
+    const sliding = strips.filter((c) => !c.gone && c.y > 2 && c.y < H * 0.75);
+    if (sliding.length && Math.random() < 0.6) {
+      const c = sliding[Math.floor(Math.random() * sliding.length)];
+      const point = c?.top[Math.floor(Math.random() * c.top.length)];
+      if (!c || !point) return;
+      // Just under the edge, on the face of the strip
+      const [x, y] = edgeAt(c, point);
+      drawing.drip(x, y + rand(4, 10) * (H / 800), '255,190,80', c.v, 0);
+      return;
+    }
+    const source = sources[Math.floor(Math.random() * sources.length)];
+    if (!source) return;
+    const x = source.x + rand(4, Math.max(5, source.w - 4));
+    // An element whose strip has started to slide no longer drips from where it was
+    if (strips.some((c) => c.y > 0 && x >= c.x && x < c.x + c.w)) return;
+    drawing.drip(x, source.y + source.h, source.color);
+  }
+
   time.tick((t, dt) => {
-    // Drops, faster as it gets hotter
-    if (sources.length && melting < 0 && t > 6 && Math.random() < dt * (6 + heat * 30)) {
-      const source = sources[Math.floor(Math.random() * sources.length)];
-      if (source) drawing.drip(source);
+    // Drops, faster as it gets hotter, until the metal has cooled
+    if (sources.length && t > 6 && t < 16.5 && Math.random() < dt * (6 + heat * 30)) {
+      drip();
       if (t - lastDrip > 0.06) {
         lastDrip = t;
         fx.noise({
@@ -452,18 +505,11 @@ function run(time: SequenceClock, fx: Sfx, drawing: Heat, site: HTMLElement, box
         });
       }
     }
-    // Columns slide down with a steady acceleration, each from its own start, stretching as they go
-    if (melting >= 0 && !reduced) {
-      columns.forEach((c, i) => {
-        if (c.gone) return;
-        const s = Math.max(0, t - melting - (delays[i] ?? 0));
-        c.y = 0.5 * c.accel * s * s + 12 * s;
-        if (c.y > H + 40) {
-          c.gone = true;
-          c.el.style.display = 'none';
-          return;
-        }
-        c.el.style.transform = `translateY(${c.y.toFixed(1)}px) scaleY(${(1 + c.y / 1800).toFixed(3)})`;
+    // Strips slide down with a steady acceleration, each from its own start, stretching, leaning and
+    // wobbling as they go
+    if (melting >= 0) {
+      strips.forEach((c, i) => {
+        if (!c.gone) slideStrip(c, Math.max(0, t - melting - (delays[i] ?? 0)), t);
       });
     }
     if (!reduced) {
@@ -480,9 +526,10 @@ function run(time: SequenceClock, fx: Sfx, drawing: Heat, site: HTMLElement, box
         });
       }
     }
+    scene?.draw(t, strips, look(t));
     drawing.frame(t, dt, {
-      drops: melting < 0 ? 1 : clamp(1 - (t - melting) / 0.6, 0, 1),
-      edges: melting >= 0 && t < 18 && !reduced ? columns : [],
+      drops: clamp(1 - (t - 17) / 1, 0, 1),
+      edges: scene && melting >= 0 && t < 18 ? strips : [],
     });
   });
 }
@@ -496,7 +543,7 @@ async function showFinal() {
   coolButton.value?.focus({ preventScroll: true });
 }
 
-// Cooling down: the fans start again, the columns rise back into place through a cold blue, then
+// Cooling down: the fans start again, the strips rise back into place through a cold blue, then
 // the page takes over and its colours come back
 function coolDown() {
   if (phase.value !== 'final' || !page || !heatFx) return;
@@ -509,7 +556,7 @@ function coolDown() {
   const fx = sfx;
   const site = page;
   const drawing = heatFx;
-  const box = columnsBox.value;
+  const melt = scene;
   const W = window.innerWidth;
   const H = window.innerHeight;
   finalWindow.value?.animate(
@@ -525,8 +572,8 @@ function coolDown() {
 
   // The page comes back in a cold blue that warms up to its own colours
   function showPage() {
-    box?.replaceChildren();
-    columns = [];
+    sceneShown.value = false;
+    wipeBox.value?.replaceChildren();
     site.style.visibility = pageVisibility;
     screenBlocks(site).forEach((block) => {
       animations.push(block.animate(
@@ -543,30 +590,35 @@ function coolDown() {
     finalShown.value = false;
     lavaShown.value = false;
     drawing.clear();
-    if (reduced || columns.length < 2 || !box) {
+    if (!melt) {
       showPage();
       return;
     }
-    box.style.filter = COLD_FILTER;
-    const starts = wanderingDelays(columns.length, 0.7);
-    columns.forEach((c, i) => {
-      c.gone = false;
-      c.y = 0;
-      c.el.style.display = '';
-      c.el.style.transform = 'none';
-      c.el.animate([{ transform: `translateY(${H + 20}px) scaleY(1.4)` }, { transform: 'none' }], {
-        duration: 1200, delay: (starts[i] ?? 0) * 1000, easing: 'cubic-bezier(.15,.7,.3,1)', fill: 'backwards',
-      });
-    });
     for (let i = 0; i < 120; i += 1) {
       drawing.particle({
         x: rand(0, W), y: rand(0, H), vx: rand(-15, 15), vy: rand(-30, 10), size: rand(1.5, 3), life: rand(1, 2.2), color: '170,230,255', glow: true,
       });
     }
   });
-  if (!reduced) time.at(2.5, showPage);
+  if (melt) {
+    // Each strip rises back from below the screen, stretched, and settles in place
+    const starts = wanderingDelays(strips.length, 0.7);
+    time.tick((t) => {
+      strips.forEach((c, i) => {
+        const p = clamp((t - 0.4 - (starts[i] ?? 0)) / 1.2, 0, 1);
+        c.gone = false;
+        c.y = (H + 20) * (1 - p) ** 3;
+        c.dx = 0;
+        c.settle = 0;
+      });
+      melt.draw(t, strips, {
+        grade: COLD_GRADE.matrix, bright: COLD_GRADE.bright, shimmerContent: 0, shimmerAll: 0, glow: 0, glowA: 0, lava: 0, ragged: 1 - clamp((t - 1.7) / 0.6, 0, 1),
+      });
+    });
+    time.at(2.5, showPage);
+  }
   time.tick((t, dt) => drawing.frame(t, dt, { drops: 0, edges: [] }));
-  time.at(reduced ? 1.4 : 3.6, close);
+  time.at(melt ? 3.6 : 1.4, close);
 }
 
 // Escape cancels the confirmation; Tab stays inside the open dialog

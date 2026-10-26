@@ -51,8 +51,9 @@ function inkOf(cs: CSSStyleDeclaration): string {
 // The page from its top down to the given height (the screen by default, the whole page for the
 // megapolis), drawn into a canvas: backgrounds, borders, glows, canvases, images and text. Gradients
 // and inline icons are left out. Blocks still waiting to rise into view are drawn as they will be.
-// The page must be scrolled to the top.
-export function paintPage(page: HTMLElement, H: number, scale: number): HTMLCanvasElement {
+// The page must be scrolled to the top. Options: elements left out (skip), and no page background
+// under it all (transparent).
+export function paintPage(page: HTMLElement, H: number, scale: number, options: { skip?: string; transparent?: boolean } = {}): HTMLCanvasElement {
   const W = window.innerWidth;
   const canvas = document.createElement('canvas');
   canvas.width = Math.max(1, Math.round(W * scale));
@@ -60,8 +61,11 @@ export function paintPage(page: HTMLElement, H: number, scale: number): HTMLCanv
   const p = canvas.getContext('2d');
   if (!p) return canvas;
   p.setTransform(scale, 0, 0, scale, 0, 0);
-  p.fillStyle = pageBackdrop(page);
-  p.fillRect(0, 0, W, H);
+  if (!options.transparent) {
+    p.fillStyle = pageBackdrop(page);
+    p.fillRect(0, 0, W, H);
+  }
+  const skip = options.skip ? `${SKIP}, ${options.skip}` : SKIP;
   p.textBaseline = 'middle';
   const range = document.createRange();
   const theme = document.getElementById('cyberpunkroot');
@@ -173,7 +177,7 @@ export function paintPage(page: HTMLElement, H: number, scale: number): HTMLCanv
   const above: [Element, number][] = [];
 
   function walk(el: Element, alpha: number, deferred = false) {
-    if (!p || el.matches(SKIP)) return;
+    if (!p || el.matches(skip)) return;
     const cs = getComputedStyle(el);
     if (cs.display === 'none' || cs.visibility === 'hidden') return;
     if (!deferred && (cs.position === 'fixed' || cs.position === 'sticky') && parseInt(cs.zIndex, 10) > 0) {
