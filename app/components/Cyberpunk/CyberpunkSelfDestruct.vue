@@ -95,6 +95,23 @@
                   :style="{ left: `${tower.x}%`, width: `${tower.w}%`, height: `${tower.h}%`, animationDelay: `${tower.delay}s` }"
                 />
               </span>
+              <span v-else-if="item.id === 'deluge'" class="preview-flood">
+                <!-- The liquid rises with a wave on top and a bar floating on it, then drains -->
+                <span class="flood-water">
+                  <svg viewBox="0 0 240 10" preserveAspectRatio="none">
+                    <path d="M0 5 Q15 0 30 5 T60 5 T90 5 T120 5 T150 5 T180 5 T210 5 T240 5 V10 H0 Z"/>
+                  </svg>
+                  <i/>
+                </span>
+              </span>
+              <span v-else-if="item.id === 'disintegration'" class="preview-dust">
+                <i
+                  v-for="dot in DUST_PREVIEW_DOTS"
+                  :key="dot.key"
+                  :class="dot.tone"
+                  :style="{ left: `${dot.x}px`, top: `${dot.y}px`, animationDelay: `${dot.delay}s`, '--dust-x': `${dot.dx}px`, '--dust-y': `${dot.dy}px` }"
+                />
+              </span>
             </span>
             <span
               v-if="item.id === selectedSequence"
@@ -143,6 +160,8 @@
     <CyberpunkSingularity v-if="showAlarm && sequence.id === 'singularity'" @close="showAlarm = false"/>
     <CyberpunkOverheat v-if="showAlarm && sequence.id === 'overheat'" @close="showAlarm = false"/>
     <CyberpunkMegapolis v-if="showAlarm && sequence.id === 'megapolis'" @close="showAlarm = false"/>
+    <CyberpunkDeluge v-if="showAlarm && sequence.id === 'deluge'" @close="showAlarm = false"/>
+    <CyberpunkDisintegration v-if="showAlarm && sequence.id === 'disintegration'" @close="showAlarm = false"/>
 
     <!-- Alarm Overlay (grid sequence) -->
     <div
@@ -491,6 +510,23 @@ const CITY_PREVIEW_TOWERS = [
   },
 ];
 
+// Pixels of the disintegration preview: a block of 10 × 6, blown away column by column from the
+// left. Their drift is spread with fixed formulas rather than at random, so the server and the
+// browser render the same thing. The negative delays make the still frame show the wind front.
+const DUST_PREVIEW_DOTS = Array.from({ length: 60 }, (_, i) => {
+  const row = Math.floor(i / 10);
+  const col = i % 10;
+  return {
+    key: i,
+    x: 34 + col * 6,
+    y: 11 + row * 6,
+    delay: -(1.7 - col * 0.13),
+    dx: 50 + ((row * 13 + col * 7) % 40),
+    dy: 6 - ((row * 5 + col * 11) % 24),
+    tone: ['dust-primary', 'dust-secondary', 'dust-text'][(row + col) % 3],
+  };
+});
+
 // Sequences other than the grid are loaded only when launched
 const CyberpunkCollapse = defineAsyncComponent(() => import('./CyberpunkCollapse.vue'));
 const CyberpunkCorruption = defineAsyncComponent(() => import('./CyberpunkCorruption.vue'));
@@ -498,6 +534,8 @@ const CyberpunkFracture = defineAsyncComponent(() => import('./CyberpunkFracture
 const CyberpunkSingularity = defineAsyncComponent(() => import('./CyberpunkSingularity.vue'));
 const CyberpunkOverheat = defineAsyncComponent(() => import('./CyberpunkOverheat.vue'));
 const CyberpunkMegapolis = defineAsyncComponent(() => import('./CyberpunkMegapolis.vue'));
+const CyberpunkDeluge = defineAsyncComponent(() => import('./CyberpunkDeluge.vue'));
+const CyberpunkDisintegration = defineAsyncComponent(() => import('./CyberpunkDisintegration.vue'));
 
 // Sequence picker. In the store so the terminal's `sudo rm -rf /` uses the same choice.
 const { selfDestructSequence: selectedSequence } = storeToRefs(preferencesStore);
@@ -1232,6 +1270,102 @@ onMounted(() => {
   }
 }
 
+/* Deluge preview: the liquid rises, its wave rolls, a bar floats on it, then it drains. The
+   negative delay makes the still frame show it risen. */
+.flood-water {
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--color-terminal) / 0.3);
+  animation: preview-flood 3.2s ease-in-out -1.4s infinite paused;
+}
+
+/* The wave repeats every half of its width: sliding by half loops seamlessly */
+.flood-water svg {
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  width: 200%;
+  height: 8px;
+  fill: rgb(var(--color-terminal) / 0.3);
+  animation: preview-wave 1.2s linear infinite paused;
+}
+
+.flood-water i {
+  position: absolute;
+  top: -7px;
+  left: 30%;
+  width: 34px;
+  height: 6px;
+  background: rgb(var(--color-primary));
+  animation: preview-bob 0.9s ease-in-out infinite alternate paused;
+}
+
+.sequence-card:is(:hover, :focus-visible, [aria-checked="true"]) :is(.flood-water, .flood-water svg, .flood-water i) {
+  animation-play-state: running;
+}
+
+@keyframes preview-flood {
+  0% {
+    transform: translateY(100%);
+  }
+  55%, 80% {
+    transform: translateY(30%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes preview-wave {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes preview-bob {
+  from {
+    transform: translateY(-1px) rotate(-8deg);
+  }
+  to {
+    transform: translateY(2px) rotate(7deg);
+  }
+}
+
+/* Disintegration preview: the pixels of a block blow away to the right and fade */
+.preview-dust i {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  animation: preview-dust 2.6s ease-in infinite paused;
+}
+
+.preview-dust .dust-primary {
+  background: rgb(var(--color-primary));
+}
+
+.preview-dust .dust-secondary {
+  background: rgb(var(--color-secondary));
+}
+
+.preview-dust .dust-text {
+  background: rgb(var(--color-text) / 0.8);
+}
+
+.sequence-card:is(:hover, :focus-visible, [aria-checked="true"]) .preview-dust i {
+  animation-play-state: running;
+}
+
+@keyframes preview-dust {
+  0%, 20% {
+    transform: none;
+    opacity: 1;
+  }
+  75%, 100% {
+    transform: translate(var(--dust-x), var(--dust-y)) scale(0.5);
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .preview-grid i,
   .preview-fall i,
@@ -1241,8 +1375,17 @@ onMounted(() => {
   .crack-pane,
   .hole-disk i,
   .preview-melt i,
-  .preview-city i {
+  .preview-city i,
+  .flood-water,
+  .flood-water svg,
+  .flood-water i,
+  .preview-dust i {
     animation: none;
+  }
+
+  /* Still frame of the deluge preview: the liquid risen */
+  .flood-water {
+    transform: translateY(35%);
   }
 
   /* Still frame of the overheat preview: a ragged melt */

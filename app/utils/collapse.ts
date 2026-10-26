@@ -302,6 +302,18 @@ export interface Capture {
   restore: () => void;
 }
 
+// A frame comes apart into its visible sides, each a body of its own, in the order of frame.sides
+export function barsOf(layer: HTMLElement, frame: Body): Body[] {
+  frame.off = true;
+  frame.el.style.display = 'none';
+  return frame.sides.map((side) => {
+    const el = document.createElement('div');
+    place(el, side);
+    Object.assign(el.style, { background: side.color, borderRadius: '1px', boxShadow: `0 0 8px ${side.color}` });
+    return createBody(layer, 'bar', el, frame.src, side);
+  });
+}
+
 // Copies everything on screen into the layer, then hides the originals in the same task, so no frame
 // ever shows the page twice or not at all
 export function captureScreen(page: HTMLElement, layer: HTMLElement): Capture {
@@ -353,18 +365,14 @@ export function createWorld(layer: HTMLElement, bodies: Body[], options: { reduc
 
   // A frame comes apart into its visible sides
   function breakFrame(b: Body) {
-    b.off = true;
-    b.el.style.display = 'none';
-    for (const side of b.sides) {
-      const el = document.createElement('div');
-      place(el, side);
-      Object.assign(el.style, { background: side.color, borderRadius: '1px', boxShadow: `0 0 8px ${side.color}` });
-      const bar = createBody(layer, 'bar', el, b.src, side);
+    barsOf(layer, b).forEach((bar, i) => {
+      const side = b.sides[i];
+      if (!side) return;
       Object.assign(bar, {
         active: true, vx: side.dx * 90 + rand(-30, 30), vy: side.dx ? -30 : (side.y === b.homeY ? -60 : 0), va: rand(-0.6, 0.6),
       });
       bodies.push(bar);
-    }
+    });
   }
 
   function release(b: Body): boolean {

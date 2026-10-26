@@ -1,6 +1,6 @@
 import type { Language } from './language';
 
-export type SelfDestructSequenceId = 'grid' | 'collapse' | 'corruption' | 'fracture' | 'singularity' | 'overheat' | 'megapolis';
+export type SelfDestructSequenceId = 'grid' | 'collapse' | 'corruption' | 'fracture' | 'singularity' | 'overheat' | 'megapolis' | 'deluge' | 'disintegration';
 
 export interface SelfDestructSequence {
   id: SelfDestructSequenceId;
@@ -46,5 +46,15 @@ export const SELF_DESTRUCT_SEQUENCES: [SelfDestructSequence, ...SelfDestructSequ
     id: 'megapolis',
     name: { fr: 'Mégapole', en: 'Megalopolis' },
     duration: 26,
+  },
+  {
+    id: 'deluge',
+    name: { fr: 'Déluge', en: 'Deluge' },
+    duration: 26,
+  },
+  {
+    id: 'disintegration',
+    name: { fr: 'Désintégration', en: 'Disintegration' },
+    duration: 25,
   },
 ];

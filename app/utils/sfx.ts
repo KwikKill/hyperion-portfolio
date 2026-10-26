@@ -98,7 +98,14 @@ export function setMuted(value: boolean) {
 export function createSfx() {
   const ctx = audio();
   const bus = ctx && master ? ctx.createGain() : null;
-  if (bus && master) bus.connect(master);
+  // A low-pass filter on all the sounds of the sequence, wide open unless muffle() closes it
+  const muffler = ctx && bus ? ctx.createBiquadFilter() : null;
+  if (bus && muffler && master) {
+    muffler.type = 'lowpass';
+    muffler.frequency.value = 20000;
+    bus.connect(muffler);
+    muffler.connect(master);
+  }
   const drones: Drone[] = [];
   const silent: Drone = {
     gain() {}, freq() {}, filter() {}, stop() {},
@@ -216,15 +223,23 @@ export function createSfx() {
     return handle;
   }
 
+  // Everything as if heard from under water: the cut-off frequency of the low-pass filter, in Hz
+  function muffle(frequency: number, time = 0.5) {
+    if (ctx && muffler) muffler.frequency.setTargetAtTime(frequency, ctx.currentTime, Math.max(time, 0.01) / 3);
+  }
+
   function close() {
     drones.forEach((handle) => handle.stop());
     if (!ctx || !bus) return;
     bus.gain.setTargetAtTime(0, ctx.currentTime, 0.04);
-    setTimeout(() => bus.disconnect(), 400);
+    setTimeout(() => {
+      bus.disconnect();
+      muffler?.disconnect();
+    }, 400);
   }
 
   return {
-    tone, noise, drone, close,
+    tone, noise, drone, muffle, close,
   };
 }
 
