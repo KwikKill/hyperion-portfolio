@@ -21,7 +21,7 @@ export const usePreferencesStore = defineStore('preferences', {
     // Shared so the terminal's `sudo rm -rf /` can open the self-destruct confirmation.
     showSelfDestructAlarm: false,
     // Sequence picked in the self-destruct panel, shared for the same reason.
-    selfDestructSequence: 'collapse' as SelfDestructSequenceId,
+    selfDestructSequence: 'megapolis' as SelfDestructSequenceId,
   }),
 
   actions: {

@@ -18,13 +18,29 @@ export const SELF_DESTRUCT_SEQUENCES: [SelfDestructSequence, ...SelfDestructSequ
     duration: 50,
   },*/
   {
-    id: 'collapse',
-    name: { fr: 'Effondrement', en: 'Collapse' },
-    duration: 26,
+    id: 'megapolis',
+    name: { fr: 'Mégapole', en: 'Megalopolis' },
+    duration: 30,
   },
   {
     id: 'corruption',
     name: { fr: 'Corruption', en: 'Corruption' },
+    duration: 26,
+  },
+  {
+    id: 'singularity',
+    name: { fr: 'Singularité', en: 'Singularity' },
+    duration: 27,
+  },
+  
+  {
+    id: 'deluge',
+    name: { fr: 'Déluge', en: 'Deluge' },
+    duration: 26,
+  },
+  {
+    id: 'collapse',
+    name: { fr: 'Effondrement', en: 'Collapse' },
     duration: 26,
   },
   {
@@ -33,24 +49,9 @@ export const SELF_DESTRUCT_SEQUENCES: [SelfDestructSequence, ...SelfDestructSequ
     duration: 24,
   },
   {
-    id: 'singularity',
-    name: { fr: 'Singularité', en: 'Singularity' },
-    duration: 27,
-  },
-  {
     id: 'overheat',
     name: { fr: 'Surchauffe', en: 'Overheat' },
     duration: 25,
-  },
-  {
-    id: 'megapolis',
-    name: { fr: 'Mégapole', en: 'Megalopolis' },
-    duration: 30,
-  },
-  {
-    id: 'deluge',
-    name: { fr: 'Déluge', en: 'Deluge' },
-    duration: 26,
   },
   {
     id: 'disintegration',
