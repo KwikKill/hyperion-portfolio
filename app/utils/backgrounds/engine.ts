@@ -3,9 +3,7 @@
 // the tab is hidden. Colours come from the theme variables and follow theme changes. With reduced
 // motion, a background shows one still image. Browser-only.
 import { prefersReducedMotion } from '../motion';
-import {
-  lum, type Colors, type Focus, type RGB, type Stage,
-} from './core';
+import { type Focus, readColors, type Stage } from './core';
 import { SCENES, type SceneName } from './scenes';
 
 interface Running extends Stage {
@@ -45,22 +43,6 @@ let frame = 0;
 let last = 0;
 let visibility: IntersectionObserver | null = null;
 let themeWatch: MutationObserver | null = null;
-
-function readColors(el: HTMLElement): Colors {
-  const style = getComputedStyle(el);
-  const read = (name: string) => style.getPropertyValue(name).trim().split(/\s+/).map(Number) as RGB;
-  const b = read('--color-background');
-  return {
-    p: read('--color-primary'),
-    s: read('--color-secondary'),
-    a: read('--color-accent'),
-    b,
-    fg: read('--color-text'),
-    mu: read('--color-gray-500'),
-    tm: read('--color-terminal'),
-    light: lum(b) > 0.5,
-  };
-}
 
 // New size: the canvas follows its box and the scene starts again for it
 function resize(s: Running) {

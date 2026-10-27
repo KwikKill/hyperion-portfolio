@@ -96,6 +96,23 @@ export function shuffle<T>(list: readonly T[]): T[] {
   return a;
 }
 
+// The theme colours of an element inside #cyberpunkroot, from its --color-* variables
+export function readColors(el: HTMLElement): Colors {
+  const style = getComputedStyle(el);
+  const read = (name: string) => style.getPropertyValue(name).trim().split(/\s+/).map(Number) as RGB;
+  const b = read('--color-background');
+  return {
+    p: read('--color-primary'),
+    s: read('--color-secondary'),
+    a: read('--color-accent'),
+    b,
+    fg: read('--color-text'),
+    mu: read('--color-gray-500'),
+    tm: read('--color-terminal'),
+    light: lum(b) > 0.5,
+  };
+}
+
 // Text of the canvas overlays, in the page language
 export const tr = (s: Stage, fr: string, en: string) => (s.lang === 'en' ? en : fr);
 

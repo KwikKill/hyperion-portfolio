@@ -47,6 +47,7 @@ Every portfolio page carries its language in the path and is prerendered in that
 | `/cyberpunk`, `/classic` | Redirect to the French page (or to the language of an older `?lang=` link) |
 | `/fr`, `/en` | Redirect to the cyberpunk page in that language |
 | `/version` | Redirect to `/` |
+| Any other path | 404 page, in the cyberpunk style (`app/error.vue`) |
 | `/sitemap.xml` | Generated at build time with the build date (`server/routes/sitemap.xml.ts`) |
 
 - The language comes from the `[lang]` route parameter. `middleware/language.ts` sets it before rendering, so the prerendered HTML is already in the right language.
@@ -115,6 +116,16 @@ A section uses `<CyberpunkBackground scene="…"/>`. The code is in `app/utils/b
 The canvas is the height of the screen and stays stuck to the top of its section while it scrolls by, so a long section costs no more than a short one. A section can free one side of the screen for its background: `wide-focus` then centres the scene in that free area from 1024 px, as in the About section.
 
 To add a background, write a scene in `scenes.ts`, add it to `SCENES`, and use its name in a section.
+
+### 404 page
+
+`app/error.vue` shows `CyberpunkNotFound.vue` for any error, loaded on demand so it adds nothing to the other pages. The grid of the home page is broken open where the address should have been (the same address always opens the same breach), and the status code floats above it as a hologram of particles that the pointer scatters. Tiles keep breaking off the rim; a click on the floor next to the breach breaks one more. "Repair the grid" seals it tile by tile, turns the 404 into a 200 and goes back home.
+
+- The scene is `utils/notFoundScene.ts` (Canvas 2D). It uses the theme colours and the helpers of `utils/backgrounds/core.ts`, and shows one still image with reduced motion.
+- Around it: a kernel log written as the breach opens, a live map of the sector, and a terminal that knows the pages that exist (`ls`, `cd`, `open`, `theme`, `repair`).
+- The address is compared to the pages and project names, to suggest the closest one (`/fr/cyberpnk`, `/polis`).
+- Optional sound, synthesized with `utils/sfx.ts`.
+- The static host answers a missing page with the app shell and a 200 status: the page carries `noindex`.
 
 ### Accessibility and performance
 

@@ -57,7 +57,9 @@ export const usePreferencesStore = defineStore('preferences', {
 
       navigateTo({ path: route.path.replace(/^\/(fr|en)(?=\/|$)/, `/${this.lang}`), query }, { replace: true });
     },
-    setCyberpunkTheme(theme: Theme) {
+    // syncUrl: false on a page whose address must stay as it is (the 404, where rewriting the
+    // URL would route to the missing page again). The theme is still saved for the next visit.
+    setCyberpunkTheme(theme: Theme, syncUrl = true) {
       const changed = theme !== this.cyberpunkTheme;
       this.cyberpunkTheme = theme;
       const apply = () => this.applyCyberpunkTheme(theme);
@@ -70,7 +72,7 @@ export const usePreferencesStore = defineStore('preferences', {
       }
 
       // Update URL parameters
-      this.updateUrlParameters();
+      if (syncUrl) this.updateUrlParameters();
     },
 
     // The theme class goes on <html>, where the inline script of nuxt.config.ts puts it
