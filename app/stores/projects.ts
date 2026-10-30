@@ -34,6 +34,9 @@ import infographiqueImage from '@/assets/projects/infographique.webp';
 import insalanImage from '@/assets/projects/insalan.webp';
 import insaplace1 from '@/assets/projects/insaplace1.webp';
 import insaplace2 from '@/assets/projects/insaplace2.webp';
+import kleio1 from '@/assets/projects/kleio1.webp';
+import kleio2 from '@/assets/projects/kleio2.webp';
+import kleio3 from '@/assets/projects/kleio3.webp';
 import lightshieldImage from '@/assets/projects/lightshield.webp';
 import metisImage from '@/assets/projects/metis.webp';
 import mindustryImage from '@/assets/projects/mindustry.webp';
@@ -89,6 +92,37 @@ export const useProjectsStore = defineStore('projects', {
         },
         link: 'https://rankup.somi.blaisot.org/',
         github: 'https://github.com/KwikKill/Kwik_bot',
+        completed: true,
+      },
+      {
+        name: {
+          en: 'Kleio',
+          fr: 'Kleio',
+        },
+        subtitle: {
+          en: 'Zoomable Wikidata Timeline',
+          fr: 'Frise Chronologique Wikidata',
+        },
+        description: {
+          en: 'A timeline you can zoom from the Big Bang to yesterday, built on Wikidata.\n- About 23,000 people and events in themed lanes, plus a curated geological scale: the most notable entries show first, more appear as you zoom in\n- Wikidata\'s query service cannot rank people by date live, so a weekly two-stage harvest builds a local index served by the app\n- Canvas rendering with ticks that adapt from days to billions of years, a logarithmic minimap, Wikidata search and custom lanes written in SPARQL',
+          fr: 'Une frise chronologique que l\'on zoome du Big Bang à hier, alimentée par Wikidata.\n- Environ 23 000 personnes et événements rangés en couloirs thématiques, plus une échelle géologique saisie à la main : les entrées les plus connues s\'affichent d\'abord, les autres apparaissent en zoomant\n- Le service de requêtes de Wikidata ne sait pas classer les personnes par date en direct, donc une collecte hebdomadaire en deux étapes construit un index local servi par l\'application\n- Rendu canvas avec des graduations qui s\'adaptent du jour au milliard d\'années, mini-carte logarithmique, recherche Wikidata et couloirs personnalisés écrits en SPARQL',
+        },
+        file: {
+          en: 'kleio.html',
+          fr: 'kleio.html',
+        },
+        date: '2026',
+        starred: false,
+        category: 'personal',
+        status: 'online',
+        technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Canvas API', 'SPARQL', 'Wikidata', 'Docker', 'Caddy', 'Git'],
+        images: [
+          kleio1,
+          kleio2,
+          kleio3,
+        ],
+        link: 'https://kleio.somi.blaisot.org/',
+        github: 'https://github.com/KwikKill/kleio',
         completed: true,
       },
       {
